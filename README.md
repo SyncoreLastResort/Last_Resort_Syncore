@@ -1,37 +1,10 @@
-## Welcome to GitHub Pages
+##Syncore
+Group Formed For CITM's Project 1 subject, featuring SNK's Last Resort Videogame
 
-You can use the [editor on GitHub](https://github.com/SyncoreLastResort/Last_Resort_Syncore/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Last Resort is an arcade shoot'em up released in 1992 by SNK. It was also released for Sega's NeoGeo and for PS2, PSP and Wii. In a distant future mankind has developed the technology needed for space colonization. However, a mysterious computer virus infects the primary computer running human's first space station, causing it not only to affect its automated defenses, but to convince other humans to side with it. The computer attacks Earth so often that Earth's only hope is put into advanced spaceships wielding great firepower.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The player is in charge of one of this spaceships and also (when achieved in-game) an indestructible drone that is a shield and a weapon at the same time. Making good use of it is key in order to succeed.
 
-### Markdown
+--< Our team is formed by:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/SyncoreLastResort/Last_Resort_Syncore/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+--> Aitor Simona as Manager --> David Tello as Artist --> Joan Marín as Coder --> Oriol Sabaté as QA
