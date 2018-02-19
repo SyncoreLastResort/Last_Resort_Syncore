@@ -11,16 +11,14 @@ The player is in charge of one of this spaceships and also (when achieved in-gam
 
 [![](https://img.youtube.com/vi/kSzxzSNXTC8/0.jpg)](https://www.youtube.com/watch?v=kSzxzSNXTC8)
 
-## Team
+## About Us
 
 <img src="/docs/TeamPhoto.jpg">
 
-Our team is formed by: 
-
---> Aitor Simona as Manager
---> David Tello as Artist
---> Joan Marín as Coder
---> Oriol Sabaté as QA
+>>Aitor Simona as Manager
+  >>David Tello as Artist
+  >>Joan Marín as Coder
+  >>Oriol Sabaté as QA
 
 
 
