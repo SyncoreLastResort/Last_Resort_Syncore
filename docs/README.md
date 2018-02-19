@@ -22,3 +22,7 @@ Our team is formed by:
 --> Joan Marín as Coder
 --> Oriol Sabaté as QA
 
+<iframe width="420" height="345" src="https://www.youtube.com/watch?v=i6hrFisgQSE&t=47s">
+</iframe>
+
+
