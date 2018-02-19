@@ -10,7 +10,7 @@ The player is in charge of one of this spaceships and also (when achieved in-gam
 ## Gameplay Video
 
 <video src="[eShop JP] ACA NEOGEO LAST RESORT - Gameplay.mp4" poster="poster.jpg" width="1024" height="720" controls preload></video>
-Owner: NintenDaan [![](link)](https://www.youtube.com/watch?v=i6hrFisgQSE&t=47s)
+Owner: NintenDaan [link](https://www.youtube.com/watch?v=i6hrFisgQSE&t=47s"Link to YouTube")
 
 [![](https://img.youtube.com/vi/kSzxzSNXTC8/0.jpg)](https://www.youtube.com/watch?v=kSzxzSNXTC8)
 
