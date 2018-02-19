@@ -13,7 +13,7 @@ The player is in charge of one of this spaceships and also (when achieved in-gam
 
 ## Team
 
-![teamphoto](https://user-images.githubusercontent.com/36265599/36394647-90a29050-15b5-11e8-97e1-034bcecbf596.jpg)
+![](docs/TeamPhoto.jpg)
 
 Our team is formed by: 
 
