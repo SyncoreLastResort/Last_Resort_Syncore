@@ -7,7 +7,9 @@ In a distant future mankind has developed the technology needed for space coloni
 
 The player is in charge of one of this spaceships and also (when achieved in-game) an indestructible drone that is a shield and a weapon at the same time. Making good use of it is key in order to succeed.
 
-##Gameplay
+# Gameplay Video
+
+[![LastResort](http://img.youtube.com/vi/i6hrFisgQSE/0.jpg)](http://www.youtube.com/watch?v=i6hrFisgQSE "LastResort")
 
 # Team
 
@@ -19,4 +21,5 @@ The player is in charge of one of this spaceships and also (when achieved in-gam
 --> David Tello as Artist
 --> Joan Marín as Coder
 --> Oriol Sabaté as QA
+
 
