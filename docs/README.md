@@ -9,7 +9,7 @@ The player is in charge of one of this spaceships and also (when achieved in-gam
 
 ## Gameplay Video
 
-<video src="%5BeShop%20JP%5D%20ACA%20NEOGEO%20LAST%20RESORT%20-%20Gameplay.mp4" poster="poster.jpg" width="320" height="200" controls preload></video>
+<video src="[eShop JP] ACA NEOGEO LAST RESORT - Gameplay.mp4" poster="poster.jpg" width="320" height="200" controls preload></video>
 
 [![](https://img.youtube.com/vi/kSzxzSNXTC8/0.jpg)](https://www.youtube.com/watch?v=kSzxzSNXTC8)
 
