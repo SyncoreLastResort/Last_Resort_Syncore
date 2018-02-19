@@ -7,7 +7,11 @@ In a distant future mankind has developed the technology needed for space coloni
 
 The player is in charge of one of this spaceships and also (when achieved in-game) an indestructible drone that is a shield and a weapon at the same time. Making good use of it is key in order to succeed.
 
+##Gameplay
+
 # Team
+
+![Team Photo](https://github.com/SyncoreLastResort/Last_Resort_Syncore/blob/master/docs/Foto%20de%20Urii%F0%9F%8E%AE%F0%9F%8F%80.jpg)
 
 --< Our team is formed by: 
 
