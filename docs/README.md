@@ -13,7 +13,7 @@ The player is in charge of one of this spaceships and also (when achieved in-gam
 
 ## Team
 
-![Team Photo](https://github.com/SyncoreLastResort/Last_Resort_Syncore/docs/TeamPhoto.jpg)
+![Team Photo](Last_Resort_Syncore/docs/TeamPhoto.jpg)
 
 Our team is formed by: 
 
