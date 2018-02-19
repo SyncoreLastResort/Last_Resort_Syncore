@@ -7,14 +7,13 @@ In a distant future mankind has developed the technology needed for space coloni
 
 The player is in charge of one of this spaceships and also (when achieved in-game) an indestructible drone that is a shield and a weapon at the same time. Making good use of it is key in order to succeed.
 
-# Gameplay Video
+##Gameplay
 
-[![LastResort](http://img.youtube.com/vi/i6hrFisgQSE/0.jpg)](http://www.youtube.com/watch?v=i6hrFisgQSE "LastResort")
+[![](https://img.youtube.com/vi/kSzxzSNXTC8/0.jpg)](https://www.youtube.com/watch?v=kSzxzSNXTC8)
 
 # Team
 
 ![Team Photo](https://github.com/SyncoreLastResort/Last_Resort_Syncore/blob/master/docs/Foto%20de%20Urii%F0%9F%8E%AE%F0%9F%8F%80.jpg)
-
 
 --< Our team is formed by: 
 
@@ -22,5 +21,4 @@ The player is in charge of one of this spaceships and also (when achieved in-gam
 --> David Tello as Artist
 --> Joan Marín as Coder
 --> Oriol Sabaté as QA
-
 
