@@ -16,9 +16,12 @@ The player is in charge of one of this spaceships and also (when achieved in-gam
 <img src="/docs/TeamPhoto.jpg">
 
 >>Aitor Simona as Manager
-  >>David Tello as Artist
-  >>Joan Marín as Coder
-  >>Oriol Sabaté as QA
+
+>>David Tello as Artist
+
+>>Joan Marín as Coder
+
+>>Oriol Sabaté as QA
 
 
 
