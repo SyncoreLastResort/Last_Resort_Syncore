@@ -13,7 +13,6 @@ The player is in charge of one of this spaceships and also (when achieved in-gam
 
 # Team
 
-![Team Photo](https://github.com/SyncoreLastResort/Last_Resort_Syncore/blob/master/docs/Foto%20de%20Urii%F0%9F%8E%AE%F0%9F%8F%80.jpg)
 
 --< Our team is formed by: 
 
