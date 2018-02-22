@@ -14,15 +14,16 @@ Owner: NintenDaan [link](https://www.youtube.com/watch?v=i6hrFisgQSE&t=47s"Link 
 
 ##       About Us
 
-<img src="/docs/TeamPhoto.jpg">
+<img src="/docs/TeamPhoto.jpg">                                                                                                           ![Team Photo]({{ https://github.com/SyncoreLastResort/Last_Resort_Syncore/blob/master}}/docs/TeamPhoto.jpg)
 
->>Aitor Simona as Manager https://github.com/AitorSimona
 
->>David Tello as Artist https://github.com/DavidTello1
+>>Aitor Simona as Manager [Github account](https://github.com/AitorSimona"Link to member account")
 
->>Joan Marín as Coder https://github.com/X0KA
+>>David Tello as Artist   [Github account](https://github.com/DavidTello1"Link to member account")
 
->>Oriol Sabaté as QA  https://github.com/urisabate
+>>Joan Marín as Coder  [Github account](https://github.com/X0KA"Link to member account")
+
+>>Oriol Sabaté as QA   [Github account](https://github.com/urisabate"Link to member account")
 
 
 
