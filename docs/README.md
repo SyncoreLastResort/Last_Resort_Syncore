@@ -14,7 +14,8 @@ Owner: NintenDaan [link](https://www.youtube.com/watch?v=i6hrFisgQSE&t=47s"Link 
 
 ##       About Us
 
-<img src="docs/TeamPhoto.jpg" alt="hi" class="inline"/>
+<img src="TeamPhoto.jpg" alt="Us" height="399" width="535">
+
 
 >>Aitor Simona as Manager [Github account](https://github.com/AitorSimona"Link to member account")
 
