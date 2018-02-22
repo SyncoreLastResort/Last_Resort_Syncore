@@ -1,4 +1,4 @@
-# Syncore
+#           Syncore
 
    Group Formed For CITM's Project 1 subject, featuring SNK's Last Resort Videogame
 
@@ -14,7 +14,7 @@ Owner: NintenDaan [link](https://www.youtube.com/watch?v=i6hrFisgQSE&t=47s"Link 
 
 ##       About Us
 
-<img src="/docs/TeamPhoto.jpg">
+<img src="docs/TeamPhoto.jpg" alt="hi" class="inline"/>
 
 >>Aitor Simona as Manager [Github account](https://github.com/AitorSimona"Link to member account")
 
