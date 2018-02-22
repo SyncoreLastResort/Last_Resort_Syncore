@@ -14,8 +14,7 @@ Owner: NintenDaan [link](https://www.youtube.com/watch?v=i6hrFisgQSE&t=47s"Link 
 
 ##       About Us
 
-<img src="/docs/TeamPhoto.jpg">                                                                                                           ![Team Photo]({{ https://github.com/SyncoreLastResort/Last_Resort_Syncore/blob/master}}/docs/TeamPhoto.jpg)
-
+[Team Photo]({{ https://github.com/SyncoreLastResort/Last_Resort_Syncore/blob/master}}/docs/TeamPhoto.jpg)
 
 >>Aitor Simona as Manager [Github account](https://github.com/AitorSimona"Link to member account")
 
@@ -27,3 +26,6 @@ Owner: NintenDaan [link](https://www.youtube.com/watch?v=i6hrFisgQSE&t=47s"Link 
 
 
 
+
+
+                                                                                                                                                                                                                                                                                                                                             
