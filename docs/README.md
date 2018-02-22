@@ -16,13 +16,13 @@ Owner: NintenDaan [link](https://www.youtube.com/watch?v=i6hrFisgQSE&t=47s"Link 
 
 <img src="/docs/TeamPhoto.jpg">
 
->>Aitor Simona as Manager
+>>Aitor Simona as Manager https://github.com/AitorSimona
 
->>David Tello as Artist
+>>David Tello as Artist https://github.com/DavidTello1
 
->>Joan Marín as Coder
+>>Joan Marín as Coder https://github.com/X0KA
 
->>Oriol Sabaté as QA
+>>Oriol Sabaté as QA  https://github.com/urisabate
 
 
 
