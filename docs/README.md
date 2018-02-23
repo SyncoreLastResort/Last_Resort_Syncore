@@ -10,9 +10,13 @@
 ##       Gameplay Video
 <html>
 <body>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/i6hrFisgQSE" frameborder="0" allow="autoplay; encrypted-media"" allowfullscreen></iframe>
+
+<iframe width="420" height="345" src="https://www.youtube.com/embed/i6hrFisgQSE">
+</iframe>
+
 </body>
-                                                                                                                                   </html>                                                                                                                                   
+</html>
+
 <video src="[eShop JP] ACA NEOGEO LAST RESORT - Gameplay.mp4" poster="poster.jpg" width="720" height="720" controls preload></video>
 Owner: NintenDaan [link](https://www.youtube.com/watch?v=i6hrFisgQSE&t=47s"Link to YouTube")
 
