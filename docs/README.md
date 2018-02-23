@@ -11,14 +11,11 @@
 <html>
 <body>
 
-<iframe width="420" height="345" src="https://www.youtube.com/embed/i6hrFisgQSE"> frameborder="0" allowfullscreen
+<iframe width="420" height="345" src="https://www.youtube.com/embed/i6hrFisgQSE" frameborder="0" allowfullscreen>
 </iframe>
 
 </body>
 </html>
-
-
-Owner: NintenDaan [link](https://www.youtube.com/watch?v=i6hrFisgQSE&t=47s"Link to YouTube")
 
 ##       About Us
 
