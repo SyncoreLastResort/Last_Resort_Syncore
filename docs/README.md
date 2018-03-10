@@ -6,6 +6,8 @@
    In a distant future mankind has developed the technology needed for space colonization. Then, a computer virus infects the main            computer running human's first space station, disrupting its automated defenses, and convincing other humans to side alongside it.        The computer strikes the Earth so often that Earth's only hope is put into some spaceships with advanced weaponry.
 
    The player is in charge of one of this spaceships and also (when achieved in-game) an indestructible drone that is a shield and a          weapon at the same time. Making good use of it is key in order to succeed.
+   
+   ***
 
 ##       Gameplay Video
 <html>
@@ -16,6 +18,8 @@
 
 </body>
 </html>
+
+***
 
 ##       About Us
 
