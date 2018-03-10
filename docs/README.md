@@ -11,7 +11,7 @@
 <html>
 <body>
 
-<iframe width="420" height="345" src="https://www.youtube.com/embed/i6hrFisgQSE" frameborder="0" allowfullscreen>
+<iframe width="600" height="420" src="https://www.youtube.com/embed/i6hrFisgQSE" frameborder="0" allowfullscreen>
 </iframe>
 
 </body>
@@ -19,16 +19,16 @@
 
 ##       About Us
 
-<img src="TeamPhoto.jpg" alt="Us" height="399" width="535">
+<img src="TeamPhoto.jpg" alt="Us" height="420" width="600">
 
 
->>Aitor Simona as Manager [Github account](https://github.com/AitorSimona"Link to member account")
+>>Aitor Simona as Manager [Github account](https://github.com/AitorSimona)
 
->>David Tello as Artist   [Github account](https://github.com/DavidTello1"Link to member account")
+>>David Tello as Artist   [Github account](https://github.com/DavidTello1)
 
->>Joan Marín as Coder  [Github account](https://github.com/X0KA"Link to member account")
+>>Joan Marín as Coder  [Github account](https://github.com/X0KA)
 
->>Oriol Sabaté as QA   [Github account](https://github.com/urisabate"Link to member account")
+>>Oriol Sabaté as QA   [Github account](https://github.com/urisabate)
 
 
 
