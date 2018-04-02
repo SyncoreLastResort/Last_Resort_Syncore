@@ -22,6 +22,8 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect ship;
 	Animation idle;
+	Animation forward;
+	Animation backward;
 	Animation upwards;
 	Animation downwards;
 	Animation upwardstoidle;

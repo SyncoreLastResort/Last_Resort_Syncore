@@ -12,12 +12,12 @@ ModulePlayer::ModulePlayer()
 	position.x = 100;
 	position.y = 220;
 
-	idle.PushBack({ 64,0,32,14 });
+	idle.PushBack({ 64,0,32,14 },1);
 	// go upwards animation (neo-geo sprite sheet)
 	
 	
-	upwards.PushBack({32, 0, 32, 14});
-	upwards.PushBack({0, 0, 32, 14});
+	upwards.PushBack({32, 0, 32, 14},1);
+	upwards.PushBack({0, 0, 32, 14},1);
 	upwards.speed = 0.25f;
 
 	//Animation when the ship stops going up 
@@ -26,14 +26,9 @@ ModulePlayer::ModulePlayer()
 	upwardstoidle.speed = 0.25f;
 	// TODO 4: Make the ship go downwards with the correct animations
 
-<<<<<<< HEAD
 
 	downwards.PushBack({96,0,32,14},1);
 	downwards.PushBack({128,0,32,14},1);
-=======
-	downwards.PushBack({96,0,32,14});
-	downwards.PushBack({128,0,32,14});
->>>>>>> eb8f3406203e664b9be2516e6856b6e4eade7c99
 	downwards.speed = 0.25f;
 
 	//Animation when the ship stops going down
@@ -67,51 +62,35 @@ update_status ModulePlayer::Update()
 	if(App->input->keyboard[SDL_SCANCODE_D] == 1)
 	{
 		current_animation = &idle;
-		if (position.x + speed <= SCREEN_WIDTH - 32) {
-			position.x += speed;
-		}
+		position.x += speed;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_A] == 1)
 	{
 		current_animation = &idle;
-		if (position.x - speed >= 0) {
-			position.x -= speed;
-		}
+		position.x -= speed;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_W] == 1)
 	{
 		current_animation = &upwards;
-<<<<<<< HEAD
 
 		position.y -= speed;
 
 		upwardstoidle.setcurrentframe();
 		goingup = true;
 		goingdown = false;
-=======
-		if (position.y - speed >= 14) {
-			position.y -= speed;
-		}
->>>>>>> eb8f3406203e664b9be2516e6856b6e4eade7c99
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_S] == 1 )
 	{
 		current_animation = &downwards;
-<<<<<<< HEAD
 		
 		position.y += speed;
 
 		downwardstoidle.setcurrentframe();
 		goingdown = true;
 		goingup = false;
-=======
-		if (position.y + speed <= SCREEN_HEIGHT) {
-			position.y += speed;
-		}
->>>>>>> eb8f3406203e664b9be2516e6856b6e4eade7c99
 	}
 	
 	if (App->input->keyboard[SDL_SCANCODE_W] == 0 && goingup)
