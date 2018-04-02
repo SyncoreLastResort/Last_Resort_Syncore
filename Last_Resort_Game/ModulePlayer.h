@@ -26,7 +26,11 @@ public:
 	Animation backward;
 	Animation upwards;
 	Animation downwards;
+	Animation upwardstoidle;
+	Animation downwardstoidle;
 	iPoint position;
+	bool goingup=false;
+	bool goingdown=false;
 
 };
 
