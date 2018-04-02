@@ -27,7 +27,7 @@ public:
 		}
 	}
 
-	void PushBack(const SDL_Rect& rect, int maximumframe)
+	void PushBack(const SDL_Rect& rect)
 	{
 		frames[last_frame++] = rect;
 	}
