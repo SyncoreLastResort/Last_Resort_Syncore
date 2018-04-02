@@ -62,20 +62,22 @@ update_status ModulePlayer::Update()
 	if(App->input->keyboard[SDL_SCANCODE_D] == 1)
 	{
 		current_animation = &idle;
-		position.x += speed;
+		if (position.x +speed <=SCREEN_WIDTH-32)
+			position.x += speed;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_A] == 1)
 	{
 		current_animation = &idle;
-		position.x -= speed;
+		if (position.x - speed >=0)
+			position.x -= speed;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_W] == 1)
 	{
 		current_animation = &upwards;
-
-		position.y -= speed;
+		if (position.y - speed >= 14)
+			position.y -= speed;
 
 		upwardstoidle.setcurrentframe();
 		goingup = true;
@@ -85,8 +87,8 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_S] == 1 )
 	{
 		current_animation = &downwards;
-		
-		position.y += speed;
+		if (position.y + speed <= SCREEN_HEIGHT)
+			position.y += speed;
 
 		downwardstoidle.setcurrentframe();
 		goingdown = true;
