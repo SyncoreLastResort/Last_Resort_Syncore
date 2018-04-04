@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 
+
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModulePlayer::ModulePlayer()
@@ -120,4 +121,13 @@ update_status ModulePlayer::Update()
 	App->render->Blit(graphics, position.x, position.y - r.h, &r);
 	
 	return UPDATE_CONTINUE;
+}
+
+bool ModulePlayer::CleanUp()
+{
+	LOG("Freeing texture");
+
+	App->textures->Unload(graphics);
+
+	return true;
 }

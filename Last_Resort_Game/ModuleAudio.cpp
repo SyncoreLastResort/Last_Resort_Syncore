@@ -10,9 +10,14 @@
 
 ModuleAudio::ModuleAudio() : Module()
 {
-	for (uint i = 0; i < MAX_SOUNDS; ++i)
+	for (uint i = 0; i < MAX_SONGS; ++i)
 	{
-		audio[i] = nullptr;
+		songs[i] = nullptr;
+	}
+
+	for (uint i = 0; i < MAX_EFFECTS; ++i)
+	{
+		sound_effects[i] = nullptr;
 	}
 }
 
@@ -36,31 +41,26 @@ bool ModuleAudio::Init()
 	}
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048); //frequency, format, channels, chunk
 
-	Load("assets/sounds/LRMusic.ogg");
 	return ret;
 }
 
-update_status ModuleAudio::Update()
-{
-	if (!isplaying)
-	{
-		Mix_PlayMusic(audio[0], -1);
-		isplaying = true;
-	}
 
-	return update_status::UPDATE_CONTINUE;
-}
-
-
-// Called before q	uitting
+// Called before quitting
 bool ModuleAudio::CleanUp()
 {
 	LOG("Freeing audio and Mixer library");
 
-	for (uint i = 0; i < MAX_SOUNDS; ++i)
-	{
-		if (audio[i] != nullptr)
-			Mix_FreeMusic(audio[i]);
+	Mix_HaltMusic();
+
+	for (uint i = 0; i < MAX_SONGS; i++) {
+		if (songs[i] != nullptr) {
+			Mix_FreeMusic(songs[i]);
+		}
+	}
+	for (uint i = 0; i < MAX_EFFECTS; i++) {
+		if (sound_effects[i] != nullptr) {
+			Mix_FreeChunk(sound_effects[i]);
+		}
 	}
 
 	Mix_CloseAudio();
@@ -70,21 +70,136 @@ bool ModuleAudio::CleanUp()
 }
 
 // Load new texture from file path
-Mix_Music* const ModuleAudio::Load(const char* path)
-{
-	Mix_Music* music = nullptr;
+//Mix_Music* const ModuleAudio::Load(const char* path)
+//{
+//	Mix_Music* music = nullptr;
+//
+//	music = Mix_LoadMUS(path);
+//
+//	if (!music)
+//	{
+//		LOG("Unable to create music from path! SDL Error: %s\n", SDL_GetError());
+//	}
+//	else
+//	{
+//		audio[last_sound++] = music;
+//	}
+//
+//
+//	return music;
+//}
+//
+//bool ModuleAudio::Unload(Mix_Music * music)
+//{
+//	bool ret = false;
+//
+//	if (music != nullptr)
+//	{
+//		for (int i = 0; i < MAX_SOUNDS; ++i)
+//		{
+//			if (audio[i] == music)
+//			{
+//				audio[i] = nullptr;
+//				ret = true;
+//				break;
+//			}
+//		}
+//	}
+//
+//	last_sound--;
+//
+//	return ret;
+//}
 
+void ModuleAudio::StopAudio() {
+
+	Mix_HaltMusic();
+	ResetState();
+}
+
+
+void ModuleAudio::ResetState() {
+
+	prev_song = nullptr;
+}
+
+
+void ModuleAudio::PlayMusic(Mix_Music* to_play, Repetitions n_times) {
+
+	if (to_play != prev_song) {
+		Mix_PlayMusic(to_play, n_times);
+		//Mix_VolumeMusic(MIX_MAX_VOLUME / 3);
+		prev_song = to_play;
+	}
+}
+
+
+void ModuleAudio::PlaySoundEffect(Mix_Chunk* to_play) {
+
+	Mix_PlayChannel(-1, to_play, 0);
+}
+
+
+bool ModuleAudio::IsPlaying() {
+
+	if (Mix_PlayingMusic() == 1) return true;
+	else return false;
+}
+
+
+Mix_Music* const ModuleAudio::LoadMusic(const char* path) {
+
+	Mix_Music* music = nullptr;
 	music = Mix_LoadMUS(path);
 
-	if (!music)
-	{
-		LOG("Unable to create music from path! SDL Error: %s\n", SDL_GetError());
+	if (music == nullptr) {
+		LOG("Could not load song with path: %s. Error: %s.", path, Mix_GetError());
 	}
-	else
-	{
-		audio[last_sound++] = music;
+	else {
+		songs[last_song++] = music;
 	}
-
 
 	return music;
+}
+
+
+Mix_Chunk* const ModuleAudio::LoadSoundEffect(const char* path) {
+
+	Mix_Chunk* effect = nullptr;
+	effect = Mix_LoadWAV(path);
+
+	if (effect == nullptr) {
+		LOG("Could not load sound effect with path: %s. Error: %s.", path, Mix_GetError());
+	}
+	else {
+		sound_effects[last_effect++] = effect;
+	}
+
+	return effect;
+}
+
+
+bool ModuleAudio::UnloadMusic(Mix_Music* music) {
+
+	for (uint i = 0; i < MAX_SONGS; i++) {
+		if (songs[i] == music) {
+			Mix_FreeMusic(songs[i]);
+			songs[i] = nullptr;
+			break;
+		}
+	}
+	return true;
+}
+
+
+bool ModuleAudio::UnloadSoundEffect(Mix_Chunk* effect) {
+
+	for (uint i = 0; i < MAX_SONGS; i++) {
+		if (sound_effects[i] == effect) {
+			Mix_FreeChunk(sound_effects[i]);
+			sound_effects[i] = nullptr;
+			break;
+		}
+	}
+	return true;
 }

@@ -4,8 +4,10 @@
 #include "Module.h"
 #include "Animation.h"
 #include "Globals.h"
+#include "ModuleAudio.h"
 
 struct SDL_Texture;
+
 
 class ModuleBackground : public Module
 {
@@ -15,6 +17,7 @@ public:
 
 	bool Start();
 	update_status Update();
+	bool CleanUp();
 
 public:
 	
@@ -26,6 +29,7 @@ public:
 	SDL_Rect background;
 	SDL_Rect midback;
 	SDL_Rect bossplace;
+	Mix_Music* maintracklvl1 = nullptr;
 };
 
 #endif
