@@ -8,6 +8,8 @@
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleWelcomeScreen.h"
+#include "ModuleLevel2.h"
+#include "ModuleCongrats.h"
 
 Application::Application()
 {
@@ -15,11 +17,13 @@ Application::Application()
 	modules[1] = render = new ModuleRender();
 	modules[2] = input = new ModuleInput();
 	modules[3] = textures = new ModuleTextures();
-	modules[4] = background = new ModuleBackground();
-	modules[5] = player = new ModulePlayer();
-	modules[6] = audio = new ModuleAudio();
-	modules[7] = fade = new ModuleFadeToBlack();
-	modules[8] = menu = new ModuleWelcomeScreen();
+	modules[4] = audio = new ModuleAudio();
+	modules[5] = menu = new ModuleWelcomeScreen();
+	modules[6] = background = new ModuleBackground();
+	modules[7] = level2 = new ModuleLevel2();
+	modules[8] = congrats = new ModuleCongrats();
+	modules[9] = player = new ModulePlayer();
+	modules[10] = fade = new ModuleFadeToBlack();
 }	
 
 Application::~Application()
@@ -31,7 +35,9 @@ Application::~Application()
 bool Application::Init()
 {
 	player->Disable();
-	menu->Disable();
+	background->Disable();
+	level2->Disable();
+	congrats->Disable();
 
 	bool ret = true;
 

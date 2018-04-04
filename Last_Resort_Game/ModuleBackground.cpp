@@ -5,7 +5,7 @@
 #include "ModuleBackground.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
-#include "ModuleWelcomeScreen.h"
+#include "ModuleLevel2.h"
 #include "ModulePlayer.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
@@ -91,7 +91,7 @@ update_status ModuleBackground::Update()
 	App->audio->PlayMusic(maintracklvl1, ONCE);
 	
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
-		App->fade->FadeToBlack(App->background, App->menu);
+		App->fade->FadeToBlack(App->background, App->level2);
 
 	scrollground -= 0.55; 
 	scrollmid -= 0.25; 

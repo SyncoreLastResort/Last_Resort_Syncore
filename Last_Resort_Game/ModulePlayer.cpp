@@ -10,8 +10,8 @@
 
 ModulePlayer::ModulePlayer()
 {
-	position.x = 100;
-	position.y = 220;
+	position.x = 50;
+	position.y = 100;
 
 	idle.PushBack({ 64,0,32,14 },1);
 	// go upwards animation (neo-geo sprite sheet)
