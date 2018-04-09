@@ -72,7 +72,7 @@ update_status ModulePlayer2::Update()
 	int speed = 2;
 
 	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN) {
-		App->particles->AddParticle(App->particles->Laserexplosion, App->particles->Laserexplosion.position.x, App->particles->Laserexplosion.position.y);
+		App->particles->AddParticle(App->particles->Laserexplosion, App->player2->position.x + 32, App->player2->position.y);
 		App->particles->AddParticle(App->particles->laser, App->player2->position.x + 35, App->player2->position.y);
 	}
 

@@ -40,8 +40,7 @@ bool ModuleParticles::Start()
 	Laserexplosion.anim.PushBack({ 82, 239, 13, 12 });
 	Laserexplosion.anim.loop = true;
 	Laserexplosion.anim.speed = 0.3f;
-	Laserexplosion.position.x = App->player->position.x + 32;
-	Laserexplosion.position.y = App->player->position.y;
+	
 
 	// TODO 2: Create the template for a new particle "laser"
 	//laser.anim.PushBack({104,171,80,15});
