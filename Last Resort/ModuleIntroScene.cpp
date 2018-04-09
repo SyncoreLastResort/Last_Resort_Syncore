@@ -60,7 +60,10 @@ update_status ModuleIntroScene::Update()
 	App->audio->PlayMusic(maintrackintro, ONCE);
 	// Draw everything --------------------------------------
 	App->render->Blit(introbackground, 0, 0, &introrect);
-	if(App->input->keyboard[SDL_SCANCODE_SPACE]==1)
-	App->fade->FadeToBlack(this, App->level1);
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	{
+		Mix_FadeOutMusic(1000);
+		App->fade->FadeToBlack(this, App->level1);
+	}
 	return UPDATE_CONTINUE;
 }

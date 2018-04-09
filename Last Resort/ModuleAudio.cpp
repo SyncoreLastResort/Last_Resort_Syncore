@@ -86,7 +86,8 @@ void ModuleAudio::ResetState() {
 void ModuleAudio::PlayMusic(Mix_Music* to_play, Repetitions n_times) {
 
 	if (to_play != prev_song) {
-		Mix_PlayMusic(to_play, n_times);
+		/*Mix_PlayMusic(to_play, n_times);*/
+		Mix_FadeInMusic(to_play, 1, 1000);
 		//Mix_VolumeMusic(MIX_MAX_VOLUME / 3);
 		prev_song = to_play;
 	}

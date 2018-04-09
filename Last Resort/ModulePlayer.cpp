@@ -17,25 +17,25 @@ ModulePlayer::ModulePlayer()
 	position.y = 100;
 
 	idle.PushBack({ 64,0,32,14 });
+
 	// go upwards animation (neo-geo sprite sheet)
-
-
 	upwards.PushBack({ 32, 0, 32, 14 });
 	upwards.PushBack({ 0, 0, 32, 14 });
 	upwards.speed = 0.1f;
 	upwards.loop = false;
+
 	//Animation when the ship stops going up 
 	upwardstoidle.PushBack({ 32, 0, 32, 14 });
 	upwardstoidle.PushBack({ 64,0,32,14 });
 	upwardstoidle.speed = 0.1f;
 	upwardstoidle.loop = false;
-	// TODO 4: Make the ship go downwards with the correct animations
 
-
+	// go downwards animation
 	downwards.PushBack({ 96,0,32,14 });
 	downwards.PushBack({ 128,0,32,14 });
 	downwards.speed = 0.1f;
 	downwards.loop = false;
+
 	//Animation when the ship stops going down
 	downwardstoidle.PushBack({ 96,0,32,14 });
 	downwardstoidle.PushBack({ 64,0,32,14 });
@@ -107,6 +107,7 @@ update_status ModulePlayer::Update()
 			current_animation = &downwards;
 		}
 	}
+
 	//When ship starts going down, back to idle position
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP)
 	{

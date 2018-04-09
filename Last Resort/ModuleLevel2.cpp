@@ -59,8 +59,10 @@ update_status ModuleLevel2::Update()
 	App->audio->PlayMusic(maintracklvl2, ONCE);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
-		App->fade->FadeToBlack(App->level2, App->congrats);
-
+	{
+		Mix_FadeOutMusic(1000);
+        App->fade->FadeToBlack(App->level2, App->congrats);
+    }
 	scrollbackgroundcongrats -= 0.55;
 
 
