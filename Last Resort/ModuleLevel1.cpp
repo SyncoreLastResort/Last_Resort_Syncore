@@ -38,6 +38,23 @@ ModuleLevel1::ModuleLevel1()
 	bossplace.y = 0;
 	bossplace.w = 304;
 	bossplace.h = 224;
+
+	thick_lights.PushBack({133,2,25,144});
+	thick_lights.PushBack({ 158,2,38,144 }); // From left to right
+	thick_lights.PushBack({ 196,2,52,144 }); // From left to right
+	thick_lights.PushBack({ 248,2,65,144 }); // From left to right
+	thick_lights.PushBack({ 313,2,81,144 }); // From left to right
+	thick_lights.PushBack({ 394,2,98,144 }); // From left to right
+	thick_lights.PushBack({ 17,159,121,144 }); // From left to right
+	thick_lights.PushBack({ 138,159,143,144 }); // Limit   -   now I copy the same pushbacks in reverse order
+	thick_lights.PushBack({ 17,159,121,144 }); //From right to left
+	thick_lights.PushBack({ 394,2,98,144 }); //From right to left
+	thick_lights.PushBack({ 313,2,81,144 }); //From right to left
+	thick_lights.PushBack({ 248,2,65,144 }); //From right to left
+	thick_lights.PushBack({ 196,2,52,144 }); //From right to left
+	thick_lights.PushBack({ 158,2,38,144 }); //From right to left
+	
+	thick_lights.speed = 0.15f;
 }
 
 ModuleLevel1::~ModuleLevel1()
@@ -57,6 +74,7 @@ bool ModuleLevel1::Start()
 	}
 
 	bool ret = true;
+	background_lights = App->textures->Load("assets/sprites/Lasers_Sprite.png");
 	backbackground = App->textures->Load("assets/sprites/BackBackground_Sprite.png");
 	midbackground = App->textures->Load("assets/sprites/MidBackground_Sprite.png");
 	road = App->textures->Load("assets/sprites/Road&Tunnel_Background.png");
@@ -71,6 +89,7 @@ bool ModuleLevel1::CleanUp()
 {
 	
 	App->textures->Unload(backbackground);
+	App->textures->Unload(background_lights);
 	App->textures->Unload(midbackground);
 	App->textures->Unload(road);
 	App->textures->Unload(bossimg);
@@ -89,6 +108,7 @@ update_status ModuleLevel1::Update()
 	// Draw everything --------------------------------------
 	App->render->Blit(bossimg, 0, 0, &bossplace); // bossimg background
 	App->render->Blit(backbackground, scrollback, 0, &background, 0.75f); // back background
+	App->render->Blit(background_lights, scroll_lights, -2, &thick_lights.GetCurrentFrame(),0.75f);
 	App->render->Blit(midbackground, scrollmid, 32, &midback, 0.75f); // mid background
 	App->render->Blit(road, scrollground, 2,&ground); //road & tunnel
 												
@@ -99,6 +119,7 @@ update_status ModuleLevel1::Update()
 		Mix_FadeOutMusic(1000);
 		App->fade->FadeToBlack(App->level1, App->level2);
 	}
+	scroll_lights -= 0.25;
 	scrollground -= 0.55;
 	scrollmid -= 0.25;
 	scrollback -= 0.15;

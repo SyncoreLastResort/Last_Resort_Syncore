@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "ModuleAudio.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 
@@ -22,12 +23,16 @@ public:
 	SDL_Texture* midbackground = nullptr;
 	SDL_Texture* road = nullptr;
 	SDL_Texture* bossimg = nullptr;
+	SDL_Texture* background_lights = nullptr;
+	Animation thin_lights;
+	Animation thick_lights;
 	SDL_Rect ground;
 	SDL_Rect background;
 	SDL_Rect midback;
 	SDL_Rect bossplace;
 	Mix_Music* maintracklvl1 = nullptr;
 	float scrollground = 0.4;
+	float scroll_lights = 100.0;
 	float scrollmid = 0.2;
 	float scrollback = 0.1;
 };
