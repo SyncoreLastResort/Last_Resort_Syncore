@@ -52,7 +52,7 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
-
+	current_animation = &idle;
 	return true;
 }
 
@@ -107,7 +107,15 @@ update_status ModulePlayer::Update()
 			current_animation = &downwards;
 		}
 	}
-
+	//When ship starts going down, back to idle position
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP)
+	{
+		if (current_animation == &downwards)
+		{
+			downwardstoidle.Reset();
+			current_animation = &downwardstoidle;
+		}
+	}
 	if(App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		if (position.y - speed >= 2)
@@ -121,21 +129,16 @@ update_status ModulePlayer::Update()
 			current_animation = &upwards;
 		}
 	}
-
-	if (App->input->keyboard[SDL_SCANCODE_W] == 0 && goingup)
+	//When ship starts going up, back to idle position
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP)
 	{
-		upwards.setcurrentframe();
-		current_animation = &upwardstoidle;
-
+		if (current_animation == &upwards)
+		{
+			upwardstoidle.Reset();
+			current_animation = &upwardstoidle;
+		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_S] == 0 && goingdown)
-	{
-		downwards.setcurrentframe();
-		current_animation = &downwardstoidle;
-	}
-
-	// TODO 3: Shoot lasers when the player hits SPACE
 
 	if(App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 	{
@@ -145,9 +148,7 @@ update_status ModulePlayer::Update()
 		App->particles->AddParticle(App->particles->explosion, position.x + 25, position.y, 1500);
 	}
 
-	if(App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-	   && App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE)
-		current_animation = &idle;
+
 
 	// Draw everything --------------------------------------
 
