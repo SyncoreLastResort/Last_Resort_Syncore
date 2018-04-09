@@ -4,11 +4,11 @@
 #include "ModuleInput.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
-#include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
-ModulePlayer::ModulePlayer()
+ModulePlayer2::ModulePlayer2()
 {
 	graphics = NULL;
 	current_animation = NULL;
@@ -43,11 +43,11 @@ ModulePlayer::ModulePlayer()
 	downwardstoidle.loop = false;
 }
 
-ModulePlayer::~ModulePlayer()
+ModulePlayer2::~ModulePlayer2()
 {}
 
 // Load assets
-bool ModulePlayer::Start()
+bool ModulePlayer2::Start()
 {
 	LOG("Loading player");
 
@@ -57,7 +57,7 @@ bool ModulePlayer::Start()
 }
 
 // Unload assets
-bool ModulePlayer::CleanUp()
+bool ModulePlayer2::CleanUp()
 {
 	LOG("Unloading player");
 
@@ -67,16 +67,16 @@ bool ModulePlayer::CleanUp()
 }
 
 // Update: draw background
-update_status ModulePlayer::Update()
+update_status ModulePlayer2::Update()
 {
 	int speed = 2;
 
-	if (App->input->keyboard[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN) {
 		App->particles->AddParticle(App->particles->Laserexplosion, App->particles->Laserexplosion.position.x, App->particles->Laserexplosion.position.y);
-		App->particles->AddParticle(App->particles->laser, App->player->position.x + 35, App->player->position.y);
+		App->particles->AddParticle(App->particles->laser, App->player2->position.x + 35, App->player2->position.y);
 	}
-	
-	if(App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 	{
 		if (position.x - speed >= 0)
 		{
@@ -85,7 +85,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if(App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 	{
 		if (position.x + speed <= SCREEN_WIDTH - 32)   //32 is the ship's width
 		{
@@ -94,21 +94,21 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if(App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 	{
 		if (position.y + speed <= SCREEN_HEIGHT - 14)
 		{
 			position.y += speed;
 			App->particles->Laserexplosion.position.y += speed;
 		}
-		if(current_animation != &downwards)
+		if (current_animation != &downwards)
 		{
 			downwards.Reset();
 			current_animation = &downwards;
 		}
 	}
 	//When ship starts going down, back to idle position
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP)
+	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_UP)
 	{
 		if (current_animation == &downwards)
 		{
@@ -116,21 +116,21 @@ update_status ModulePlayer::Update()
 			current_animation = &downwardstoidle;
 		}
 	}
-	if(App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
 	{
 		if (position.y - speed >= 2)
 		{
 			position.y -= speed;
 			App->particles->Laserexplosion.position.y -= speed;
 		}
-		if(current_animation != &upwards)
+		if (current_animation != &upwards)
 		{
 			upwards.Reset();
 			current_animation = &upwards;
 		}
 	}
 	//When ship starts going up, back to idle position
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP)
+	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_UP)
 	{
 		if (current_animation == &upwards)
 		{
@@ -140,7 +140,7 @@ update_status ModulePlayer::Update()
 	}
 
 
-	if(App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 	{
 		App->particles->AddParticle(App->particles->explosion, position.x, position.y + 25);
 		App->particles->AddParticle(App->particles->explosion, position.x - 25, position.y, 500);
@@ -149,10 +149,10 @@ update_status ModulePlayer::Update()
 	}
 
 
-	
+
 	// Draw everything --------------------------------------
-	
+
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
-	
+
 	return UPDATE_CONTINUE;
 }

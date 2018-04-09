@@ -8,6 +8,7 @@
 #include "ModuleLevel1.h"
 #include "ModuleIntroScene.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
@@ -24,8 +25,9 @@ Application::Application()
 	modules[7] = level1 = new ModuleLevel1();
 	modules[8] = intro = new ModuleIntroScene();
 	modules[9] = player = new ModulePlayer();
-	modules[10] = particles = new ModuleParticles();
-	modules[11] = fade = new ModuleFadeToBlack();
+	modules[10] = player2 = new ModulePlayer2();
+	modules[11] = particles = new ModuleParticles();
+	modules[12] = fade = new ModuleFadeToBlack();
 }	
 
 Application::~Application()

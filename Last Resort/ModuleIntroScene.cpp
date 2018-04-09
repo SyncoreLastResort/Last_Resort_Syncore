@@ -3,10 +3,12 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleIntroScene.h"
 #include "ModuleLevel1.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleInput.h"
+
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -30,6 +32,7 @@ bool ModuleIntroScene::Start()
 	maintrackintro = App->audio->LoadMusic("assets/sounds/1.Last resort title.ogg");
 	App->level1->Disable();
 	App->player->Disable();
+	App->player2->Disable();
 
 	return true;
 }

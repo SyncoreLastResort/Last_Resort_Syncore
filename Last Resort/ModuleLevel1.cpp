@@ -3,6 +3,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleLevel2.h"
 #include "ModuleLevel1.h"
 #include "ModuleInput.h"
@@ -46,7 +47,6 @@ ModuleLevel1::~ModuleLevel1()
 bool ModuleLevel1::Start()
 {
 	LOG("Loading background assets");
-
 	if (IsEnabled() == true)
 	{
 		App->player->Enable();
@@ -100,6 +100,11 @@ update_status ModuleLevel1::Update()
 	scrollground -= 0.55;
 	scrollmid -= 0.25;
 	scrollback -= 0.15;
+
+	if (App->input->keyboard[SDL_SCANCODE_2] == 1)
+	{
+		App->player2->Enable();
+	}
 	
 	return UPDATE_CONTINUE;
 }
