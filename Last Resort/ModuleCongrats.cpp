@@ -51,7 +51,7 @@ update_status ModuleCongrats::Update()
 	// Draw everything --------------------------------------
 	App->render->Blit(backgroundcongrats, 0, 0, &congratsrect, 0.75f); // back background
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_F] == 1)
 		App->fade->FadeToBlack(App->congrats, App->intro);
 
 	return UPDATE_CONTINUE;
