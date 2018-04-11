@@ -53,10 +53,10 @@
     <ClInclude Include="ModuleParticles.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleIntroScene.h">
+    <ClInclude Include="ModuleCollision.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleAudio.h">
+    <ClInclude Include="ModuleSceneIntro.h">
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleLevel1.h">
@@ -66,6 +66,9 @@
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleCongrats.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleAudio.h">
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModulePlayer2.h">
@@ -103,10 +106,10 @@
     <ClCompile Include="ModuleParticles.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleIntroScene.cpp">
+    <ClCompile Include="ModuleCollision.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleAudio.cpp">
+    <ClCompile Include="ModuleSceneIntro.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleLevel1.cpp">
@@ -116,6 +119,9 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleCongrats.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleAudio.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModulePlayer2.cpp">

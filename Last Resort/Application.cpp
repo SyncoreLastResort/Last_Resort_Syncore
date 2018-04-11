@@ -6,7 +6,8 @@
 #include "ModuleCongrats.h"
 #include "ModuleLevel2.h"
 #include "ModuleLevel1.h"
-#include "ModuleIntroScene.h"
+#include "ModuleSceneIntro.h"
+#include "ModuleCollision.h"
 #include "ModulePlayer.h"
 #include "ModulePlayer2.h"
 #include "ModuleFadeToBlack.h"
@@ -15,19 +16,21 @@
 
 Application::Application()
 {
-	modules[0] = window = new ModuleWindow();
-	modules[1] = render = new ModuleRender();
-	modules[2] = input = new ModuleInput();
-	modules[3] = textures = new ModuleTextures();
-	modules[4] = audio = new ModuleAudio();
-	modules[5] = congrats = new ModuleCongrats();
-	modules[6] = level2 = new ModuleLevel2();
-	modules[7] = level1 = new ModuleLevel1();
-	modules[8] = intro = new ModuleIntroScene();
-	modules[9] = player = new ModulePlayer();
-	modules[10] = player2 = new ModulePlayer2();
-	modules[11] = particles = new ModuleParticles();
-	modules[12] = fade = new ModuleFadeToBlack();
+	int i = 0;
+	modules[i++] = window = new ModuleWindow();
+	modules[i++] = render = new ModuleRender();
+	modules[i++] = input = new ModuleInput();
+	modules[i++] = textures = new ModuleTextures();
+	modules[i++] = audio = new ModuleAudio();
+	modules[i++] = congrats = new ModuleCongrats();
+	modules[i++] = level2 = new ModuleLevel2();
+	modules[i++] = level1 = new ModuleLevel1();
+	modules[i++] = scene_intro = new ModuleSceneIntro();
+	modules[i++] = player = new ModulePlayer();
+	modules[i++] = player2 = new ModulePlayer2();
+	modules[i++] = particles = new ModuleParticles();
+	modules[i++] = collision = new ModuleCollision();
+	modules[i++] = fade = new ModuleFadeToBlack();
 }	
 
 Application::~Application()
@@ -40,12 +43,14 @@ bool Application::Init()
 {
 	bool ret = true;
 
-	// Disable all stopped modules here
-	player->Disable();
+	// Deactivate modules here ----
 	level1->Disable();
 	level2->Disable();
 	congrats->Disable();
-	// ---
+	player->Disable();
+	player2->Disable();
+	collision->Disable();
+	// ----------------------------
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

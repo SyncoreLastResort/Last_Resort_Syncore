@@ -61,8 +61,8 @@ update_status ModuleLevel2::Update()
 	if (App->input->keyboard[SDL_SCANCODE_F] == 1)
 	{
 		Mix_FadeOutMusic(1000);
-        App->fade->FadeToBlack(App->level2, App->congrats);
-    }
+		App->fade->FadeToBlack(App->level2, App->congrats);
+	}
 	scrollbackgroundcongrats -= 0.55;
 
 

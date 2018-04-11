@@ -8,7 +8,7 @@
 #include "ModulePlayer.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
-#include "ModuleIntroScene.h"
+#include "ModuleSceneIntro.h"
 #include "ModuleCongrats.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -52,7 +52,7 @@ update_status ModuleCongrats::Update()
 	App->render->Blit(backgroundcongrats, 0, 0, &congratsrect, 0.75f); // back background
 
 	if (App->input->keyboard[SDL_SCANCODE_F] == 1)
-		App->fade->FadeToBlack(App->congrats, App->intro);
+		App->fade->FadeToBlack(App->congrats, App->scene_intro);
 
 	return UPDATE_CONTINUE;
 }

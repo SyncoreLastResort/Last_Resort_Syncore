@@ -4,6 +4,8 @@
 #include "ModuleInput.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
+#include "ModuleCollision.h"
+#include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -12,9 +14,6 @@ ModulePlayer::ModulePlayer()
 {
 	graphics = NULL;
 	current_animation = NULL;
-
-	position.x = 50;
-	position.y = 100;
 
 	idle.PushBack({ 64,0,32,14 });
 
@@ -53,6 +52,14 @@ bool ModulePlayer::Start()
 
 	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	current_animation = &idle;
+
+	position.x = 50;
+	position.y = 100;
+
+	// TODO 2: Add a collider to the player
+
+	playercollider=App->collision->AddCollider({ position.x,position.y,32,14 }, COLLIDER_PLAYER, this);   // this = App->player
+
 	return true;
 }
 
@@ -71,12 +78,13 @@ update_status ModulePlayer::Update()
 {
 	int speed = 2;
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
-		App->particles->AddParticle(App->particles->Laserexplosion, App->player->position.x+32, App->player->position.y);
-		App->particles->AddParticle(App->particles->laser, App->player->position.x + 35, App->player->position.y);
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	{
+		App->particles->AddParticle(App->particles->Laserexplosion, App->player->position.x + 32, App->player->position.y);
+		App->particles->AddParticle(App->particles->laser, position.x + 35, position.y, COLLIDER_PLAYER_SHOT);
 	}
-	
-	if(App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		if (position.x - speed >= 0)
 		{
@@ -85,7 +93,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if(App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		if (position.x + speed <= SCREEN_WIDTH - 32)   //32 is the ship's width
 		{
@@ -94,14 +102,14 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if(App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
 		if (position.y + speed <= SCREEN_HEIGHT - 14)
 		{
 			position.y += speed;
 			App->particles->Laserexplosion.position.y += speed;
 		}
-		if(current_animation != &downwards)
+		if (current_animation != &downwards)
 		{
 			downwards.Reset();
 			current_animation = &downwards;
@@ -117,14 +125,14 @@ update_status ModulePlayer::Update()
 			current_animation = &downwardstoidle;
 		}
 	}
-	if(App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		if (position.y - speed >= 2)
 		{
 			position.y -= speed;
 			App->particles->Laserexplosion.position.y -= speed;
 		}
-		if(current_animation != &upwards)
+		if (current_animation != &upwards)
 		{
 			upwards.Reset();
 			current_animation = &upwards;
@@ -140,20 +148,28 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+	if(App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
+	   && App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE)
+		current_animation = &idle;
 
-	if(App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+	// TODO 3: Update collider position to player position
+
+	playercollider->SetPos(position.x, position.y);
+
+	// Draw everything --------------------------------------
+	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+
+	return UPDATE_CONTINUE;
+}
+
+// TODO 4: Detect collision with a wall. If so, go back to intro screen.
+
+void ModulePlayer::OnCollision(Collider * col_1, Collider * col_2) 
+{
+	if (col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL)
 	{
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y + 25);
-		App->particles->AddParticle(App->particles->explosion, position.x - 25, position.y, 500);
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y - 25, 1000);
-		App->particles->AddParticle(App->particles->explosion, position.x + 25, position.y, 1500);
+		App->player->Disable();
+		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
 	}
 
-
-	
-	// Draw everything --------------------------------------
-	
-	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
-	
-	return UPDATE_CONTINUE;
 }

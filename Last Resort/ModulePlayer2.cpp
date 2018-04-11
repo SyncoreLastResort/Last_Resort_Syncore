@@ -143,9 +143,9 @@ update_status ModulePlayer2::Update()
 	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 	{
 		App->particles->AddParticle(App->particles->explosion, position.x, position.y + 25);
-		App->particles->AddParticle(App->particles->explosion, position.x - 25, position.y, 500);
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y - 25, 1000);
-		App->particles->AddParticle(App->particles->explosion, position.x + 25, position.y, 1500);
+		App->particles->AddParticle(App->particles->explosion, position.x - 25, position.y);
+		App->particles->AddParticle(App->particles->explosion, position.x, position.y - 25);
+		App->particles->AddParticle(App->particles->explosion, position.x + 25, position.y);
 	}
 
 

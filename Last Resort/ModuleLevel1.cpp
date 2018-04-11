@@ -4,10 +4,11 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModulePlayer2.h"
-#include "ModuleLevel2.h"
 #include "ModuleLevel1.h"
+#include "ModuleLevel2.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
+#include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleFadeToBlack.h"
 
@@ -39,7 +40,7 @@ ModuleLevel1::ModuleLevel1()
 	bossplace.w = 304;
 	bossplace.h = 224;
 
-	thick_lights.PushBack({133,2,25,144});
+	thick_lights.PushBack({ 133,2,25,144 });
 	thick_lights.PushBack({ 158,2,38,144 }); // From left to right
 	thick_lights.PushBack({ 196,2,52,144 }); // From left to right
 	thick_lights.PushBack({ 248,2,65,144 }); // From left to right
@@ -53,7 +54,7 @@ ModuleLevel1::ModuleLevel1()
 	thick_lights.PushBack({ 248,2,65,144 }); //From right to left
 	thick_lights.PushBack({ 196,2,52,144 }); //From right to left
 	thick_lights.PushBack({ 158,2,38,144 }); //From right to left
-	
+
 	thick_lights.speed = 0.15f;
 }
 
@@ -63,17 +64,12 @@ ModuleLevel1::~ModuleLevel1()
 // Load assets
 bool ModuleLevel1::Start()
 {
-	LOG("Loading background assets");
-	if (IsEnabled() == true)
-	{
-		App->player->Enable();
-	}
-	else if (IsEnabled() == false)
-	{
-		App->player->Disable();
-	}
+	LOG("Loading level1 scene");
 
-	bool ret = true;
+	App->player->Enable();
+	App->particles->Enable();
+	App->collision->Enable();
+
 	background_lights = App->textures->Load("assets/sprites/Lasers_Sprite.png");
 	backbackground = App->textures->Load("assets/sprites/BackBackground_Sprite.png");
 	midbackground = App->textures->Load("assets/sprites/MidBackground_Sprite.png");
@@ -81,13 +77,20 @@ bool ModuleLevel1::Start()
 	bossimg = App->textures->Load("assets/sprites/Boss_Static_Background.png");
 	maintracklvl1 = App->audio->LoadMusic("assets/sounds/2. Jack to the metro (Stage 1).ogg");
 	
+	// Colliders ---
+	App->collision->AddCollider({0, 224, 3930, 16}, COLLIDER_WALL);
+	App->collision->AddCollider({ 1376,0,112,96 }, COLLIDER_WALL);
+	App->collision->AddCollider({ 1376,144,112,80 }, COLLIDER_WALL);
+	// TODO 1: Add colliders for the first columns of the level
+	
 	return true;
 }
 
 // UnLoad assets
 bool ModuleLevel1::CleanUp()
 {
-	
+	LOG("Unloading space scene");
+
 	App->textures->Unload(backbackground);
 	App->textures->Unload(background_lights);
 	App->textures->Unload(midbackground);
@@ -97,6 +100,9 @@ bool ModuleLevel1::CleanUp()
 	App->audio->StopAudio();
 	App->audio->UnloadMusic(maintracklvl1);
 
+	App->player->Disable();
+	App->collision->Disable();
+	App->particles->Disable();
 	
 	return true;
 }
@@ -104,21 +110,28 @@ bool ModuleLevel1::CleanUp()
 // Update: draw background
 update_status ModuleLevel1::Update()
 {
-
-	// Draw everything --------------------------------------
-	App->render->Blit(bossimg, 0, 0, &bossplace); // bossimg background
-	App->render->Blit(backbackground, scrollback, 0, &background, 0.75f); // back background
-	App->render->Blit(background_lights, scroll_lights, -2, &thick_lights.GetCurrentFrame(),0.75f);
-	App->render->Blit(midbackground, scrollmid, 32, &midback, 0.75f); // mid background
-	App->render->Blit(road, scrollground, 2,&ground); //road & tunnel
-												
-	App->audio->PlayMusic(maintracklvl1, ONCE);
+	// Move camera forward -----------------------------
+	//int scroll_speed = 1;
 
 	if (App->input->keyboard[SDL_SCANCODE_F] == 1)
 	{
 		Mix_FadeOutMusic(1000);
 		App->fade->FadeToBlack(App->level1, App->level2);
 	}
+	
+	/*App->player->position.x += 1;
+	App->render->camera.x -= 3;
+	*/
+
+	// Draw everything --------------------------------------
+	App->render->Blit(bossimg, 0, 0, &bossplace); // bossimg background
+	App->render->Blit(backbackground, scrollback, 0, &background, 0.75f); // back background
+	App->render->Blit(background_lights, scroll_lights, -2, &thick_lights.GetCurrentFrame(), 0.75f);
+	App->render->Blit(midbackground, scrollmid, 32, &midback, 0.75f); // mid background
+	App->render->Blit(road, scrollground, 2, &ground); //road & tunnel
+
+	App->audio->PlayMusic(maintracklvl1, ONCE);
+
 	scroll_lights -= 0.25;
 	scrollground -= 0.55;
 	scrollmid -= 0.25;

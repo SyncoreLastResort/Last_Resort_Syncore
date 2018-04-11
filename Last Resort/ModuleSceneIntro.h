@@ -1,26 +1,29 @@
-#ifndef __MODULEINTROSCENE_H__
-#define __MODULEINTROSCENE_H__
+#ifndef __MODULESCENEINTRO_H__
+#define __MODULESCENEINTRO_H__
 
 #include "Module.h"
 #include "ModuleAudio.h"
 
 struct SDL_Texture;
 
-class ModuleIntroScene : public Module
+class ModuleSceneIntro : public Module
 {
 public:
-	ModuleIntroScene();
-	~ModuleIntroScene();
+	ModuleSceneIntro();
+	~ModuleSceneIntro();
 
 	bool Start();
 	update_status Update();
 	bool CleanUp();
 
 public:
+	
+	/*SDL_Texture* background = nullptr;
+	uint fx = 0;*/
 
 	SDL_Texture * introbackground = nullptr;
 	SDL_Rect introrect;
 	Mix_Music* maintrackintro = nullptr;
 };
 
-#endif // __MODULESCENESPACE_H__
+#endif // __MODULESCENEINTRO_H__
