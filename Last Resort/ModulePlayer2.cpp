@@ -89,6 +89,8 @@ bool ModulePlayer2::Start()
 	LOG("Loading player");
 	deathsound = App->audio->LoadSoundEffect("assets/sounds/005.Death.wav");
 	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
+	death.Reset();
+	spawn.Reset();
 	current_animation = &spawn;
 	player2collider = App->collision->AddCollider({ position.x,position.y,32,14 }, COLLIDER_PLAYER, this);
 	return true;
@@ -110,9 +112,11 @@ update_status ModulePlayer2::Update()
 {
 	int speed = 2;
 	
+	if (current_animation == &spawn&&current_animation->Finished())
+		current_animation = &idle;
+
 	if (current_animation != &death)
 	{
-		death.Reset();
 		if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN) {
 			App->particles->AddParticle(App->particles->Laserexplosion, App->player2->position.x + 32, App->player2->position.y);
 			App->particles->AddParticle(App->particles->laser, position.x + 35, position.y, COLLIDER_PLAYER_SHOT);
@@ -181,9 +185,6 @@ update_status ModulePlayer2::Update()
 			}
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
-			&& App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_IDLE && current_animation->Finished())
-			current_animation = &idle;
 	}
 	// Draw everything --------------------------------------
 	player2collider->SetPos(position.x, position.y);
@@ -208,15 +209,14 @@ void ModulePlayer2::OnCollision(Collider * col_1, Collider * col_2)
 	if (col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL)
 	{
 		if (current_animation != &death)
+		{
 			App->audio->PlaySoundEffect(deathsound);
-		current_animation = &death;
+			current_animation = &death;
+		}
 		if (current_animation->Finished()) {
 			App->player2->Disable();
-			position.x = 50;
-			position.y = 100;
-			player2collider->rect = {0, 0};
-			spawn.Reset();
-			current_animation = nullptr;
+			player2collider->rect = { 0,0 };
+			position = { 50,100 };
 		}
 	}
 }

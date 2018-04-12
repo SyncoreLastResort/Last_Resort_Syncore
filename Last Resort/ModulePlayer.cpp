@@ -7,6 +7,8 @@
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
+#include "SDL/include/SDL_timer.h"
+
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -92,6 +94,8 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	deathsound = App->audio->LoadSoundEffect("assets/sounds/005.Death.wav");
 	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
+	death.Reset();
+	spawn.Reset();
 	current_animation = &spawn;
 	position.x = 50;
 	position.y = 100;
@@ -119,6 +123,9 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update()
 {
 	int speed = 2;
+	
+	if (current_animation == &spawn&&current_animation->Finished())
+		current_animation = &idle;
 	
 	if (current_animation != &death)
 	{
@@ -191,10 +198,7 @@ update_status ModulePlayer::Update()
 				current_animation = &upwardstoidle;
 			}
 		}
-
-		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-			&& App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE && current_animation->Finished())
-			current_animation = &idle;
+		
 	}
 	// TODO 3: Update collider position to player position
 
@@ -223,16 +227,14 @@ void ModulePlayer::OnCollision(Collider * col_1, Collider * col_2)
 {
 	if (col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL)
 	{
-		spawn.Reset();
-		if (current_animation!=&death)
+		if (current_animation != &death)
+		{
 			App->audio->PlaySoundEffect(deathsound);
-		current_animation = &death;
+			current_animation = &death;
+		}
 		if (current_animation->Finished()) {
-			
 			App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
 			App->player->Disable();
-			spawn.Reset();
-			
 		}
 	}
 }

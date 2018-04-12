@@ -21,6 +21,7 @@ public:
 	void OnCollision(Collider* col_1, Collider* col_2) override;
 
 public:
+	unsigned int TimeZero = 0, CurrentTime;
 
 	Mix_Chunk* deathsound;
 	Animation spawn;
