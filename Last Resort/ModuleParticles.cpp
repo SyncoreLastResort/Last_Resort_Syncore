@@ -25,14 +25,16 @@ bool ModuleParticles::Start()
 	lasersound = App->audio->LoadSoundEffect("assets/sounds/004.Shot_center.wav");
 
 	// Explosion particle
-	explosion.anim.PushBack({274, 296, 33, 30});
-	explosion.anim.PushBack({313, 296, 33, 30});
-	explosion.anim.PushBack({346, 296, 33, 30});
-	explosion.anim.PushBack({382, 296, 33, 30});
-	explosion.anim.PushBack({419, 296, 33, 30});
-	explosion.anim.PushBack({457, 296, 33, 30});
+	explosion.anim.PushBack({315, 369, 16, 16});
+	explosion.anim.PushBack({331, 369, 16, 16});
+	explosion.anim.PushBack({347, 369, 16, 16 });
+	explosion.anim.PushBack({363, 369, 16, 16 });
+	explosion.anim.PushBack({379, 369, 16, 16 });
+	explosion.anim.PushBack({395, 369, 16, 16 });
+	explosion.anim.PushBack({411, 369, 16, 16 });
 	explosion.anim.loop = false;
-	explosion.anim.speed = 0.3f;
+	explosion.anim.speed = 1.0f;
+	
 
 	// Explosion particle
 	Laserexplosion.anim.PushBack({ 95, 241, 10, 9 });
@@ -125,7 +127,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		if(active[i] != nullptr && active[i]->collider == c1)
 		{
 			if(c2->type==COLLIDER_WALL)
-			App->particles->AddParticle(App->particles->explosion, active[i]->position.x, active[i]->position.y);
+			App->particles->AddParticle(App->particles->explosion, active[i]->position.x, active[i]->position.y-4);
 
 			delete active[i];
 			active[i] = nullptr;

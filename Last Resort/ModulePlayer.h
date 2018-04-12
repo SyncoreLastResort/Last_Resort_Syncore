@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
+#include "ModuleParticles.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -21,6 +22,9 @@ public:
 
 public:
 
+	Mix_Chunk* deathsound;
+	Animation spawn;
+	Animation death;
 	Collider * playercollider;
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect ship;

@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "ModuleAudio.h"
 #include "Animation.h"
+#include "ModuleParticles.h"
+
 
 struct SDL_Texture;
 
@@ -19,7 +21,8 @@ public:
 
 public:
 	
-
+	Particle tank;
+	SDL_Texture* tank_texture = nullptr;
 	SDL_Texture* backbackground = nullptr;
 	SDL_Texture* midbackground = nullptr;
 	SDL_Texture* road = nullptr;

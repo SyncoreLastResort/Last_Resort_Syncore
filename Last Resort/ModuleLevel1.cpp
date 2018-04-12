@@ -22,6 +22,16 @@ ModuleLevel1::ModuleLevel1()
 	ground.w = 4408;
 	ground.h = 239;
 
+	tank.anim.PushBack({ 0,0,157,63 });
+	tank.anim.PushBack({ 0,63,157,64 });
+	tank.anim.PushBack({ 0,127,157,63 });
+
+	tank.anim.PushBack({ 0,191,157,65 });
+	tank.anim.speed = 0.2f;
+	tank.anim.loop = true;
+	tank.speed = {1, 0};
+	tank.life = 100000;
+
 	// BackBackground 
 	background.x = 0;
 	background.y = 0;
@@ -70,6 +80,7 @@ bool ModuleLevel1::Start()
 	App->particles->Enable();
 	App->collision->Enable();
 
+	tank_texture= App->textures->Load("assets/sprites/Tank_Stage1_Sprite.png");
 	background_lights = App->textures->Load("assets/sprites/Lasers_Sprite.png");
 	backbackground = App->textures->Load("assets/sprites/BackBackground_Sprite.png");
 	midbackground = App->textures->Load("assets/sprites/MidBackground_Sprite.png");
@@ -78,11 +89,9 @@ bool ModuleLevel1::Start()
 	maintracklvl1 = App->audio->LoadMusic("assets/sounds/2. Jack to the metro (Stage 1).ogg");
 	
 	// Colliders ---
-	App->collision->AddCollider({0, 224, 3930, 16}, COLLIDER_WALL);
-	App->collision->AddCollider({ 1376,0,112,96 }, COLLIDER_WALL);
-	App->collision->AddCollider({ 1376,144,112,80 }, COLLIDER_WALL);
-	// TODO 1: Add colliders for the first columns of the level
 	
+	// TODO 1: Add colliders for the first columns of the level
+	App->collision->AddCollider({ 120,155,155,63 }, COLLIDER_WALL);
 	return true;
 }
 
@@ -96,7 +105,8 @@ bool ModuleLevel1::CleanUp()
 	App->textures->Unload(midbackground);
 	App->textures->Unload(road);
 	App->textures->Unload(bossimg);
-
+	App->textures->Unload(tank_texture);
+	
 	App->audio->StopAudio();
 	App->audio->UnloadMusic(maintracklvl1);
 
@@ -129,6 +139,10 @@ update_status ModuleLevel1::Update()
 	App->render->Blit(background_lights, scroll_lights, -2, &thick_lights.GetCurrentFrame(), 0.75f);
 	App->render->Blit(midbackground, scrollmid, 32, &midback, 0.75f); // mid background
 	App->render->Blit(road, scrollground, 2, &ground); //road & tunnel
+	
+	App->render->Blit(tank_texture, 120, 155, &(tank.anim.GetCurrentFrame()));
+	
+	
 
 	App->audio->PlayMusic(maintracklvl1, ONCE);
 

@@ -51,7 +51,7 @@ private:
 	uint last_particle = 0;
 
 public:
-
+	
 	Particle explosion;
 	Particle Laserexplosion;
 	Particle laser;
