@@ -6,6 +6,7 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModuleLevel2.h"
@@ -30,14 +31,12 @@ bool ModuleLevel2::Start()
 {
 	LOG("Loading background assets");
 
-	if (IsEnabled() == true)
-	{
-		App->player->Enable();
-	}
-	else if (IsEnabled() == false)
-	{
-		App->player->Disable();
-	}
+	
+	App->player->Enable();
+	App->player2->Enable();
+	App->collision->Enable();
+	App->particles->Enable();
+	
 
 	bool ret = true;
 	background2 = App->textures->Load("assets/sprites/Stage2_tilemap.png");
@@ -77,7 +76,11 @@ bool ModuleLevel2::CleanUp()
 
 	App->audio->StopAudio();
 	App->audio->UnloadMusic(maintracklvl2);
-
+	App->player->Disable();
+	App->player2->Disable();
+	App->collision->Disable();
+	App->particles->Disable();
+	
 	LOG("Unloading background scene");
 
 	return true;

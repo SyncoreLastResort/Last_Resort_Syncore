@@ -99,7 +99,6 @@ bool ModulePlayer::Start()
 	current_animation = &spawn;
 	position.x = 50;
 	position.y = 100;
-	death.Reset();
 	
 	// TODO 2: Add a collider to the player
 
@@ -115,6 +114,7 @@ bool ModulePlayer::CleanUp()
 
 	App->textures->Unload(graphics);
 	
+	playercollider->to_delete;
 	
 	return true;
 }

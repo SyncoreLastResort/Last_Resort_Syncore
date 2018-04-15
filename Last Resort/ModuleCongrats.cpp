@@ -6,10 +6,12 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleCongrats.h"
+
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -33,6 +35,7 @@ bool ModuleCongrats::Start()
 	if (IsEnabled() == true)
 	{
 		App->player->Disable();
+		App->player2->Disable();
 	}
 
 	bool ret = true;

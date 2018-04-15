@@ -42,7 +42,7 @@ bool ModuleParticles::Start()
 	Laserexplosion.anim.PushBack({ 82, 239, 13, 12 });
 	Laserexplosion.anim.loop = true;
 	Laserexplosion.anim.speed = 0.3f;
-	Laserexplosion.life = 100;
+	//Laserexplosion.life = 100;
 
 	//Laser particle
 	laser.anim.PushBack({ 115,240,15,9 });

@@ -107,10 +107,12 @@ bool ModuleLevel1::CleanUp()
 	App->textures->Unload(bossimg);
 	App->textures->Unload(tank_texture);
 	
+	
 	App->audio->StopAudio();
 	App->audio->UnloadMusic(maintracklvl1);
 
 	App->player->Disable();
+	App->player2->Disable();
 	App->collision->Disable();
 	App->particles->Disable();
 	
