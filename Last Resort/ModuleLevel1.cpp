@@ -96,22 +96,22 @@ bool ModuleLevel1::Start()
 	App->collision->AddCollider({ 120,155,155,63 }, COLLIDER_WALL);
 
 	// Enemies ---
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 600, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 625, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 640, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 665, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 200, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 225, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 240, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 265, 80);
 
 	// TODO 1: Add a new wave of red birds
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 710, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 735, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 750, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 775, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 310, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 335, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 350, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 375, 80);
 
 	//Brown Cookies
-	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 825, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 850, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 865, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 880, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 425, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 450, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 465, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 480, 80);
 	return true;
 }
 
@@ -161,7 +161,7 @@ update_status ModuleLevel1::Update()
 	App->render->Blit(backbackground, scrollback, 0, &background, 0.75f); // back background
 	App->render->Blit(background_lights, scroll_lights, -2, &thick_lights.GetCurrentFrame(), 0.75f);
 	App->render->Blit(midbackground, scrollmid, 32, &midback, 0.75f); // mid background
-	App->render->Blit(road, scrollground, 2, &ground); //road & tunnel
+	App->render->Blit(road, scrollground, 0, &ground); //road & tunnel
 	
 	App->render->Blit(tank_texture, 120, 155, &(tank.anim.GetCurrentFrame()));
 	
