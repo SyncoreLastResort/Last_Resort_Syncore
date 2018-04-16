@@ -13,29 +13,19 @@ ModuleParticles::ModuleParticles()
 {
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
-}
-
-ModuleParticles::~ModuleParticles()
-{}
-
-// Load assets
-bool ModuleParticles::Start()
-{
-	LOG("Loading particles");
-	lasersound = App->audio->LoadSoundEffect("assets/sounds/004.Shot_center.wav");
 
 	// Explosion particle
-	explosion.anim.PushBack({315, 369, 16, 16});
-	explosion.anim.PushBack({331, 369, 16, 16});
-	explosion.anim.PushBack({347, 369, 16, 16 });
-	explosion.anim.PushBack({363, 369, 16, 16 });
-	explosion.anim.PushBack({379, 369, 16, 16 });
-	explosion.anim.PushBack({395, 369, 16, 16 });
-	explosion.anim.PushBack({411, 369, 16, 16 });
+	explosion.anim.PushBack({ 315, 369, 16, 16 });
+	explosion.anim.PushBack({ 331, 369, 16, 16 });
+	explosion.anim.PushBack({ 347, 369, 16, 16 });
+	explosion.anim.PushBack({ 363, 369, 16, 16 });
+	explosion.anim.PushBack({ 379, 369, 16, 16 });
+	explosion.anim.PushBack({ 395, 369, 16, 16 });
+	explosion.anim.PushBack({ 411, 369, 16, 16 });
 	explosion.anim.loop = false;
 	explosion.anim.speed = 1.0f;
 	explosion.life = 100;
-	
+
 
 	// Explosion particle
 	Laserexplosion.anim.PushBack({ 95, 241, 10, 9 });
@@ -51,6 +41,16 @@ bool ModuleParticles::Start()
 	laser.speed.x = 10;
 	laser.speed.y = 0;
 	laser.life = 1000;
+}
+
+ModuleParticles::~ModuleParticles()
+{}
+
+// Load assets
+bool ModuleParticles::Start()
+{
+	LOG("Loading particles");
+	lasersound = App->audio->LoadSoundEffect("assets/sounds/004.Shot_center.wav");
 
 	return true;
 }
@@ -128,7 +128,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if(active[i] != nullptr && active[i]->collider == c1)
 		{
-			if(c2->type==COLLIDER_WALL)
+			if(c2->type==COLLIDER_WALL || c1->type==COLLIDER_WALL)
 			App->particles->AddParticle(App->particles->explosion, active[i]->position.x, active[i]->position.y-4);
 
 			delete active[i];

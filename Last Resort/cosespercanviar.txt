@@ -1,3 +1,0 @@
-Windowe name with version
-kbhit to close window clicking X
-Fix Animation of explosion, has to be special animation

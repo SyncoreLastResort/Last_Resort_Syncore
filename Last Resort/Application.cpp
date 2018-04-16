@@ -13,6 +13,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
+#include "ModuleEnemies.h"
 
 Application::Application()
 {
@@ -22,10 +23,11 @@ Application::Application()
 	modules[i++] = input = new ModuleInput();
 	modules[i++] = textures = new ModuleTextures();
 	modules[i++] = audio = new ModuleAudio();
-	modules[i++] = congrats = new ModuleCongrats();
-	modules[i++] = level2 = new ModuleLevel2();
-	modules[i++] = level1 = new ModuleLevel1();
 	modules[i++] = scene_intro = new ModuleSceneIntro();
+	modules[i++] = level1 = new ModuleLevel1();
+	modules[i++] = level2 = new ModuleLevel2();
+	modules[i++] = congrats = new ModuleCongrats();
+	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = player2 = new ModulePlayer2();
 	modules[i++] = particles = new ModuleParticles();
@@ -50,6 +52,7 @@ bool Application::Init()
 	player->Disable();
 	player2->Disable();
 	collision->Disable();
+	enemies->Disable();
 	// ----------------------------
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)

@@ -4,6 +4,7 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModulePlayer2.h"
+#include "ModuleEnemies.h"
 #include "ModuleLevel1.h"
 #include "ModuleLevel2.h"
 #include "ModuleInput.h"
@@ -79,6 +80,7 @@ bool ModuleLevel1::Start()
 	App->player->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
+	App->enemies->Enable();
 
 	tank_texture= App->textures->Load("assets/sprites/Tank_Stage1_Sprite.png");
 	background_lights = App->textures->Load("assets/sprites/Lasers_Sprite.png");
@@ -92,6 +94,24 @@ bool ModuleLevel1::Start()
 	
 	// TODO 1: Add colliders for the first columns of the level
 	App->collision->AddCollider({ 120,155,155,63 }, COLLIDER_WALL);
+
+	// Enemies ---
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 600, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 625, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 640, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 665, 80);
+
+	// TODO 1: Add a new wave of red birds
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 710, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 735, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 750, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 775, 80);
+
+	//Brown Cookies
+	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 825, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 850, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 865, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 880, 80);
 	return true;
 }
 
@@ -111,6 +131,7 @@ bool ModuleLevel1::CleanUp()
 	App->audio->StopAudio();
 	App->audio->UnloadMusic(maintracklvl1);
 
+	App->enemies->Disable();
 	App->player->Disable();
 	App->player2->Disable();
 	App->collision->Disable();
