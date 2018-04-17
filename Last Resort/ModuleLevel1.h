@@ -21,8 +21,6 @@ public:
 
 public:
 	
-	Particle tank;
-	SDL_Texture* tank_texture = nullptr;
 	SDL_Texture* backbackground = nullptr;
 	SDL_Texture* midbackground = nullptr;
 	SDL_Texture* road = nullptr;

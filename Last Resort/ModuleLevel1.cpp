@@ -12,6 +12,8 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleFadeToBlack.h"
+#include "SDL\include\SDL_render.h"
+#include "ModuleFirstBoss.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -22,16 +24,6 @@ ModuleLevel1::ModuleLevel1()
 	ground.y = 0;
 	ground.w = 4408;
 	ground.h = 239;
-
-	tank.anim.PushBack({ 0,0,157,63 });
-	tank.anim.PushBack({ 0,63,157,64 });
-	tank.anim.PushBack({ 0,127,157,63 });
-
-	tank.anim.PushBack({ 0,191,157,65 });
-	tank.anim.speed = 0.2f;
-	tank.anim.loop = true;
-	tank.speed = {1, 0};
-	tank.life = 100000;
 
 	// BackBackground 
 	background.x = 0;
@@ -65,8 +57,9 @@ ModuleLevel1::ModuleLevel1()
 	thick_lights.PushBack({ 248,2,65,144 }); //From right to left
 	thick_lights.PushBack({ 196,2,52,144 }); //From right to left
 	thick_lights.PushBack({ 158,2,38,144 }); //From right to left
-
 	thick_lights.speed = 0.15f;
+
+	
 }
 
 ModuleLevel1::~ModuleLevel1()
@@ -81,8 +74,9 @@ bool ModuleLevel1::Start()
 	App->particles->Enable();
 	App->collision->Enable();
 	App->enemies->Enable();
+	App->boss1->Enable();
 
-	tank_texture= App->textures->Load("assets/sprites/Tank_Stage1_Sprite.png");
+
 	background_lights = App->textures->Load("assets/sprites/Lasers_Sprite.png");
 	backbackground = App->textures->Load("assets/sprites/BackBackground_Sprite.png");
 	midbackground = App->textures->Load("assets/sprites/MidBackground_Sprite.png");
@@ -90,28 +84,6 @@ bool ModuleLevel1::Start()
 	bossimg = App->textures->Load("assets/sprites/Boss_Static_Background.png");
 	maintracklvl1 = App->audio->LoadMusic("assets/sounds/2. Jack to the metro (Stage 1).ogg");
 	
-	// Colliders ---
-	
-	// TODO 1: Add colliders for the first columns of the level
-	App->collision->AddCollider({ 120,155,155,63 }, COLLIDER_WALL);
-
-	// Enemies ---
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 200, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 225, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 240, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 265, 80);
-
-	// TODO 1: Add a new wave of red birds
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 310, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 335, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 350, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 375, 80);
-
-	//Brown Cookies
-	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 425, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 450, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 465, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::BROWNCOOKIE, 480, 80);
 	return true;
 }
 
@@ -125,7 +97,7 @@ bool ModuleLevel1::CleanUp()
 	App->textures->Unload(midbackground);
 	App->textures->Unload(road);
 	App->textures->Unload(bossimg);
-	App->textures->Unload(tank_texture);
+	
 	
 	
 	App->audio->StopAudio();
@@ -136,6 +108,7 @@ bool ModuleLevel1::CleanUp()
 	App->player2->Disable();
 	App->collision->Disable();
 	App->particles->Disable();
+	App->boss1->Disable();
 	
 	return true;
 }
@@ -163,7 +136,7 @@ update_status ModuleLevel1::Update()
 	App->render->Blit(midbackground, scrollmid, 32, &midback, 0.75f); // mid background
 	App->render->Blit(road, scrollground, 0, &ground); //road & tunnel
 	
-	App->render->Blit(tank_texture, 120, 155, &(tank.anim.GetCurrentFrame()));
+	
 	
 	
 

@@ -200,23 +200,23 @@ update_status ModulePlayer2::Update()
 	{
 		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 	}
-	
+	if (current_animation == &death && current_animation->Finished())
+	{
+		App->player2->Disable();
+		player2collider->rect = { 0,0 };
+		position = { 50,100 };
+	}
 
 	return UPDATE_CONTINUE;
 }
 void ModulePlayer2::OnCollision(Collider * col_1, Collider * col_2)
 {
-	if (col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL)
+	if ((col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL || col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT))
 	{
 		if (current_animation != &death)
 		{
 			App->audio->PlaySoundEffect(deathsound);
 			current_animation = &death;
-		}
-		if (current_animation->Finished()) {
-			App->player2->Disable();
-			player2collider->rect = { 0,0 };
-			position = { 50,100 };
 		}
 	}
 }

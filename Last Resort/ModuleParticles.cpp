@@ -32,7 +32,7 @@ ModuleParticles::ModuleParticles()
 	Laserexplosion.anim.PushBack({ 82, 239, 13, 12 });
 	Laserexplosion.anim.loop = true;
 	Laserexplosion.anim.speed = 0.3f;
-	//Laserexplosion.life = 100;
+	
 
 	//Laser particle
 	laser.anim.PushBack({ 115,240,15,9 });
@@ -41,6 +41,30 @@ ModuleParticles::ModuleParticles()
 	laser.speed.x = 10;
 	laser.speed.y = 0;
 	laser.life = 1000;
+	
+
+	boss_shot.anim.PushBack({256,523, 63, 32});
+	boss_shot.anim.PushBack({ 319,523, 63, 32 });
+	boss_shot.anim.speed = 0.1;
+	boss_shot.speed.x = -4;
+	boss_shot.life = 3000;
+
+	boss_explosion.anim.PushBack({384, 522, 64, 56});
+	boss_explosion.anim.PushBack({ 448, 522, 64, 56 });
+	boss_explosion.anim.speed = 0.15;
+
+	boss_cooling.anim.PushBack({57,578,56, 28 });
+	boss_cooling.anim.PushBack({ 113,578,56, 28 });
+	boss_cooling.anim.PushBack({ 169,578,56, 28 });
+	boss_cooling.anim.PushBack({ 225,578,56, 28 });
+	boss_cooling.anim.PushBack({ 281,578,56, 28 });
+	boss_cooling.anim.PushBack({ 337,578,56, 28 });
+	boss_cooling.anim.PushBack({ 393,578,56, 28 });
+	boss_cooling.anim.PushBack({ 449,578,56, 28 });
+	boss_cooling.anim.speed = 0.15;
+	boss_cooling.anim.loop = false;
+
+	
 }
 
 ModuleParticles::~ModuleParticles()
@@ -51,7 +75,7 @@ bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
 	lasersound = App->audio->LoadSoundEffect("assets/sounds/004.Shot_center.wav");
-
+	enemylaser_sound = App->audio->LoadSoundEffect("assets/sounds/025.Boss_shot.wav");
 	return true;
 }
 
@@ -78,7 +102,6 @@ update_status ModuleParticles::Update()
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		Particle* p = active[i];
-
 		if(p == nullptr)
 			continue;
 

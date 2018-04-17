@@ -24,7 +24,7 @@ struct Particle
 	Uint32 born = 0;
 	Uint32 life = 0;
 	bool fx_played = false;
-
+	
 	Particle();
 	Particle(const Particle& p);
 	~Particle();
@@ -49,11 +49,14 @@ private:
 	Particle* active[MAX_ACTIVE_PARTICLES];
 
 public:
-	
+	Particle boss_shot;
+	Particle boss_explosion;
+	Particle boss_cooling;
 	Particle explosion;
 	Particle Laserexplosion;
 	Particle laser;
 	Mix_Chunk* lasersound;
+	Mix_Chunk* enemylaser_sound;
 };
 
 #endif // __MODULEPARTICLES_H__

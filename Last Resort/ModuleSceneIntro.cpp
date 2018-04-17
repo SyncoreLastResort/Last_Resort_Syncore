@@ -8,7 +8,7 @@
 #include "ModulePlayer2.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneIntro.h"
-
+#include "ModuleFirstBoss.h"
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModuleSceneIntro::ModuleSceneIntro()
@@ -32,6 +32,7 @@ bool ModuleSceneIntro::Start()
 	App->level1->Disable();
 	App->player->Disable();
 	App->player2->Disable();
+	App->boss1->Disable();
 
 	App->render->camera.x = App->render->camera.y = 0;
 	

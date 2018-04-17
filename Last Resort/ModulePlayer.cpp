@@ -8,6 +8,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
 #include "SDL/include/SDL_timer.h"
+#include "SDL/include/SDL_render.h"
 
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -93,7 +94,7 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 	deathsound = App->audio->LoadSoundEffect("assets/sounds/005.Death.wav");
-	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
+	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite_provisional.png");
 	death.Reset();
 	spawn.Reset();
 	current_animation = &spawn;
@@ -218,7 +219,11 @@ update_status ModulePlayer::Update()
 	{
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 	}
-
+	if (current_animation == &death &&current_animation->Finished())
+	{
+		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
+		App->player->Disable();
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -226,16 +231,13 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider * col_1, Collider * col_2) 
 {
-	if (col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL)
+	if (col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL|| col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT)
 	{
 		if (current_animation != &death)
 		{
 			App->audio->PlaySoundEffect(deathsound);
 			current_animation = &death;
 		}
-		if (current_animation->Finished()) {
-			App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
-			App->player->Disable();
-		}
+		
 	}
 }
