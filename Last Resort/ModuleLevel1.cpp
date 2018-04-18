@@ -84,6 +84,23 @@ bool ModuleLevel1::Start()
 	bossimg = App->textures->Load("assets/sprites/Boss_Static_Background.png");
 	maintracklvl1 = App->audio->LoadMusic("assets/sounds/2. Jack to the metro (Stage 1).ogg");
 	
+	// Enemies ---
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 400, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 432, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 464, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 498, 40);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 600, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 632, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 664, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 698, 80);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 800, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 832, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 864, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 898, 120);
+
 	return true;
 }
 
