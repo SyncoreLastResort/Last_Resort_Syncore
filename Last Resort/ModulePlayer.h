@@ -23,12 +23,30 @@ public:
 public:
 	unsigned int TimeZero = 0, CurrentTime;
 
+	//FX
 	Mix_Chunk* deathsound;
+
+	//Fonts
+	int font_score = -1;
+	int font_2 = -1;
+	char score_text[10];
+	char score_text2[10];
+	uint score = 0;
+	uint score2 = 0;
+	uint fontt2 = 0;
+
+	//Collider
+	Collider * playercollider;
+
+	//Texture
+	SDL_Texture* graphics = nullptr;
+
+	//Rect
+	SDL_Rect ship;
+
+	//Animations
 	Animation spawn;
 	Animation death;
-	Collider * playercollider;
-	SDL_Texture* graphics = nullptr;
-	SDL_Rect ship;
 	Animation* current_animation = nullptr;
 	Animation idle;
 	Animation forward;
@@ -37,6 +55,8 @@ public:
 	Animation downwards;
 	Animation upwardstoidle;
 	Animation downwardstoidle;
+
+	//Position
 	iPoint position;
 
 };

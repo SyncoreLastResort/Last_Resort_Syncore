@@ -6,6 +6,9 @@
 #include "ModuleRender.h"
 #include "ModulePlayer2.h"
 #include "ModuleCollision.h"
+#include "ModuleFonts.h"
+
+#include<stdio.h>
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -93,6 +96,9 @@ bool ModulePlayer2::Start()
 	spawn.Reset();
 	current_animation = &spawn;
 	player2collider = App->collision->AddCollider({ position.x,position.y,32,14 }, COLLIDER_PLAYER, this);
+	App->player->score2 = 0;
+
+	App->player->font_2 = App->player->font_score;
 	return true;
 }
 
@@ -101,8 +107,8 @@ bool ModulePlayer2::CleanUp()
 {
 	LOG("Unloading player");
 
-	App->textures->Unload(graphics);
-	
+	//App->textures->Unload(graphics);
+	//App->fonts->UnLoad(App->player->font_2);
 
 	return true;
 }
@@ -120,6 +126,7 @@ update_status ModulePlayer2::Update()
 		if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN) {
 			App->particles->AddParticle(App->particles->Laserexplosion, App->player2->position.x + 32, App->player2->position.y);
 			App->particles->AddParticle(App->particles->laser, position.x + 35, position.y, COLLIDER_PLAYER_SHOT);
+			App->player->score2 += 8;
 		}
 
 		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
@@ -206,6 +213,11 @@ update_status ModulePlayer2::Update()
 		player2collider->rect = { 0,0 };
 		position = { 50,100 };
 	}
+
+	sprintf_s(App->player->score_text2, 10, "%7d", App->player->score2);
+
+	App->fonts->BlitText(50, 25, App->player->font_2, App->player->score_text2);
+
 
 	return UPDATE_CONTINUE;
 }

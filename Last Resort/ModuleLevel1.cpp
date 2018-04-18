@@ -76,7 +76,7 @@ bool ModuleLevel1::Start()
 	App->enemies->Enable();
 	App->boss1->Enable();
 
-
+	hud = App->textures->Load("rtype/hud.png");
 	background_lights = App->textures->Load("assets/sprites/Lasers_Sprite.png");
 	backbackground = App->textures->Load("assets/sprites/BackBackground_Sprite.png");
 	midbackground = App->textures->Load("assets/sprites/MidBackground_Sprite.png");
@@ -84,6 +84,23 @@ bool ModuleLevel1::Start()
 	bossimg = App->textures->Load("assets/sprites/Boss_Static_Background.png");
 	maintracklvl1 = App->audio->LoadMusic("assets/sounds/2. Jack to the metro (Stage 1).ogg");
 	
+	// Enemies ---
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 400, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 432, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 464, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 498, 40);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 600, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 632, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 664, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 698, 80);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 800, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 832, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 864, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 898, 120);
+
 	return true;
 }
 
@@ -117,7 +134,7 @@ bool ModuleLevel1::CleanUp()
 update_status ModuleLevel1::Update()
 {
 	// Move camera forward -----------------------------
-	//int scroll_speed = 1;
+	/*App->render->camera.x += 1 * SCREEN_SIZE;*/
 
 	if (App->input->keyboard[SDL_SCANCODE_F] == 1)
 	{
@@ -135,7 +152,8 @@ update_status ModuleLevel1::Update()
 	App->render->Blit(background_lights, scroll_lights, -2, &thick_lights.GetCurrentFrame(), 0.75f);
 	App->render->Blit(midbackground, scrollmid, 32, &midback, 0.75f); // mid background
 	App->render->Blit(road, scrollground, 0, &ground); //road & tunnel
-	
+
+	App->render->Blit(hud, 0, 240, NULL, 0.0f, false);
 	
 	
 	

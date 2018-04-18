@@ -6,9 +6,12 @@
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleFonts.h"
 #include "ModulePlayer.h"
 #include "SDL/include/SDL_timer.h"
 #include "SDL/include/SDL_render.h"
+
+#include<stdio.h>
 
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -100,11 +103,19 @@ bool ModulePlayer::Start()
 	current_animation = &spawn;
 	position.x = 50;
 	position.y = 100;
+	score = 0;
 	
 	// TODO 2: Add a collider to the player
 
 	playercollider=App->collision->AddCollider({ position.x,position.y,32,14 }, COLLIDER_PLAYER, this);   // this = App->player
 	
+																										  // TODO 0: Notice how a font is loaded and the meaning of all its arguments 
+	/*font_score = App->fonts->Load("assets/fonts/Font_score.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);*/ // From rtype
+
+	font_score = App->fonts->Load("assets/fonts/Font_score.png", "0123456789ABCDEFGHIJKLMNPQRSTUVWXYZ_.,[]&$", 2);
+	// TODO 4: Try loading "rtype_font3.png" that has two rows to test if all calculations are correct
+	
+
 	return true;
 }
 
@@ -114,6 +125,7 @@ bool ModulePlayer::CleanUp()
 	LOG("Unloading player");
 
 	App->textures->Unload(graphics);
+	App->fonts->UnLoad(font_score);
 	
 	if (playercollider != nullptr)
 		playercollider->to_delete = true;
@@ -137,6 +149,7 @@ update_status ModulePlayer::Update()
 			App->particles->AddParticle(App->particles->Laserexplosion, App->player->position.x + 32, App->player->position.y, COLLIDER_NONE, 50);
 			
 			App->particles->AddParticle(App->particles->laser, position.x + 35, position.y, COLLIDER_PLAYER_SHOT);
+			score += 10;
 		}
 
 		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
@@ -226,6 +239,13 @@ update_status ModulePlayer::Update()
 		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
 		App->player->Disable();
 	}
+
+	// Draw UI (score) --------------------------------------
+	sprintf_s(score_text, 10, "%7d", score);
+
+	// TODO 3: Blit the text of the score in at the bottom of the screen
+	App->fonts->BlitText(0, 25, font_score, score_text);
+
 	return UPDATE_CONTINUE;
 }
 
