@@ -33,7 +33,6 @@ bool ModuleLevel2::Start()
 
 	
 	App->player->Enable();
-	App->player2->Enable();
 	App->collision->Enable();
 	App->particles->Enable();
 	

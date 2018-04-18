@@ -76,7 +76,7 @@ bool ModuleLevel1::Start()
 	App->enemies->Enable();
 	App->boss1->Enable();
 
-
+	hud = App->textures->Load("rtype/hud.png");
 	background_lights = App->textures->Load("assets/sprites/Lasers_Sprite.png");
 	backbackground = App->textures->Load("assets/sprites/BackBackground_Sprite.png");
 	midbackground = App->textures->Load("assets/sprites/MidBackground_Sprite.png");
@@ -117,7 +117,7 @@ bool ModuleLevel1::CleanUp()
 update_status ModuleLevel1::Update()
 {
 	// Move camera forward -----------------------------
-	//int scroll_speed = 1;
+	/*App->render->camera.x += 1 * SCREEN_SIZE;*/
 
 	if (App->input->keyboard[SDL_SCANCODE_F] == 1)
 	{
@@ -135,7 +135,8 @@ update_status ModuleLevel1::Update()
 	App->render->Blit(background_lights, scroll_lights, -2, &thick_lights.GetCurrentFrame(), 0.75f);
 	App->render->Blit(midbackground, scrollmid, 32, &midback, 0.75f); // mid background
 	App->render->Blit(road, scrollground, 0, &ground); //road & tunnel
-	
+
+	App->render->Blit(hud, 0, 240, NULL, 0.0f, false);
 	
 	
 	

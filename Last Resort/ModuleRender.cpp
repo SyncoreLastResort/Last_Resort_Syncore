@@ -88,14 +88,23 @@ bool ModuleRender::CleanUp()
 }
 
 // Blit to screen
-bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed)
+bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed, bool use_camera)
 {
 	bool ret = true;
 	SDL_Rect rect;
-	rect.x = (int)(camera.x * speed) + x * SCREEN_SIZE;
-	rect.y = (int)(camera.y * speed) + y * SCREEN_SIZE;
 
-	if(section != NULL)
+	if (use_camera)
+	{
+		rect.x = (int)(-camera.x * speed) + x * SCREEN_SIZE;
+		rect.y = (int)(-camera.y * speed) + y * SCREEN_SIZE;
+	}
+	else
+	{
+		rect.x = x * SCREEN_SIZE;
+		rect.y = y * SCREEN_SIZE;
+	}
+
+	if (section != NULL)
 	{
 		rect.w = section->w;
 		rect.h = section->h;
@@ -108,7 +117,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, f
 	rect.w *= SCREEN_SIZE;
 	rect.h *= SCREEN_SIZE;
 
-	if(SDL_RenderCopy(renderer, texture, section, &rect) != 0)
+	if (SDL_RenderCopy(renderer, texture, section, &rect) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;
@@ -127,11 +136,18 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	SDL_Rect rec(rect);
 	if(use_camera)
 	{
-		rec.x = (int)(camera.x + rect.x * SCREEN_SIZE);
-		rec.y = (int)(camera.y + rect.y * SCREEN_SIZE);
-		rec.w *= SCREEN_SIZE;
-		rec.h *= SCREEN_SIZE;
+		rec.x = (int)(-camera.x + rect.x * SCREEN_SIZE);
+		rec.y = (int)(-camera.y + rect.y * SCREEN_SIZE);
 	}
+	else
+	{
+		rec.x *= SCREEN_SIZE;
+		rec.y *= SCREEN_SIZE;
+	}
+
+	rec.w *= SCREEN_SIZE;
+	rec.h *= SCREEN_SIZE;
+
 
 	if(SDL_RenderFillRect(renderer, &rec) != 0)
 	{

@@ -188,8 +188,7 @@ bool Particle::Update()
 
 	if(life > 0)
 	{
-		int time = ((int)SDL_GetTicks() - (int)born);
-		if( time > (int)life)
+		if ((SDL_GetTicks() - born) > life)
 			ret = false;
 	}
 	else

@@ -15,6 +15,7 @@
 #include "ModuleAudio.h"
 #include "ModuleEnemies.h"
 #include "ModuleFirstBoss.h"
+#include "ModuleFonts.h"
 
 Application::Application()
 {
@@ -23,6 +24,7 @@ Application::Application()
 	modules[i++] = render = new ModuleRender();
 	modules[i++] = input = new ModuleInput();
 	modules[i++] = textures = new ModuleTextures();
+	modules[i++] = fonts = new ModuleFonts();
 	modules[i++] = audio = new ModuleAudio();
 	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = level1 = new ModuleLevel1();
@@ -55,6 +57,7 @@ bool Application::Init()
 	player2->Disable();
 	collision->Disable();
 	enemies->Disable();
+
 	// ----------------------------
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
