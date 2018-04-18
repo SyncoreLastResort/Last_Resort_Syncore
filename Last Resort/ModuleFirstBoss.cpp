@@ -89,6 +89,7 @@ bool ModuleFirstBoss::Start()
 	boss1_texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
 	current_head = &Head_Idle;
 	current_eye = &eye_closed;
+	timer = SDL_GetTicks();
 	
 	//eye collider - this is the one that damages the enemy
 	eye_collider=App->collision->AddCollider({ position.x+20,position.y+79,25,16 }, COLLIDER_ENEMY, this);
@@ -123,7 +124,11 @@ bool ModuleFirstBoss::CleanUp()
 // Update: draw background
 update_status ModuleFirstBoss::Update()
 {
+	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_UP)
+		attack_with_body = true;
 	Act();
+	if (attack_with_body)
+		Body_attack();
 	//Update colliders position
 	eye_collider->SetPos(position.x+20, position.y+79);
 	body_collider->SetPos(position.x, position.y);
@@ -132,7 +137,7 @@ update_status ModuleFirstBoss::Update()
 	bottom_collider->SetPos(position.x + 10, position.y + 95);
 	//boss melee attack
 	if (App->input->keyboard[SDL_SCANCODE_B])
-		body_attack = true;
+		attack_with_body = true;
 	
 	if (App->input->keyboard[SDL_SCANCODE_N])
 	{
@@ -183,25 +188,29 @@ void ModuleFirstBoss::Shot()
 	App->particles->AddParticle(App->particles->boss_cooling, position.x - 22, position.y + 73);
 }
 
-
-
-void ModuleFirstBoss::Act()
+void ModuleFirstBoss::Body_attack()
 {
-	if (SDL_GetTicks() <= 5000)
+	bool forward = true, backward=false;
+	if (position.x <= 30)
 	{
-		body_attack = true;
+		forward = false;
+		backward = true;
 	}
-	if (body_attack == true)
+	if (forward)
 	{
 		position.x--;
-		if (position.x <= 30)
-			body_attack = false;
 	}
-	if (!body_attack && position.x <= 220)
+	
+	if (backward && position.x <= 220)
 	{
 		position.x++;
 	}
+}
 
+void ModuleFirstBoss::Act()
+{
+	if (SDL_GetTicks() - timer == 5000)
+		attack_with_body = true;
 	if (current_eye == &eye_opening&&current_eye->Finished() == true)
 	{
 		vulnerable = true;

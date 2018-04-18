@@ -23,7 +23,7 @@ public:
 private:
 	void ModuleFirstBoss::Shot();
 	void ModuleFirstBoss::Act();
-	
+	void ModuleFirstBoss::Body_attack();
 
 public:
 	bool vulnerable = false;
@@ -32,7 +32,6 @@ public:
 	Collider * head_collider = nullptr;
 	Collider * eye_collider = nullptr;
 	Collider * bottom_collider = nullptr;
-	unsigned int TimeZero = 0, CurrentTime;
 	SDL_Texture* boss1_texture;
 	iPoint position;
 	Animation Arm;
@@ -47,8 +46,8 @@ public:
 	Animation eye_closed;
 	Animation * current_eye = nullptr;
 private:
-	bool body_attack = false;
-
+	bool attack_with_body = false;
+	uint timer;
 
 };
 
