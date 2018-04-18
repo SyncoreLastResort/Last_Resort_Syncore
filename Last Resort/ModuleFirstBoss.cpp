@@ -160,7 +160,7 @@ update_status ModuleFirstBoss::Update()
 	return UPDATE_CONTINUE;
 }
 
-// TODO 4: Detect collision with a wall. If so, go back to intro screen.
+// TODO 4: Detect collision with a wall. If so, go back to intro screen. 
 
 void ModuleFirstBoss::OnCollision(Collider * col_1, Collider * col_2)
 {
@@ -182,6 +182,9 @@ void ModuleFirstBoss::Shot()
 	App->particles->AddParticle(App->particles->boss_shot, position.x + 20, position.y + 74, COLLIDER_ENEMY_SHOT);
 	App->particles->AddParticle(App->particles->boss_cooling, position.x - 22, position.y + 73);
 }
+
+
+
 void ModuleFirstBoss::Act()
 {
 	if (SDL_GetTicks() <= 5000)

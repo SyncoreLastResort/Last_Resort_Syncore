@@ -7,6 +7,7 @@
 #include "p2Point.h"
 #include "ModuleCollision.h"
 #include "ModuleAudio.h"
+#include "ModulePlayer.h"
 
 #define MAX_ACTIVE_PARTICLES 100
 
@@ -24,6 +25,7 @@ struct Particle
 	Uint32 born = 0;
 	Uint32 life = 0;
 	bool fx_played = false;
+	//SDL_Texture* texture = nullptr;
 	
 	Particle();
 	Particle(const Particle& p);

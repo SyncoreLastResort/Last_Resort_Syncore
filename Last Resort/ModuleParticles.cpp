@@ -33,6 +33,7 @@ ModuleParticles::ModuleParticles()
 	Laserexplosion.anim.loop = true;
 	Laserexplosion.anim.speed = 0.3f;
 	
+	
 
 	//Laser particle
 	laser.anim.PushBack({ 115,240,15,9 });
@@ -187,7 +188,8 @@ bool Particle::Update()
 
 	if(life > 0)
 	{
-		if((SDL_GetTicks() - born) > life)
+		int time = ((int)SDL_GetTicks() - (int)born);
+		if( time > (int)life)
 			ret = false;
 	}
 	else
