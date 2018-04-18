@@ -94,7 +94,7 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 	deathsound = App->audio->LoadSoundEffect("assets/sounds/005.Death.wav");
-	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite_provisional.png");
+	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	death.Reset();
 	spawn.Reset();
 	current_animation = &spawn;

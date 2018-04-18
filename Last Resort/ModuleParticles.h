@@ -25,7 +25,8 @@ struct Particle
 	Uint32 born = 0;
 	Uint32 life = 0;
 	bool fx_played = false;
-	//SDL_Texture* texture = nullptr;
+	SDL_Texture* texture = nullptr;
+	Mix_Chunk* sound = nullptr;
 	
 	Particle();
 	Particle(const Particle& p);
@@ -38,7 +39,7 @@ class ModuleParticles : public Module
 public:
 	ModuleParticles();
 	~ModuleParticles();
-
+	
 	bool Start();
 	update_status Update();
 	bool CleanUp();
@@ -49,7 +50,7 @@ public:
 private:
 
 	Particle* active[MAX_ACTIVE_PARTICLES];
-
+	
 public:
 	Particle boss_shot;
 	Particle boss_explosion;
@@ -57,8 +58,7 @@ public:
 	Particle explosion;
 	Particle Laserexplosion;
 	Particle laser;
-	Mix_Chunk* lasersound;
-	Mix_Chunk* enemylaser_sound;
+	
 };
 
 #endif // __MODULEPARTICLES_H__

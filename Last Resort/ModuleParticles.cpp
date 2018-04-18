@@ -33,6 +33,9 @@ ModuleParticles::ModuleParticles()
 	Laserexplosion.anim.loop = true;
 	Laserexplosion.anim.speed = 0.3f;
 	
+	//Laserexplosion.sound = lasersound;
+
+	
 	
 
 	//Laser particle
@@ -64,7 +67,7 @@ ModuleParticles::ModuleParticles()
 	boss_cooling.anim.PushBack({ 449,578,56, 28 });
 	boss_cooling.anim.speed = 0.15;
 	boss_cooling.anim.loop = false;
-
+	
 	
 }
 
@@ -75,8 +78,15 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	lasersound = App->audio->LoadSoundEffect("assets/sounds/004.Shot_center.wav");
-	enemylaser_sound = App->audio->LoadSoundEffect("assets/sounds/025.Boss_shot.wav");
+	Laserexplosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
+	laser.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
+	explosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
+	laser.sound=  App->audio->LoadSoundEffect("assets/sounds/004.Shot_center.wav");
+
+
+	boss_shot.sound = App->audio->LoadSoundEffect("assets/sounds/025.Boss_shot.wav");
+
+
 	return true;
 }
 
@@ -113,12 +123,12 @@ update_status ModuleParticles::Update()
 		}
 		else if(SDL_GetTicks() >= p->born)
 		{
-			App->render->Blit(App->player->graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+			App->render->Blit(p->texture, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
 			if(p->fx_played == false)
 			{
 				p->fx_played = true;
 				// Play particle fx here
-				App->audio->PlaySoundEffect(lasersound);
+				App->audio->PlaySoundEffect(p->sound);
 			}
 		}
 	}
@@ -136,9 +146,12 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			p->born = SDL_GetTicks() + delay;
 			p->position.x = x;
 			p->position.y = y;
+			p->texture=particle.texture;
+			p->sound = particle.sound;
 			if(collider_type != COLLIDER_NONE)
 				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
 			active[i] = p;
+			//active[i]->texture = particle.texture;
 			break;
 		}
 	}

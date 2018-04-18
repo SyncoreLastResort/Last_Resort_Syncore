@@ -183,9 +183,10 @@ void ModuleFirstBoss::OnCollision(Collider * col_1, Collider * col_2)
 
 void ModuleFirstBoss::Shot()
 {
-	App->particles->AddParticle(App->particles->boss_explosion, position.x - 10, position.y + 59);
+	
 	App->particles->AddParticle(App->particles->boss_shot, position.x + 20, position.y + 74, COLLIDER_ENEMY_SHOT);
 	App->particles->AddParticle(App->particles->boss_cooling, position.x - 22, position.y + 73);
+	App->particles->AddParticle(App->particles->boss_explosion, position.x - 10, position.y + 59);
 }
 
 void ModuleFirstBoss::Body_attack()
