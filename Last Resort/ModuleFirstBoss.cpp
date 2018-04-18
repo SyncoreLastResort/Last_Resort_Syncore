@@ -190,7 +190,6 @@ void ModuleFirstBoss::Shot()
 
 void ModuleFirstBoss::Body_attack()
 {
-	bool forward = true, backward=false;
 	if (position.x <= 30)
 	{
 		forward = false;
@@ -200,7 +199,6 @@ void ModuleFirstBoss::Body_attack()
 	{
 		position.x--;
 	}
-	
 	if (backward && position.x <= 220)
 	{
 		position.x++;

@@ -26,7 +26,7 @@ private:
 	void ModuleFirstBoss::Body_attack();
 
 public:
-	bool vulnerable = false;
+	bool vulnerable = false, forward = true, backward = false;;
 	Collider * body_collider = nullptr;
 	Collider * arm_collider = nullptr;
 	Collider * head_collider = nullptr;
