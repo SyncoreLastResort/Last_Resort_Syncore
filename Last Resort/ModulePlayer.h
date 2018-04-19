@@ -20,15 +20,12 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* col_1, Collider* col_2) override;
 
-	
 public:
-	iPoint position;
 	//god mode
 	bool godmode = false;
 	//FX
 	Mix_Chunk* deathsound;
-	//Move speed
-	int speed = 2;
+
 	//Fonts
 	int font_score = -1;
 	int font_2 = -1;
@@ -60,7 +57,7 @@ public:
 	Animation downwardstoidle;
 
 	//Position
-	
+	iPoint position;
 
 };
 
