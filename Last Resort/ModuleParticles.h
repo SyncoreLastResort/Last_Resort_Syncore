@@ -58,7 +58,7 @@ public:
 	Particle explosion;
 	Particle Laserexplosion;
 	Particle laser;
-	Particle boss_grenade;
+	//Particle boss_grenade;
 	
 };
 

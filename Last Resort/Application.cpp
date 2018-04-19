@@ -52,13 +52,13 @@ bool Application::Init()
 	bool ret = true;
 
 	// Deactivate modules here ----
-	level1->Disable();
-	level2->Disable();
-	congrats->Disable();
-	player->Disable();
+	boss1->Disable();
 	player2->Disable();
-	collision->Disable();
+	player->Disable();
 	enemies->Disable();
+	congrats->Disable();
+	level2->Disable();
+	level1->Disable();
 
 	// ----------------------------
 

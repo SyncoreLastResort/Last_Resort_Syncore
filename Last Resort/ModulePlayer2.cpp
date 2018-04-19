@@ -14,8 +14,7 @@
 
 ModulePlayer2::ModulePlayer2()
 {
-	graphics = NULL;
-	current_animation = NULL;
+	current_animation = nullptr;
 
 	position.x = 50;
 	position.y = 100;
@@ -90,8 +89,7 @@ ModulePlayer2::~ModulePlayer2()
 bool ModulePlayer2::Start()
 {
 	LOG("Loading player");
-	deathsound = App->audio->LoadSoundEffect("assets/sounds/005.Death.wav");
-	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
+
 	death.Reset();
 	spawn.Reset();
 	current_animation = &spawn;
@@ -107,8 +105,8 @@ bool ModulePlayer2::CleanUp()
 {
 	LOG("Unloading player");
 
-	//App->textures->Unload(graphics);
-	//App->fonts->UnLoad(App->player->font_2);
+	if (player2collider != nullptr)
+		player2collider->to_delete = true;
 
 	return true;
 }
@@ -197,15 +195,15 @@ update_status ModulePlayer2::Update()
 	player2collider->SetPos(position.x, position.y);
 	if (current_animation == &spawn)
 	{
-		App->render->Blit(graphics, position.x - 32, position.y - 7, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(App->player->graphics, position.x - 32, position.y - 7, &(current_animation->GetCurrentFrame()));
 	}
 	else if (current_animation == &death)
 	{
-		App->render->Blit(graphics, position.x - 23, position.y - 5, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(App->player->graphics, position.x - 23, position.y - 5, &(current_animation->GetCurrentFrame()));
 	}
 	else
 	{
-		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(App->player->graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 	}
 	if (current_animation == &death && current_animation->Finished())
 	{
@@ -229,7 +227,7 @@ void ModulePlayer2::OnCollision(Collider * col_1, Collider * col_2)
 		{
 			if (current_animation != &death)
 			{
-				App->audio->PlaySoundEffect(deathsound);
+				App->audio->PlaySoundEffect(App->player->deathsound);
 				current_animation = &death;
 			}
 		}

@@ -33,9 +33,6 @@ bool ModuleLevel2::Start()
 
 	
 	App->player->Enable();
-	App->collision->Enable();
-	App->particles->Enable();
-	
 
 	bool ret = true;
 	background2 = App->textures->Load("assets/sprites/Stage2_tilemap.png");
@@ -76,9 +73,10 @@ bool ModuleLevel2::CleanUp()
 	App->audio->StopAudio();
 	App->audio->UnloadMusic(maintracklvl2);
 	App->player->Disable();
-	App->player2->Disable();
-	App->collision->Disable();
-	App->particles->Disable();
+
+	if (App->player2->IsEnabled() == true)
+		App->player2->Disable();
+
 	
 	LOG("Unloading background scene");
 

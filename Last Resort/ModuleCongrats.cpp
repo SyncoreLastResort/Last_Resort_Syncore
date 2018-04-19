@@ -32,12 +32,6 @@ bool ModuleCongrats::Start()
 {
 	LOG("Loading background assets");
 
-	if (IsEnabled() == true)
-	{
-		App->player->Disable();
-		App->player2->Disable();
-	}
-
 	bool ret = true;
 	backgroundcongrats = App->textures->Load("assets/sprites/GameEnd.png");
 

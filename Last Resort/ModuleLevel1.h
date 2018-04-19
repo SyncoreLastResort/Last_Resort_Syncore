@@ -21,7 +21,6 @@ public:
 
 public:
 
-	SDL_Texture* hud = nullptr;
 	SDL_Texture* backbackground = nullptr;
 	SDL_Texture* midbackground = nullptr;
 	SDL_Texture* road = nullptr;
