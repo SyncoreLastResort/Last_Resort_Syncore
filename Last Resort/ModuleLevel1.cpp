@@ -165,7 +165,6 @@ update_status ModuleLevel1::Update()
 	scrollmid -= 0.25;
 	scrollback -= 0.15;
 
-	
 
 	if (App->input->keyboard[SDL_SCANCODE_2] == 1)
 	{

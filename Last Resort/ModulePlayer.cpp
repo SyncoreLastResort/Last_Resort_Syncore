@@ -137,6 +137,13 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update()
 {
 	int speed = 2;
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
+	{
+		if (godmode)
+			godmode = false;
+		else if (!godmode)
+			godmode = true;
+	}
 	
 	if (current_animation == &spawn&&current_animation->Finished())
 		current_animation = &idle;
@@ -253,13 +260,16 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider * col_1, Collider * col_2) 
 {
-	if (col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL|| col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT)
+	if (!godmode)
 	{
-		if (current_animation != &death)
+		if (col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL || col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT)
 		{
-			App->audio->PlaySoundEffect(deathsound);
-			current_animation = &death;
+			if (current_animation != &death)
+			{
+				App->audio->PlaySoundEffect(deathsound);
+				current_animation = &death;
+			}
+
 		}
-		
 	}
 }

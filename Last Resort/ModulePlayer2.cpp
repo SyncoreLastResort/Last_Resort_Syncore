@@ -223,12 +223,15 @@ update_status ModulePlayer2::Update()
 }
 void ModulePlayer2::OnCollision(Collider * col_1, Collider * col_2)
 {
-	if ((col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL || col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT))
+	if (!App->player->godmode)
 	{
-		if (current_animation != &death)
+		if ((col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL || col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT))
 		{
-			App->audio->PlaySoundEffect(deathsound);
-			current_animation = &death;
+			if (current_animation != &death)
+			{
+				App->audio->PlaySoundEffect(deathsound);
+				current_animation = &death;
+			}
 		}
 	}
 }

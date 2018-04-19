@@ -22,7 +22,8 @@ public:
 
 public:
 	unsigned int TimeZero = 0, CurrentTime;
-
+	//god mode
+	bool godmode = false;
 	//FX
 	Mix_Chunk* deathsound;
 

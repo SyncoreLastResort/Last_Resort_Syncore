@@ -241,6 +241,7 @@ bool Particle::Update()
 		if (time > (int)life)
 			ret = false;
 	}
+
 	else
 		if(anim.Finished())
 			ret = false;
@@ -252,7 +253,6 @@ bool Particle::Update()
 			collider->SetPos(position.x, position.y);
 	}
 
-	
 
 	return ret;
 }

@@ -90,7 +90,6 @@ bool ModuleFirstBoss::Start()
 	boss1_texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
 	current_head = &Head_Idle;
 	current_eye = &eye_closed;
-	time = SDL_GetTicks();
 	
 	//eye collider - this is the one that damages the enemy
 	eye_collider=App->collision->AddCollider({ position.x+20,position.y+79,25,16 }, COLLIDER_ENEMY, this);
@@ -132,20 +131,17 @@ update_status ModuleFirstBoss::Update()
 	head_collider->SetPos(position.x + 8, position.y - 20);
 	bottom_collider->SetPos(position.x + 10, position.y + 95);
 
-	
-
 	Act();
-	if (attack_with_body)
-		Body_attack();
-
-	if (SDL_GetTicks() - time >= 3000 && SDL_GetTicks() - time <= 3020)
+	
+	
+	if (SDL_GetTicks()%3000>=0&& SDL_GetTicks() % 3000 <= 20)
 	{
 		Attack next_attack = static_cast<Attack>(rand() % NONE);
 		if (next_attack == BODY)
 		{
 			attack_with_body = true;
 		}
-		if (next_attack == CANNON)
+		else if (next_attack == CANNON)
 		{
 			Shot();
 		}
@@ -188,7 +184,6 @@ void ModuleFirstBoss::Shot()
 	App->particles->AddParticle(App->particles->boss_cooling, position.x - 20, position.y + 73, COLLIDER_NONE, 280);
 	App->particles->AddParticle(App->particles->boss_explosion, position.x - 10, position.y + 59);
 
-	time = SDL_GetTicks();
 }
 
 void ModuleFirstBoss::Body_attack()
@@ -221,7 +216,6 @@ void ModuleFirstBoss::Body_attack()
 			forward = true;
 			current_eye = &eye_opening;
 			eye_closing.Reset();
-			time = SDL_GetTicks();
 		}
 	}
 }
@@ -232,4 +226,7 @@ void ModuleFirstBoss::Act()
 		vulnerable = true;
 	else
 		vulnerable = false;
+	
+	if (attack_with_body)
+		Body_attack();
 }

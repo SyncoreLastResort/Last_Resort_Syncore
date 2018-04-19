@@ -52,7 +52,6 @@ public:
 	Animation * current_eye = nullptr;
 private:
 	bool attack_with_body = false,forward = true, backward = false; // booleans for the body attack;
-	uint time;
 
 };
 
