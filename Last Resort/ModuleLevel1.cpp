@@ -14,6 +14,7 @@
 #include "ModuleFadeToBlack.h"
 #include "SDL\include\SDL_render.h"
 #include "ModuleFirstBoss.h"
+#include "ModuleBall.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -75,6 +76,7 @@ bool ModuleLevel1::Start()
 	App->collision->Enable();
 	App->enemies->Enable();
 	App->boss1->Enable();
+	App->ball_player1->Enable();
 
 	hud = App->textures->Load("rtype/hud.png");
 	background_lights = App->textures->Load("assets/sprites/Lasers_Sprite.png");
