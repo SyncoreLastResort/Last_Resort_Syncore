@@ -39,7 +39,7 @@ bool ModuleLevel2::Start()
 
 	bool ret = true;
 	background2 = App->textures->Load("assets/sprites/Stage2_tilemap.png");
-	maintracklvl2 = App->audio->LoadMusic("assets/sounds/5. The ruins of the metro (stage 2).ogg");
+	maintracklvl2 = App->audio->LoadMusic("assets/music/5. The ruins of the metro (stage 2).ogg");
 
 	return ret;
 }

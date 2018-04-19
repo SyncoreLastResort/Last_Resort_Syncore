@@ -26,7 +26,12 @@ private:
 	void ModuleFirstBoss::Body_attack();
 
 public:
-	bool vulnerable = false, forward = true, backward = false;;
+	bool vulnerable = false; //if the eye is opened, this is true and the enemy can get damaged
+	enum Attack {
+		CANNON, 
+		BODY, 
+		NONE
+	};
 	Collider * body_collider = nullptr;
 	Collider * arm_collider = nullptr;
 	Collider * head_collider = nullptr;
@@ -46,8 +51,8 @@ public:
 	Animation eye_closed;
 	Animation * current_eye = nullptr;
 private:
-	bool attack_with_body = false;
-	uint timer;
+	bool attack_with_body = false,forward = true, backward = false; // booleans for the body attack;
+	uint time;
 
 };
 

@@ -28,7 +28,7 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading intro");
 	
 	introbackground = App->textures->Load("assets/sprites/lastresortgametitle.png");
-	maintrackintro = App->audio->LoadMusic("assets/sounds/1.Last resort title.ogg");
+	maintrackintro = App->audio->LoadMusic("assets/music/1.Last resort title.ogg");
 	App->level1->Disable();
 	App->player->Disable();
 	App->player2->Disable();

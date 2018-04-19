@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -28,7 +29,7 @@ ModuleFirstBoss::ModuleFirstBoss()
 	Arm.PushBack({ 22,177, 22, 72 });
 	Arm.PushBack({ 44,177, 22, 72 });
 	Arm.PushBack({ 66,177, 22, 72 });
-	Arm.speed = 0.2f;
+	Arm.speed = 0.1f;
 	Arm.loop = true;
 
 	//Head idle animtion
@@ -58,7 +59,7 @@ ModuleFirstBoss::ModuleFirstBoss()
 	Body.PushBack({ 191, 177, 95, 77 });
 	Body.PushBack({ 286, 177, 95, 77 });
 	Body.PushBack({ 381, 177, 95, 77 });
-	Body.speed = 0.2;
+	Body.speed = 0.1;
 
 	//Eye animations
 
@@ -68,14 +69,14 @@ ModuleFirstBoss::ModuleFirstBoss()
 	eye_opening.PushBack({ 385, 34, 45, 34 });
 	eye_opening.PushBack({ 430, 34, 45, 34 });
 	eye_opening.PushBack({ 295, 0, 45, 34 });
-	eye_opening.speed = 0.05f;
+	eye_opening.speed = 0.1f;
 	eye_opening.loop = false;
 
 	eye_closing.PushBack({ 430, 34, 45, 34 });
 	eye_closing.PushBack({ 385, 34, 45, 34 });
 	eye_closing.PushBack({ 340, 34, 45, 34 });
 	eye_closing.PushBack({ 295, 34, 45, 34 });
-	eye_closing.speed = 0.05f;
+	eye_closing.speed = 0.1f;
 	eye_closing.loop = false;
 
 }
@@ -89,7 +90,7 @@ bool ModuleFirstBoss::Start()
 	boss1_texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
 	current_head = &Head_Idle;
 	current_eye = &eye_closed;
-	timer = SDL_GetTicks();
+	time = SDL_GetTicks();
 	
 	//eye collider - this is the one that damages the enemy
 	eye_collider=App->collision->AddCollider({ position.x+20,position.y+79,25,16 }, COLLIDER_ENEMY, this);
@@ -124,33 +125,32 @@ bool ModuleFirstBoss::CleanUp()
 // Update: draw background
 update_status ModuleFirstBoss::Update()
 {
-	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_UP)
-		attack_with_body = true;
+	//Update colliders position
+	eye_collider->SetPos(position.x + 20, position.y + 79);
+	body_collider->SetPos(position.x, position.y);
+	arm_collider->SetPos(position.x - 14, position.y + 8);
+	head_collider->SetPos(position.x + 8, position.y - 20);
+	bottom_collider->SetPos(position.x + 10, position.y + 95);
+
+	
+
 	Act();
 	if (attack_with_body)
 		Body_attack();
-	//Update colliders position
-	eye_collider->SetPos(position.x+20, position.y+79);
-	body_collider->SetPos(position.x, position.y);
-	arm_collider->SetPos(position.x - 14, position.y + 8);
-	head_collider->SetPos(position.x + 8, position.y-20);
-	bottom_collider->SetPos(position.x + 10, position.y + 95);
-	//boss melee attack
-	if (App->input->keyboard[SDL_SCANCODE_B])
-		attack_with_body = true;
+
+	if (SDL_GetTicks() - time >= 3000 && SDL_GetTicks() - time <= 3020)
+	{
+		Attack next_attack = static_cast<Attack>(rand() % NONE);
+		if (next_attack == BODY)
+		{
+			attack_with_body = true;
+		}
+		if (next_attack == CANNON)
+		{
+			Shot();
+		}
+	}
 	
-	if (App->input->keyboard[SDL_SCANCODE_N])
-	{
-		current_eye = &eye_opening;
-		vulnerable = true;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_M])
-		current_eye = &eye_closing;
-	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
-	{
-		Shot();
-		
-	}
 	//Body & right arm
 	App->render->Blit(boss1_texture, position.x, position.y, &Body.GetCurrentFrame());
 	//Head
@@ -183,60 +183,53 @@ void ModuleFirstBoss::OnCollision(Collider * col_1, Collider * col_2)
 
 void ModuleFirstBoss::Shot()
 {
-	
+	//first shot
 	App->particles->AddParticle(App->particles->boss_shot, position.x + 20, position.y + 74, COLLIDER_ENEMY_SHOT);
-	App->particles->AddParticle(App->particles->boss_cooling, position.x - 22, position.y + 73);
+	App->particles->AddParticle(App->particles->boss_cooling, position.x - 20, position.y + 73, COLLIDER_NONE, 280);
 	App->particles->AddParticle(App->particles->boss_explosion, position.x - 10, position.y + 59);
+
+	time = SDL_GetTicks();
 }
 
 void ModuleFirstBoss::Body_attack()
 {
-	if (position.x <= 30)
+	uint speed = 4;
+	if (current_eye == &eye_opening && current_eye->Finished())
 	{
-		forward = false;
-		backward = true;
+		eye_opening.Reset();
+		current_eye = &eye_closing;
 	}
-	if (forward)
+	if (current_eye->Finished())
 	{
-		position.x--;
-	}
-	if (backward && position.x <= 220)
-	{
-		position.x++;
+		if (position.x <= 30 && forward)
+		{
+			forward = false;
+			backward = true;
+		}
+		if (forward)
+		{
+			position.x-=speed;
+		}
+		if (backward && position.x <= 220)
+		{
+			position.x++;
+		}
+		if (backward && position.x == 220)
+		{
+			attack_with_body = false;
+			backward = false;
+			forward = true;
+			current_eye = &eye_opening;
+			eye_closing.Reset();
+			time = SDL_GetTicks();
+		}
 	}
 }
 
 void ModuleFirstBoss::Act()
 {
-	if (SDL_GetTicks() - timer == 5000)
-		attack_with_body = true;
-	if (current_eye == &eye_opening&&current_eye->Finished() == true)
-	{
+	if (current_eye == &eye_opening&&current_eye->Finished())
 		vulnerable = true;
-		eye_closing.Reset();
-	}
-	if (current_eye == &eye_closing)
-	{
-		eye_opening.Reset();
-	}
-	
-
-	if (SDL_GetTicks() >= 10000 && SDL_GetTicks() <= 10050)
-	{
-		current_eye = &eye_opening;
-	}
-
-	if (current_eye == &eye_opening&&current_eye->Finished() == true && SDL_GetTicks()<=15050 && SDL_GetTicks() >= 15020)
-	{
-		eye_closing.Reset();
-		Shot();
-		current_eye = &eye_closing;
-	}
-	if (current_eye == &eye_closing&&current_eye->Finished())
+	else
 		vulnerable = false;
-	
-	if (current_eye ==&eye_closing && current_eye->Finished() &&SDL_GetTicks() >= 23000)
-	{
-		current_eye = &eye_opening;
-	}
 }

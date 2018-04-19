@@ -82,7 +82,7 @@ bool ModuleLevel1::Start()
 	midbackground = App->textures->Load("assets/sprites/MidBackground_Sprite.png");
 	road = App->textures->Load("assets/sprites/Road&Tunnel_Background.png");
 	bossimg = App->textures->Load("assets/sprites/Boss_Static_Background.png");
-	maintracklvl1 = App->audio->LoadMusic("assets/sounds/2. Jack to the metro (Stage 1).ogg");
+	maintracklvl1 = App->audio->LoadMusic("assets/music/2. Jack to the metro (Stage 1).ogg");
 	
 	// Enemies ---
 

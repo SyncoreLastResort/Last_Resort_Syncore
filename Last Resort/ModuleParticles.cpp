@@ -47,26 +47,58 @@ ModuleParticles::ModuleParticles()
 	laser.life = 1000;
 	
 
-	boss_shot.anim.PushBack({256,523, 63, 32});
-	boss_shot.anim.PushBack({ 319,523, 63, 32 });
+	boss_shot.anim.PushBack({256,256, 63, 32});
+	boss_shot.anim.PushBack({ 319,256, 63, 32 });
 	boss_shot.anim.speed = 0.1;
 	boss_shot.speed.x = -4;
-	boss_shot.life = 3000;
+	boss_shot.anim.loop = true;
+	boss_shot.life = 1000;
 
-	boss_explosion.anim.PushBack({384, 522, 64, 56});
-	boss_explosion.anim.PushBack({ 448, 522, 64, 56 });
+	
+	boss_explosion.anim.PushBack({ 448, 255, 64, 56 });
+	boss_explosion.anim.PushBack({ 384, 255, 64, 56 });
 	boss_explosion.anim.speed = 0.15;
 
-	boss_cooling.anim.PushBack({57,578,56, 28 });
-	boss_cooling.anim.PushBack({ 113,578,56, 28 });
-	boss_cooling.anim.PushBack({ 169,578,56, 28 });
-	boss_cooling.anim.PushBack({ 225,578,56, 28 });
-	boss_cooling.anim.PushBack({ 281,578,56, 28 });
-	boss_cooling.anim.PushBack({ 337,578,56, 28 });
-	boss_cooling.anim.PushBack({ 393,578,56, 28 });
-	boss_cooling.anim.PushBack({ 449,578,56, 28 });
-	boss_cooling.anim.speed = 0.15;
+
+
+	boss_cooling.anim.PushBack({63,311,56, 28 });
+	boss_cooling.anim.PushBack({ 119,311,56, 28 });
+	boss_cooling.anim.PushBack({ 175,311,56, 28 });
+	boss_cooling.anim.PushBack({ 231,311,56, 28 });
+	boss_cooling.anim.PushBack({ 288,311,55, 28 });
+	boss_cooling.anim.PushBack({ 347,311,52, 28 });
+	boss_cooling.anim.PushBack({ 407,311,48, 28 });
+	boss_cooling.anim.PushBack({ 467,311,46, 28 });
+	boss_cooling.anim.speed = 0.2;
 	boss_cooling.anim.loop = false;
+	boss_cooling.speed.x = -0.5;
+	
+	
+	
+	boss_grenade.anim.PushBack({ 498, 335, 14,14 });
+	boss_grenade.anim.PushBack({ 484, 335, 14,14 });
+	boss_grenade.anim.PushBack({ 470, 335, 14,14 });
+	boss_grenade.anim.PushBack({ 456, 335, 14,14 });
+	boss_grenade.anim.PushBack({ 442, 335, 14,14 });
+	boss_grenade.anim.PushBack({ 428, 335, 14,14 });
+	boss_grenade.anim.PushBack({ 414, 335, 14,14 });
+	boss_grenade.anim.PushBack({ 400, 335, 14,14 });
+	boss_grenade.anim.PushBack({ 386, 335, 14,14 });
+	boss_grenade.anim.PushBack({ 372, 335, 14,14 });
+	boss_grenade.anim.PushBack({ 498, 349, 14,14 });
+	boss_grenade.anim.PushBack({ 484, 349, 14,14 });
+	boss_grenade.anim.PushBack({ 470, 349, 14,14 });
+	boss_grenade.anim.PushBack({ 456, 349, 14,14 });
+	boss_grenade.anim.PushBack({ 442, 349, 14,14 });
+	boss_grenade.anim.PushBack({ 428, 349, 14,14 });
+	boss_grenade.anim.PushBack({ 414, 349, 14,14 });
+	boss_grenade.anim.PushBack({ 400, 349, 14,14 });
+	boss_grenade.anim.PushBack({ 386, 349, 14,14 });
+	boss_grenade.anim.speed = 0.2;
+	boss_grenade.anim.loop = false;
+	boss_grenade.life = 2000;
+	
+	
 	
 	
 }
@@ -78,15 +110,19 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
+	//Player sprites && sounds
 	Laserexplosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	laser.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	explosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	laser.sound=  App->audio->LoadSoundEffect("assets/sounds/004.Shot_center.wav");
 
-
+	//Boss 1 sprites && sounds
 	boss_shot.sound = App->audio->LoadSoundEffect("assets/sounds/025.Boss_shot.wav");
-
-
+	boss_shot.texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
+	boss_explosion.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
+	boss_cooling.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
+	boss_grenade.texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
+	boss_grenade.sound = App->audio->LoadSoundEffect("assets/sounds/029.Bomb_fall.wav");
 	return true;
 }
 
@@ -201,18 +237,22 @@ bool Particle::Update()
 
 	if(life > 0)
 	{
-		if ((SDL_GetTicks() - born) > life)
+		int time = ((int)SDL_GetTicks() - (int)born);
+		if (time > (int)life)
 			ret = false;
 	}
 	else
 		if(anim.Finished())
 			ret = false;
+	if (SDL_GetTicks() >= born)
+	{
+		position.x += speed.x;
+		position.y += speed.y;
+		if (collider != nullptr)
+			collider->SetPos(position.x, position.y);
+	}
 
-	position.x += speed.x;
-	position.y += speed.y;
-
-	if(collider != nullptr)
-		collider->SetPos(position.x, position.y);
+	
 
 	return ret;
 }
