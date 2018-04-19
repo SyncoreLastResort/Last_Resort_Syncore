@@ -20,6 +20,14 @@ private:
 public:
 	iPoint position;
 private:
-	Animation ball_0;
+	Animation blueball_0;
+	Animation blueball_45;
+	Animation blueball_90;
+	Animation blueball_135;
+	Animation blueball_180;
+
+	Animation blueball_225;
+	Animation blueball_270;
+	Animation blueball_315;
 };
 #endif // !1

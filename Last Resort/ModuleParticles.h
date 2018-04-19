@@ -58,8 +58,7 @@ public:
 	Particle explosion;
 	Particle Laserexplosion;
 	Particle laser;
-	//Particle boss_grenade;
-	
+
 };
 
 #endif // __MODULEPARTICLES_H__

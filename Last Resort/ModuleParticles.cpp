@@ -26,17 +26,11 @@ ModuleParticles::ModuleParticles()
 	explosion.anim.speed = 1.0f;
 	explosion.life = 100;
 
-
 	// Explosion particle
 	Laserexplosion.anim.PushBack({ 95, 241, 10, 9 });
 	Laserexplosion.anim.PushBack({ 82, 239, 13, 12 });
 	Laserexplosion.anim.loop = true;
 	Laserexplosion.anim.speed = 0.3f;
-	
-	//Laserexplosion.sound = lasersound;
-
-	
-	
 
 	//Laser particle
 	laser.anim.PushBack({ 115,240,15,9 });
@@ -45,7 +39,6 @@ ModuleParticles::ModuleParticles()
 	laser.speed.x = 10;
 	laser.speed.y = 0;
 	laser.life = 1000;
-	
 
 	boss_shot.anim.PushBack({256,256, 63, 32});
 	boss_shot.anim.PushBack({ 319,256, 63, 32 });
@@ -54,12 +47,9 @@ ModuleParticles::ModuleParticles()
 	boss_shot.anim.loop = true;
 	boss_shot.life = 1000;
 
-	
 	boss_explosion.anim.PushBack({ 448, 255, 64, 56 });
 	boss_explosion.anim.PushBack({ 384, 255, 64, 56 });
 	boss_explosion.anim.speed = 0.15;
-
-
 
 	boss_cooling.anim.PushBack({63,311,56, 28 });
 	boss_cooling.anim.PushBack({ 119,311,56, 28 });
@@ -72,35 +62,6 @@ ModuleParticles::ModuleParticles()
 	boss_cooling.anim.speed = 0.2;
 	boss_cooling.anim.loop = false;
 	boss_cooling.speed.x = -0.5;
-	
-	
-	
-	/*boss_grenade.anim.PushBack({ 498, 335, 14,14 });
-	boss_grenade.anim.PushBack({ 484, 335, 14,14 });
-	boss_grenade.anim.PushBack({ 470, 335, 14,14 });
-	boss_grenade.anim.PushBack({ 456, 335, 14,14 });
-	boss_grenade.anim.PushBack({ 442, 335, 14,14 });
-	boss_grenade.anim.PushBack({ 428, 335, 14,14 });
-	boss_grenade.anim.PushBack({ 414, 335, 14,14 });
-	boss_grenade.anim.PushBack({ 400, 335, 14,14 });
-	boss_grenade.anim.PushBack({ 386, 335, 14,14 });
-	boss_grenade.anim.PushBack({ 372, 335, 14,14 });
-	boss_grenade.anim.PushBack({ 498, 349, 14,14 });
-	boss_grenade.anim.PushBack({ 484, 349, 14,14 });
-	boss_grenade.anim.PushBack({ 470, 349, 14,14 });
-	boss_grenade.anim.PushBack({ 456, 349, 14,14 });
-	boss_grenade.anim.PushBack({ 442, 349, 14,14 });
-	boss_grenade.anim.PushBack({ 428, 349, 14,14 });
-	boss_grenade.anim.PushBack({ 414, 349, 14,14 });
-	boss_grenade.anim.PushBack({ 400, 349, 14,14 });
-	boss_grenade.anim.PushBack({ 386, 349, 14,14 });
-	boss_grenade.anim.speed = 0.2;
-	boss_grenade.anim.loop = false;
-	boss_grenade.life = 2000;*/
-	
-	
-	
-	
 }
 
 ModuleParticles::~ModuleParticles()
@@ -121,8 +82,7 @@ bool ModuleParticles::Start()
 	boss_shot.texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
 	boss_explosion.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
 	boss_cooling.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
-	/*boss_grenade.texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
-	boss_grenade.sound = App->audio->LoadSoundEffect("assets/sounds/029.Bomb_fall.wav");*/
+	
 	return true;
 }
 
@@ -201,8 +161,8 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if(active[i] != nullptr && active[i]->collider == c1)
 		{
-			if(c2->type==COLLIDER_WALL || c1->type==COLLIDER_WALL)
-			App->particles->AddParticle(App->particles->explosion, active[i]->position.x, active[i]->position.y-4);
+			if(c2->type==COLLIDER_WALL || c1->type==COLLIDER_WALL || c2->type == COLLIDER_ENEMY || c1->type == COLLIDER_ENEMY)
+				App->particles->AddParticle(explosion, active[i]->position.x, active[i]->position.y-4);
 
 			delete active[i];
 			active[i] = nullptr;
