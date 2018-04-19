@@ -112,7 +112,7 @@ bool ModulePlayer::Start()
 																										  // TODO 0: Notice how a font is loaded and the meaning of all its arguments 
 	/*font_score = App->fonts->Load("assets/fonts/Font_score.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);*/ // From rtype
 
-	font_score = App->fonts->Load("assets/fonts/Font_score.png", "0123456789ABCDEFGHIJKLMNPQRSTUVWXYZ_.,[]&$", 2);
+	font_score = App->fonts->Load("assets/fonts/Font_score.png", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_.,[]&$ ", 2);
 	// TODO 4: Try loading "rtype_font3.png" that has two rows to test if all calculations are correct
 	
 

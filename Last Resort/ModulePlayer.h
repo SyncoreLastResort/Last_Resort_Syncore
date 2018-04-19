@@ -21,7 +21,6 @@ public:
 	void OnCollision(Collider* col_1, Collider* col_2) override;
 
 public:
-	unsigned int TimeZero = 0, CurrentTime;
 	//god mode
 	bool godmode = false;
 	//FX

@@ -31,11 +31,11 @@ Application::Application()
 	modules[i++] = level2 = new ModuleLevel2();
 	modules[i++] = congrats = new ModuleCongrats();
 	modules[i++] = enemies = new ModuleEnemies();
-	modules[i++] = player = new ModulePlayer();
-	modules[i++] = player2 = new ModulePlayer2();
 	modules[i++] = boss1 = new ModuleFirstBoss();
 	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = collision = new ModuleCollision();
+	modules[i++] = player = new ModulePlayer();
+	modules[i++] = player2 = new ModulePlayer2();
 	modules[i++] = fade = new ModuleFadeToBlack();
 }	
 

@@ -16,7 +16,7 @@
 
 ModuleFirstBoss::ModuleFirstBoss()
 {
-	position = { 220, 60 };
+	
 	//Engine animation
 	Engine.PushBack({ 240, 145, 42,32 });
 	Engine.PushBack({ 282, 145, 42,32 });
@@ -87,6 +87,7 @@ ModuleFirstBoss::~ModuleFirstBoss()
 // Load assets
 bool ModuleFirstBoss::Start()
 {
+	position = { 220, 60 };
 	boss1_texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
 	current_head = &Head_Idle;
 	current_eye = &eye_closed;
