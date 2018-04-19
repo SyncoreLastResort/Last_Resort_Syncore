@@ -18,8 +18,8 @@
 
 ModulePlayer::ModulePlayer()
 {
-	graphics = NULL;
-	current_animation = NULL;
+	graphics = nullptr;
+	current_animation = nullptr;
 	
 	//Spawn animation
 	spawn.PushBack({ 0,135,64,25 });
@@ -126,6 +126,7 @@ bool ModulePlayer::CleanUp()
 
 	App->textures->Unload(graphics);
 	App->fonts->UnLoad(font_score);
+	App->audio->UnloadSoundEffect(deathsound);
 	
 	if (playercollider != nullptr)
 		playercollider->to_delete = true;

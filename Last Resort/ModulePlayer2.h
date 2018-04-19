@@ -19,11 +19,9 @@ public:
 	void OnCollision(Collider* col_1, Collider* col_2) override;
 
 public:
-	Mix_Chunk * deathsound;
 	Animation spawn;
 	Animation death;
 	Collider* player2collider;
-	SDL_Texture * graphics = nullptr;
 	SDL_Rect ship;
 	Animation* current_animation = nullptr;
 	Animation idle;

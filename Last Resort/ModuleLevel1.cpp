@@ -41,8 +41,8 @@ ModuleLevel1::ModuleLevel1()
 	//bossplace
 	bossplace.x = 0;
 	bossplace.y = 0;
-	bossplace.w = 304;
-	bossplace.h = 224;
+	bossplace.w = SCREEN_WIDTH;
+	bossplace.h = SCREEN_HEIGHT;
 
 	thick_lights.PushBack({ 133,2,25,144 });
 	thick_lights.PushBack({ 158,2,38,144 }); // From left to right
@@ -72,13 +72,14 @@ bool ModuleLevel1::Start()
 	LOG("Loading level1 scene");
 
 	App->player->Enable();
-	App->particles->Enable();
-	App->collision->Enable();
 	App->enemies->Enable();
 	App->boss1->Enable();
-	App->ball_player1->Enable();
 
-	hud = App->textures->Load("rtype/hud.png");
+	scroll_lights = 0;
+	scrollground = 0;
+	scrollmid = 0;
+	scrollback = 0;
+
 	background_lights = App->textures->Load("assets/sprites/Lasers_Sprite.png");
 	backbackground = App->textures->Load("assets/sprites/BackBackground_Sprite.png");
 	midbackground = App->textures->Load("assets/sprites/MidBackground_Sprite.png");
@@ -122,13 +123,15 @@ bool ModuleLevel1::CleanUp()
 	App->audio->StopAudio();
 	App->audio->UnloadMusic(maintracklvl1);
 
-	App->enemies->Disable();
-	App->player->Disable();
-	App->player2->Disable();
-	App->collision->Disable();
-	App->particles->Disable();
 	App->boss1->Disable();
-	
+
+	App->enemies->Disable();
+
+	App->player->Disable();
+
+	if (App->player2->IsEnabled() == true)
+		App->player2->Disable();
+
 	return true;
 }
 
@@ -137,6 +140,23 @@ update_status ModuleLevel1::Update()
 {
 	// Move camera forward -----------------------------
 	/*App->render->camera.x += 1 * SCREEN_SIZE;*/
+
+
+	// Utility conditions, used to move forward or backwards at high speed
+	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_REPEAT)
+	{
+		scroll_lights -= 2.5;
+		scrollground -= 5.5;
+		scrollmid -= 2.5;
+		scrollback -= 1.5;
+	}
+	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_STATE::KEY_REPEAT)
+	{
+		scroll_lights += 2.5;
+		scrollground += 5.5;
+		scrollmid += 2.5;
+		scrollback += 1.5;
+	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F] == 1)
 	{
@@ -155,11 +175,7 @@ update_status ModuleLevel1::Update()
 	App->render->Blit(midbackground, scrollmid, 32, &midback, 0.75f); // mid background
 	App->render->Blit(road, scrollground, 0, &ground); //road & tunnel
 
-	App->render->Blit(hud, 0, 240, NULL, 0.0f, false);
 	
-	
-	
-
 	App->audio->PlayMusic(maintracklvl1, ONCE);
 
 	scroll_lights -= 0.25;

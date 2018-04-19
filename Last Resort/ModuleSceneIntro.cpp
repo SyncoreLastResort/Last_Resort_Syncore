@@ -10,7 +10,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleFirstBoss.h"
 #include "ModuleBall.h"
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
+
 
 ModuleSceneIntro::ModuleSceneIntro()
 {
@@ -28,13 +28,9 @@ bool ModuleSceneIntro::Start()
 {
 	LOG("Loading intro");
 	
-	introbackground = App->textures->Load("assets/sprites/lastresortgametitle.png");
+	introbackground = App->textures->Load("assets/sprites/Last_Resort_Intro.png");
 	maintrackintro = App->audio->LoadMusic("assets/music/1.Last resort title.ogg");
-	App->level1->Disable();
-	App->player->Disable();
-	App->player2->Disable();
-	App->boss1->Disable();
-	App->ball_player1->Disable();
+	
 	App->render->camera.x = App->render->camera.y = 0;
 	
 	return true;

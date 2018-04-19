@@ -75,7 +75,7 @@ ModuleParticles::ModuleParticles()
 	
 	
 	
-	boss_grenade.anim.PushBack({ 498, 335, 14,14 });
+	/*boss_grenade.anim.PushBack({ 498, 335, 14,14 });
 	boss_grenade.anim.PushBack({ 484, 335, 14,14 });
 	boss_grenade.anim.PushBack({ 470, 335, 14,14 });
 	boss_grenade.anim.PushBack({ 456, 335, 14,14 });
@@ -96,7 +96,7 @@ ModuleParticles::ModuleParticles()
 	boss_grenade.anim.PushBack({ 386, 349, 14,14 });
 	boss_grenade.anim.speed = 0.2;
 	boss_grenade.anim.loop = false;
-	boss_grenade.life = 2000;
+	boss_grenade.life = 2000;*/
 	
 	
 	
@@ -121,8 +121,8 @@ bool ModuleParticles::Start()
 	boss_shot.texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
 	boss_explosion.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
 	boss_cooling.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
-	boss_grenade.texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
-	boss_grenade.sound = App->audio->LoadSoundEffect("assets/sounds/029.Bomb_fall.wav");
+	/*boss_grenade.texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
+	boss_grenade.sound = App->audio->LoadSoundEffect("assets/sounds/029.Bomb_fall.wav");*/
 	return true;
 }
 
