@@ -111,12 +111,6 @@ bool ModuleParticles::CleanUp()
 {
 	LOG("Unloading particles");
 
-	App->textures->Unload(Laserexplosion.texture);
-	App->textures->Unload(laser.texture);
-	App->textures->Unload(explosion.texture);
-	App->textures->Unload(boss_shot.texture);
-	App->textures->Unload(boss_explosion.texture);
-	App->textures->Unload(boss_cooling.texture);
 	App->textures->Unload(enemy_explosion.texture);
 
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
