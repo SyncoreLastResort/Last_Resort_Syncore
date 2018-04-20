@@ -50,6 +50,7 @@ bool ModuleBall::Start()
 {
 	position = { App->player->position.x +42, App->player->position.y};
 	ball1_collider = App->collision->AddCollider({ position.x, position.y, 22, 22 }, COLLIDER_BALL);
+	current_animation = &blueball_0;
 	return true;
 }
 bool ModuleBall::CleanUp()
@@ -65,7 +66,7 @@ update_status ModuleBall::Update()
 	if (movement_allowed)
 		Move();
 	
-	App->render->Blit(App->player->graphics, position.x, position.y, &blueball_0.GetCurrentFrame());
+	App->render->Blit(App->player->graphics, position.x, position.y, &current_animation->GetCurrentFrame());
 	ball1_collider->SetPos(position.x, position.y);
 	return UPDATE_CONTINUE;
 }
@@ -164,18 +165,43 @@ void ModuleBall::Move()
 			}
 		}
 	}
+	//We change the animation depending on the position of the ball
+	if (getPosition() == TOP)
+		current_animation = &blueball_90;
+
+	else if (getPosition() == BOTTOM)
+		current_animation = &blueball_270;
+
+	else if (getPosition() == RIGHT_SIDE)
+		current_animation = &blueball_0;
+
+	else if (getPosition() == RIGHT_TOP)
+		current_animation = &blueball_45;
+
+	else if (getPosition() == RIGHT_BOTTOM)
+		current_animation = &blueball_315;
+
+	else if (getPosition() == LEFT_SIDE)
+		current_animation = &blueball_180;
 	
+	else if (getPosition() == LEFT_TOP)
+		current_animation = &blueball_135;
+	
+	else if (getPosition() == LEFT_BOTTOM)
+		current_animation = &blueball_225;
+
+	//Limits
 	if (position.x <= App->player->position.x - 26)
 		position.x = App->player->position.x - 26;
+
+	if (position.x >= App->player->position.x + 42)
+		position.x = App->player->position.x + 42;
 
 	if (position.y >= App->player->position.y + 30)
 		position.y = App->player->position.y + 30;
 
 	if (position.y <= App->player->position.y - 25)
 		position.y = App->player->position.y - 25;
-
-	if (position.x >= App->player->position.x + 42)
-		position.x = App->player->position.x + 42;
 }
 
 void ModuleBall::ChargeBall()
@@ -202,13 +228,29 @@ void ModuleBall::ReturnBall()
 BALL_POSITION ModuleBall::getPosition()
 {
 	BALL_POSITION ret = NONE;
-	if (position.x < App->player->position.x + 16 && position.x >App->player->position.x - 10 && position.y<App->player->position.y + 7 && position.y>App->player->position.y - 25)
+	if (position.x < App->player->position.x + 16 && position.x >= App->player->position.x - 10 &&position.y < App->player->position.y - 1 && position.y > App->player->position.y - 25)
 		ret = LEFT_TOP;
-	else if (position.x < App->player->position.x + 16 && position.x >App->player->position.x - 10)
-
-
-
-
+	
+	else if (position.x < App->player->position.x + 16 && position.x >= App->player->position.x - 10 && position.y>App->player->position.y - 1 && position.y < App->player->position.y + 25)
+		ret = LEFT_BOTTOM;
+	
+	else if (position.x <= App->player->position.x - 10)
+		ret = LEFT_SIDE;
+	
+	else if (position.x > App->player->position.x + 16 && position.y < App->player->position.y - 1&& position.y > App->player->position.y - 25)
+		ret = RIGHT_TOP;
+	
+	else if (position.x > App->player->position.x + 16 && position.y > App->player->position.y - 1 && position.y < App->player->position.y + 25)
+		ret = RIGHT_BOTTOM;
+	
+	else if (position.x >= App->player->position.x + 41)
+		ret = RIGHT_SIDE;
+	
+	else if (position.y <= App->player->position.y - 25)
+		ret = TOP;
+	
+	else if (position.y >= App->player->position.y + 25)
+		ret = BOTTOM;
 
 	return ret;
 }

@@ -42,7 +42,7 @@ private:
 	Collider *ball1_collider;
 	
 	
-
+	Animation* current_animation;
 	Animation blueball_0;
 	Animation blueball_45;
 	Animation blueball_90;
