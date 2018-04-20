@@ -13,6 +13,7 @@ enum COLLIDER_TYPE
 	COLLIDER_ENEMY,
 	COLLIDER_PLAYER_SHOT,
 	COLLIDER_ENEMY_SHOT,
+	COLLIDER_BALL,
 
 	COLLIDER_MAX
 };
@@ -59,7 +60,7 @@ private:
 
 	Collider * colliders[MAX_COLLIDERS];
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
-	bool debug = true;
+	bool debug = false;
 };
 
 #endif // __ModuleCollision_H__

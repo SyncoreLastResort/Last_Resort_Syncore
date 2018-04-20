@@ -48,24 +48,31 @@ ModuleBall::~ModuleBall()
 
 bool ModuleBall::Start()
 {
-	position = { App->player->position.x + 37, App->player->position.y };
+	position = { App->player->position.x +42, App->player->position.y};
+	ball1_collider = App->collision->AddCollider({ position.x, position.y, 22, 22 }, COLLIDER_BALL);
 	return true;
 }
 bool ModuleBall::CleanUp()
 {
+	
+	if (ball1_collider != nullptr)
+		ball1_collider->to_delete = true;
 	return true;
+	
 }
 update_status ModuleBall::Update()
 {
-	Move();
-	App->render->Blit(App->player->graphics, position.x, position.y, &blueball_315.GetCurrentFrame());
+	if (movement_allowed)
+		Move();
+	
+	App->render->Blit(App->player->graphics, position.x, position.y, &blueball_0.GetCurrentFrame());
+	ball1_collider->SetPos(position.x, position.y);
 	return UPDATE_CONTINUE;
 }
 
 void ModuleBall::Move()
 {
 	uint speed =2;
-	
 	//Ship goes down  -  ball moves to the sides
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
@@ -169,4 +176,39 @@ void ModuleBall::Move()
 
 	if (position.x >= App->player->position.x + 42)
 		position.x = App->player->position.x + 42;
+}
+
+void ModuleBall::ChargeBall()
+{
+	charge++;
+	if (charge > 50)
+		shot_charged = true;
+}
+
+void ModuleBall::ReleaseBall()
+{
+	if (shot_charged)
+	{
+		charge = 0;
+		shot_charged = false;
+	}
+}
+
+void ModuleBall::ReturnBall()
+{
+
+}
+
+BALL_POSITION ModuleBall::getPosition()
+{
+	BALL_POSITION ret = NONE;
+	if (position.x < App->player->position.x + 16 && position.x >App->player->position.x - 10 && position.y<App->player->position.y + 7 && position.y>App->player->position.y - 25)
+		ret = LEFT_TOP;
+	else if (position.x < App->player->position.x + 16 && position.x >App->player->position.x - 10)
+
+
+
+
+
+	return ret;
 }

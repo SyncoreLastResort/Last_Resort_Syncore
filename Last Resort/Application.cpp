@@ -59,6 +59,7 @@ bool Application::Init()
 	congrats->Disable();
 	level2->Disable();
 	level1->Disable();
+	ball_player1->Disable();
 
 	// ----------------------------
 

@@ -10,6 +10,7 @@
 #include "ModulePlayer.h"
 #include "SDL/include/SDL_timer.h"
 #include "SDL/include/SDL_render.h"
+#include "ModuleBall.h"
 
 #include<stdio.h>
 
@@ -104,6 +105,8 @@ bool ModulePlayer::Start()
 	position.x = 50;
 	position.y = 100;
 	score = 0;
+
+	App->ball_player1->Enable();
 	
 	// TODO 2: Add a collider to the player
 
@@ -123,6 +126,7 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player");
+	App->ball_player1->Disable();
 
 	App->textures->Unload(graphics);
 	App->fonts->UnLoad(font_score);
