@@ -58,6 +58,7 @@ public:
 	Particle explosion;
 	Particle Laserexplosion;
 	Particle laser;
+	Particle enemy_explosion;
 
 };
 
