@@ -62,6 +62,22 @@ ModuleParticles::ModuleParticles()
 	boss_cooling.anim.speed = 0.2;
 	boss_cooling.anim.loop = false;
 	boss_cooling.speed.x = -0.5;
+
+	enemy_explosion.anim.PushBack({ 286, 347, 16, 16 });
+	enemy_explosion.anim.PushBack({ 302, 347, 22, 22 });
+	enemy_explosion.anim.PushBack({ 324, 347, 27, 27 });
+	enemy_explosion.anim.PushBack({ 351, 347, 28, 28 });
+	enemy_explosion.anim.PushBack({ 379, 347, 34, 34 });
+	enemy_explosion.anim.PushBack({ 413, 347, 34, 34 });
+	enemy_explosion.anim.PushBack({ 447, 347, 34, 34 });
+	enemy_explosion.anim.PushBack({ 0, 396, 34, 34 });
+	enemy_explosion.anim.PushBack({ 34, 396, 34, 34 });
+	enemy_explosion.anim.PushBack({ 68, 396, 34, 34 });
+	enemy_explosion.anim.PushBack({ 102, 396, 34, 34 });
+	enemy_explosion.anim.PushBack({ 136, 396, 34, 34 });
+	enemy_explosion.anim.speed = 0.7;
+	enemy_explosion.speed.x = -0.5;
+
 }
 
 ModuleParticles::~ModuleParticles()
@@ -82,6 +98,10 @@ bool ModuleParticles::Start()
 	boss_shot.texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
 	boss_explosion.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
 	boss_cooling.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
+
+	//Enemy sprites && sounds
+	enemy_explosion.texture = App->textures->Load("assets/sprites/BossWeapons&parts_EnemyShip&structure_Multiple-effects-and-explosions.png");
+	enemy_explosion.sound = App->audio->LoadSoundEffect("assets/sounds/006.Explosion1_center.wav");
 	
 	return true;
 }
@@ -91,6 +111,8 @@ bool ModuleParticles::CleanUp()
 {
 	LOG("Unloading particles");
 
+	App->textures->Unload(enemy_explosion.texture);
+
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		if(active[i] != nullptr)
@@ -99,6 +121,8 @@ bool ModuleParticles::CleanUp()
 			active[i] = nullptr;
 		}
 	}
+
+
 
 	return true;
 }
