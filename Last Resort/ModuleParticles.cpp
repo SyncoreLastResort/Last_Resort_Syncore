@@ -101,7 +101,7 @@ bool ModuleParticles::Start()
 
 	//Enemy sprites && sounds
 	enemy_explosion.texture = App->textures->Load("assets/sprites/BossWeapons&parts_EnemyShip&structure_Multiple-effects-and-explosions.png");
-	enemy_explosion.sound = App->audio->LoadSoundEffect("assets/sounds/.wav");
+	enemy_explosion.sound = App->audio->LoadSoundEffect("assets/sounds/006.Explosion1_center.wav");
 	
 	return true;
 }
