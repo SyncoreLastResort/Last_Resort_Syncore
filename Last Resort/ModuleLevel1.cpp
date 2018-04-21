@@ -222,6 +222,7 @@ bool ModuleLevel1::CleanUp()
 	App->audio->StopAudio();
 	App->audio->UnloadMusic(maintracklvl1);
 
+	if(App->boss1->IsEnabled())
 	App->boss1->Disable();
 
 	App->enemies->Disable();
@@ -239,7 +240,8 @@ update_status ModuleLevel1::Update()
 {
 	// Move camera forward -----------------------------
 	/*App->render->camera.x += 1 * SCREEN_SIZE;*/
-
+	if (ground.x == -ground.w)
+		App->boss1->Enable();
 
 	// Utility conditions, used to move forward or backwards at high speed
 	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_REPEAT)

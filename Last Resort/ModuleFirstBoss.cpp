@@ -170,9 +170,14 @@ void ModuleFirstBoss::OnCollision(Collider * col_1, Collider * col_2)
 	{
 		if (col_1->type == COLLIDER_PLAYER_SHOT || col_2->type == COLLIDER_PLAYER_SHOT)
 		{
-			App->boss1->Disable();
-			eye_collider->rect = { 0,0 };
-			body_collider->rect = { 0,0 };
+			if (life > 1)
+				life -= 1;
+			else
+			{
+				App->boss1->Disable();
+				eye_collider->rect = { 0,0 };
+				body_collider->rect = { 0,0 };
+			}
 		}
 	}
 

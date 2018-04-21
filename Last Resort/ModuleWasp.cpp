@@ -4,6 +4,9 @@
 
 Enemy_Wasp::Enemy_Wasp(int x, int y) : Enemy(x, y)
 {
+
+	life = 1;
+
 	fly.PushBack({ 0,178,32,16 });
 	fly.PushBack({ 0, 194, 32, 15 });
 	fly.PushBack({ 0, 209, 32, 16 });
