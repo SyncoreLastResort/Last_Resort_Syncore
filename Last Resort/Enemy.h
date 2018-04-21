@@ -15,6 +15,7 @@ protected:
 
 public:
 	fPoint position;
+	uint life;
 
 public:
 	Enemy(int x, int y);

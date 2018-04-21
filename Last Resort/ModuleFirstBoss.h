@@ -32,6 +32,8 @@ public:
 		BODY, 
 		NONE
 	};
+
+	uint life = 50;
 	Collider * body_collider = nullptr;
 	Collider * arm_collider = nullptr;
 	Collider * head_collider = nullptr;
@@ -52,6 +54,7 @@ public:
 	Animation * current_eye = nullptr;
 private:
 	bool attack_with_body = false,forward = true, backward = false; // booleans for the body attack;
+
 
 };
 

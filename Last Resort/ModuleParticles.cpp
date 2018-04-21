@@ -19,7 +19,7 @@ ModuleParticles::ModuleParticles()
 	ball_shot.anim.loop = true;
 	ball_shot.anim.speed = 0.5f;
 	ball_shot.speed = { 10,0 };
-	ball_shot.life = 2000;
+	ball_shot.life = 680;
 
 	// Explosion particle
 	explosion.anim.PushBack({ 315, 371, 16, 16 });
@@ -45,7 +45,7 @@ ModuleParticles::ModuleParticles()
 	laser.anim.speed = 0.1f;
 	laser.speed.x = 7;
 	laser.speed.y = 0;
-	laser.life = 1000;
+	laser.life = 680;
 	
 	boss_shot.anim.PushBack({256,256, 63, 32});
 	boss_shot.anim.PushBack({ 319,256, 63, 32 });
