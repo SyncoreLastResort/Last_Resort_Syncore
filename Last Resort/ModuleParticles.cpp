@@ -30,6 +30,14 @@ ModuleParticles::ModuleParticles()
 	ball_shot.speed = { 0,0 };
 	ball_shot.life = 2000;
 
+	//Ball2 green shot
+	ball2_shot.anim.PushBack({ 103,252,13, 13 });
+	ball2_shot.anim.PushBack({ 117,252,13, 13 });
+	ball2_shot.anim.loop = true;
+	ball2_shot.anim.speed = 0.5f;
+	ball2_shot.speed = { 0,0 };
+	ball2_shot.life = 2000;
+
 	// Explosion particle
 	explosion.anim.PushBack({ 315, 371, 16, 16 });
 	explosion.anim.PushBack({ 331, 371, 16, 16 });
@@ -117,6 +125,7 @@ bool ModuleParticles::Start()
 	//Ball sprites & sounds
 	/*ball_shot.texture= App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");*/
 	ball_shot.texture = Laserexplosion.texture;
+	ball2_shot.texture = Laserexplosion.texture;
 
 	//Boss 1 sprites && sounds
 	boss_shot.sound = App->audio->LoadSoundEffect("assets/sounds/025.Boss_shot.wav");

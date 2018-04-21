@@ -23,14 +23,14 @@ ModulePlayer::ModulePlayer()
 	current_animation = nullptr;
 	
 	//Spawn animation
-	spawn.PushBack({ 0,135,64,25 });
-	spawn.PushBack({ 0,160,64,25 });
-	spawn.PushBack({ 0,185,64,25 });
-	spawn.PushBack({ 0,210,64,25 });
-	spawn.PushBack({ 64,135,64,25 });
-	spawn.PushBack({ 64,160,64,25 });
-	spawn.PushBack({ 64,185,64,25 });
-	spawn.PushBack({ 64,210,64,25 });
+	spawn.PushBack({ 0,137,64,25 });
+	spawn.PushBack({ 0,162,64,25 });
+	spawn.PushBack({ 0,187,64,25 });
+	spawn.PushBack({ 0,212,64,25 });
+	spawn.PushBack({ 64,137,64,25 });
+	spawn.PushBack({ 64,162,64,25 });
+	spawn.PushBack({ 64,187,64,25 });
+	spawn.PushBack({ 64,212,64,25 });
 	spawn.PushBack({ 128,125,64,25 });
 	spawn.PushBack({ 128,150,64,25 });
 	spawn.loop = false;

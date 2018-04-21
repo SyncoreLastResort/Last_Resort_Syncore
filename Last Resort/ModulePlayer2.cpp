@@ -7,6 +7,7 @@
 #include "ModulePlayer2.h"
 #include "ModuleCollision.h"
 #include "ModuleFonts.h"
+#include "ModuleBall2.h"
 
 #include<stdio.h>
 
@@ -19,14 +20,14 @@ ModulePlayer2::ModulePlayer2()
 	position.x = 50;
 	position.y = 100;
 	//Spawn animation
-	spawn.PushBack({ 0,135,64,25 });
-	spawn.PushBack({ 0,160,64,25 });
-	spawn.PushBack({ 0,185,64,25 });
-	spawn.PushBack({ 0,210,64,25 });
-	spawn.PushBack({ 64,135,64,25 });
-	spawn.PushBack({ 64,160,64,25 });
-	spawn.PushBack({ 64,185,64,25 });
-	spawn.PushBack({ 64,210,64,25 });
+	spawn.PushBack({ 0,137,64,25 });
+	spawn.PushBack({ 0,162,64,25 });
+	spawn.PushBack({ 0,187,64,25 });
+	spawn.PushBack({ 0,212,64,25 });
+	spawn.PushBack({ 64,137,64,25 });
+	spawn.PushBack({ 64,162,64,25 });
+	spawn.PushBack({ 64,187,64,25 });
+	spawn.PushBack({ 64,212,64,25 });
 	spawn.PushBack({ 128,125,64,25 });
 	spawn.PushBack({ 128,150,64,25 });
 	spawn.loop = false;
@@ -89,7 +90,8 @@ ModulePlayer2::~ModulePlayer2()
 bool ModulePlayer2::Start()
 {
 	LOG("Loading player");
-
+	
+	App->ball_player2->Enable();
 	death.Reset();
 	spawn.Reset();
 	current_animation = &spawn;
@@ -107,21 +109,21 @@ bool ModulePlayer2::CleanUp()
 
 	if (player2collider != nullptr)
 		player2collider->to_delete = true;
-
+	App->ball_player2->Disable();
 	return true;
 }
 
 // Update: draw background
 update_status ModulePlayer2::Update()
 {
-	int speed = 2;
+	
 	
 	if (current_animation == &spawn&&current_animation->Finished())
 		current_animation = &idle;
 
 	if (current_animation != &death)
 	{
-		if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN) {
+		if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
 			App->particles->AddParticle(App->particles->Laserexplosion, App->player2->position.x + 32, App->player2->position.y);
 			App->particles->AddParticle(App->particles->laser, position.x + 35, position.y, COLLIDER_PLAYER_SHOT);
 			App->player->score2 += 8;
@@ -223,7 +225,7 @@ void ModulePlayer2::OnCollision(Collider * col_1, Collider * col_2)
 {
 	if (!App->player->godmode)
 	{
-		if ((col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL || col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT))
+		if ((col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL || col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT|| col_1->type == COLLIDER_BOSS || col_2->type == COLLIDER_BOSS))
 		{
 			if (current_animation != &death)
 			{

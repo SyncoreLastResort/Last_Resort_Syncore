@@ -275,27 +275,46 @@ void ModuleBall::MoveAround()
 
 void ModuleBall::BallFixed()
 {
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && (App->player->position.x - App->player->speed >= 0))
 	{
 		position.x -= App->player->speed;
-		current_animation = &blueball_0;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && (App->player->position.x + App->player->speed <= SCREEN_WIDTH-32))
 	{
 		position.x += App->player->speed;
-		current_animation = &blueball_180;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && (App->player->position.y - App->player->speed > 0))
 	{
 		position.y -= App->player->speed;
-		current_animation = &blueball_270;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && (App->player->position.y + App->player->speed <= SCREEN_HEIGHT-14))
 	{
-		current_animation = &blueball_90;
 		position.y += App->player->speed;
 	}
 
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT&&App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+		current_animation = &blueball_315;
+
+	else if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT&&App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+		current_animation = &blueball_225;
+
+	else if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT&&App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE)
+		current_animation = &blueball_270;
+
+	else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT&&App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+		current_animation = &blueball_45;
+
+	else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT&&App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+		current_animation = &blueball_135;
+
+	else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT&&App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE)
+		current_animation = &blueball_90;
+
+	else if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT &&App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE &&App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE)
+		current_animation = &blueball_180;
+
+	else if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT &&App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE &&App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE)
+		current_animation = &blueball_0;
 }
 
 void ModuleBall::ChargeBall()
@@ -487,7 +506,7 @@ void ModuleBall::OnCollision(Collider* c1, Collider* c2)
 		}
 		if (c1->type == COLLIDER_ENEMY || c2->type == COLLIDER_ENEMY )
 		{
-			if (charge < 100)
+			if (charge < 200)
 				back_to_player = true;
 		}
 	}

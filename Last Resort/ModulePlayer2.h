@@ -19,6 +19,7 @@ public:
 	void OnCollision(Collider* col_1, Collider* col_2) override;
 
 public:
+	int speed = 2;
 	Animation spawn;
 	Animation death;
 	Collider* player2collider;
