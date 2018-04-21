@@ -25,19 +25,23 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	//void OnCollision(Collider* c1, Collider* c2);
 private:
-	void ModuleBall::Move();
+	void ModuleBall::MoveAround();
+	void ModuleBall::BallFixed();
 	void ModuleBall::ChargeBall();
 	void ModuleBall::ReleaseBall();
+	void ModuleBall::Path();
 	void ModuleBall::ReturnBall();
+	void ModuleBall::Shot();
 	BALL_POSITION ModuleBall::getPosition();
 
 public:
 	iPoint position;
 private:
 	uint charge=0;
-
-	bool movement_allowed=true, shot_charged=false, back_to_player=false;
+	iPoint velocity = { 0,0 };
+	bool fixed=true, shot_charged=false, back_to_player=false, ball_thrown=false;
 
 	Collider *ball1_collider;
 	

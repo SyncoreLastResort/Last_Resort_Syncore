@@ -34,6 +34,7 @@ struct Particle
 	bool Update();
 };
 
+
 class ModuleParticles : public Module
 {
 public:
@@ -59,6 +60,7 @@ public:
 	Particle Laserexplosion;
 	Particle laser;
 	Particle enemy_explosion;
+	Particle ball_shot;
 
 };
 

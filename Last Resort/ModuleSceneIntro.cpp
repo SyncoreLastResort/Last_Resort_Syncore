@@ -55,7 +55,7 @@ update_status ModuleSceneIntro::Update()
 	// Draw everything --------------------------------------
 	App->render->Blit(introbackground, 0, 0, &introrect);
 
-	if(App->input->keyboard[SDL_SCANCODE_F] == KEY_DOWN && App->fade->IsFading() == false)
+	if(App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN && App->fade->IsFading() == false)
 	{
 		Mix_FadeOutMusic(1000);
 		App->fade->FadeToBlack(this, (Module*)App->level1);

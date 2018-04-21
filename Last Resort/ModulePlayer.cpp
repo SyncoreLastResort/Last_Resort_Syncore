@@ -144,10 +144,7 @@ update_status ModulePlayer::Update()
 	
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
 	{
-		if (godmode)
-			godmode = false;
-		else if (!godmode)
-			godmode = true;
+		godmode = !godmode;
 	}
 	
 	if (current_animation == &spawn&&current_animation->Finished())
@@ -157,10 +154,10 @@ update_status ModulePlayer::Update()
 	{
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 		{
-			//App->particles->AddParticle(App->particles->Laserexplosion, App->player->position.x + 32, App->player->position.y);
-			App->particles->AddParticle(App->particles->Laserexplosion, App->player->position.x + 32, App->player->position.y, COLLIDER_NONE, 50);
+			App->particles->AddParticle(App->particles->Laserexplosion, App->player->position.x + 32, App->player->position.y);
 			
-			App->particles->AddParticle(App->particles->laser, position.x + 35, position.y, COLLIDER_PLAYER_SHOT);
+			
+			App->particles->AddParticle(App->particles->laser, position.x + 35, position.y+4, COLLIDER_PLAYER_SHOT);
 			score += 10;
 		}
 
@@ -267,7 +264,7 @@ void ModulePlayer::OnCollision(Collider * col_1, Collider * col_2)
 {
 	if (!godmode)
 	{
-		if (col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL || col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT)
+		if (col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL || col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT || col_1->type == COLLIDER_BOSS || col_2->type == COLLIDER_BOSS)
 		{
 			if (current_animation != &death)
 			{

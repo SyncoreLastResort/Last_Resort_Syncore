@@ -90,16 +90,16 @@ bool ModuleFirstBoss::Start()
 	position = { 220, 60 };
 	boss1_texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
 	current_head = &Head_Idle;
-	current_eye = &eye_closed;
+	current_eye = &eye_opening;
 	
 	//eye collider - this is the one that damages the enemy
-	eye_collider=App->collision->AddCollider({ position.x+20,position.y+79,25,16 }, COLLIDER_ENEMY, this);
+	eye_collider=App->collision->AddCollider({ position.x+20,position.y+79,25,16 }, COLLIDER_BOSS, this);
 	
 	//collider for the rest of the body - numbers are similar to renders
-	body_collider = App->collision->AddCollider({ position.x, position.y,95,77 }, COLLIDER_ENEMY);//body
-	arm_collider = App->collision->AddCollider({ position.x-14, position.y+8,22,72 }, COLLIDER_ENEMY);//arm
-	head_collider = App->collision->AddCollider({ position.x + 8, position.y - 20,48,44}, COLLIDER_ENEMY);//head
-	bottom_collider = App->collision->AddCollider({ position.x + 10, position.y+95,48,18 }, COLLIDER_ENEMY);//below the eye
+	body_collider = App->collision->AddCollider({ position.x, position.y,95,77 }, COLLIDER_BOSS);//body
+	arm_collider = App->collision->AddCollider({ position.x-14, position.y+8,22,69 }, COLLIDER_BOSS);//arm
+	head_collider = App->collision->AddCollider({ position.x + 8, position.y - 20,48,44}, COLLIDER_BOSS);//head
+	bottom_collider = App->collision->AddCollider({ position.x + 10, position.y+95,48,18 }, COLLIDER_BOSS);//below the eye
 	return true;
 }
 
@@ -135,7 +135,7 @@ update_status ModuleFirstBoss::Update()
 	Act();
 	
 	
-	if (SDL_GetTicks()%3000>=0&& SDL_GetTicks() % 3000 <= 20)
+	if (SDL_GetTicks()%4000>=0&& SDL_GetTicks() % 4000 <= 24)
 	{
 		Attack next_attack = static_cast<Attack>(rand() % NONE);
 		if (next_attack == BODY)
@@ -180,11 +180,12 @@ void ModuleFirstBoss::OnCollision(Collider * col_1, Collider * col_2)
 
 void ModuleFirstBoss::Shot()
 {
-	//first shot
-	App->particles->AddParticle(App->particles->boss_shot, position.x + 20, position.y + 74, COLLIDER_ENEMY_SHOT);
-	App->particles->AddParticle(App->particles->boss_cooling, position.x - 20, position.y + 73, COLLIDER_NONE, 280);
-	App->particles->AddParticle(App->particles->boss_explosion, position.x - 10, position.y + 59);
-
+	if (current_eye == &eye_opening&&current_eye->Finished())
+	{
+		App->particles->AddParticle(App->particles->boss_shot, position.x + 20, position.y + 74, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->boss_cooling, position.x - 20, position.y + 73, COLLIDER_NONE, 280);
+		App->particles->AddParticle(App->particles->boss_explosion, position.x - 10, position.y + 59);
+	}
 }
 
 void ModuleFirstBoss::Body_attack()

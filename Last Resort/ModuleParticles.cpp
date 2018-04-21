@@ -13,15 +13,22 @@ ModuleParticles::ModuleParticles()
 {
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
+	//Ball green shot
+	ball_shot.anim.PushBack({103,252,13, 13});
+	ball_shot.anim.PushBack({ 117,252,13, 13 });
+	ball_shot.anim.loop = true;
+	ball_shot.anim.speed = 0.5f;
+	ball_shot.speed = { 10,0 };
+	ball_shot.life = 2000;
 
 	// Explosion particle
-	explosion.anim.PushBack({ 315, 369, 16, 16 });
-	explosion.anim.PushBack({ 331, 369, 16, 16 });
-	explosion.anim.PushBack({ 347, 369, 16, 16 });
-	explosion.anim.PushBack({ 363, 369, 16, 16 });
-	explosion.anim.PushBack({ 379, 369, 16, 16 });
-	explosion.anim.PushBack({ 395, 369, 16, 16 });
-	explosion.anim.PushBack({ 411, 369, 16, 16 });
+	explosion.anim.PushBack({ 315, 371, 16, 16 });
+	explosion.anim.PushBack({ 331, 371, 16, 16 });
+	explosion.anim.PushBack({ 347, 371, 16, 16 });
+	explosion.anim.PushBack({ 363, 371, 16, 16 });
+	explosion.anim.PushBack({ 379, 371, 16, 16 });
+	explosion.anim.PushBack({ 395, 371, 16, 16 });
+	explosion.anim.PushBack({ 411, 371, 16, 16 });
 	explosion.anim.loop = false;
 	explosion.anim.speed = 1.0f;
 	explosion.life = 100;
@@ -29,14 +36,14 @@ ModuleParticles::ModuleParticles()
 	// Explosion particle
 	Laserexplosion.anim.PushBack({ 95, 241, 10, 9 });
 	Laserexplosion.anim.PushBack({ 82, 239, 13, 12 });
-	Laserexplosion.anim.loop = true;
-	Laserexplosion.anim.speed = 0.3f;
+	Laserexplosion.anim.loop = false;
+	Laserexplosion.anim.speed = 0.5f;
 
 	//Laser particle
-	laser.anim.PushBack({ 115,240,15,9 });
+	laser.anim.PushBack({ 115,244,15,7});
 	laser.anim.loop = true;
 	laser.anim.speed = 0.1f;
-	laser.speed.x = 10;
+	laser.speed.x = 7;
 	laser.speed.y = 0;
 	laser.life = 1000;
 
@@ -77,6 +84,7 @@ ModuleParticles::ModuleParticles()
 	enemy_explosion.anim.PushBack({ 136, 396, 34, 34 });
 	enemy_explosion.anim.speed = 0.7;
 	enemy_explosion.speed.x = -0.5;
+	enemy_explosion.anim.loop = false;
 
 }
 
@@ -92,6 +100,9 @@ bool ModuleParticles::Start()
 	laser.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	explosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	laser.sound=  App->audio->LoadSoundEffect("assets/sounds/004.Shot_center.wav");
+
+	//Ball sprites & sounds
+	ball_shot.texture= App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 
 	//Boss 1 sprites && sounds
 	boss_shot.sound = App->audio->LoadSoundEffect("assets/sounds/025.Boss_shot.wav");
@@ -185,14 +196,16 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if(active[i] != nullptr && active[i]->collider == c1)
 		{
-			if(c2->type==COLLIDER_WALL || c1->type==COLLIDER_WALL || c2->type == COLLIDER_ENEMY || c1->type == COLLIDER_ENEMY)
-				App->particles->AddParticle(explosion, active[i]->position.x, active[i]->position.y-4);
+			//if(c2->type==COLLIDER_WALL || c1->type==COLLIDER_WALL || c2->type == COLLIDER_ENEMY || c1->type == COLLIDER_ENEMY)
+			App->particles->AddParticle(explosion, active[i]->position.x, active[i]->position.y-4);
 
 			delete active[i];
 			active[i] = nullptr;
 			break;
 		}
 	}
+
+
 }
 
 // -------------------------------------------------------------
