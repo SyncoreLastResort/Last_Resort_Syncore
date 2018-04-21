@@ -9,7 +9,7 @@ Enemy_Wasp::Enemy_Wasp(int x, int y) : Enemy(x, y)
 	fly.PushBack({ 0, 209, 32, 16 });
 	fly.PushBack({ 0, 225, 32, 15 });
 	fly.PushBack({ 0, 240, 32, 16 });
-	fly.speed = 0.1f;
+	fly.speed = 0.075f;
 	fly.loop = true;
 
 	animation = &fly;
@@ -22,5 +22,5 @@ Enemy_Wasp::Enemy_Wasp(int x, int y) : Enemy(x, y)
 void Enemy_Wasp::Move()
 {
 	
-	position.x -= 1;
+	position.x -= 1.5;
 }

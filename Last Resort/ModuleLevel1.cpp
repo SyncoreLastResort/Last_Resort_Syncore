@@ -89,20 +89,119 @@ bool ModuleLevel1::Start()
 	
 	// Enemies ---
 
+	//Wasp Wave 1
+
 	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 400, 40);
-	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 432, 40);
-	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 464, 40);
-	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 498, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 450, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 500, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 550, 140);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 600, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 632, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 664, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 698, 80);
-
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 750, 160);
 	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 800, 120);
-	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 832, 120);
-	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 864, 120);
-	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 898, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 850, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 900, 40);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 1000, 160);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 1050, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 1100, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 1150, 80);
+
+
+	//Rhino Wave 1
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 850, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 950, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 1050, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 1150, 75);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 1350, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 1450, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 1550, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 1650, 75);
+
+
+	//Wasp Wave 2
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 2850, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 2900, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 2950, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 3000, 140);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 3050, 160);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 3100, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 3150, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 3200, 40);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 3250, 160);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 3300, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 3350, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 3400, 80);
+
+
+	//Rhino Wave 2
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 3000, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 3100, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 3200, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 3300, 75);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 3600, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 3700, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 3800, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 3900, 75);
+
+	//Wasp wave 3
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 3800, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 3850, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 3900, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 3950, 40);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 4100, 160);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 4150, 160);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 4200, 160);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 4250, 160);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 4400, 160);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 4450, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 4500, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 4550, 40);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 5200, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 5250, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 5300, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 5350, 160);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 6400, 160);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 6450, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 6500, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 6550, 40);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 7200, 40);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 7250, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 7300, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::WASP, 7350, 160);
+
+	
+	//Rhino Wave 2
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 4200, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 4300, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 4400, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 4500, 75);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 4800, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 4900, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 5000, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 5100, 75);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 6200, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 6300, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 6400, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 6500, 75);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 6800, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 6900, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 7000, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 7100, 75);
+
+	
 
 	return true;
 }

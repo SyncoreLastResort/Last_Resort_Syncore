@@ -97,18 +97,27 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	//Player sprites && sounds
 	Laserexplosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
-	laser.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
-	explosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
+
+	/*laser.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
+	explosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");*/
+	laser.texture = Laserexplosion.texture;
+	explosion.texture = Laserexplosion.texture;
+
 	laser.sound=  App->audio->LoadSoundEffect("assets/sounds/004.Shot_center.wav");
 
 	//Ball sprites & sounds
-	ball_shot.texture= App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
+	/*ball_shot.texture= App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");*/
+	ball_shot.texture = Laserexplosion.texture;
 
 	//Boss 1 sprites && sounds
 	boss_shot.sound = App->audio->LoadSoundEffect("assets/sounds/025.Boss_shot.wav");
 	boss_shot.texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
-	boss_explosion.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
-	boss_cooling.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
+
+	/*boss_explosion.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
+	boss_cooling.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");*/
+
+	boss_explosion.texture = boss_shot.texture;
+	boss_cooling.texture = boss_shot.texture;
 
 	//Enemy sprites && sounds
 	enemy_explosion.texture = App->textures->Load("assets/sprites/BossWeapons&parts_EnemyShip&structure_Multiple-effects-and-explosions.png");
@@ -122,7 +131,7 @@ bool ModuleParticles::CleanUp()
 {
 	LOG("Unloading particles");
 
-	App->textures->Unload(enemy_explosion.texture);
+	/*App->textures->Unload(enemy_explosion.texture);*/
 
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -132,8 +141,6 @@ bool ModuleParticles::CleanUp()
 			active[i] = nullptr;
 		}
 	}
-
-
 
 	return true;
 }

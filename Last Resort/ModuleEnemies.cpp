@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "Enemy.h"
 #include "ModuleWasp.h"
+#include "ModuleRhino.h"
 
 
 #define SPAWN_MARGIN 50
@@ -62,12 +63,12 @@ update_status ModuleEnemies::Update()
 
 update_status ModuleEnemies::PostUpdate()
 {
-	// check camera position to decide what to spawn
+	// check camera position to decide what to despawn
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (enemies[i] != nullptr)
 		{
-			if (enemies[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN)
+			if (enemies[i]->position.x * SCREEN_SIZE +75 < (App->render->camera.x) - SPAWN_MARGIN)
 			{
 				LOG("DeSpawning enemy at %d", enemies[i]->position.x * SCREEN_SIZE);
 				delete enemies[i];
@@ -93,6 +94,8 @@ bool ModuleEnemies::CleanUp()
 			delete enemies[i];
 			enemies[i] = nullptr;
 		}
+
+		queue[i].type = NO_TYPE;
 	}
 
 	return true;
@@ -129,6 +132,10 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		{
 		case ENEMY_TYPES::WASP:
 			enemies[i] = new Enemy_Wasp(info.x, info.y);
+			break;
+
+		case ENEMY_TYPES::RHINO:
+			enemies[i] = new Enemy_Rhino(info.x, info.y);
 			break;
 		}
 		

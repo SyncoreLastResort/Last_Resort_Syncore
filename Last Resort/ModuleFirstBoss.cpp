@@ -106,7 +106,7 @@ bool ModuleFirstBoss::Start()
 // Unload assets
 bool ModuleFirstBoss::CleanUp()
 {
-	LOG("Unloading player");
+	LOG("Unloading boss");
 
 	App->textures->Unload(boss1_texture);
 	if (eye_collider != nullptr)
