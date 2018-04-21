@@ -28,6 +28,7 @@ struct Particle
 	SDL_Texture* texture = nullptr;
 	Mix_Chunk* sound = nullptr;
 	
+	
 	Particle();
 	Particle(const Particle& p);
 	~Particle();

@@ -46,7 +46,7 @@ ModuleParticles::ModuleParticles()
 	laser.speed.x = 7;
 	laser.speed.y = 0;
 	laser.life = 1000;
-
+	
 	boss_shot.anim.PushBack({256,256, 63, 32});
 	boss_shot.anim.PushBack({ 319,256, 63, 32 });
 	boss_shot.anim.speed = 0.1;
@@ -197,7 +197,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		if(active[i] != nullptr && active[i]->collider == c1)
 		{
 			//if(c2->type==COLLIDER_WALL || c1->type==COLLIDER_WALL || c2->type == COLLIDER_ENEMY || c1->type == COLLIDER_ENEMY)
-			App->particles->AddParticle(explosion, active[i]->position.x, active[i]->position.y-4);
+			App->particles->AddParticle(explosion,  active[i]->position.x, active[i]->position.y-4);
 
 			delete active[i];
 			active[i] = nullptr;

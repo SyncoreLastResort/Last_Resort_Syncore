@@ -271,7 +271,6 @@ void ModulePlayer::OnCollision(Collider * col_1, Collider * col_2)
 				App->audio->PlaySoundEffect(deathsound);
 				current_animation = &death;
 			}
-
 		}
 	}
 }

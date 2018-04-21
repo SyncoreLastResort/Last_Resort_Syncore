@@ -39,6 +39,15 @@ ModuleBall::ModuleBall()
 		blueball_315.PushBack({ 469, 2 + i * 22,21, 21 });
 	blueball_315.speed = 0.1;
 
+	for (int i = 0; i < 6; ++i)
+		blueball_thrown.PushBack({169, 180 +i*26, 26,26});
+	blueball_thrown.speed = 0.30;
+
+	for (int i = 0; i < 3; ++i)
+		for (int j = 0; j < 5; ++j)
+			blueball_charging.PushBack({ 230+46*j,45+46*i,46,46 });
+	blueball_charging.speed = 0.3;
+
 };
 
 ModuleBall::~ModuleBall()
@@ -48,6 +57,12 @@ ModuleBall::~ModuleBall()
 
 bool ModuleBall::Start()
 {
+	fix_ball = App->audio->LoadSoundEffect("assets/sounds/011.Death_ball_fix.wav");
+	unfix_ball = App->audio->LoadSoundEffect("assets/sounds/012.Death_ball_unfix.wav");
+	ball_aditional_effects = App->textures->Load("assets/sprites/Ball_aditional_effects.png");
+	release_ball_sound = App->audio->LoadSoundEffect("assets/sounds/009.Charged_shot_release.wav");
+	charge_ball_sound = App->audio->LoadSoundEffect("assets/sounds/008.Charging_shot.wav");
+	
 	position = { App->player->position.x +42, App->player->position.y};
 	ball1_collider = App->collision->AddCollider({ position.x, position.y, 22, 22 }, COLLIDER_BALL);
 	current_animation = &blueball_0;
@@ -58,9 +73,15 @@ bool ModuleBall::CleanUp()
 {
 	
 	if (ball1_collider != nullptr)
+
 		ball1_collider->to_delete = true;
+	App->textures->Unload(ball_aditional_effects);
+	App->audio->UnloadSoundEffect(unfix_ball);
+	App->audio->UnloadSoundEffect(fix_ball);
+	App->audio->UnloadSoundEffect(release_ball_sound);
+	App->audio->UnloadSoundEffect(charge_ball_sound);
+
 	return true;
-	
 }
 
 update_status ModuleBall::Update()
@@ -69,8 +90,13 @@ update_status ModuleBall::Update()
 	if (ball_thrown == false)
 	{
 		if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
+		{
+			if (fixed)
+				App->audio->PlaySoundEffect(unfix_ball);
+			if(!fixed)
+				App->audio->PlaySoundEffect(fix_ball);
 			fixed = !fixed;
-
+		}
 		if (fixed == false)
 			MoveAround();
 
@@ -81,15 +107,20 @@ update_status ModuleBall::Update()
 			ChargeBall();
 
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_UP)
+		{
+			charge_time = 0;
 			ReleaseBall();
-
+		}
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
-			Shot();
-		
+		{
+			charge_time = SDL_GetTicks();
+			Shoot();
+		}
 	}
 
 	if (ball_thrown == true)
 	{
+		current_animation = &blueball_thrown;
 		if (back_to_player == false)
 		{
 			Path();
@@ -101,6 +132,7 @@ update_status ModuleBall::Update()
 	}
 
 	App->render->Blit(App->player->graphics, position.x, position.y, &current_animation->GetCurrentFrame());
+	
 	
 	ball1_collider->SetPos(position.x, position.y);
 	
@@ -267,18 +299,50 @@ void ModuleBall::BallFixed()
 
 void ModuleBall::ChargeBall()
 {
+	
 	charge+=2;
 	if (charge > 80)
 		shot_charged = true;
+	if (SDL_GetTicks() - charge_time > 200)
+	{
+		if (current_animation == &blueball_0)
+			App->render->Blit(ball_aditional_effects, position.x - 15, position.y - 15, &blueball_charging.GetCurrentFrame());
+
+		if (current_animation == &blueball_45)
+			App->render->Blit(ball_aditional_effects, position.x - 15, position.y - 10, &blueball_charging.GetCurrentFrame());
+
+		if (current_animation == &blueball_90)
+			App->render->Blit(ball_aditional_effects, position.x - 15, position.y - 9, &blueball_charging.GetCurrentFrame());
+
+		if (current_animation == &blueball_135)
+			App->render->Blit(ball_aditional_effects, position.x - 10, position.y - 10, &blueball_charging.GetCurrentFrame());
+
+		if (current_animation == &blueball_180)
+			App->render->Blit(ball_aditional_effects, position.x - 9, position.y - 15, &blueball_charging.GetCurrentFrame());
+
+		if (current_animation == &blueball_225)
+			App->render->Blit(ball_aditional_effects, position.x - 10, position.y - 15, &blueball_charging.GetCurrentFrame());
+
+		if (current_animation == &blueball_270)
+			App->render->Blit(ball_aditional_effects, position.x - 15, position.y - 15, &blueball_charging.GetCurrentFrame());
+
+		if (current_animation == &blueball_315)
+			App->render->Blit(ball_aditional_effects, position.x - 15, position.y - 15, &blueball_charging.GetCurrentFrame());
+	}
+	
+
+
 }
 
 void ModuleBall::ReleaseBall()
 {
+	blueball_charging.Reset();
 	if (!shot_charged)
 		charge = 0;
 	if (shot_charged)
 	{
 		shot_charged = false;
+		App->audio->PlaySoundEffect(release_ball_sound);
 		if (getPosition() == RIGHT_SIDE)
 		{
 			velocity = { 8,0 };
@@ -374,7 +438,7 @@ BALL_POSITION ModuleBall::getPosition()
 	return ret;
 }
 
-void ModuleBall::Shot()
+void ModuleBall::Shoot()
 {
 	if (current_animation == &blueball_0)
 		App->particles->ball_shot.speed = { 7,0 };

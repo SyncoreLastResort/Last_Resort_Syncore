@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include "p2Point.h" 
 #include "ModuleParticles.h"
+#include "ModuleTextures.h"
 enum BALL_POSITION {
 	NONE,
 	LEFT_SIDE,
@@ -33,19 +34,26 @@ private:
 	void ModuleBall::ReleaseBall();
 	void ModuleBall::Path();
 	void ModuleBall::ReturnBall();
-	void ModuleBall::Shot();
+	void ModuleBall::Shoot();
 	BALL_POSITION ModuleBall::getPosition();
 
 public:
 	iPoint position;
 private:
-	uint charge=0;
+	Mix_Chunk* fix_ball=nullptr;
+	Mix_Chunk* unfix_ball = nullptr;
+	Mix_Chunk* release_ball_sound = nullptr;
+	Mix_Chunk* charge_ball_sound = nullptr;
+
+	uint charge=0, charge_time=0;
 	iPoint velocity = { 0,0 };
-	bool fixed=true, shot_charged=false, back_to_player=false, ball_thrown=false;
+	bool fixed=false, shot_charged=false, back_to_player=false, ball_thrown=false;
 
 	Collider *ball1_collider;
-	
-	
+	SDL_Texture* ball_aditional_effects=nullptr;
+	Animation blueball_charging;
+	Animation blueball_thrown;
+
 	Animation* current_animation;
 	Animation blueball_0;
 	Animation blueball_45;
