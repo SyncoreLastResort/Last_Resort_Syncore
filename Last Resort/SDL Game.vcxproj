@@ -88,6 +88,7 @@
     <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModuleFirstBoss.h" />
     <ClInclude Include="ModuleFonts.h" />
+    <ClInclude Include="ModuleGameOver.h" />
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModuleLevel2.h" />
     <ClInclude Include="ModuleParticles.h" />
@@ -116,6 +117,7 @@
     <ClCompile Include="ModuleFadeToBlack.cpp" />
     <ClCompile Include="ModuleFirstBoss.cpp" />
     <ClCompile Include="ModuleFonts.cpp" />
+    <ClCompile Include="ModuleGameOver.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleLevel2.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />

@@ -156,9 +156,7 @@ update_status ModulePlayer::Update()
 		{
 			App->particles->AddParticle(App->particles->Laserexplosion, App->player->position.x + 32, App->player->position.y);
 			
-			
 			App->particles->AddParticle(App->particles->laser, position.x + 35, position.y+4, COLLIDER_PLAYER_SHOT);
-			score += 10;
 		}
 
 		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
