@@ -15,7 +15,8 @@
 enum ENEMY_TYPES
 {
 	NO_TYPE,
-	WASP
+	WASP,
+	RHINO
 };
 
 class Enemy;
