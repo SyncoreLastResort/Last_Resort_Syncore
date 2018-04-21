@@ -3,6 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
+#include "ModuleGameOver.h"
 #include "ModuleCongrats.h"
 #include "ModuleLevel2.h"
 #include "ModuleLevel1.h"
@@ -32,6 +33,7 @@ Application::Application()
 	modules[i++] = level1 = new ModuleLevel1();
 	modules[i++] = level2 = new ModuleLevel2();
 	modules[i++] = congrats = new ModuleCongrats();
+	modules[i++] = gameover = new ModuleGameOver();
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = boss1 = new ModuleFirstBoss();
 	modules[i++] = particles = new ModuleParticles();
@@ -54,10 +56,11 @@ bool Application::Init()
 	bool ret = true;
 
 	// Deactivate modules here ----
-	boss1->Disable();
 	player2->Disable();
 	player->Disable();
+	boss1->Disable();
 	enemies->Disable();
+	gameover->Disable();
 	congrats->Disable();
 	level2->Disable();
 	level1->Disable();

@@ -11,7 +11,6 @@
 
 #include<stdio.h>
 
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModulePlayer2::ModulePlayer2()
 {
@@ -125,8 +124,7 @@ update_status ModulePlayer2::Update()
 	{
 		if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
 			App->particles->AddParticle(App->particles->Laserexplosion, App->player2->position.x + 32, App->player2->position.y);
-			App->particles->AddParticle(App->particles->laser, position.x + 35, position.y, COLLIDER_PLAYER_SHOT);
-			App->player->score2 += 8;
+			App->particles->AddParticle(App->particles->laser, position.x + 35, position.y, COLLIDER_PLAYER2_SHOT);
 		}
 
 		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)

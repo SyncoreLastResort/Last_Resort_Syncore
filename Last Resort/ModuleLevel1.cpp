@@ -6,13 +6,15 @@
 #include "ModulePlayer2.h"
 #include "ModuleEnemies.h"
 #include "ModuleLevel1.h"
-#include "ModuleLevel2.h"
+//#include "ModuleLevel2.h"
+#include "ModuleGameOver.h"
+#include "ModuleCongrats.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleFadeToBlack.h"
-#include "SDL\include\SDL_render.h"
+//#include "SDL\include\SDL_render.h"
 #include "ModuleFirstBoss.h"
 #include "ModuleBall.h"
 
@@ -262,7 +264,7 @@ update_status ModuleLevel1::Update()
 	if (App->input->keyboard[SDL_SCANCODE_F] == 1)
 	{
 		Mix_FadeOutMusic(1000);
-		App->fade->FadeToBlack(App->level1, App->level2);
+		App->fade->FadeToBlack(App->level1, App->gameover);
 	}
 	
 	/*App->player->position.x += 1;
