@@ -54,6 +54,7 @@ private:
 	Particle* active[MAX_ACTIVE_PARTICLES];
 	
 public:
+	Particle ball_trail;
 	Particle boss_shot;
 	Particle boss_explosion;
 	Particle boss_cooling;

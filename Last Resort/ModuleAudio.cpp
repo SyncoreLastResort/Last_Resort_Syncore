@@ -76,6 +76,15 @@ void ModuleAudio::StopAudio() {
 	ResetState();
 }
 
+void ModuleAudio::StopEffect(Mix_Chunk* to_stop)
+{
+	for (uint i = 0; i < MAX_EFFECTS; i++) {
+		if (sound_effects[i] == to_stop) {
+			to_stop->volume = 0;
+			break;
+		}
+	}
+}
 
 void ModuleAudio::ResetState() {
 

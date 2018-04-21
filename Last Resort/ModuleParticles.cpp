@@ -13,12 +13,21 @@ ModuleParticles::ModuleParticles()
 {
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
+	
+	ball_trail.anim.PushBack({ 251,1,32,32 });
+	ball_trail.anim.PushBack({ 283,1,32,32 });
+	ball_trail.anim.PushBack({ 315,1,32,32 });
+	ball_trail.anim.PushBack({ 347,1,32,32 });
+	ball_trail.anim.loop = false;
+	ball_trail.anim.speed = 0.5;
+	ball_trail.speed = { 0,0 };
+	
 	//Ball green shot
 	ball_shot.anim.PushBack({103,252,13, 13});
 	ball_shot.anim.PushBack({ 117,252,13, 13 });
 	ball_shot.anim.loop = true;
 	ball_shot.anim.speed = 0.5f;
-	ball_shot.speed = { 10,0 };
+	ball_shot.speed = { 0,0 };
 	ball_shot.life = 2000;
 
 	// Explosion particle
@@ -122,7 +131,9 @@ bool ModuleParticles::Start()
 	//Enemy sprites && sounds
 	enemy_explosion.texture = App->textures->Load("assets/sprites/BossWeapons&parts_EnemyShip&structure_Multiple-effects-and-explosions.png");
 	enemy_explosion.sound = App->audio->LoadSoundEffect("assets/sounds/006.Explosion1_center.wav");
-	
+
+	//Ball trail particles
+	ball_trail.texture = App->textures->Load("assets/sprites/Ball_aditional_effects.png");
 	return true;
 }
 

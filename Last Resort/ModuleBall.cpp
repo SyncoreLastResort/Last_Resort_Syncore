@@ -64,7 +64,7 @@ bool ModuleBall::Start()
 	charge_ball_sound = App->audio->LoadSoundEffect("assets/sounds/008.Charging_shot.wav");
 	
 	position = { App->player->position.x +42, App->player->position.y};
-	ball1_collider = App->collision->AddCollider({ position.x, position.y, 22, 22 }, COLLIDER_BALL);
+	ball1_collider = App->collision->AddCollider({ position.x, position.y, 22, 22 }, COLLIDER_BALL,this);
 	current_animation = &blueball_0;
 	return true;
 }
@@ -120,6 +120,7 @@ update_status ModuleBall::Update()
 
 	if (ball_thrown == true)
 	{
+		Trail();
 		current_animation = &blueball_thrown;
 		if (back_to_player == false)
 		{
@@ -299,12 +300,15 @@ void ModuleBall::BallFixed()
 
 void ModuleBall::ChargeBall()
 {
-	
+	charge_ball_sound->volume = 128;
 	charge+=2;
 	if (charge > 80)
 		shot_charged = true;
 	if (SDL_GetTicks() - charge_time > 200)
 	{
+		if (charge>=20&&charge<=26)
+			App->audio->PlaySoundEffect(charge_ball_sound);
+
 		if (current_animation == &blueball_0)
 			App->render->Blit(ball_aditional_effects, position.x - 15, position.y - 15, &blueball_charging.GetCurrentFrame());
 
@@ -336,6 +340,7 @@ void ModuleBall::ChargeBall()
 
 void ModuleBall::ReleaseBall()
 {
+	charge_ball_sound->volume = 0;
 	blueball_charging.Reset();
 	if (!shot_charged)
 		charge = 0;
@@ -400,7 +405,7 @@ void ModuleBall::ReturnBall()
 	else if (position.y < App->player->position.y - 16)
 		position.y += 5;
 
-	if (position.x <= App->player->position.x + 24 && position.x >= App->player->position.x + 16 && position.y >= App->player->position.y - 16 && position.y <= App->player->position.y + 14)
+	if (position.x <= App->player->position.x + 42 && position.x >= App->player->position.x - 26 && position.y >= App->player->position.y - 35 && position.y <= App->player->position.y + 35)
 	{
 		back_to_player = false;
 		ball_thrown = false;
@@ -467,8 +472,24 @@ void ModuleBall::Shoot()
 	App->particles->AddParticle(App->particles->ball_shot, position.x, position.y, COLLIDER_PLAYER_SHOT);
 }
 
-
-void OnCollision(Collider* c1, Collider* c2) 
+void ModuleBall::Trail()
 {
-	true;
+	if (SDL_GetTicks()%80>=0&& SDL_GetTicks() % 80 <= 20)
+		App->particles->AddParticle(App->particles->ball_trail, position.x - 6, position.y - 6);
+}
+void ModuleBall::OnCollision(Collider* c1, Collider* c2) 
+{
+	if (ball_thrown == true) 
+	{
+		if (c1->type == COLLIDER_WALL || c2->type == COLLIDER_WALL || c1->type == COLLIDER_BOSS || c2->type == COLLIDER_BOSS)
+		{
+			back_to_player = true;
+		}
+		if (c1->type == COLLIDER_ENEMY || c2->type == COLLIDER_ENEMY )
+		{
+			if (charge < 100)
+				back_to_player = true;
+		}
+	}
+
 }

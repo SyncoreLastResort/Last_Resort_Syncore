@@ -28,12 +28,13 @@ public:
 	bool CleanUp();
 
 	// Audio methods
+	void StopEffect(Mix_Chunk* to_stop);
 	void StopAudio();
 	void ResetState();
 	void PlayMusic(Mix_Music* to_play, Repetitions n_times);
 	void PlaySoundEffect(Mix_Chunk* to_play);
 	bool IsPlaying();
-
+	
 	// Utility methods
 	Mix_Music* const LoadMusic(const char* path);
 	Mix_Chunk* const LoadSoundEffect(const char* path);
