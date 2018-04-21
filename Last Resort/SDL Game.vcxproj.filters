@@ -101,11 +101,7 @@
     <ClInclude Include="ModuleRhino.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="ModuleBall2.h">
-=======
-    <ClInclude Include="ModuleGameOver.h">
->>>>>>> 5a0a6ff3025f28e129f3b5dba6a4b04f000a2b18
       <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
@@ -183,9 +179,6 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleBall2.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleGameOver.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
