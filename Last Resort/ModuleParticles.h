@@ -71,6 +71,7 @@ public:
 	Particle laser_beam;
 	Particle bomb_upwards;
 	Particle bomb_downwards;
+	Particle bomb_explosion;
 
 };
 

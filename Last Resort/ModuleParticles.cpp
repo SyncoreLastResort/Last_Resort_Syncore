@@ -23,6 +23,7 @@ ModuleParticles::ModuleParticles()
 	bomb_downwards.anim.loop = false;
 	bomb_downwards.life = 1750;
 	bomb_downwards.speed = { 1,2 };
+	bomb_downwards.end_particle = &bomb_explosion;
 
 	bomb_upwards.anim.PushBack({ 0,303,16,16 });
 	bomb_upwards.anim.PushBack({ 47,303,16,16 });
@@ -31,6 +32,12 @@ ModuleParticles::ModuleParticles()
 	bomb_upwards.anim.loop = false;
 	bomb_upwards.life = 1750;
 	bomb_upwards.speed = { 1,-2 };
+	bomb_upwards.end_particle = &bomb_explosion;
+
+	for (int i=0;i<11;++i)
+		bomb_explosion.anim.PushBack({ 448 - 32 * i, 480, 32, 32 });
+	bomb_explosion.anim.loop = false;
+	bomb_explosion.anim.speed = 0.5;
 
 	//Laser beam
 	laser_beam.anim.PushBack({ 47, 245, 16,3 });
@@ -194,7 +201,9 @@ bool ModuleParticles::Start()
 	enemy_explosion.texture = App->textures->Load("assets/sprites/BossWeapons&parts_EnemyShip&structure_Multiple-effects-and-explosions.png");
 	enemy_explosion.sound = App->audio->LoadSoundEffect("assets/sounds/006.Explosion1_center.wav");
 	boss_dying.texture = enemy_explosion.texture;
-	
+
+	bomb_explosion.sound = App->audio->LoadSoundEffect("assets/sounds/010.Bomb_center.wav");
+	bomb_explosion.texture = enemy_explosion.texture;
 	//Ball trail particles
 	ball_trail.texture = App->textures->Load("assets/sprites/Ball_aditional_effects.png");
 	return true;

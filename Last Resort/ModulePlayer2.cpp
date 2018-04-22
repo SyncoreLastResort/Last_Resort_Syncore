@@ -90,7 +90,7 @@ bool ModulePlayer2::Start()
 {
 	LOG("Loading player");
 	
-	App->ball_player2->Enable();
+	
 	death.Reset();
 	spawn.Reset();
 	current_animation = &spawn;
@@ -115,14 +115,18 @@ bool ModulePlayer2::CleanUp()
 // Update: draw background
 update_status ModulePlayer2::Update()
 {
-	if (current_animation == &spawn&&current_animation->Finished())
+	if (weapon_level == 2)
+	{
+		App->ball_player2->Enable();
+	}
+
+	if (current_animation == &spawn && current_animation->Finished())
 		current_animation = &idle;
 
-	if (current_animation != &death)
+	if (current_animation != &death && current_animation != &spawn)
 	{
 		if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
-			App->particles->AddParticle(App->particles->Laserexplosion, App->player2->position.x + 32, App->player2->position.y);
-			App->particles->AddParticle(App->particles->laser, position.x + 35, position.y, COLLIDER_PLAYER2_SHOT);
+			Shoot();
 		}
 
 		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
@@ -234,23 +238,33 @@ void ModulePlayer2::OnCollision(Collider * col_1, Collider * col_2)
 
 void ModulePlayer2::Shoot()
 {
-	App->particles->AddParticle(App->particles->Laserexplosion, App->player->position.x + 32, App->player->position.y);
+	App->particles->AddParticle(App->particles->Laserexplosion, position.x + 32, position.y);
 	App->particles->AddParticle(App->particles->laser, position.x + 35, position.y + 4, COLLIDER_PLAYER_SHOT);
 
-	if (weapon == LASER_BEAM && weapon_level == 3)
+	if (SDL_GetTicks() - App->player->weapon_fired)
 	{
-		App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 20);
-		App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 40);
-		App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 60);
-		App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 80);
-		App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 100);
-		App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 120);
-		App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 140);
-	}
+		if (weapon == LASER_BEAM && weapon_level == 3 && SDL_GetTicks() - weapon_fired >= 500)
+		{
 
-	if (weapon == BOMB && weapon_level == 3)
-	{
+			App->audio->PlaySoundEffect(App->player->laser_sound);
+			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 20);
+			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 40);
+			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 60);
+			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 80);
+			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 100);
+			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 120);
+			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 140);
 
+			weapon_fired = SDL_GetTicks();
+
+		}
+
+		if (weapon == BOMB && weapon_level == 3)
+		{
+			App->particles->AddParticle(App->particles->bomb_downwards, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->bomb_upwards, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT);
+		}
+		weapon_fired = SDL_GetTicks();
 	}
 }

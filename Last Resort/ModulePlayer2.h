@@ -21,7 +21,7 @@ public:
 
 public:
 	WEAPON_TYPE weapon = BASIC;
-	uint weapon_level=1;
+	uint weapon_level=1, weapon_fired;
 	int speed = 2;
 	Animation spawn;
 	Animation death;
