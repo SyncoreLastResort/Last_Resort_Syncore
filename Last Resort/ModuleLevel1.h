@@ -20,7 +20,8 @@ public:
 	bool CleanUp();
 
 public:
-
+	bool boss_apeared;
+	uint startime;
 	SDL_Texture* backbackground = nullptr;
 	SDL_Texture* midbackground = nullptr;
 	SDL_Texture* road = nullptr;

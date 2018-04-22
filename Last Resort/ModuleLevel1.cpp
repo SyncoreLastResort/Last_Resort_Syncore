@@ -78,18 +78,19 @@ ModuleLevel1::~ModuleLevel1()
 bool ModuleLevel1::Start()
 {
 	LOG("Loading level1 scene");
-
+	startime = SDL_GetTicks();
 	App->player->p1dead = false;
 	App->player2->p2dead = false;
 
 	App->player->Enable();
 	App->enemies->Enable();
-	App->boss1->Enable();
-
+	
+	
 	scroll_lights = 0;
 	scrollground = 0;
 	scrollmid = 0;
 	scrollback = 0;
+	boss_apeared = false;
 
 	background_lights = App->textures->Load("assets/sprites/Lasers_Sprite.png");
 	backbackground = App->textures->Load("assets/sprites/BackBackground_Sprite.png");
@@ -238,7 +239,8 @@ bool ModuleLevel1::CleanUp()
 	
 	App->audio->StopAudio();
 	App->audio->UnloadMusic(maintracklvl1);
-
+	App->audio->UnloadMusic(bossmusic);
+	
 	if(App->boss1->IsEnabled())
 	App->boss1->Disable();
 
@@ -277,6 +279,13 @@ update_status ModuleLevel1::Update()
 		scrollback += 1.5;
 	}
 */
+	if (SDL_GetTicks() - startime > 120000 && SDL_GetTicks() - startime <120020)
+	{
+		App->audio->StopAudio();
+		App->boss1->Enable();
+		boss_apeared = true;
+	}
+
 	if (App->player->p1dead == true && App->player2->p2dead == true)
 	{
 		Mix_FadeOutMusic(1000);
@@ -316,9 +325,11 @@ update_status ModuleLevel1::Update()
 
 	/*App->render->Blit(powerups, 0, 0, &powerupplace);*/
 
+	if (boss_apeared==false)
+		App->audio->PlayMusic(maintracklvl1, ONCE);
 	
-	App->audio->PlayMusic(maintracklvl1, ONCE);
-
+	if (boss_apeared==true)
+		App->audio->PlayMusic(bossmusic, ONCE);
 	scroll_lights -= 0.25;
 	scrollground -= 0.55;
 	scrollmid -= 0.25;
