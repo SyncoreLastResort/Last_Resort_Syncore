@@ -173,7 +173,6 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			
 			else
 			{
-				
 					if (c1->type != COLLIDER_BOSS)
 					{
 						if (c1->type == COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_PLAYER_SHOT)
@@ -198,7 +197,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 							App->player->score2 += 5000;
 					}
 
-					
+	
 			    App->particles->AddParticle(App->particles->enemy_explosion, enemies[i]->position.x, enemies[i]->position.y);
 				delete enemies[i];
 				enemies[i] = nullptr;
