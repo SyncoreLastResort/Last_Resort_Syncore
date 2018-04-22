@@ -15,8 +15,6 @@
 #include<stdio.h>
 
 
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
-
 ModulePlayer::ModulePlayer()
 {
 	graphics = nullptr;
