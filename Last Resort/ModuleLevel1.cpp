@@ -94,13 +94,10 @@ bool ModuleLevel1::Start()
 	road = App->textures->Load("assets/sprites/Road&Tunnel_Background.png");
 	bossimg = App->textures->Load("assets/sprites/Boss_Static_Background.png");
 	maintracklvl1 = App->audio->LoadMusic("assets/music/2. Jack to the metro (Stage 1).ogg");
-<<<<<<< HEAD
+
 	bossmusic = App->audio->LoadMusic("assets/music/3.Vice (Boss).ogg");
-	powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");
-=======
+	//powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");
 	/*powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");*/
->>>>>>> 0ae78925f32a171f38d6c09b1105488b7f4a079e
-	
 
 	// Enemies ---
 
