@@ -12,8 +12,6 @@
 #include "ModuleCongrats.h"
 
 
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
-
 ModuleCongrats::ModuleCongrats()
 {
 	congratsrect.x = 0;

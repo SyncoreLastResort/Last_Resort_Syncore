@@ -10,51 +10,48 @@
 #include "ModuleScores.h"
 
 
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
-
-ModuleCongrats::ModuleCongrats()
+ModuleScores::ModuleScores()
 {
-	congratsrect.x = 0;
-	congratsrect.y = 0;
-	congratsrect.w = 304;
-	congratsrect.h = 224;
+	backgroundrect.x = 0;
+	backgroundrect.y = 0;
+	backgroundrect.w = 304;
+	backgroundrect.h = 224;
 
 }
 
-ModuleCongrats::~ModuleCongrats()
+ModuleScores::~ModuleScores()
 {}
 
 // Load assets
-bool ModuleCongrats::Start()
+bool ModuleScores::Start()
 {
-	LOG("Loading background assets");
+	LOG("Loading scores assets");
 
 	bool ret = true;
-	backgroundcongrats = App->textures->Load("assets/sprites/GameEnd.png");
+	backgroundscores = App->textures->Load("assets/sprites/GameEnd.png");
 
 	return ret;
 }
 
-float scrollbackground = 0.4;
 
 // Update: draw background
-update_status ModuleCongrats::Update()
+update_status ModuleScores::Update()
 {
 	bool end = false;
 
 	// Draw everything --------------------------------------
-	App->render->Blit(backgroundcongrats, 0, 0, &congratsrect, 0.75f); // back background
+	App->render->Blit(backgroundscores, 0, 0, &backgroundrect); // back background
 
 	if (App->input->keyboard[SDL_SCANCODE_F] == 1)
-		App->fade->FadeToBlack(App->congrats, App->scene_intro);
+		App->fade->FadeToBlack(App->scores, App->scene_intro);
 
 	return UPDATE_CONTINUE;
 }
 
 
-bool ModuleCongrats::CleanUp()
+bool ModuleScores::CleanUp()
 {
-	App->textures->Unload(backgroundcongrats);
+	App->textures->Unload(backgroundscores);
 
 	LOG("Unloading background scene");
 
