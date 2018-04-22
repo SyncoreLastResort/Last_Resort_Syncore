@@ -236,6 +236,7 @@ void ModulePlayer2::OnCollision(Collider * col_1, Collider * col_2)
 			if (current_animation != &death)
 			{
 				p2dead = true;
+				weapon_level = 1;
 				App->audio->PlaySoundEffect(App->player->deathsound);
 				current_animation = &death;
 
@@ -248,10 +249,10 @@ void ModulePlayer2::OnCollision(Collider * col_1, Collider * col_2)
 
 void ModulePlayer2::Shoot()
 {
-	App->particles->AddParticle(App->particles->Laserexplosion, position.x + 32, position.y);
+	/*App->particles->AddParticle(App->particles->Laserexplosion, position.x + 32, position.y);*/
 	App->particles->AddParticle(App->particles->laser, position.x + 35, position.y + 4, COLLIDER_PLAYER_SHOT);
 
-	if (SDL_GetTicks() - App->player->weapon_fired)
+	if (SDL_GetTicks() - weapon_fired)
 	{
 		if (weapon == LASER_BEAM && weapon_level >= 3 && SDL_GetTicks() - weapon_fired >= 1000)
 		{

@@ -134,7 +134,7 @@ update_status ModuleBall2::Update()
 		}
 	}
 
-	App->render->Blit(App->player->graphics, position.x, position.y, &current_animation->GetCurrentFrame());
+	App->render->Blit(App->player2->graphics, position.x, position.y, &current_animation->GetCurrentFrame());
 
 
 	ball2_collider->SetPos(position.x, position.y);

@@ -289,25 +289,15 @@ update_status ModuleLevel1::Update()
 		boss_apeared = true;
 	}
 
-	//if (App->player->p1dead == true && App->player2->p2dead == true)
-
-	//if (App->player2->IsEnabled() == false && App->player->p1dead==true && App->player->current_animation->Finished()==true)
-	//{
-	//	Mix_FadeOutMusic(1000);
-	//	App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
-	//	App->player->Disable();
-	//}
-
-	//if (App->player->p1dead == true && App->player2->p2dead == true && App->player2->IsEnabled()==true && App->player->current_animation->Finished() == true && App->player2->current_animation->Finished()==true)
-
-	//{
-	//	Mix_FadeOutMusic(1000);
-	//	App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
-	//	App->player->Disable();
-	//	App->player2->Disable();
-	//}
+	if (App->player->IsEnabled() == false && App->player2->IsEnabled() == false)
+	{
+		App->fade->FadeToBlack(this, App->gameover);
+	}
+	
 	if (App->player2->IsEnabled() == true && App->player->p1dead == true)
 	{
+		App->player->current_animation = &App->player->death;
+		if(App->player->current_animation->Finished()==true)
 		App->player->Disable();
 	}
 

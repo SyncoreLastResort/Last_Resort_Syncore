@@ -247,7 +247,7 @@ update_status ModulePlayer::Update()
 	
 	if (current_animation == &death &&current_animation->Finished() && App->player2->IsEnabled()==false)
 	{
-		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
+		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->gameover);
 		App->player->Disable();
 	}
 
@@ -274,6 +274,7 @@ void ModulePlayer::OnCollision(Collider * col_1, Collider * col_2)
 				if (current_animation != &death)
 				{
 					p1dead = true;
+					weapon_level = 1;
 					App->audio->PlaySoundEffect(deathsound);
 					current_animation = &death;
 				}
@@ -287,7 +288,7 @@ void ModulePlayer::OnCollision(Collider * col_1, Collider * col_2)
 void ModulePlayer::Shoot()
 {
 	
-		App->particles->AddParticle(App->particles->Laserexplosion, App->player->position.x + 32, App->player->position.y);
+		/*App->particles->AddParticle(App->particles->Laserexplosion, App->player->position.x + 32, App->player->position.y);*/
 		App->particles->AddParticle(App->particles->laser, position.x + 35, position.y + 4, COLLIDER_PLAYER_SHOT);
 
 		if (SDL_GetTicks() - weapon_fired)
