@@ -105,20 +105,17 @@ bool ModulePlayer::Start()
 	position.x = 50;
 	position.y = 100;
 	score = 0;
+	score2 = 0;
 
 	App->ball_player1->Enable();
 	
 	// TODO 2: Add a collider to the player
 
-	playercollider=App->collision->AddCollider({ position.x,position.y,32,14 }, COLLIDER_PLAYER, this);   // this = App->player
+	playercollider=App->collision->AddCollider({ position.x,position.y,32,14 }, COLLIDER_PLAYER, this);   // this = App->player																						
 	
-																										  // TODO 0: Notice how a font is loaded and the meaning of all its arguments 
-	/*font_score = App->fonts->Load("assets/fonts/Font_score.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);*/ // From rtype
 
 	font_score = App->fonts->Load("assets/fonts/Font_score.png", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_.,[]&$ ", 2);
-	// TODO 4: Try loading "rtype_font3.png" that has two rows to test if all calculations are correct
 	
-
 	return true;
 }
 
@@ -129,7 +126,7 @@ bool ModulePlayer::CleanUp()
 	App->ball_player1->Disable();
 
 	App->textures->Unload(graphics);
-	App->fonts->UnLoad(font_score);
+	/*App->fonts->UnLoad(font_score);*/
 	App->audio->UnloadSoundEffect(deathsound);
 	
 	if (playercollider != nullptr)

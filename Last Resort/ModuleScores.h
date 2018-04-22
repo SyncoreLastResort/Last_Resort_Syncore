@@ -21,6 +21,11 @@ public:
 
 public:
 
+
+	int font_scorenums = -1;
+	char score_text[10];
+	char score_text2[10];
+
 	SDL_Texture* backgroundscores = nullptr;
 	SDL_Texture* scoresranking = nullptr;
 	SDL_Rect backgroundrect;
