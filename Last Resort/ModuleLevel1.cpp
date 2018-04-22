@@ -240,8 +240,8 @@ update_status ModuleLevel1::Update()
 {
 	// Move camera forward -----------------------------
 	/*App->render->camera.x += 1 * SCREEN_SIZE;*/
-	if (ground.x == -ground.w)
-		App->boss1->Enable();
+	/*if (ground.x == -ground.w)
+		App->boss1->Enable();*/
 
 	// Utility conditions, used to move forward or backwards at high speed
 	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_REPEAT)
@@ -257,6 +257,12 @@ update_status ModuleLevel1::Update()
 		scrollground += 5.5;
 		scrollmid += 2.5;
 		scrollback += 1.5;
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_F] == 1)
+	{
+		Mix_FadeOutMusic(1000);
+		App->fade->FadeToBlack(App->level1, App->stageclear);
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F] == 1)

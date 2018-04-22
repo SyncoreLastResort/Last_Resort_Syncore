@@ -9,6 +9,9 @@
 #include "SDL/include/SDL_timer.h"
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
+#include "ModuleFadeToBlack.h"
+#include "ModuleLevel1.h"
+#include "ModuleStageClear.h"
 
 
 
@@ -378,7 +381,8 @@ void ModuleFirstBoss::Die()
 
 	if (SDL_GetTicks() - deathtime > 4500)
 	{
-		App->boss1->Disable();
+		Mix_FadeOutMusic(1000);
+		App->fade->FadeToBlack(App->level1, App->stageclear);
 		eye_collider->rect = { 0,0 };
 		body_collider->rect = { 0,0 };
 	}
