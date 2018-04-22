@@ -281,7 +281,7 @@ update_status ModuleLevel1::Update()
 		scrollback += 1.5;
 	}
 */
-<<<<<<< HEAD
+
 	if (SDL_GetTicks() - startime > 120000 && SDL_GetTicks() - startime <120020)
 	{
 		App->audio->StopAudio();
@@ -290,7 +290,7 @@ update_status ModuleLevel1::Update()
 	}
 
 	if (App->player->p1dead == true && App->player2->p2dead == true)
-=======
+
 	if (App->player2->IsEnabled() == false && App->player->p1dead==true && App->player->current_animation->Finished()==true)
 	{
 		Mix_FadeOutMusic(1000);
@@ -299,7 +299,7 @@ update_status ModuleLevel1::Update()
 	}
 
 	if (App->player->p1dead == true && App->player2->p2dead == true && App->player2->IsEnabled()==true && App->player->current_animation->Finished() == true && App->player2->current_animation->Finished()==true)
->>>>>>> 17164dd707c7f8157c5034d701588b0753533525
+
 	{
 		Mix_FadeOutMusic(1000);
 		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
