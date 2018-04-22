@@ -26,6 +26,7 @@ public:
 	SDL_Texture* road = nullptr;
 	SDL_Texture* bossimg = nullptr;
 	SDL_Texture* background_lights = nullptr;
+	SDL_Texture* powerups = nullptr;
 	Animation thin_lights;
 	Animation thick_lights;
 	SDL_Rect ground;
