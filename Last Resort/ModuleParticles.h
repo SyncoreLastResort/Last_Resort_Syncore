@@ -13,7 +13,7 @@
 
 struct SDL_Texture;
 struct Collider;
-enum COLLIDER_TYPE;
+//enum COLLIDER_TYPE;
 
 struct Particle
 {

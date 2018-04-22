@@ -21,14 +21,14 @@ ModuleParticles::ModuleParticles()
 	bomb.anim.PushBack({ 32,303,16,16 });
 	bomb.anim.speed = 0.1;
 	bomb.anim.loop = false;
-	bomb.life = 2000;
+	bomb.life = 1750;
 	bomb.speed = { 1,2 };
 
 	//Laser beam
 	laser_beam.anim.PushBack({ 47, 245, 16,3 });
 	laser_beam.anim.loop = true;
 	laser_beam.speed = { 6,0 };
-	laser_beam.life = 2000;
+	laser_beam.life = 1000;
 	
 	//ball trail
 	ball_trail.anim.PushBack({ 251,1,32,32 });
@@ -45,7 +45,7 @@ ModuleParticles::ModuleParticles()
 	ball_shot.anim.loop = true;
 	ball_shot.anim.speed = 0.5f;
 	ball_shot.speed = { 0,0 };
-	ball_shot.life = 2000;
+	ball_shot.life = 650;
 	ball_shot.end_particle = &ball_shot_explosion;
 
 	//Ball2 green shot
@@ -86,7 +86,7 @@ ModuleParticles::ModuleParticles()
 	laser.anim.speed = 0.1f;
 	laser.speed.x = 7;
 	laser.speed.y = 0;
-	laser.life = 1000;
+	laser.life = 650;
 	laser.end_particle = &explosion;
 	
 	boss_dying.anim.PushBack({ 286, 347, 16, 16 });
@@ -158,15 +158,13 @@ bool ModuleParticles::Start()
 	Laserexplosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	laser_beam.texture = Laserexplosion.texture;
 	bomb.texture = Laserexplosion.texture;
-	/*laser.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
-	explosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");*/
+
 	laser.texture = Laserexplosion.texture;
 	explosion.texture = Laserexplosion.texture;
 
 	laser.sound=  App->audio->LoadSoundEffect("assets/sounds/004.Shot_center.wav");
 
 	//Ball sprites & sounds
-	/*ball_shot.texture= App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");*/
 	ball_shot.texture = Laserexplosion.texture;
 	ball2_shot.texture = Laserexplosion.texture;
 	ball_shot_explosion.texture= Laserexplosion.texture;
@@ -174,9 +172,7 @@ bool ModuleParticles::Start()
 	//Boss 1 sprites && sounds
 	boss_shot.sound = App->audio->LoadSoundEffect("assets/sounds/025.Boss_shot.wav");
 	boss_shot.texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
-	
-	/*boss_explosion.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
-	boss_cooling.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");*/
+
 
 	boss_explosion.texture = boss_shot.texture;
 	boss_cooling.texture = boss_shot.texture;
@@ -196,7 +192,6 @@ bool ModuleParticles::CleanUp()
 {
 	LOG("Unloading particles");
 
-	/*App->textures->Unload(enemy_explosion.texture);*/
 
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -254,7 +249,6 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			if(collider_type != COLLIDER_NONE)
 				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
 			active[i] = p;
-			//active[i]->texture = particle.texture;
 			break;
 		}
 	}
@@ -277,8 +271,6 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			break;
 		}
 	}
-
-
 }
 
 // -------------------------------------------------------------

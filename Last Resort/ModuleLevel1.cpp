@@ -8,7 +8,6 @@
 #include "ModuleLevel1.h"
 #include "ModuleGameOver.h"
 #include "ModuleStageClear.h"
-#include "ModuleCongrats.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
@@ -86,6 +85,7 @@ bool ModuleLevel1::Start()
 	road = App->textures->Load("assets/sprites/Road&Tunnel_Background.png");
 	bossimg = App->textures->Load("assets/sprites/Boss_Static_Background.png");
 	maintracklvl1 = App->audio->LoadMusic("assets/music/2. Jack to the metro (Stage 1).ogg");
+	powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");
 	
 	// Enemies ---
 
