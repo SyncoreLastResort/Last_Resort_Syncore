@@ -87,6 +87,8 @@ ModuleFirstBoss::~ModuleFirstBoss()
 // Load assets
 bool ModuleFirstBoss::Start()
 {
+	attack_with_body = false, forward = true, backward = false, boss_dead = false;
+
 	position = { 400, 60 };
 	boss1_texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
 	current_head = &Head_Idle;

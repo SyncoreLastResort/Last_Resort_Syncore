@@ -59,7 +59,7 @@ public:
 	
 private:
 	uint deathtime=0;
-	bool attack_with_body = false,forward = true, backward = false, boss_dead=false; // booleans for the body attack;
+	bool attack_with_body,forward, backward, boss_dead; // booleans for the body attack;
 
 
 };

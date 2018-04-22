@@ -34,10 +34,12 @@ public:
 	SDL_Rect midback;
 	SDL_Rect bossplace;
 	Mix_Music* maintracklvl1 = nullptr;
+	Mix_Music* bossmusic = nullptr;
 	float scrollground = 0.4;
 	float scroll_lights = 100.0;
 	float scrollmid = 0.2;
 	float scrollback = 0.1;
+
 };
 
 #endif // __MODULELEVEL1_H__

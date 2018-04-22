@@ -29,7 +29,6 @@ Application::Application()
 	modules[i++] = textures = new ModuleTextures();
 	modules[i++] = fonts = new ModuleFonts();
 	modules[i++] = audio = new ModuleAudio();
-	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = level1 = new ModuleLevel1();
 	modules[i++] = scores = new ModuleScores();
 	modules[i++] = stageclear = new ModuleStageClear();
@@ -42,6 +41,7 @@ Application::Application()
 	modules[i++] = ball_player2 = new ModuleBall2();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = player2 = new ModulePlayer2();
+	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = fade = new ModuleFadeToBlack();
 }	
 
