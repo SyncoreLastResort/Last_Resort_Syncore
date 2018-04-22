@@ -100,7 +100,8 @@ bool ModuleLevel1::Start()
 
 	// Enemies ---
 
-	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP, 100, 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP, 200, 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP_BOMB, 200, 100);
 
 	//Wasp Wave 1
 

@@ -12,7 +12,8 @@ enum ENEMY_TYPES
 	NO_TYPE,
 	WASP,
 	RHINO,
-	POWER_UP
+	POWER_UP,
+	POWER_UP_BOMB
 };
 
 class Enemy;
