@@ -11,6 +11,7 @@
 #include "SDL/include/SDL_timer.h"
 #include "SDL/include/SDL_render.h"
 #include "ModuleBall.h"
+#include "ModulePlayer2.h"
 
 #include<stdio.h>
 
@@ -128,7 +129,6 @@ bool ModulePlayer::CleanUp()
 	App->ball_player1->Disable();
 
 	App->textures->Unload(graphics);
-	/*App->fonts->UnLoad(font_score);*/
 	App->audio->UnloadSoundEffect(deathsound);
 	App->audio->UnloadSoundEffect(laser_sound);
 	App->audio->UnloadSoundEffect(powerup_sound);
@@ -245,9 +245,9 @@ update_status ModulePlayer::Update()
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 	}
 	
-	if (current_animation == &death &&current_animation->Finished())
+	if (current_animation == &death &&current_animation->Finished() && App->player2->IsEnabled()==false)
 	{
-		/*App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);*/
+		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
 		App->player->Disable();
 	}
 

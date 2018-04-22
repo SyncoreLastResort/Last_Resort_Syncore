@@ -41,6 +41,14 @@ public:
 	iPoint position;
 
 
+	Mix_Chunk* deathsound;
+	Mix_Chunk* laser_sound;
+	Mix_Chunk* powerup_sound;
+
+	//Texture
+	SDL_Texture* graphics = nullptr;
+
+
 };
 
 #endif

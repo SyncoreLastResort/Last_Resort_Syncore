@@ -289,22 +289,26 @@ update_status ModuleLevel1::Update()
 		boss_apeared = true;
 	}
 
-	if (App->player->p1dead == true && App->player2->p2dead == true)
+	//if (App->player->p1dead == true && App->player2->p2dead == true)
 
-	if (App->player2->IsEnabled() == false && App->player->p1dead==true && App->player->current_animation->Finished()==true)
+	//if (App->player2->IsEnabled() == false && App->player->p1dead==true && App->player->current_animation->Finished()==true)
+	//{
+	//	Mix_FadeOutMusic(1000);
+	//	App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
+	//	App->player->Disable();
+	//}
+
+	//if (App->player->p1dead == true && App->player2->p2dead == true && App->player2->IsEnabled()==true && App->player->current_animation->Finished() == true && App->player2->current_animation->Finished()==true)
+
+	//{
+	//	Mix_FadeOutMusic(1000);
+	//	App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
+	//	App->player->Disable();
+	//	App->player2->Disable();
+	//}
+	if (App->player2->IsEnabled() == true && App->player->p1dead == true)
 	{
-		Mix_FadeOutMusic(1000);
-		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
 		App->player->Disable();
-	}
-
-	if (App->player->p1dead == true && App->player2->p2dead == true && App->player2->IsEnabled()==true && App->player->current_animation->Finished() == true && App->player2->current_animation->Finished()==true)
-
-	{
-		Mix_FadeOutMusic(1000);
-		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
-		App->player->Disable();
-		App->player2->Disable();
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)

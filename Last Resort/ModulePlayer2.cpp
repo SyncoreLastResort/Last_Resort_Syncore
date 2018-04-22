@@ -97,6 +97,11 @@ bool ModulePlayer2::Start()
 	player2collider = App->collision->AddCollider({ position.x,position.y,32,14 }, COLLIDER_PLAYER2, this);
 	App->player->score2 = 0;
 
+	deathsound = App->audio->LoadSoundEffect("assets/sounds/005.Death.wav");
+	laser_sound = App->audio->LoadSoundEffect("assets/sounds/013.Laser1_Center.wav");
+	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
+	powerup_sound = App->audio->LoadSoundEffect("assets/sounds/018.Damage_upgrade.wav");
+
 	App->player->font_2 = App->player->font_score;
 	return true;
 }
@@ -197,15 +202,15 @@ update_status ModulePlayer2::Update()
 	player2collider->SetPos(position.x, position.y);
 	if (current_animation == &spawn)
 	{
-		App->render->Blit(App->player->graphics, position.x - 32, position.y - 7, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(graphics, position.x - 32, position.y - 7, &(current_animation->GetCurrentFrame()));
 	}
 	else if (current_animation == &death)
 	{
-		App->render->Blit(App->player->graphics, position.x - 23, position.y - 5, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(graphics, position.x - 23, position.y - 5, &(current_animation->GetCurrentFrame()));
 	}
 	else
 	{
-		App->render->Blit(App->player->graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 	}
 	if (current_animation == &death && current_animation->Finished())
 	{
