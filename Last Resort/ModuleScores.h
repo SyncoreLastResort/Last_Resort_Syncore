@@ -2,6 +2,9 @@
 #define __MODULESCORES_H__
 
 #include "Module.h"
+#include "Globals.h"
+
+#include "SDL_mixer/include/SDL_mixer.h"
 
 struct SDL_Texture;
 

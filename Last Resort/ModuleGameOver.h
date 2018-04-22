@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "Globals.h"
 
+#include "SDL_mixer/include/SDL_mixer.h"
+
+
 struct SDL_Texture;
 
 class ModuleGameOver : public Module

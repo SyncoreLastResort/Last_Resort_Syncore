@@ -66,6 +66,7 @@ bool Application::Init()
 	enemies->Disable();
 	gameover->Disable();
 	stageclear->Disable();
+	scores->Disable();
 	congrats->Disable();
 	level2->Disable();
 	level1->Disable();
