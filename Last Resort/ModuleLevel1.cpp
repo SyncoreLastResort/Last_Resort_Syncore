@@ -99,7 +99,7 @@ bool ModuleLevel1::Start()
 	maintracklvl1 = App->audio->LoadMusic("assets/music/2. Jack to the metro (Stage 1).ogg");
 
 	bossmusic = App->audio->LoadMusic("assets/music/3.Vice (Boss).ogg");
-	powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");
+	/*powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");*/
 
 	// Enemies ---
 
@@ -277,7 +277,14 @@ update_status ModuleLevel1::Update()
 		scrollback += 1.5;
 	}
 */
-	if (App->player->p1dead == true && App->player2->p2dead == true)
+	if (App->player2->IsEnabled() == false && App->player->p1dead==true && App->player->current_animation->Finished()==true)
+	{
+		Mix_FadeOutMusic(1000);
+		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
+		App->player->Disable();
+	}
+
+	if (App->player->p1dead == true && App->player2->p2dead == true && App->player2->IsEnabled()==true && App->player->current_animation->Finished() == true && App->player2->current_animation->Finished()==true)
 	{
 		Mix_FadeOutMusic(1000);
 		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
@@ -324,6 +331,7 @@ update_status ModuleLevel1::Update()
 	scrollmid -= 0.25;
 	scrollback -= 0.15;
 
+	
 
 	if (App->input->keyboard[SDL_SCANCODE_F4] == 1)
 	{

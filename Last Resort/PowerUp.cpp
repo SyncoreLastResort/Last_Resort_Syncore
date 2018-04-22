@@ -20,3 +20,9 @@ Power_Up::Power_Up(int x, int y) : Enemy(x, y)
 	original_y = y;
 }
 
+
+void Power_Up::Move()
+{
+
+	position.x -= 1;
+}

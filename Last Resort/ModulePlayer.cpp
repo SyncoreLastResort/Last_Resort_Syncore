@@ -270,9 +270,10 @@ void ModulePlayer::OnCollision(Collider * col_1, Collider * col_2)
 		{
 			if (col_1->type != COLLIDER_POWERUP && col_2->type!=COLLIDER_POWERUP)
 			{
-				p1dead = true;
+			
 				if (current_animation != &death)
 				{
+					p1dead = true;
 					App->audio->PlaySoundEffect(deathsound);
 					current_animation = &death;
 				}

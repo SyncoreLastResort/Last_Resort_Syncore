@@ -15,7 +15,7 @@ public:
 
 	Power_Up(int x, int y);
 
-	/*void Move();*/
+	void Move();
 };
 
 #endif // __POWERUP_H__

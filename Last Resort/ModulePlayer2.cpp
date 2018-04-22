@@ -227,9 +227,10 @@ void ModulePlayer2::OnCollision(Collider * col_1, Collider * col_2)
 	{
 		if ((col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL || col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT|| col_1->type == COLLIDER_BOSS || col_2->type == COLLIDER_BOSS || col_1->type == COLLIDER_BOSS_SHOT || col_2->type == COLLIDER_BOSS_SHOT))
 		{
-			p2dead = true;
+		
 			if (current_animation != &death)
 			{
+				p2dead = true;
 				App->audio->PlaySoundEffect(App->player->deathsound);
 				current_animation = &death;
 
