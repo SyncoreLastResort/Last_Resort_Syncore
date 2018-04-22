@@ -151,10 +151,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_BOSS_SHOT][COLLIDER_BOSS_SHOT] = false;
 	matrix[COLLIDER_BOSS_SHOT][COLLIDER_POWERUP] = false;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 65fccacc02f79218802265900443484c93c19d10
 	matrix[COLLIDER_POWERUP][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_POWERUP][COLLIDER_PLAYER2] = true;
 	matrix[COLLIDER_POWERUP][COLLIDER_PLAYER_SHOT] = false;
@@ -167,11 +164,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_POWERUP][COLLIDER_BALL] = false;
 	matrix[COLLIDER_POWERUP][COLLIDER_BALL2] = false;
 	matrix[COLLIDER_POWERUP][COLLIDER_POWERUP] = false;
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 65fccacc02f79218802265900443484c93c19d10
 }
 
 // Destructor

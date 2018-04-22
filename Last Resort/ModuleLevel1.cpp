@@ -100,12 +100,14 @@ bool ModuleLevel1::Start()
 	maintracklvl1 = App->audio->LoadMusic("assets/music/2. Jack to the metro (Stage 1).ogg");
 
 	bossmusic = App->audio->LoadMusic("assets/music/3.Vice (Boss).ogg");
-	powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");
+	/*powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");*/
 
 	// Enemies ---
 
 	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP, 200, 50);
 	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP_BOMB, 200, 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP, 3000, 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP_BOMB, 3000, 100);
 
 	//Wasp Wave 1
 
@@ -279,6 +281,7 @@ update_status ModuleLevel1::Update()
 		scrollback += 1.5;
 	}
 */
+<<<<<<< HEAD
 	if (SDL_GetTicks() - startime > 120000 && SDL_GetTicks() - startime <120020)
 	{
 		App->audio->StopAudio();
@@ -287,6 +290,16 @@ update_status ModuleLevel1::Update()
 	}
 
 	if (App->player->p1dead == true && App->player2->p2dead == true)
+=======
+	if (App->player2->IsEnabled() == false && App->player->p1dead==true && App->player->current_animation->Finished()==true)
+	{
+		Mix_FadeOutMusic(1000);
+		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
+		App->player->Disable();
+	}
+
+	if (App->player->p1dead == true && App->player2->p2dead == true && App->player2->IsEnabled()==true && App->player->current_animation->Finished() == true && App->player2->current_animation->Finished()==true)
+>>>>>>> 17164dd707c7f8157c5034d701588b0753533525
 	{
 		Mix_FadeOutMusic(1000);
 		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
@@ -335,6 +348,7 @@ update_status ModuleLevel1::Update()
 	scrollmid -= 0.25;
 	scrollback -= 0.15;
 
+	
 
 	if (App->input->keyboard[SDL_SCANCODE_F4] == 1)
 	{
