@@ -68,7 +68,7 @@ public:
 	Particle ball2_shot;
 	Particle ball_shot_explosion;
 	Particle laser_beam;
-	Particle laser_cannon;
+	Particle bomb;
 
 };
 

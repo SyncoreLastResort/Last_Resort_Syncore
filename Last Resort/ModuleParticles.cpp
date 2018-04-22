@@ -11,14 +11,24 @@
 
 ModuleParticles::ModuleParticles()
 {
+	
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
 
 
+	bomb.anim.PushBack({0,303,16,16});
+	bomb.anim.PushBack({ 16,303,16,16 });
+	bomb.anim.PushBack({ 32,303,16,16 });
+	bomb.anim.speed = 0.1;
+	bomb.anim.loop = false;
+	bomb.life = 2000;
+	bomb.speed = { 1,2 };
+
 	//Laser beam
-	laser_beam.anim.PushBack({ 47, 245, 16,2 });
+	laser_beam.anim.PushBack({ 47, 245, 16,3 });
 	laser_beam.anim.loop = true;
 	laser_beam.speed = { 6,0 };
+	laser_beam.life = 2000;
 	
 	//ball trail
 	ball_trail.anim.PushBack({ 251,1,32,32 });
@@ -51,6 +61,7 @@ ModuleParticles::ModuleParticles()
 	for (int i = 0; i < 7; ++i)
 		ball_shot_explosion.anim.PushBack({ 203 + i * 16,371,16,16 });
 	ball_shot_explosion.anim.speed = 1.0f;
+	
 	// Explosion particle
 	explosion.anim.PushBack({ 315, 371, 16, 16 });
 	explosion.anim.PushBack({ 331, 371, 16, 16 });
@@ -133,6 +144,7 @@ ModuleParticles::ModuleParticles()
 	enemy_explosion.speed.x = -0.5;
 	enemy_explosion.anim.loop = false;
 
+
 }
 
 ModuleParticles::~ModuleParticles()
@@ -145,6 +157,7 @@ bool ModuleParticles::Start()
 	//Player sprites && sounds
 	Laserexplosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	laser_beam.texture = Laserexplosion.texture;
+	bomb.texture = Laserexplosion.texture;
 	/*laser.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	explosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");*/
 	laser.texture = Laserexplosion.texture;

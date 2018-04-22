@@ -8,12 +8,14 @@
 
 struct SDL_Texture;
 struct Collider;
+
 enum WEAPON_TYPE
 {
 	LASER_BEAM, 
 	ROCKETS,
 	BASIC
 };
+
 class ModulePlayer : public Module
 {
 public:
@@ -29,7 +31,8 @@ public:
 	
 public:
 	WEAPON_TYPE weapon = BASIC;
-
+	uint wepon_level = 1;
+	
 	iPoint position;
 	//god mode
 	bool godmode = false;
