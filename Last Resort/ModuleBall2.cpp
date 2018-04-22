@@ -64,7 +64,7 @@ bool ModuleBall2::Start()
 	charge_ball_sound = App->audio->LoadSoundEffect("assets/sounds/008.Charging_shot.wav");
 
 	position = { App->player2->position.x + 42, App->player2->position.y };
-	ball2_collider = App->collision->AddCollider({ position.x, position.y, 22, 22 }, COLLIDER_BALL, this);
+	ball2_collider = App->collision->AddCollider({ position.x, position.y, 22, 22 }, COLLIDER_BALL2, this);
 	current_animation = &blueball_0;
 	return true;
 }

@@ -158,7 +158,10 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					App->player->score += 10;
 				if(c1->type == COLLIDER_PLAYER2_SHOT || c2->type == COLLIDER_PLAYER2_SHOT)
 					App->player->score2 += 10;
-				
+				if (c1->type == COLLIDER_BALL || c2->type == COLLIDER_BALL)
+					App->player->score += 10;
+				if (c1->type == COLLIDER_BALL2 || c2->type == COLLIDER_BALL2)
+					App->player->score2 += 10;
 				App->particles->AddParticle(App->particles->enemy_explosion, enemies[i]->position.x, enemies[i]->position.y);
 				delete enemies[i];
 				enemies[i] = nullptr;
