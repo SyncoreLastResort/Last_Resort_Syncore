@@ -14,9 +14,6 @@
 #include "ModuleStageClear.h"
 
 
-
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
-
 ModuleFirstBoss::ModuleFirstBoss()
 {
 	
@@ -125,6 +122,7 @@ bool ModuleFirstBoss::CleanUp()
 		bottom_collider->to_delete = true;
 	return true;
 }
+
 
 // Update: draw background
 update_status ModuleFirstBoss::Update()
