@@ -99,7 +99,8 @@ bool ModulePlayer::Start()
 	deathsound = App->audio->LoadSoundEffect("assets/sounds/005.Death.wav");
 	laser_sound = App->audio->LoadSoundEffect("assets/sounds/013.Laser1_Center.wav");
 	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
-	
+	powerup_sound= App->audio->LoadSoundEffect("assets/sounds/018.Damage_upgrade.wav");
+
 	death.Reset();
 	spawn.Reset();
 	current_animation = &spawn;
@@ -130,6 +131,7 @@ bool ModulePlayer::CleanUp()
 	/*App->fonts->UnLoad(font_score);*/
 	App->audio->UnloadSoundEffect(deathsound);
 	App->audio->UnloadSoundEffect(laser_sound);
+	App->audio->UnloadSoundEffect(powerup_sound);
 	
 	if (playercollider != nullptr)
 		playercollider->to_delete = true;
@@ -242,6 +244,7 @@ update_status ModulePlayer::Update()
 	{
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 	}
+	
 	if (current_animation == &death &&current_animation->Finished())
 	{
 		/*App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);*/
@@ -276,6 +279,8 @@ void ModulePlayer::OnCollision(Collider * col_1, Collider * col_2)
 			}
 		}
 	}
+	if (col_1->type == COLLIDER_POWERUP || col_2->type == COLLIDER_POWERUP)
+		App->audio->PlaySoundEffect(powerup_sound);
 }
 
 void ModulePlayer::Shoot()
@@ -286,7 +291,7 @@ void ModulePlayer::Shoot()
 
 		if (SDL_GetTicks() - weapon_fired)
 		{
-			if (weapon == LASER_BEAM && weapon_level == 3 && SDL_GetTicks() - weapon_fired >= 500)
+			if (weapon == LASER_BEAM && weapon_level == 3 && SDL_GetTicks() - weapon_fired >= 1000)
 			{
 
 				App->audio->PlaySoundEffect(laser_sound);
@@ -303,11 +308,12 @@ void ModulePlayer::Shoot()
 
 			}
 
-			if (weapon == BOMB && weapon_level == 3)
+			if (weapon == BOMB && weapon_level == 3 && SDL_GetTicks() - weapon_fired >= 1000)
 			{
 				App->particles->AddParticle(App->particles->bomb_downwards, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT);
 				App->particles->AddParticle(App->particles->bomb_upwards, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT);
+				weapon_fired = SDL_GetTicks();
 			}
-			weapon_fired = SDL_GetTicks();
+			
 		}
 }

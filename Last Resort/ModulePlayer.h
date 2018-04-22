@@ -34,6 +34,7 @@ public:
 	WEAPON_TYPE weapon = BASIC;
 	uint weapon_level = 1, weapon_fired;
 
+	Mix_Chunk* powerup_sound;
 	
 	iPoint position;
 	//god mode

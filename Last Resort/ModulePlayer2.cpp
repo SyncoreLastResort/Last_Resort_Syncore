@@ -236,6 +236,8 @@ void ModulePlayer2::OnCollision(Collider * col_1, Collider * col_2)
 			}
 		}
 	}
+	if (col_1->type == COLLIDER_POWERUP || col_2->type == COLLIDER_POWERUP)
+		App->audio->PlaySoundEffect(App->player->powerup_sound);
 }
 
 void ModulePlayer2::Shoot()
@@ -245,7 +247,7 @@ void ModulePlayer2::Shoot()
 
 	if (SDL_GetTicks() - App->player->weapon_fired)
 	{
-		if (weapon == LASER_BEAM && weapon_level == 3 && SDL_GetTicks() - weapon_fired >= 500)
+		if (weapon == LASER_BEAM && weapon_level >= 3 && SDL_GetTicks() - weapon_fired >= 1000)
 		{
 
 			App->audio->PlaySoundEffect(App->player->laser_sound);
@@ -262,11 +264,12 @@ void ModulePlayer2::Shoot()
 
 		}
 
-		if (weapon == BOMB && weapon_level == 3)
+		if (weapon == BOMB && weapon_level >= 3 && SDL_GetTicks() - weapon_fired >= 1000)
 		{
 			App->particles->AddParticle(App->particles->bomb_downwards, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT);
 			App->particles->AddParticle(App->particles->bomb_upwards, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT);
+			weapon_fired = SDL_GetTicks();
 		}
-		weapon_fired = SDL_GetTicks();
+		
 	}
 }

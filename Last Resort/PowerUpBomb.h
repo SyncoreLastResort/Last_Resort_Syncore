@@ -2,7 +2,7 @@
 #define __ENEMY_POWERUPBOMB_H__
 
 #include "Enemy.h"
-
+enum WEAPON_TYPE;
 class Power_Up_Bomb : public Enemy
 {
 private:

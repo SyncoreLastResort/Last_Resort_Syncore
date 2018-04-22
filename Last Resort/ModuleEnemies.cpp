@@ -26,7 +26,9 @@ ModuleEnemies::~ModuleEnemies()
 
 bool ModuleEnemies::Start()
 {
+	//powerup_sound = App->audio->LoadSoundEffect("assets/sounds/018.Damage_upgrade.wav");
 	// Create a prototype for each enemy available so we can copy them around
+	
 	sprites = App->textures->Load("assets/sprites/Common_enemyes_Sprite.png");
 	//powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");
 
@@ -35,6 +37,7 @@ bool ModuleEnemies::Start()
 
 update_status ModuleEnemies::PreUpdate()
 {
+	
 	// check camera position to decide what to spawn
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
@@ -197,8 +200,24 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 							App->player->score2 += 5000;
 					}
 
-	
-			    App->particles->AddParticle(App->particles->enemy_explosion, enemies[i]->position.x, enemies[i]->position.y);
+				if(c1->type!=COLLIDER_POWERUP && c2->type!=COLLIDER_POWERUP)
+					App->particles->AddParticle(App->particles->enemy_explosion, enemies[i]->position.x, enemies[i]->position.y);
+				
+				if (c1->type == COLLIDER_POWERUP || c2->type == COLLIDER_POWERUP)
+				{
+					if (c1->type == COLLIDER_PLAYER || c2->type == COLLIDER_PLAYER)
+					{
+						App->player->weapon_level++;
+						App->player->weapon = enemies[i]->weapon_upgraded;
+					}
+
+					if (c1->type == COLLIDER_PLAYER2 || c2->type == COLLIDER_PLAYER2)
+					{
+						App->player2->weapon_level++;
+						App->player2->weapon = enemies[i]->weapon_upgraded;
+					}
+				}
+				
 				delete enemies[i];
 				enemies[i] = nullptr;
 				break;
