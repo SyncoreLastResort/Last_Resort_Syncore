@@ -104,6 +104,12 @@
     <ClInclude Include="ModuleBall2.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleGameOver.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleStageClear.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -179,6 +185,12 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleBall2.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleGameOver.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleStageClear.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

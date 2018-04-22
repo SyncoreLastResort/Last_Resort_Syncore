@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 20
+#define NUM_MODULES 21
 
 class ModuleWindow;
 class ModuleInput;
@@ -13,6 +13,7 @@ class ModuleRender;
 class ModuleParticles;
 class ModuleAudio;
 class ModuleCongrats;
+class ModuleStageClear;
 class ModuleGameOver;
 class ModuleLevel2;
 class ModuleLevel1;
@@ -39,6 +40,7 @@ public:
 	ModuleTextures* textures;
 	ModuleFonts* fonts;
 	ModuleCongrats* congrats;
+	ModuleStageClear* stageclear;
 	ModuleGameOver* gameover;
 	ModuleLevel2* level2;
 	ModuleLevel1* level1;

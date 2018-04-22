@@ -99,6 +99,7 @@
     <ClInclude Include="ModuleRhino.h" />
     <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleLevel1.h" />
+    <ClInclude Include="ModuleStageClear.h" />
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleWasp.h" />
     <ClInclude Include="ModuleWindow.h" />
@@ -129,6 +130,7 @@
     <ClCompile Include="ModuleRhino.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
     <ClCompile Include="ModuleLevel1.cpp" />
+    <ClCompile Include="ModuleStageClear.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleWasp.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
