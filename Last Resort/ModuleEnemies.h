@@ -7,6 +7,7 @@
 #define MAX_ENEMIES 150
 
 
+
 enum ENEMY_TYPES
 {
 	NO_TYPE,
@@ -21,7 +22,7 @@ class Enemy;
 struct EnemyInfo
 {
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
-	int x, y;
+	int x, y; 
 };
 
 class ModuleEnemies : public Module
@@ -45,7 +46,6 @@ private:
 	void SpawnEnemy(const EnemyInfo& info);
 
 private:
-
 	EnemyInfo queue[MAX_ENEMIES];
 	Enemy* enemies[MAX_ENEMIES];
 	SDL_Texture* sprites = nullptr;
