@@ -50,6 +50,7 @@ update_status ModuleGameOver::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_SPACE]) {
 		Mix_FadeOutMusic(1000);
 		App->fade->FadeToBlack(App->gameover, App->scene_intro);
+		App->audio->StopAudio();
 	}
 
 	return UPDATE_CONTINUE;

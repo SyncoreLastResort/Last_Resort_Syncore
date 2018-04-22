@@ -58,7 +58,8 @@ update_status ModuleSceneIntro::Update()
 	if(App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && App->fade->IsFading() == false)
 	{
 		Mix_FadeOutMusic(1000);
-		App->fade->FadeToBlack(this, (Module*)App->level1);
+		App->fade->FadeToBlack(this, (Module*)App->level1); 
+		App->audio->StopAudio();
 	}
 
 	return UPDATE_CONTINUE;

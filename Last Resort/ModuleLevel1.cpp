@@ -81,6 +81,7 @@ bool ModuleLevel1::Start()
 	startime = SDL_GetTicks();
 	App->player->p1dead = false;
 	App->player2->p2dead = false;
+	App->player2->life = 1;
 
 	App->player->Enable();
 	App->enemies->Enable();
