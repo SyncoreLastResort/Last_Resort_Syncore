@@ -6,8 +6,8 @@ Power_Up::Power_Up(int x, int y) : Enemy(x, y)
 {
 
 	//Powe up animation
-	Powerup.PushBack({ 18,64,31,16 });
-	Powerup.PushBack({ 49,64,31,16 });
+	Powerup.PushBack({ 33,188,31,16 });
+	Powerup.PushBack({ 33,204,31,16 });
 	Powerup.loop = true;
 	Powerup.speed = 0.05f;
 

@@ -27,7 +27,7 @@ bool ModuleEnemies::Start()
 {
 	// Create a prototype for each enemy available so we can copy them around
 	sprites = App->textures->Load("assets/sprites/Common_enemyes_Sprite.png");
-	powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");
+	//powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");
 
 	return true;
 }
@@ -168,31 +168,36 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			
 			else
 			{
-				if (c1->type != COLLIDER_BOSS)
+				if (c1->type != POWER_UP)
 				{
-					if (c1->type == COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_PLAYER_SHOT)
-						App->player->score += enemies[i]->score;
-					if (c1->type == COLLIDER_PLAYER2_SHOT || c2->type == COLLIDER_PLAYER2_SHOT)
-						App->player->score2 += enemies[i]->score;
-					if (c1->type == COLLIDER_BALL || c2->type == COLLIDER_BALL)
-						App->player->score += enemies[i]->score;
-					if (c1->type == COLLIDER_BALL2 || c2->type == COLLIDER_BALL2)
-						App->player->score2 += enemies[i]->score;
-				}
+					if (c1->type != COLLIDER_BOSS)
+					{
+						if (c1->type == COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_PLAYER_SHOT)
+							App->player->score += enemies[i]->score;
+						if (c1->type == COLLIDER_PLAYER2_SHOT || c2->type == COLLIDER_PLAYER2_SHOT)
+							App->player->score2 += enemies[i]->score;
+						if (c1->type == COLLIDER_BALL || c2->type == COLLIDER_BALL)
+							App->player->score += enemies[i]->score;
+						if (c1->type == COLLIDER_BALL2 || c2->type == COLLIDER_BALL2)
+							App->player->score2 += enemies[i]->score;
+					}
 
-				else 
-				{
-					if (c1->type == COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_PLAYER_SHOT)
-						App->player->score += 5000;
-					if (c1->type == COLLIDER_PLAYER2_SHOT || c2->type == COLLIDER_PLAYER2_SHOT)
-						App->player->score2 += 5000;
-					if (c1->type == COLLIDER_BALL || c2->type == COLLIDER_BALL)
-						App->player->score += 5000;
-					if (c1->type == COLLIDER_BALL2 || c2->type == COLLIDER_BALL2)
-						App->player->score2 += 5000;
+					else
+					{
+						if (c1->type == COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_PLAYER_SHOT)
+							App->player->score += 5000;
+						if (c1->type == COLLIDER_PLAYER2_SHOT || c2->type == COLLIDER_PLAYER2_SHOT)
+							App->player->score2 += 5000;
+						if (c1->type == COLLIDER_BALL || c2->type == COLLIDER_BALL)
+							App->player->score += 5000;
+						if (c1->type == COLLIDER_BALL2 || c2->type == COLLIDER_BALL2)
+							App->player->score2 += 5000;
+					}
+
+
+					App->particles->AddParticle(App->particles->enemy_explosion, enemies[i]->position.x, enemies[i]->position.y);
 				}
-			
-				App->particles->AddParticle(App->particles->enemy_explosion, enemies[i]->position.x, enemies[i]->position.y);
+					
 				delete enemies[i];
 				enemies[i] = nullptr;
 				break;

@@ -26,5 +26,5 @@ Enemy_Wasp::Enemy_Wasp(int x, int y) : Enemy(x, y)
 void Enemy_Wasp::Move()
 {
 	
-	position.x -= 1.5;
+	position.x -= 2;
 }
