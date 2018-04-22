@@ -24,6 +24,8 @@ private:
 	void ModuleFirstBoss::Shot();
 	void ModuleFirstBoss::Act();
 	void ModuleFirstBoss::Body_attack();
+	void ModuleFirstBoss::Deatheffects();
+	void ModuleFirstBoss:: Die();
 
 public:
 	bool vulnerable = false; //if the eye is opened, this is true and the enemy can get damaged
@@ -32,8 +34,8 @@ public:
 		BODY, 
 		NONE
 	};
-
-	uint life = 50;
+	Mix_Chunk* boss_explosion_sound=nullptr;
+	uint life = 3;
 	Collider * body_collider = nullptr;
 	Collider * arm_collider = nullptr;
 	Collider * head_collider = nullptr;
@@ -52,8 +54,10 @@ public:
 	Animation eye_closing;
 	Animation eye_closed;
 	Animation * current_eye = nullptr;
+	
 private:
-	bool attack_with_body = false,forward = true, backward = false; // booleans for the body attack;
+	uint deathtime=0;
+	bool attack_with_body = false,forward = true, backward = false, boss_dead=false; // booleans for the body attack;
 
 
 };

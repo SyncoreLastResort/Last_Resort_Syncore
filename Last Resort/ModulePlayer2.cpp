@@ -94,7 +94,7 @@ bool ModulePlayer2::Start()
 	death.Reset();
 	spawn.Reset();
 	current_animation = &spawn;
-	player2collider = App->collision->AddCollider({ position.x,position.y,32,14 }, COLLIDER_PLAYER, this);
+	player2collider = App->collision->AddCollider({ position.x,position.y,32,14 }, COLLIDER_PLAYER2, this);
 	App->player->score2 = 0;
 
 	App->player->font_2 = App->player->font_score;
@@ -223,7 +223,7 @@ void ModulePlayer2::OnCollision(Collider * col_1, Collider * col_2)
 {
 	if (!App->player->godmode)
 	{
-		if ((col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL || col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT|| col_1->type == COLLIDER_BOSS || col_2->type == COLLIDER_BOSS))
+		if ((col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL || col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT|| col_1->type == COLLIDER_BOSS || col_2->type == COLLIDER_BOSS || col_1->type == COLLIDER_BOSS_SHOT || col_2->type == COLLIDER_BOSS_SHOT))
 		{
 			if (current_animation != &death)
 			{

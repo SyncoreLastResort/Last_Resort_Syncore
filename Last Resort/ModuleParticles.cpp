@@ -13,7 +13,14 @@ ModuleParticles::ModuleParticles()
 {
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
+
+
+	//Laser beam
+	laser_beam.anim.PushBack({ 47, 245, 16,2 });
+	laser_beam.anim.loop = true;
+	laser_beam.speed = { 6,0 };
 	
+	//ball trail
 	ball_trail.anim.PushBack({ 251,1,32,32 });
 	ball_trail.anim.PushBack({ 283,1,32,32 });
 	ball_trail.anim.PushBack({ 315,1,32,32 });
@@ -29,6 +36,7 @@ ModuleParticles::ModuleParticles()
 	ball_shot.anim.speed = 0.5f;
 	ball_shot.speed = { 0,0 };
 	ball_shot.life = 2000;
+	ball_shot.end_particle = &ball_shot_explosion;
 
 	//Ball2 green shot
 	ball2_shot.anim.PushBack({ 103,252,13, 13 });
@@ -37,7 +45,12 @@ ModuleParticles::ModuleParticles()
 	ball2_shot.anim.speed = 0.5f;
 	ball2_shot.speed = { 0,0 };
 	ball2_shot.life = 2000;
+	ball2_shot.end_particle = &ball_shot_explosion;
 
+	//green shot explosion
+	for (int i = 0; i < 7; ++i)
+		ball_shot_explosion.anim.PushBack({ 203 + i * 16,371,16,16 });
+	ball_shot_explosion.anim.speed = 1.0f;
 	// Explosion particle
 	explosion.anim.PushBack({ 315, 371, 16, 16 });
 	explosion.anim.PushBack({ 331, 371, 16, 16 });
@@ -63,7 +76,24 @@ ModuleParticles::ModuleParticles()
 	laser.speed.x = 7;
 	laser.speed.y = 0;
 	laser.life = 1000;
+	laser.end_particle = &explosion;
 	
+	boss_dying.anim.PushBack({ 286, 347, 16, 16 });
+	boss_dying.anim.PushBack({ 302, 347, 22, 22 });
+	boss_dying.anim.PushBack({ 324, 347, 27, 27 });
+	boss_dying.anim.PushBack({ 351, 347, 28, 28 });
+	boss_dying.anim.PushBack({ 379, 347, 34, 34 });
+	boss_dying.anim.PushBack({ 413, 347, 34, 34 });
+	boss_dying.anim.PushBack({ 447, 347, 34, 34 });
+	boss_dying.anim.PushBack({ 0, 396, 34, 34 });
+	boss_dying.anim.PushBack({ 34, 396, 34, 34 });
+	boss_dying.anim.PushBack({ 68, 396, 34, 34 });
+	boss_dying.anim.PushBack({ 102, 396, 34, 34 });
+	boss_dying.anim.PushBack({ 136, 396, 34, 34 });
+	boss_dying.anim.speed = 0.7;
+	boss_dying.speed.x = -0.5;
+	boss_dying.anim.loop = false;
+
 	boss_shot.anim.PushBack({256,256, 63, 32});
 	boss_shot.anim.PushBack({ 319,256, 63, 32 });
 	boss_shot.anim.speed = 0.1;
@@ -114,7 +144,7 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	//Player sprites && sounds
 	Laserexplosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
-
+	laser_beam.texture = Laserexplosion.texture;
 	/*laser.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	explosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");*/
 	laser.texture = Laserexplosion.texture;
@@ -126,11 +156,12 @@ bool ModuleParticles::Start()
 	/*ball_shot.texture= App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");*/
 	ball_shot.texture = Laserexplosion.texture;
 	ball2_shot.texture = Laserexplosion.texture;
+	ball_shot_explosion.texture= Laserexplosion.texture;
 
 	//Boss 1 sprites && sounds
 	boss_shot.sound = App->audio->LoadSoundEffect("assets/sounds/025.Boss_shot.wav");
 	boss_shot.texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
-
+	
 	/*boss_explosion.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
 	boss_cooling.texture= App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");*/
 
@@ -140,7 +171,8 @@ bool ModuleParticles::Start()
 	//Enemy sprites && sounds
 	enemy_explosion.texture = App->textures->Load("assets/sprites/BossWeapons&parts_EnemyShip&structure_Multiple-effects-and-explosions.png");
 	enemy_explosion.sound = App->audio->LoadSoundEffect("assets/sounds/006.Explosion1_center.wav");
-
+	boss_dying.texture = enemy_explosion.texture;
+	
 	//Ball trail particles
 	ball_trail.texture = App->textures->Load("assets/sprites/Ball_aditional_effects.png");
 	return true;
@@ -223,9 +255,10 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if(active[i] != nullptr && active[i]->collider == c1)
 		{
-			//if(c2->type==COLLIDER_WALL || c1->type==COLLIDER_WALL || c2->type == COLLIDER_ENEMY || c1->type == COLLIDER_ENEMY)
-			App->particles->AddParticle(explosion,  active[i]->position.x, active[i]->position.y-4);
-
+			if (active[i]->end_particle != nullptr) 
+			{
+				AddParticle(*active[i]->end_particle, active[i]->position.x, active[i]->position.y);		
+			}
 			delete active[i];
 			active[i] = nullptr;
 			break;
@@ -245,7 +278,7 @@ Particle::Particle()
 }
 
 Particle::Particle(const Particle& p) : 
-anim(p.anim), position(p.position), speed(p.speed),
+anim(p.anim), position(p.position), speed(p.speed), end_particle(p.end_particle),
 fx(p.fx), born(p.born), life(p.life)
 {}
 

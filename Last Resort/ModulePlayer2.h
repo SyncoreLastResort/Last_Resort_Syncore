@@ -16,9 +16,11 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	void ModulePlayer2::Shoot();
 	void OnCollision(Collider* col_1, Collider* col_2) override;
 
 public:
+	WEAPON_TYPE weapon = BASIC;
 	int speed = 2;
 	Animation spawn;
 	Animation death;

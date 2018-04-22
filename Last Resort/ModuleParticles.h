@@ -9,7 +9,7 @@
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
 
-#define MAX_ACTIVE_PARTICLES 100
+#define MAX_ACTIVE_PARTICLES 150
 
 struct SDL_Texture;
 struct Collider;
@@ -27,6 +27,7 @@ struct Particle
 	bool fx_played = false;
 	SDL_Texture* texture = nullptr;
 	Mix_Chunk* sound = nullptr;
+	Particle* end_particle = nullptr;
 	
 	
 	Particle();
@@ -57,6 +58,7 @@ public:
 	Particle ball_trail;
 	Particle boss_shot;
 	Particle boss_explosion;
+	Particle boss_dying;
 	Particle boss_cooling;
 	Particle explosion;
 	Particle Laserexplosion;
@@ -64,6 +66,9 @@ public:
 	Particle enemy_explosion;
 	Particle ball_shot;
 	Particle ball2_shot;
+	Particle ball_shot_explosion;
+	Particle laser_beam;
+	Particle laser_cannon;
 
 };
 

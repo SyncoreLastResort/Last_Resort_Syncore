@@ -491,7 +491,7 @@ void ModuleBall2::Shoot()
 	else if (current_animation == &blueball_315)
 		App->particles->ball2_shot.speed = { 5,5 };
 
-	App->particles->AddParticle(App->particles->ball2_shot, position.x, position.y, COLLIDER_PLAYER_SHOT);
+	App->particles->AddParticle(App->particles->ball2_shot, position.x, position.y, COLLIDER_PLAYER2_SHOT);
 }
 
 void ModuleBall2::Trail()
