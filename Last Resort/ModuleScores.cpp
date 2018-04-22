@@ -1,15 +1,13 @@
-#include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModuleLevel1.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
 #include "ModulePlayer2.h"
 #include "ModuleAudio.h"
 #include "ModuleSceneIntro.h"
-#include "ModuleCongrats.h"
+#include "ModuleScores.h"
 
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
