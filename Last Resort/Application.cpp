@@ -6,6 +6,7 @@
 #include "ModuleGameOver.h"
 #include "ModuleStageClear.h"
 #include "ModuleCongrats.h"
+#include "ModuleScores.h"
 #include "ModuleLevel2.h"
 #include "ModuleLevel1.h"
 #include "ModuleSceneIntro.h"
@@ -34,6 +35,7 @@ Application::Application()
 	modules[i++] = level1 = new ModuleLevel1();
 	modules[i++] = level2 = new ModuleLevel2();
 	modules[i++] = congrats = new ModuleCongrats();
+	modules[i++] = scores = new ModuleScores();
 	modules[i++] = stageclear = new ModuleStageClear();
 	modules[i++] = gameover = new ModuleGameOver();
 	modules[i++] = enemies = new ModuleEnemies();
