@@ -21,7 +21,7 @@ ModuleParticles::ModuleParticles()
 	bomb_downwards.anim.PushBack({ 32,303,16,16 });
 	bomb_downwards.anim.speed = 0.1;
 	bomb_downwards.anim.loop = false;
-	bomb_downwards.life = 2000;
+	bomb_downwards.life = 1750;
 	bomb_downwards.speed = { 1,2 };
 
 	bomb_upwards.anim.PushBack({ 0,303,16,16 });
@@ -29,14 +29,14 @@ ModuleParticles::ModuleParticles()
 	bomb_upwards.anim.PushBack({ 63,303,16,16 });
 	bomb_upwards.anim.speed = 0.1;
 	bomb_upwards.anim.loop = false;
-	bomb_upwards.life = 2000;
+	bomb_upwards.life = 1750;
 	bomb_upwards.speed = { 1,-2 };
 
 	//Laser beam
 	laser_beam.anim.PushBack({ 47, 245, 16,3 });
 	laser_beam.anim.loop = true;
 	laser_beam.speed = { 6,0 };
-	laser_beam.life = 2000;
+	laser_beam.life = 1000;
 	
 	//ball trail
 	ball_trail.anim.PushBack({ 251,1,32,32 });
@@ -53,7 +53,7 @@ ModuleParticles::ModuleParticles()
 	ball_shot.anim.loop = true;
 	ball_shot.anim.speed = 0.5f;
 	ball_shot.speed = { 0,0 };
-	ball_shot.life = 2000;
+	ball_shot.life = 650;
 	ball_shot.end_particle = &ball_shot_explosion;
 
 	//Ball2 green shot
@@ -62,7 +62,7 @@ ModuleParticles::ModuleParticles()
 	ball2_shot.anim.loop = true;
 	ball2_shot.anim.speed = 0.5f;
 	ball2_shot.speed = { 0,0 };
-	ball2_shot.life = 2000;
+	ball2_shot.life = 650;
 	ball2_shot.end_particle = &ball_shot_explosion;
 
 	//green shot explosion
@@ -94,7 +94,7 @@ ModuleParticles::ModuleParticles()
 	laser.anim.speed = 0.1f;
 	laser.speed.x = 7;
 	laser.speed.y = 0;
-	laser.life = 1000;
+	laser.life = 650;
 	laser.end_particle = &explosion;
 	
 	boss_dying.anim.PushBack({ 286, 347, 16, 16 });
