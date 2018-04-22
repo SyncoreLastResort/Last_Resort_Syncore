@@ -107,6 +107,9 @@
     <ClInclude Include="ModuleScores.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="PowerUp.h">
+      <Filter>Modules\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -186,6 +189,9 @@
     </ClCompile>
     <ClCompile Include="ModuleScores.cpp">
       <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerUp.cpp">
+      <Filter>Modules\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

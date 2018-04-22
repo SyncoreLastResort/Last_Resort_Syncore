@@ -43,6 +43,9 @@ ModuleLevel1::ModuleLevel1()
 	bossplace.w = SCREEN_WIDTH;
 	bossplace.h = SCREEN_HEIGHT;
 
+	//Power up place
+	/*powerupplace.x=*/
+
 	thick_lights.PushBack({ 133,2,25,144 });
 	thick_lights.PushBack({ 158,2,38,144 }); // From left to right
 	thick_lights.PushBack({ 196,2,52,144 }); // From left to right
@@ -58,6 +61,12 @@ ModuleLevel1::ModuleLevel1()
 	thick_lights.PushBack({ 196,2,52,144 }); //From right to left
 	thick_lights.PushBack({ 158,2,38,144 }); //From right to left
 	thick_lights.speed = 0.15f;
+
+	////Powe up animation
+	//Power_Up.PushBack({ 18,64,31,16 });
+	//Power_Up.PushBack({ 49,64,31,16 });
+	//Power_Up.loop = true;
+	//Power_Up.speed = 0.05f;
 
 	
 }
@@ -85,9 +94,12 @@ bool ModuleLevel1::Start()
 	road = App->textures->Load("assets/sprites/Road&Tunnel_Background.png");
 	bossimg = App->textures->Load("assets/sprites/Boss_Static_Background.png");
 	maintracklvl1 = App->audio->LoadMusic("assets/music/2. Jack to the metro (Stage 1).ogg");
-	powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");
+	/*powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");*/
 	
+
 	// Enemies ---
+
+	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP, 100, 50);
 
 	//Wasp Wave 1
 
@@ -216,7 +228,7 @@ bool ModuleLevel1::CleanUp()
 	App->textures->Unload(midbackground);
 	App->textures->Unload(road);
 	App->textures->Unload(bossimg);
-	
+	//App->textures->Unload(powerups);
 	
 	
 	App->audio->StopAudio();
@@ -281,6 +293,8 @@ update_status ModuleLevel1::Update()
 	App->render->Blit(background_lights, scroll_lights, -2, &thick_lights.GetCurrentFrame(), 0.75f);
 	App->render->Blit(midbackground, scrollmid, 32, &midback, 0.75f); // mid background
 	App->render->Blit(road, scrollground, 0, &ground); //road & tunnel
+
+	/*App->render->Blit(powerups, 0, 0, &powerupplace);*/
 
 	
 	App->audio->PlayMusic(maintracklvl1, ONCE);
