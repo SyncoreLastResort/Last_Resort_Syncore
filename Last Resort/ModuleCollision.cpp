@@ -151,7 +151,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_BOSS_SHOT][COLLIDER_BOSS_SHOT] = false;
 	matrix[COLLIDER_BOSS_SHOT][COLLIDER_POWERUP] = false;
 
-	/*matrix[COLLIDER_POWERUP][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_POWERUP][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_POWERUP][COLLIDER_PLAYER2] = true;
 	matrix[COLLIDER_POWERUP][COLLIDER_PLAYER_SHOT] = false;
 	matrix[COLLIDER_POWERUP][COLLIDER_PLAYER2_SHOT] = false;
@@ -162,7 +162,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_POWERUP][COLLIDER_WALL] = false;
 	matrix[COLLIDER_POWERUP][COLLIDER_BALL] = false;
 	matrix[COLLIDER_POWERUP][COLLIDER_BALL2] = false;
-	matrix[COLLIDER_POWERUP][COLLIDER_POWERUP] = false;*/
+	matrix[COLLIDER_POWERUP][COLLIDER_POWERUP] = false;
 
 
 }

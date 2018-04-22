@@ -244,7 +244,7 @@ update_status ModulePlayer::Update()
 	}
 	if (current_animation == &death &&current_animation->Finished())
 	{
-		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
+		/*App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);*/
 		App->player->Disable();
 	}
 
@@ -267,6 +267,7 @@ void ModulePlayer::OnCollision(Collider * col_1, Collider * col_2)
 		{
 			if (col_1->type != COLLIDER_POWERUP && col_2->type!=COLLIDER_POWERUP)
 			{
+				p1dead = true;
 				if (current_animation != &death)
 				{
 					App->audio->PlaySoundEffect(deathsound);

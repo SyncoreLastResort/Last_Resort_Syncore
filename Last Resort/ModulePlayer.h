@@ -22,6 +22,7 @@ public:
 	ModulePlayer();
 	~ModulePlayer();
 
+	bool p1dead = false;
 	bool Start();
 	update_status Update();
 	bool CleanUp();

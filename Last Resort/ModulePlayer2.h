@@ -20,6 +20,9 @@ public:
 	void OnCollision(Collider* col_1, Collider* col_2) override;
 
 public:
+
+	uint life = 1;
+	bool p2dead = false;
 	WEAPON_TYPE weapon = BASIC;
 	uint weapon_level=1, weapon_fired;
 	int speed = 2;

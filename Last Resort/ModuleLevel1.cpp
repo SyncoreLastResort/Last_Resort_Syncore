@@ -79,6 +79,9 @@ bool ModuleLevel1::Start()
 {
 	LOG("Loading level1 scene");
 
+	App->player->p1dead = false;
+	App->player2->p2dead = false;
+
 	App->player->Enable();
 	App->enemies->Enable();
 	App->boss1->Enable();
@@ -258,7 +261,8 @@ update_status ModuleLevel1::Update()
 		App->boss1->Enable();*/
 
 	// Utility conditions, used to move forward or backwards at high speed
-	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_REPEAT)
+
+	/*if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_REPEAT)
 	{
 		scroll_lights -= 2.5;
 		scrollground -= 5.5;
@@ -272,18 +276,32 @@ update_status ModuleLevel1::Update()
 		scrollmid += 2.5;
 		scrollback += 1.5;
 	}
-
-	if (App->input->keyboard[SDL_SCANCODE_F] == 1)
+*/
+	if (App->player->p1dead == true && App->player2->p2dead == true)
 	{
 		Mix_FadeOutMusic(1000);
-		App->fade->FadeToBlack(App->level1, App->stageclear);
+		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->scene_intro);
+		App->player->Disable();
+		App->player2->Disable();
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
 		Mix_FadeOutMusic(1000);
-		App->fade->FadeToBlack(App->level1, App->stageclear);
+		App->fade->FadeToBlack(this, App->stageclear);
 	}
+
+	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
+	{
+		Mix_FadeOutMusic(1000);
+		App->fade->FadeToBlack(this, App->gameover);
+	}
+	//if (App->input->keyboard[SDL_SCANCODE_F] == 1)
+	//{
+	//	Mix_FadeOutMusic(1000);
+	//	App->fade->FadeToBlack(App->level1, App->stageclear);
+	//}
+
 	
 	/*App->player->position.x += 1;
 	App->render->camera.x -= 3;
@@ -307,9 +325,13 @@ update_status ModuleLevel1::Update()
 	scrollback -= 0.15;
 
 
-	if (App->input->keyboard[SDL_SCANCODE_2] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_F4] == 1)
 	{
-		App->player2->Enable();
+		if (App->player2->life != 0)
+		{
+			App->player2->Enable();
+			App->player2->life -= 1;
+		}
 	}
 	
 	return UPDATE_CONTINUE;
