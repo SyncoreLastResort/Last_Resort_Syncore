@@ -64,12 +64,12 @@ update_status ModuleScores::Update()
 	}
 
 	// Draw UI (score) --------------------------------------
-	if (App->player->score > App->player->score2)
+	if (App->player->score >= App->player2->score2)
 	{
 		sprintf_s(score_text, 10, "%7d", App->player->score);
-		sprintf_s(score_text2, 10, "%7d", App->player->score2);
+		sprintf_s(score_text2, 10, "%7d", App->player2->score2);
 		
-		SumofScores = App->player->score + App->player->score2;
+		SumofScores = App->player->score + App->player2->score2;
 
 		sprintf_s(scoresum_text, 10, "%7d", SumofScores);
 
@@ -82,13 +82,13 @@ update_status ModuleScores::Update()
 		App->fonts->BlitText(SCREEN_WIDTH - 122, 66, App->player->font_score, "PLAYER2");
 
 		App->fonts->BlitText(SCREEN_WIDTH -260, SCREEN_HEIGHT-10,  App->player->font_score, "SUM OF SCORES");
-		App->fonts->BlitText(SCREEN_WIDTH - 180, SCREEN_HEIGHT - 10, font_scorenums, scoresum_text);
+		App->fonts->BlitText(SCREEN_WIDTH - 150, SCREEN_HEIGHT - 10, font_scorenums, scoresum_text);
 	}
 
 	else
 	{
 		sprintf_s(score_text, 10, "%7d", App->player->score);
-		sprintf_s(score_text2, 10, "%7d", App->player->score2);
+		sprintf_s(score_text2, 10, "%7d", App->player2->score2);
 
 
 		// TODO 3: Blit the text of the score in at the bottom of the screen

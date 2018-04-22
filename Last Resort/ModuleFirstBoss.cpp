@@ -87,6 +87,7 @@ ModuleFirstBoss::~ModuleFirstBoss()
 // Load assets
 bool ModuleFirstBoss::Start()
 {
+	life = 50;
 	attack_with_body = false, forward = true, backward = false, boss_dead = false;
 
 	position = { 400, 60 };

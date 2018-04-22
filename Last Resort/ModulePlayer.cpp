@@ -108,7 +108,6 @@ bool ModulePlayer::Start()
 	position.x = 50;
 	position.y = 100;
 	score = 0;
-	score2 = 0;
 
 	//App->ball_player1->Enable();
 	

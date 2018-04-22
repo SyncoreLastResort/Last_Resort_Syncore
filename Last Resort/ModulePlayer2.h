@@ -48,6 +48,10 @@ public:
 	//Texture
 	SDL_Texture* graphics = nullptr;
 
+	int font_2 = -1;
+	char score_text2[10];
+	uint score2 = 0;
+
 
 };
 

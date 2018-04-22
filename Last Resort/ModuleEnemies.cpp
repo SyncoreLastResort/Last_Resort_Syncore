@@ -181,11 +181,11 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 						if (c1->type == COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_PLAYER_SHOT)
 							App->player->score += enemies[i]->score;
 						if (c1->type == COLLIDER_PLAYER2_SHOT || c2->type == COLLIDER_PLAYER2_SHOT)
-							App->player->score2 += enemies[i]->score;
+							App->player2->score2 += enemies[i]->score;
 						if (c1->type == COLLIDER_BALL || c2->type == COLLIDER_BALL)
 							App->player->score += enemies[i]->score;
 						if (c1->type == COLLIDER_BALL2 || c2->type == COLLIDER_BALL2)
-							App->player->score2 += enemies[i]->score;
+							App->player2->score2 += enemies[i]->score;
 					}
 
 					else
@@ -193,11 +193,11 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 						if (c1->type == COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_PLAYER_SHOT)
 							App->player->score += 5000;
 						if (c1->type == COLLIDER_PLAYER2_SHOT || c2->type == COLLIDER_PLAYER2_SHOT)
-							App->player->score2 += 5000;
+							App->player2->score2 += 5000;
 						if (c1->type == COLLIDER_BALL || c2->type == COLLIDER_BALL)
 							App->player->score += 5000;
 						if (c1->type == COLLIDER_BALL2 || c2->type == COLLIDER_BALL2)
-							App->player->score2 += 5000;
+							App->player2->score2 += 5000;
 					}
 
 				if(c1->type!=COLLIDER_POWERUP && c2->type!=COLLIDER_POWERUP)

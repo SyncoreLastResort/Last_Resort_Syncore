@@ -46,12 +46,12 @@ public:
 	int speed = 2;
 	//Fonts
 	int font_score = -1;
-	int font_2 = -1;
+	/*int font_2 = -1;*/
 	char score_text[10];
-	char score_text2[10];
+	/*char score_text2[10];*/
 	uint score = 0;
-	uint score2 = 0;
-	uint fontt2 = 0;
+	/*uint score2 = 0;*/
+	/*uint fontt2 = 0;*/
 
 	//Collider
 	Collider * playercollider;
