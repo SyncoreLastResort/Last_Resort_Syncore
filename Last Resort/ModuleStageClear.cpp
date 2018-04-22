@@ -24,7 +24,7 @@ bool ModuleStageClear::Start() {
 
 
 	graphics = App->textures->Load("assets/sprites/All_Stage_Clears.png");
-	stageclear_Sound = App->audio->LoadMusic("assets/audio/Stage_Clear.ogg");
+	stageclear_Sound = App->audio->LoadMusic("assets/music/Stage_Clear.ogg");
 
 	App->audio->PlayMusic(stageclear_Sound, ONCE);
 	return true;
@@ -41,7 +41,7 @@ bool ModuleStageClear::CleanUp() {
 update_status ModuleStageClear::Update() {
 
 	//Draw everything
-	App->render->Blit(graphics, SCREEN_WIDTH/2, (SCREEN_HEIGHT / 2), &graphicsrect, 0.0f);
+	App->render->Blit(graphics, SCREEN_WIDTH/6, (SCREEN_HEIGHT / 2), &graphicsrect, 0.0f);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE]) {
 		App->fade->FadeToBlack(App->stageclear, App->scene_intro);
