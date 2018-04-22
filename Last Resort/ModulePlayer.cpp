@@ -292,7 +292,7 @@ void ModulePlayer::Shoot()
 
 		if (SDL_GetTicks() - weapon_fired)
 		{
-			if (weapon == LASER_BEAM && weapon_level == 3 && SDL_GetTicks() - weapon_fired >= 1000)
+			if (weapon == LASER_BEAM && weapon_level >= 3 && SDL_GetTicks() - weapon_fired >= 1000)
 			{
 
 				App->audio->PlaySoundEffect(laser_sound);
@@ -309,7 +309,7 @@ void ModulePlayer::Shoot()
 
 			}
 
-			if (weapon == BOMB && weapon_level == 3 && SDL_GetTicks() - weapon_fired >= 1000)
+			if (weapon == BOMB && weapon_level >= 3 && SDL_GetTicks() - weapon_fired >= 1000)
 			{
 				App->particles->AddParticle(App->particles->bomb_downwards, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT);
 				App->particles->AddParticle(App->particles->bomb_upwards, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT);
