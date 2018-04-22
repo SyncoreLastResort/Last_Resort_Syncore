@@ -16,6 +16,7 @@ protected:
 public:
 	fPoint position;
 	float life;
+	uint score;
 
 public:
 	Enemy(int x, int y);

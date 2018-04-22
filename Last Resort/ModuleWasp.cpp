@@ -6,6 +6,7 @@ Enemy_Wasp::Enemy_Wasp(int x, int y) : Enemy(x, y)
 {
 
 	life = 1;
+	score = 100;
 
 	fly.PushBack({ 0,178,32,16 });
 	fly.PushBack({ 0, 194, 32, 15 });
