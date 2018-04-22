@@ -90,7 +90,7 @@ ModuleFirstBoss::~ModuleFirstBoss()
 // Load assets
 bool ModuleFirstBoss::Start()
 {
-	position = { 220, 60 };
+	position = { 400, 60 };
 	boss1_texture = App->textures->Load("assets/sprites/Boss_Stage1_Sprites.png");
 	current_head = &Head_Idle;
 	current_eye = &eye_opening;
@@ -110,7 +110,8 @@ bool ModuleFirstBoss::Start()
 bool ModuleFirstBoss::CleanUp()
 {
 	LOG("Unloading boss");
-
+	ready = false;
+	position = { 400, 60 };
 	App->textures->Unload(boss1_texture);
 	if (eye_collider != nullptr)
 		eye_collider->to_delete = true;
@@ -134,7 +135,17 @@ update_status ModuleFirstBoss::Update()
 	arm_collider->SetPos(position.x - 14, position.y + 8);
 	head_collider->SetPos(position.x + 8, position.y - 20);
 	bottom_collider->SetPos(position.x + 21, position.y + 98);
-	if (boss_dead == false)
+	
+	if (ready == false)
+	{
+		position.x -= 1;
+		if (position.x <= 220)
+		{
+			ready = true;
+		}
+	}
+	
+	if (boss_dead == false && ready==true)
 	{
 		Act();
 

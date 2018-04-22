@@ -237,7 +237,7 @@ void ModulePlayer2::Shoot()
 	App->particles->AddParticle(App->particles->Laserexplosion, App->player->position.x + 32, App->player->position.y);
 	App->particles->AddParticle(App->particles->laser, position.x + 35, position.y + 4, COLLIDER_PLAYER_SHOT);
 
-	if (weapon == LASER_BEAM && wepon_level == 3)
+	if (weapon == LASER_BEAM && weapon_level == 3)
 	{
 		App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT);
 		App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 20);
@@ -249,7 +249,7 @@ void ModulePlayer2::Shoot()
 		App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 140);
 	}
 
-	if (weapon == ROCKETS && wepon_level == 3)
+	if (weapon == ROCKETS && weapon_level == 3)
 	{
 
 	}

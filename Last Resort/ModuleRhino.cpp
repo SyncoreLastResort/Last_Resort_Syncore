@@ -6,7 +6,7 @@
 Enemy_Rhino::Enemy_Rhino(int x, int y) : Enemy(x, y)
 {
 
-	score = 300;
+	//score = 300;
 	life = 6;
 
 	movement.PushBack({ 64,211,48,45 });

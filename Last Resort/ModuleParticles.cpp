@@ -16,13 +16,21 @@ ModuleParticles::ModuleParticles()
 		active[i] = nullptr;
 
 
-	bomb.anim.PushBack({0,303,16,16});
-	bomb.anim.PushBack({ 16,303,16,16 });
-	bomb.anim.PushBack({ 32,303,16,16 });
-	bomb.anim.speed = 0.1;
-	bomb.anim.loop = false;
-	bomb.life = 2000;
-	bomb.speed = { 1,2 };
+	bomb_downwards.anim.PushBack({0,303,16,16});
+	bomb_downwards.anim.PushBack({ 16,303,16,16 });
+	bomb_downwards.anim.PushBack({ 32,303,16,16 });
+	bomb_downwards.anim.speed = 0.1;
+	bomb_downwards.anim.loop = false;
+	bomb_downwards.life = 2000;
+	bomb_downwards.speed = { 1,2 };
+
+	bomb_upwards.anim.PushBack({ 0,303,16,16 });
+	bomb_upwards.anim.PushBack({ 47,303,16,16 });
+	bomb_upwards.anim.PushBack({ 63,303,16,16 });
+	bomb_upwards.anim.speed = 0.1;
+	bomb_upwards.anim.loop = false;
+	bomb_upwards.life = 2000;
+	bomb_upwards.speed = { 1,-2 };
 
 	//Laser beam
 	laser_beam.anim.PushBack({ 47, 245, 16,3 });
@@ -157,7 +165,8 @@ bool ModuleParticles::Start()
 	//Player sprites && sounds
 	Laserexplosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	laser_beam.texture = Laserexplosion.texture;
-	bomb.texture = Laserexplosion.texture;
+	bomb_downwards.texture = Laserexplosion.texture;
+	bomb_upwards.texture = Laserexplosion.texture;
 	/*laser.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	explosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");*/
 	laser.texture = Laserexplosion.texture;

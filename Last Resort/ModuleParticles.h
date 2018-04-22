@@ -15,6 +15,7 @@ struct SDL_Texture;
 struct Collider;
 enum COLLIDER_TYPE;
 
+
 struct Particle
 {
 	Collider* collider = nullptr;
@@ -68,7 +69,8 @@ public:
 	Particle ball2_shot;
 	Particle ball_shot_explosion;
 	Particle laser_beam;
-	Particle bomb;
+	Particle bomb_upwards;
+	Particle bomb_downwards;
 
 };
 

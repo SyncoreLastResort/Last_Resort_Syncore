@@ -28,7 +28,7 @@ private:
 	void ModuleFirstBoss:: Die();
 
 public:
-	bool vulnerable = false; //if the eye is opened, this is true and the enemy can get damaged
+	bool vulnerable = false, ready=false; //if the eye is opened, this is true and the enemy can get damaged
 	enum Attack {
 		CANNON, 
 		BODY, 

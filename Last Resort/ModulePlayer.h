@@ -31,7 +31,8 @@ public:
 	
 public:
 	WEAPON_TYPE weapon = BASIC;
-	uint wepon_level = 1;
+	uint weapon_level = 1, weapon_fired;
+
 	
 	iPoint position;
 	//god mode
