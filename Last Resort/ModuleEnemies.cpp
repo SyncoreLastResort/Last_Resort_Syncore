@@ -7,6 +7,7 @@
 #include "Enemy.h"
 #include "ModuleWasp.h"
 #include "ModuleRhino.h"
+#include "PowerUp.h"
 
 
 #define SPAWN_MARGIN 50
@@ -26,6 +27,7 @@ bool ModuleEnemies::Start()
 {
 	// Create a prototype for each enemy available so we can copy them around
 	sprites = App->textures->Load("assets/sprites/Common_enemyes_Sprite.png");
+	powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");
 
 	return true;
 }
@@ -136,6 +138,10 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 
 		case ENEMY_TYPES::RHINO:
 			enemies[i] = new Enemy_Rhino(info.x, info.y);
+			break;
+
+		case ENEMY_TYPES::POWER_UP:
+			enemies[i] = new Power_Up(info.x, info.y);
 			break;
 		}
 		
