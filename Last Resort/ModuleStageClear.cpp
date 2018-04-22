@@ -41,7 +41,7 @@ bool ModuleStageClear::CleanUp() {
 update_status ModuleStageClear::Update() {
 
 	//Draw everything
-	App->render->Blit(graphics, 220, (SCREEN_HEIGHT / 2) - 8, &graphicsrect, 0.0f);
+	App->render->Blit(graphics, SCREEN_WIDTH/2, (SCREEN_HEIGHT / 2), &graphicsrect, 0.0f);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE]) {
 		App->fade->FadeToBlack(App->stageclear, App->scene_intro);

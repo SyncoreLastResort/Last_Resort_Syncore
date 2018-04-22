@@ -187,10 +187,10 @@
     <ClCompile Include="ModuleBall2.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleGameOver.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleStageClear.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleGameOver.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
