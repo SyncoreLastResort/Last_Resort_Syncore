@@ -164,7 +164,6 @@ update_status ModuleFirstBoss::Update()
 	return UPDATE_CONTINUE;
 }
 
-// TODO 4: Detect collision with a wall. If so, go back to intro screen. 
 
 void ModuleFirstBoss::OnCollision(Collider * col_1, Collider * col_2)
 {

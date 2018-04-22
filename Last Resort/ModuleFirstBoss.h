@@ -35,7 +35,7 @@ public:
 		NONE
 	};
 	Mix_Chunk* boss_explosion_sound=nullptr;
-	uint life = 3;
+	uint life = 3; //Will be 50
 	Collider * body_collider = nullptr;
 	Collider * arm_collider = nullptr;
 	Collider * head_collider = nullptr;

@@ -149,9 +149,17 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
 			if (enemies[i]->life > 1)
-				enemies[i]->life -= 1;
+			{
+				if (c2->type == COLLIDER_BALL || c2->type == COLLIDER_BALL2)
+				{
+					enemies[i]->life -= 0.1f;
+				}
 
-			//enemies[i]->OnCollision(c2);
+				else 
+					enemies[i]->life -= 1;
+			}
+
+			
 			else
 			{
 				if (c1->type == COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_PLAYER_SHOT)
