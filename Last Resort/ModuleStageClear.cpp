@@ -45,6 +45,7 @@ update_status ModuleStageClear::Update() {
 	App->render->Blit(graphics, SCREEN_WIDTH/6, (SCREEN_HEIGHT / 2), &graphicsrect, 0.0f);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE]) {
+		Mix_FadeOutMusic(1000);
 		App->fade->FadeToBlack(App->stageclear, App->scores);
 	}
 

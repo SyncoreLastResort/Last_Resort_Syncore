@@ -13,9 +13,14 @@
 ModuleScores::ModuleScores()
 {
 	backgroundrect.x = 0;
-	backgroundrect.y = 0;
-	backgroundrect.w = 304;
+	backgroundrect.y = 512/2;
+	backgroundrect.w = SCREEN_WIDTH;
 	backgroundrect.h = 224;
+
+	scoresrect.x = 0;
+	scoresrect.y = 0;
+	scoresrect.w = 256;
+	scoresrect.h = 256;
 
 }
 
@@ -29,7 +34,8 @@ bool ModuleScores::Start()
 
 	bool ret = true;
 	backgroundscores = App->textures->Load("assets/sprites/GameOverScreen_Sprite.png");
-	scores_Sound = App->audio->LoadMusic("assets/music/Stage_Clear.ogg");
+	scoresranking = App->textures->Load("assets/sprites/Highscore_Sprite.png");
+	scores_Sound = App->audio->LoadMusic("assets/music/17. Flower Dancing (Ranking).ogg");
 
 	App->audio->PlayMusic(scores_Sound, ONCE);
 
@@ -43,10 +49,14 @@ update_status ModuleScores::Update()
 	bool end = false;
 
 	// Draw everything --------------------------------------
-	App->render->Blit(backgroundscores, 0, 0, &backgroundrect); // back background
+	App->render->Blit(backgroundscores, 0, 0, &backgroundrect); 
+	App->render->Blit(scoresranking, 50, 20, &scoresrect);
 
 	if (App->input->keyboard[SDL_SCANCODE_F] == 1)
+	{
+		Mix_FadeOutMusic(1000);
 		App->fade->FadeToBlack(App->scores, App->scene_intro);
+	}
 
 	return UPDATE_CONTINUE;
 }

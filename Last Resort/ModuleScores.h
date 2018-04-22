@@ -22,7 +22,9 @@ public:
 public:
 
 	SDL_Texture* backgroundscores = nullptr;
+	SDL_Texture* scoresranking = nullptr;
 	SDL_Rect backgroundrect;
+	SDL_Rect scoresrect;
 	Mix_Music *scores_Sound = nullptr;
 };
 

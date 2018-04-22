@@ -42,7 +42,7 @@ bool ModuleSceneIntro::CleanUp()
 	LOG("Unloading intro scene");
 
 	App->textures->Unload(introbackground);
-	App->audio->StopAudio();
+	/*App->audio->StopAudio();*/
 	App->audio->UnloadMusic(maintrackintro);
 	
 	return true;
