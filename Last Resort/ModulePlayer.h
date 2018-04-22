@@ -12,7 +12,7 @@ struct Collider;
 enum WEAPON_TYPE
 {
 	LASER_BEAM, 
-	ROCKETS,
+	BOMB,
 	BASIC
 };
 
@@ -39,6 +39,7 @@ public:
 	bool godmode = false;
 	//FX
 	Mix_Chunk* deathsound;
+	Mix_Chunk* laser_sound;
 	//Move speed
 	int speed = 2;
 	//Fonts

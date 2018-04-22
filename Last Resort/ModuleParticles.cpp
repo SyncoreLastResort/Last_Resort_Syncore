@@ -173,8 +173,6 @@ bool ModuleParticles::Start()
 	explosion.texture = Laserexplosion.texture;
 
 	laser.sound=  App->audio->LoadSoundEffect("assets/sounds/004.Shot_center.wav");
-	bomb_downwards.sound = App->audio->LoadSoundEffect("assets/sounds/029.Bomb_fall.wav");
-	bomb_upwards.sound = bomb_upwards.sound;
 
 	//Ball sprites & sounds
 	/*ball_shot.texture= App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");*/

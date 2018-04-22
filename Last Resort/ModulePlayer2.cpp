@@ -249,7 +249,7 @@ void ModulePlayer2::Shoot()
 		App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 140);
 	}
 
-	if (weapon == ROCKETS && weapon_level == 3)
+	if (weapon == BOMB && weapon_level == 3)
 	{
 
 	}

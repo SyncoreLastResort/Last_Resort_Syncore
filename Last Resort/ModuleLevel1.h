@@ -26,15 +26,15 @@ public:
 	SDL_Texture* road = nullptr;
 	SDL_Texture* bossimg = nullptr;
 	SDL_Texture* background_lights = nullptr;
-	/*SDL_Texture* powerups = nullptr;*/
-	//Animation Power_Up;
+	SDL_Texture* powerups = nullptr;
+	Animation Power_Up;
 	Animation thin_lights;
 	Animation thick_lights;
 	SDL_Rect ground;
 	SDL_Rect background;
 	SDL_Rect midback;
 	SDL_Rect bossplace;
-	//SDL_Rect powerupplace;
+	SDL_Rect powerupplace;
 	Mix_Music* maintracklvl1 = nullptr;
 	Mix_Music* bossmusic = nullptr;
 	float scrollground = 0.4;
