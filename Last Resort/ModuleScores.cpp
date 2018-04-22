@@ -29,7 +29,9 @@ bool ModuleScores::Start()
 
 	bool ret = true;
 	backgroundscores = App->textures->Load("assets/sprites/GameOverScreen_Sprite.png");
+	scores_Sound = App->audio->LoadMusic("assets/music/Stage_Clear.ogg");
 
+	App->audio->PlayMusic(scores_Sound, ONCE);
 
 	return ret;
 }
@@ -53,6 +55,7 @@ update_status ModuleScores::Update()
 bool ModuleScores::CleanUp()
 {
 	App->textures->Unload(backgroundscores);
+	App->audio->UnloadMusic(scores_Sound);
 
 	LOG("Unloading background scene");
 
