@@ -28,7 +28,8 @@ bool ModuleScores::Start()
 	LOG("Loading scores assets");
 
 	bool ret = true;
-	backgroundscores = App->textures->Load("assets/sprites/GameEnd.png");
+	backgroundscores = App->textures->Load("assets/sprites/GameOverScreen_Sprite.png");
+
 
 	return ret;
 }

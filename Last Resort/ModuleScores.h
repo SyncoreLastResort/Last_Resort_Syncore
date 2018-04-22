@@ -20,6 +20,7 @@ public:
 
 	SDL_Texture* backgroundscores = nullptr;
 	SDL_Rect backgroundrect;
+	Mix_Music *scores_Sound = nullptr;
 };
 
 #endif

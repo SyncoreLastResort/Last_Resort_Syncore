@@ -6,6 +6,7 @@
 #include "ModuleSceneIntro.h" 
 #include "ModuleFadeToBlack.h"
 #include "ModuleInput.h"
+#include "ModuleScores.h"
 
 ModuleStageClear::ModuleStageClear() {
 
@@ -44,7 +45,7 @@ update_status ModuleStageClear::Update() {
 	App->render->Blit(graphics, SCREEN_WIDTH/6, (SCREEN_HEIGHT / 2), &graphicsrect, 0.0f);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE]) {
-		App->fade->FadeToBlack(App->stageclear, App->scene_intro);
+		App->fade->FadeToBlack(App->stageclear, App->scores);
 	}
 
 	return UPDATE_CONTINUE;
