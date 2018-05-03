@@ -1,0 +1,53 @@
+Last Resory by Syncore
+
+---Roadmap---
+
+Starting from 0.5 to 1.0
+
+--Version 0.5.1--
+
+- Change the background scrolling to camera movement
+- Eliminate Level 1, enemies, boss etc. 
+
+- Insert player2 sprites (ship)
+-Background level 2 implementation (photo), scrolling. (no movment in walls)
+
+--Version 0.5.5--
+
+-Background implementation, scrolling. (no movment in walls)
+-Menu navigation
+-Game works with gamepad
+
+--Version 0.6--
+
+-Insert all background animations and walls that do not move  with colliders
+-Main track is being played
+
+--Version 0.6.1--
+
+-Moving walls implemented (animation and colliders)
+
+--Version 0.6.2--
+
+-Basic enemies 
+-Audio and effects
+
+--Version 0.6.3--
+
+Boss and complex enemies
+
+
+--Version 0.7--
+
+
+--Version 0.8--
+
+
+--Version 0.9--
+
+
+--Version 1.0--
+
+
+--Version 1.0.1 and etc (testing bugs)
+
