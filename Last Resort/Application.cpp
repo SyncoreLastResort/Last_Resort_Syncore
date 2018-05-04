@@ -6,7 +6,7 @@
 #include "ModuleGameOver.h"
 #include "ModuleStageClear.h"
 #include "ModuleScores.h"
-#include "ModuleLevel1.h"
+#include "ModuleLevel4.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleCollision.h"
 #include "ModulePlayer.h"
@@ -15,7 +15,6 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleEnemies.h"
-#include "ModuleFirstBoss.h"
 #include "ModuleFonts.h"
 #include "ModuleBall.h"
 #include "ModuleBall2.h"
@@ -29,12 +28,11 @@ Application::Application()
 	modules[i++] = textures = new ModuleTextures();
 	modules[i++] = fonts = new ModuleFonts();
 	modules[i++] = audio = new ModuleAudio();
-	modules[i++] = level1 = new ModuleLevel1();
+	modules[i++] = level4 = new ModuleLevel4();
 	modules[i++] = scores = new ModuleScores();
 	modules[i++] = stageclear = new ModuleStageClear();
 	modules[i++] = gameover = new ModuleGameOver();
 	modules[i++] = enemies = new ModuleEnemies();
-	modules[i++] = boss1 = new ModuleFirstBoss();
 	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = ball_player1 = new ModuleBall();
@@ -58,12 +56,11 @@ bool Application::Init()
 	// Deactivate modules here ----
 	player2->Disable();
 	player->Disable();
-	boss1->Disable();
 	enemies->Disable();
 	gameover->Disable();
 	stageclear->Disable();
 	scores->Disable();
-	level1->Disable();
+	level4->Disable();
 	ball_player1->Disable();
 	ball_player2->Disable();
 

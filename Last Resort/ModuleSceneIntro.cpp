@@ -8,7 +8,6 @@
 #include "ModulePlayer2.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneIntro.h"
-#include "ModuleFirstBoss.h"
 #include "ModuleBall.h"
 
 
@@ -58,7 +57,7 @@ update_status ModuleSceneIntro::Update()
 	if(App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && App->fade->IsFading() == false)
 	{
 		Mix_FadeOutMusic(1000);
-		App->fade->FadeToBlack(this, (Module*)App->level1); 
+		App->fade->FadeToBlack(this, (Module*)App->level4); 
 		App->audio->StopAudio();
 	}
 

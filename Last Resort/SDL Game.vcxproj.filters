@@ -80,9 +80,6 @@
     <ClInclude Include="Enemy.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleFirstBoss.h">
-      <Filter>Modules\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleFonts.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -112,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="PowerUpBomb.h">
       <Filter>Modules\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleLevel4.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -166,9 +166,6 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleFirstBoss.cpp">
-      <Filter>Modules\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleFonts.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -198,6 +195,9 @@
     </ClCompile>
     <ClCompile Include="PowerUpBomb.cpp">
       <Filter>Modules\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleLevel4.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

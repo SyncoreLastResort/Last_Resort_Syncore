@@ -163,7 +163,7 @@ update_status ModulePlayer::Update()
 
 		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 		{
-			if (position.x - speed >= 0)
+			if (position.x - speed >= App->render->camera.x)
 			{
 				position.x -= speed;
 				App->particles->Laserexplosion.position.x -= speed;
@@ -172,7 +172,7 @@ update_status ModulePlayer::Update()
 
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 		{
-			if (position.x + speed <= SCREEN_WIDTH - 32)   //32 is the ship's width
+			if (position.x + speed <= App->render->camera.x + App->render->camera.w - 32)   //32 is the ship's width
 			{
 				position.x += speed;
 				App->particles->Laserexplosion.position.x += speed;
@@ -246,7 +246,7 @@ update_status ModulePlayer::Update()
 	
 	if (current_animation == &death &&current_animation->Finished() && App->player2->IsEnabled()==false)
 	{
-		App->fade->FadeToBlack((Module*)App->level1, (Module *)App->gameover);
+		App->fade->FadeToBlack((Module*)App->level4, (Module *)App->gameover);
 		App->player->Disable();
 	}
 
