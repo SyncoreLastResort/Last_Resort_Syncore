@@ -29,6 +29,7 @@ struct Particle
 	SDL_Texture* texture = nullptr;
 	Mix_Chunk* sound = nullptr;
 	Particle* end_particle = nullptr;
+	iPoint * position_to_attach = nullptr;
 	
 	
 	Particle();
@@ -49,13 +50,16 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0);
+	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0, iPoint *position=nullptr);
 
 private:
 
 	Particle* active[MAX_ACTIVE_PARTICLES];
 	
 public:
+	SDL_Texture * graphics;
+
+	Particle laser_cannon;
 	Particle ball_trail;
 	Particle boss_shot;
 	Particle boss_explosion;
