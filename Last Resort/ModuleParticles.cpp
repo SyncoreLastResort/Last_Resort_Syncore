@@ -14,6 +14,15 @@ ModuleParticles::ModuleParticles()
 	
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
+	
+	for (int i = 0; i < 2; ++i)
+		for (int j = 0; j < 4; ++j)
+			laser_cannon.anim.PushBack({ 0+i*31, 319+j*13, 31, 13 });
+
+	
+
+	laser_cannon.anim.loop = false;
+	laser_cannon.anim.speed = 0.3;
 
 
 	bomb_downwards.anim.PushBack({0,303,16,16});
@@ -169,23 +178,26 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
+
+	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	//Player sprites && sounds
-	Laserexplosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
-	laser_beam.texture = Laserexplosion.texture;
-	bomb_downwards.texture = Laserexplosion.texture;
-	bomb_upwards.texture = Laserexplosion.texture;
+	laser_cannon.texture = graphics;
+	Laserexplosion.texture = graphics;
+	laser_beam.texture = graphics;
+	bomb_downwards.texture = graphics;
+	bomb_upwards.texture = graphics;
 	/*laser.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	explosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");*/
-	laser.texture = Laserexplosion.texture;
-	explosion.texture = Laserexplosion.texture;
+	laser.texture = graphics;
+	explosion.texture = graphics;
 
 	laser.sound=  App->audio->LoadSoundEffect("assets/sounds/004.Shot_center.wav");
 
 	//Ball sprites & sounds
 	/*ball_shot.texture= App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");*/
-	ball_shot.texture = Laserexplosion.texture;
-	ball2_shot.texture = Laserexplosion.texture;
-	ball_shot_explosion.texture= Laserexplosion.texture;
+	ball_shot.texture = graphics;
+	ball2_shot.texture = graphics;
+	ball_shot_explosion.texture= graphics;
 
 	//Boss 1 sprites && sounds
 	boss_shot.sound = App->audio->LoadSoundEffect("assets/sounds/025.Boss_shot.wav");
@@ -225,6 +237,8 @@ bool ModuleParticles::CleanUp()
 		}
 	}
 
+	App->textures->Unload(graphics);
+	
 	return true;
 }
 
@@ -257,13 +271,14 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, Uint32 delay, iPoint *position)
 {
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		if(active[i] == nullptr)
 		{
 			Particle* p = new Particle(particle);
+			p->position_to_attach = position;
 			p->born = SDL_GetTicks() + delay;
 			p->position.x = x;
 			p->position.y = y;
@@ -310,7 +325,7 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) : 
 anim(p.anim), position(p.position), speed(p.speed), end_particle(p.end_particle),
-fx(p.fx), born(p.born), life(p.life)
+fx(p.fx), born(p.born), life(p.life), position_to_attach(p.position_to_attach)
 {}
 
 Particle::~Particle()
@@ -335,8 +350,14 @@ bool Particle::Update()
 			ret = false;
 	if (SDL_GetTicks() >= born)
 	{
-		position.x += speed.x;
-		position.y += speed.y;
+		if (position_to_attach != nullptr)
+			position = *position_to_attach;
+		else 
+		{
+			position.x += speed.x;
+			position.y += speed.y;
+		}
+		
 		if (collider != nullptr)
 			collider->SetPos(position.x, position.y);
 	}

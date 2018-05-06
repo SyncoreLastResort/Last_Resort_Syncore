@@ -94,14 +94,15 @@ update_status ModuleLevel4::Update()
 
 
 	App->player->position.x += 1;
+	App->player2->position.x += 1;
 	App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 0.75); // back background
 	
 
-	// Draw everything --------------------------------------
+	//Draw everything --------------------------------------
 
 
 
-	if (App->input->keyboard[SDL_SCANCODE_F4] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
 	{
 		if (App->player2->life != 0)
 		{

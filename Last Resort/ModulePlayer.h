@@ -37,6 +37,10 @@ public:
 	Mix_Chunk* powerup_sound;
 	
 	iPoint position;
+
+	iPoint cannon_position;// position of the basic shot particles
+	iPoint laser_beam_position;// position of the laser beam particles
+
 	//god mode
 	bool godmode = false;
 	//FX

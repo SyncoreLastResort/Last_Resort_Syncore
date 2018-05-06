@@ -38,8 +38,11 @@ public:
 	Animation downwards;
 	Animation upwardstoidle;
 	Animation downwardstoidle;
+	
 	iPoint position;
-
+	
+	iPoint cannon_position;// position of the basic shot particles
+	iPoint laser_beam_position;// position of the laser beam particles
 
 	Mix_Chunk* deathsound;
 	Mix_Chunk* laser_sound;

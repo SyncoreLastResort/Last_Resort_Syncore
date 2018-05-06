@@ -141,16 +141,14 @@ update_status ModulePlayer2::Update()
 			if (position.x - speed >= 0)
 			{
 				position.x -= speed;
-				App->particles->Laserexplosion.position.x -= speed;
 			}
 		}
 
 		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 		{
-			if (position.x + speed <= SCREEN_WIDTH - 32)   //32 is the ship's width
+			if (position.x + speed <= App->render->camera.x + App->render->camera.w - 32)   //32 is the ship's width
 			{
 				position.x += speed;
-				App->particles->Laserexplosion.position.x += speed;
 			}
 		}
 
@@ -159,7 +157,6 @@ update_status ModulePlayer2::Update()
 			if (position.y + speed <= SCREEN_HEIGHT - 14)
 			{
 				position.y += speed;
-				App->particles->Laserexplosion.position.y += speed;
 			}
 			if (current_animation != &downwards)
 			{
@@ -181,7 +178,6 @@ update_status ModulePlayer2::Update()
 			if (position.y - speed >= 2)
 			{
 				position.y -= speed;
-				App->particles->Laserexplosion.position.y -= speed;
 			}
 			if (current_animation != &upwards)
 			{
@@ -200,6 +196,14 @@ update_status ModulePlayer2::Update()
 		}
 
 	}
+
+	//update the position of the cannon
+	cannon_position.x = position.x + 32;
+	cannon_position.y = position.y - 1;
+
+	laser_beam_position.x = position.x + 32;
+	laser_beam_position.y = position.y + 1;
+
 	// Draw everything --------------------------------------
 	player2collider->SetPos(position.x, position.y);
 	if (current_animation == &spawn)
@@ -224,7 +228,7 @@ update_status ModulePlayer2::Update()
 	sprintf_s(score_text2, 10, "%7d", score2);
 
 	App->fonts->BlitText(50, 25, font_2, score_text2);
-
+	
 
 	return UPDATE_CONTINUE;
 }
@@ -254,12 +258,17 @@ void ModulePlayer2::Shoot()
 	/*App->particles->AddParticle(App->particles->Laserexplosion, position.x + 32, position.y);*/
 	App->particles->AddParticle(App->particles->laser, position.x + 35, position.y + 4, COLLIDER_PLAYER2_SHOT);
 
+	App->particles->AddParticle(App->particles->Laserexplosion, position.x + 35, position.y + 4, COLLIDER_NONE, 0, &cannon_position);
+	App->particles->AddParticle(App->particles->Laserexplosion, position.x + 35, position.y + 4, COLLIDER_NONE, 150, &cannon_position);
+
 	if (SDL_GetTicks() - weapon_fired)
 	{
 		if (weapon == LASER_BEAM && weapon_level >= 3 && SDL_GetTicks() - weapon_fired >= 1000)
 		{
 			App->audio->PlaySoundEffect(laser_sound);
 
+			App->particles->AddParticle(App->particles->laser_cannon, position.x + 35, position.y + 4, COLLIDER_NONE, 0, &laser_beam_position);
+			
 			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER2_SHOT);
 			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER2_SHOT, 20);
 			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER2_SHOT, 40);
