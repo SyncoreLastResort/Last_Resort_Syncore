@@ -13,14 +13,13 @@ Starting from 0.5 to 1.0
 --Version 0.6--
 
 -Insert some background animations and walls that do not move  with colliders
--Main track is being played
 -Main Menu Neo-Geo Animation
 -Moving walls implemented (animation and colliders)
 
 --Version 0.7--
 
 -Basic background enemies 
--Audio and effects
+-Audio and effects (level main track, boss track, different effects)
 -Game works with gamepad
 -Implement player2 sprites
 -Main menu is finished
