@@ -54,28 +54,28 @@ ModulePlayer2::ModulePlayer2()
 	death.loop = false;
 	death.speed = 0.3f;
 
-	idle.PushBack({ 64,0,32,14 });
+	idle.PushBack({ 0,387,32,14 });
 	// go upwards animation (neo-geo sprite sheet)
 
 
-	upwards.PushBack({ 32, 0, 32, 14 });
-	upwards.PushBack({ 0, 0, 32, 14 });
+	upwards.PushBack({ 96, 387, 32, 14 });
+	upwards.PushBack({129, 387, 32, 14 });
 	upwards.speed = 0.1f;
 	upwards.loop = false;
 	//Animation when the ship stops going up 
-	upwardstoidle.PushBack({ 32, 0, 32, 14 });
-	upwardstoidle.PushBack({ 64,0,32,14 });
+	upwardstoidle.PushBack({ 96, 387, 32, 14 });
+	upwardstoidle.PushBack({ 0,387,32,14 });
 	upwardstoidle.speed = 0.1f;
 	upwardstoidle.loop = false;
 	// TODO 4: Make the ship go downwards with the correct animations
 
-	downwards.PushBack({ 96,0,32,14 });
-	downwards.PushBack({ 128,0,32,14 });
+	downwards.PushBack({ 32,387,32,14 });
+	downwards.PushBack({ 64,387,32,14 });
 	downwards.speed = 0.1f;
 	downwards.loop = false;
 	//Animation when the ship stops going down
-	downwardstoidle.PushBack({ 96,0,32,14 });
-	downwardstoidle.PushBack({ 64,0,32,14 });
+	downwardstoidle.PushBack({ 64,387,32,14 });
+	downwardstoidle.PushBack({ 0,387,32,14 });
 	downwardstoidle.speed = 0.1f;
 	downwardstoidle.loop = false;
 
@@ -199,7 +199,7 @@ update_status ModulePlayer2::Update()
 
 	//update the position of the cannon
 	cannon_position.x = position.x + 32;
-	cannon_position.y = position.y - 1;
+	cannon_position.y = position.y-3;
 
 	laser_beam_position.x = position.x + 32;
 	laser_beam_position.y = position.y + 1;
