@@ -8,46 +8,36 @@ Starting from 0.5 to 1.0
 
 - Change the background scrolling to camera movement
 - Eliminate Level 1, enemies, boss etc. 
-
-- Insert player2 sprites (ship)
--Background level 2 implementation (photo), scrolling. (no movment in walls)
-
---Version 0.5.5--
-
--Background implementation, scrolling. (no movment in walls)
--Menu navigation
--Game works with gamepad
+- Background level 2 implementation (photo), scrolling. (no movment in walls)
 
 --Version 0.6--
 
--Insert all background animations and walls that do not move  with colliders
+-Insert some background animations and walls that do not move  with colliders
 -Main track is being played
-
---Version 0.6.1--
-
+-Main Menu Neo-Geo Animation
 -Moving walls implemented (animation and colliders)
-
---Version 0.6.2--
-
--Basic enemies 
--Audio and effects
-
---Version 0.6.3--
-
-Boss and complex enemies
-
 
 --Version 0.7--
 
+-Basic enemies 
+-Audio and effects
+-Game works with gamepad
+-Implement player2 sprites
+-Main menu is finished
+-Background is totally finished
 
 --Version 0.8--
-
+Boss and complex enemies
+Tutorial and Intro Cinematic
 
 --Version 0.9--
-
+-Stage Clear, Win/Lose condition perfectioning
+-Imitate original game
+-UI
 
 --Version 1.0--
-
+-Polish, Debug Functionality
+-Intensive testing and 1.0 bugs correction
 
 --Version 1.0.1 and etc (testing bugs)
 
