@@ -19,7 +19,7 @@ Starting from 0.5 to 1.0
 
 --Version 0.7--
 
--Basic enemies 
+-Basic background enemies 
 -Audio and effects
 -Game works with gamepad
 -Implement player2 sprites
@@ -27,8 +27,9 @@ Starting from 0.5 to 1.0
 -Background is totally finished
 
 --Version 0.8--
-Boss and complex enemies
-Tutorial and Intro Cinematic
+-Boss and complex enemies
+-Tutorial and Intro Cinematic
+-Last Basic Enemies
 
 --Version 0.9--
 -Stage Clear, Win/Lose condition perfectioning
