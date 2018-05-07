@@ -23,6 +23,8 @@ ModuleLevel4::ModuleLevel4()
 	backgroundtilemaprect.w = 2699;
 	backgroundtilemaprect.h = 224;
 
+
+	//Wall mov down
 	wallrect.x = 0;
 	wallrect.y = 0;
 	wallrect.w = 32;
@@ -30,6 +32,18 @@ ModuleLevel4::ModuleLevel4()
 	
 	wallmovdownposition.x = 400;
 	wallmovdownposition.y = -157;
+
+	//Pinchy Wall
+	pinchywallposition.x = 600;
+	pinchywallposition.y = SCREEN_HEIGHT;
+
+	pinchywalanim.PushBack({ 0, 0, 32, 177 });
+	pinchywalanim.PushBack({ 32, 0, 32, 177 });
+	pinchywalanim.PushBack({ 64, 0, 32, 177 });
+	pinchywalanim.PushBack({ 96, 0, 30, 177 });
+	pinchywalanim.speed = 0.15f;
+	pinchywalanim.loop = true;
+
 }
 
 ModuleLevel4::~ModuleLevel4()
@@ -42,6 +56,7 @@ bool ModuleLevel4::Start()
 
 	backgroundtilemap = App->textures->Load("assets/sprites/Stage4_tilemap.png");
 	wall = App->textures->Load("assets/sprites/movingwall.png");
+	pinchywall = App->textures->Load("assets/sprites/lastrespinchywall.png");
 
 	App->player->p1dead = false;
 	App->player2->p2dead = false;
@@ -54,7 +69,7 @@ bool ModuleLevel4::Start()
 	// Enemies ---
 	
 	colliderwallmovdown = App->collision->AddCollider({ wallmovdownposition.x, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
-
+	colliderpinchywall = App->collision->AddCollider({ pinchywallposition.x, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
 		
 
 
@@ -68,6 +83,7 @@ bool ModuleLevel4::CleanUp()
 
 	App->textures->Unload(backgroundtilemap);
 	App->textures->Unload(wall);
+	App->textures->Unload(pinchywall);
 
 	App->player->Disable();
 	App->enemies->Disable();
@@ -131,10 +147,33 @@ update_status ModuleLevel4::Update()
 	colliderwallmovdown->SetPos(wallmovdownposition.x, wallmovdownposition.y);
 	//End of Wall movement
 
+	//Pinchy Walll movement
+
+	if (maxreachedpinchy == false && pinchywallposition.y+177 >= SCREEN_HEIGHT)
+	{
+		pinchywallposition.y -= 1;
+
+
+		if (pinchywallposition.y+177 == SCREEN_HEIGHT)
+			maxreachedpinchy = true;
+	}
+	if (maxreachedpinchy == true && pinchywallposition.y <= SCREEN_HEIGHT)
+	{
+		pinchywallposition.y += 1;
+
+
+		if (pinchywallposition.y == SCREEN_HEIGHT)
+			maxreachedpinchy = false;
+	}
+
+	colliderpinchywall->SetPos(pinchywallposition.x, pinchywallposition.y);
+	//End of Pinchy Wall movement
+	
+
 	App->player->position.x += 1;
 	App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 1); // back background
 	App->render->Blit(wall, wallmovdownposition.x, wallmovdownposition.y, &wallrect, 1);
-
+	App->render->Blit(pinchywall, pinchywallposition.x, pinchywallposition.y, &pinchywalanim.GetCurrentFrame());
 	// Draw everything --------------------------------------
 
 
