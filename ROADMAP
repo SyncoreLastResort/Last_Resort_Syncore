@@ -19,21 +19,20 @@ Starting from 0.5 to 1.0
 
 --Version 0.7--
 
--Basic background enemies 
+-Basic enemies 
 -Audio and effects (level main track, boss track, different effects)
--Game works with gamepad
 -Implement player2 sprites
 -Tutorial and Intro Cinematic
 
 --Version 0.8--
+
 -Boss and complex enemies
--Last Basic Enemies
--Score perfectioning
+-Game works with gamepad
 
 --Version 0.9--
 -Stage Clear, Win/Lose condition perfectioning
 -Imitate original game
--UI
+-UI, -Score perfectioning
 
 --Version 1.0--
 -Polish, Debug Functionality
