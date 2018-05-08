@@ -1,10 +1,11 @@
 #include "Application.h"
-#include "ModuleWasp.h"
+#include "PowerUpHolder.h"
 #include "ModuleCollision.h"
+#include "ModuleEnemies.h"
 
-Enemy_Wasp::Enemy_Wasp(int x, int y) : Enemy(x, y)
+PowerUpHolder::PowerUpHolder(int x, int y) : Enemy(x, y)
 {
-
+	texturename = App->enemies->someenemies;
 	life = 1;
 	score = 100;
 
@@ -23,8 +24,8 @@ Enemy_Wasp::Enemy_Wasp(int x, int y) : Enemy(x, y)
 	original_y = y;
 }
 
-void Enemy_Wasp::Move()
+void PowerUpHolder::Move()
 {
 	
-	position.x -= 2;
+	position.x -= 1;
 }

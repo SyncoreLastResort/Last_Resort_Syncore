@@ -72,6 +72,8 @@ bool ModuleLevel4::Start()
 	colliderpinchywall = App->collision->AddCollider({ pinchywallposition.x, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
 		
 
+	/*App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 200, 50);*/
+
 
 	return true;
 }
