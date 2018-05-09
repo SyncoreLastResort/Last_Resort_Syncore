@@ -5,7 +5,6 @@
 #include "ModulePlayer.h"
 #include "ModulePlayer2.h"
 #include "ModuleLevel4.h"
-#include "ModuleEnemies.h"
 #include "ModuleGameOver.h"
 #include "ModuleStageClear.h"
 #include "ModuleInput.h"
@@ -18,32 +17,24 @@
 ModuleLevel4::ModuleLevel4()
 {
 	//Background 
-	backgroundtilemaprect.x = 0;
-	backgroundtilemaprect.y = 0;
-	backgroundtilemaprect.w = 2699;
-	backgroundtilemaprect.h = 224;
+    backgroundrect.x = 0;
+    backgroundrect.y = 0;
+    backgroundrect.w = 4143;
+    backgroundrect.h = 223;
 
+	//Foreground
+	foregroundrect.x = 0;
+	foregroundrect.y = 0;
+	foregroundrect.w = 4143;
+	foregroundrect.h = 223;
 
-	//Wall mov down
-	wallrect.x = 0;
-	wallrect.y = 0;
-	wallrect.w = 32;
-	wallrect.h = 157;
+	//Background Lava Animation
+	Back_lava.PushBack();
+	Back_lava.PushBack();
+	Back_lava.PushBack();
+	Back_lava.PushBack();
+	Back_lava.PushBack();
 	
-	wallmovdownposition.x = 400;
-	wallmovdownposition.y = -157;
-
-	//Pinchy Wall
-	pinchywallposition.x = 600;
-	pinchywallposition.y = SCREEN_HEIGHT;
-
-	pinchywalanim.PushBack({ 0, 0, 32, 177 });
-	pinchywalanim.PushBack({ 32, 0, 32, 177 });
-	pinchywalanim.PushBack({ 64, 0, 32, 177 });
-	pinchywalanim.PushBack({ 96, 0, 30, 177 });
-	pinchywalanim.speed = 0.15f;
-	pinchywalanim.loop = true;
-
 }
 
 ModuleLevel4::~ModuleLevel4()
@@ -52,25 +43,16 @@ ModuleLevel4::~ModuleLevel4()
 // Load assets
 bool ModuleLevel4::Start()
 {
-	LOG("Loading level1 scene");
+	LOG("Loading level4 scene");
 
-	backgroundtilemap = App->textures->Load("assets/sprites/Stage4_tilemap.png");
-	wall = App->textures->Load("assets/sprites/movingwall.png");
-	pinchywall = App->textures->Load("assets/sprites/lastrespinchywall.png");
+	background = App->textures->Load("assets\sprites\Background.png");
+	foreground = App->textures->Load("assets\sprites\Foreground.png");
 
 	App->player->p1dead = false;
 	App->player2->p2dead = false;
 	App->player2->life = 1;
 
 	App->player->Enable();
-	App->enemies->Enable();
-
-
-	// Enemies ---
-	
-	colliderwallmovdown = App->collision->AddCollider({ wallmovdownposition.x, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
-	colliderpinchywall = App->collision->AddCollider({ pinchywallposition.x, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
-		
 
 
 	return true;
@@ -81,12 +63,9 @@ bool ModuleLevel4::CleanUp()
 {
 	LOG("Unloading space scene");
 
-	App->textures->Unload(backgroundtilemap);
-	App->textures->Unload(wall);
-	App->textures->Unload(pinchywall);
+	App->textures->Unload(background);
 
 	App->player->Disable();
-	App->enemies->Disable();
 
 	if (App->player2->IsEnabled() == true)
 		App->player2->Disable();
@@ -126,56 +105,14 @@ update_status ModuleLevel4::Update()
 		App->fade->FadeToBlack(this, App->gameover);
 	}
 
-	
-	//Wall movement
-	if (maxreached == false && wallmovdownposition.y <= 0)
-	{
-		wallmovdownposition.y += 1;
-		
-
-		if (wallmovdownposition.y == 0)
-			maxreached = true;
-	}
-	if (maxreached == true && wallmovdownposition.y >= -157)
-	{
-		wallmovdownposition.y -= 1;
-		
-
-		if (wallmovdownposition.y == -157)
-			maxreached = false;
-	}
-	colliderwallmovdown->SetPos(wallmovdownposition.x, wallmovdownposition.y);
-	//End of Wall movement
-
-	//Pinchy Walll movement
-
-	if (maxreachedpinchy == false && pinchywallposition.y+177 >= SCREEN_HEIGHT)
-	{
-		pinchywallposition.y -= 1;
-
-
-		if (pinchywallposition.y+177 == SCREEN_HEIGHT)
-			maxreachedpinchy = true;
-	}
-	if (maxreachedpinchy == true && pinchywallposition.y <= SCREEN_HEIGHT)
-	{
-		pinchywallposition.y += 1;
-
-
-		if (pinchywallposition.y == SCREEN_HEIGHT)
-			maxreachedpinchy = false;
-	}
-
-	colliderpinchywall->SetPos(pinchywallposition.x, pinchywallposition.y);
-	//End of Pinchy Wall movement
-	
 
 	App->player->position.x += 1;
-	App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 1); // back background
-	App->render->Blit(wall, wallmovdownposition.x, wallmovdownposition.y, &wallrect, 1);
-	App->render->Blit(pinchywall, pinchywallposition.x, pinchywallposition.y, &pinchywalanim.GetCurrentFrame());
+
+		
 	// Draw everything --------------------------------------
 
+	App->render->Blit(background, 0, 0, &Back_lava.GetCurrentFrame(), 0.75); //background
+	App->render->Blit(foreground, 0, 0, &foregroundrect, 0.75); //foreground
 
 
 	if (App->input->keyboard[SDL_SCANCODE_F4] == 1)

@@ -11,7 +11,6 @@
 #include "PowerUpBomb.h"
 
 
-
 #define SPAWN_MARGIN 50
 
 ModuleEnemies::ModuleEnemies()
@@ -63,10 +62,7 @@ update_status ModuleEnemies::Update()
 		if (enemies[i] != nullptr) enemies[i]->Move();
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		
-			if(enemies[i] != nullptr) enemies[i]->Draw(sprites);
-	}
+		if (enemies[i] != nullptr) enemies[i]->Draw(sprites);
 
 	return UPDATE_CONTINUE;
 }
@@ -155,7 +151,6 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		case ENEMY_TYPES::POWER_UP_BOMB:
 			enemies[i] = new Power_Up_Bomb(info.x, info.y);
 			break;
-	
 		}
 		
 	}
