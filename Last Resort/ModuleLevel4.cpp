@@ -112,6 +112,15 @@ bool ModuleLevel4::CleanUp()
 // Update: draw background
 update_status ModuleLevel4::Update()
 {
+
+
+	// Move camera forward -----------------------------
+	App->render->camera.x += 1 * SCREEN_SIZE;
+
+	App->player->position.x += 1;
+	if (App->player2->IsEnabled() == true)
+		App->player2->position.x += 1;
+
 	if (!boss_fight)
 		App->audio->PlayMusic(main_track_lvl4,ONCE);
 	
@@ -123,9 +132,6 @@ update_status ModuleLevel4::Update()
 		App->audio->StopAudio();
 		boss_fight = true;
 	}
-
-	// Move camera forward -----------------------------
-	App->render->camera.x += 1 * SCREEN_SIZE;
 	
 	
 
@@ -159,9 +165,6 @@ update_status ModuleLevel4::Update()
 	{
 		wallmovdownposition.y += 1;
 		
-
-	App->player->position.x += 1;
-	App->player2->position.x += 1;
 	
 
 		if (wallmovdownposition.y == 0)
