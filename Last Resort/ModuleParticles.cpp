@@ -110,7 +110,7 @@ ModuleParticles::ModuleParticles()
 	laser.anim.speed = 0.1f;
 	laser.speed.x = 7;
 	laser.speed.y = 0;
-	laser.life = 650;
+	laser.life = 750;
 	laser.end_particle = &explosion;
 	
 	boss_dying.anim.PushBack({ 286, 347, 16, 16 });

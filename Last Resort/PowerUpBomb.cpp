@@ -1,9 +1,12 @@
 #include "Application.h"
 #include "PowerUpBomb.h"
 #include "ModuleCollision.h"
+#include "ModuleEnemies.h"
 
 Power_Up_Bomb::Power_Up_Bomb(int x, int y) : Enemy(x, y)
 {
+
+	texturename = App->enemies->sprites;
 
 	//Power up animation
 	Powerup.PushBack({ 33,204,31,16 });

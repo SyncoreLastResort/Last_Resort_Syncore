@@ -5,10 +5,11 @@
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
 #include "Enemy.h"
-#include "ModuleWasp.h"
+#include "PowerUpHolder.h"
 #include "ModuleRhino.h"
 #include "PowerUp.h"
 #include "PowerUpBomb.h"
+
 
 
 #define SPAWN_MARGIN 50
@@ -27,10 +28,10 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	//powerup_sound = App->audio->LoadSoundEffect("assets/sounds/018.Damage_upgrade.wav");
-	// Create a prototype for each enemy available so we can copy them around
+
 	
 	sprites = App->textures->Load("assets/sprites/Common_enemyes_Sprite.png");
-	//powerups = App->textures->Load("assets/sprites/PowerUps_Sprite.png");
+	
 
 	return true;
 }
@@ -62,7 +63,9 @@ update_status ModuleEnemies::Update()
 		if (enemies[i] != nullptr) enemies[i]->Move();
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
-		if (enemies[i] != nullptr) enemies[i]->Draw(sprites);
+	{
+			if(enemies[i] != nullptr) enemies[i]->Draw(enemies[i]->texturename);
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -136,8 +139,8 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 	{
 		switch (info.type)
 		{
-		case ENEMY_TYPES::WASP:
-			enemies[i] = new Enemy_Wasp(info.x, info.y);
+		case ENEMY_TYPES::Power_Up_Holder:
+			enemies[i] = new PowerUpHolder(info.x, info.y);
 			break;
 
 		case ENEMY_TYPES::RHINO:
@@ -151,6 +154,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		case ENEMY_TYPES::POWER_UP_BOMB:
 			enemies[i] = new Power_Up_Bomb(info.x, info.y);
 			break;
+	
 		}
 		
 	}
