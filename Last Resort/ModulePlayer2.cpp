@@ -113,10 +113,6 @@ bool ModulePlayer2::CleanUp()
 // Update: draw background
 update_status ModulePlayer2::Update()
 {
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN)
-		current_animation = &death;
-
-
 	if (weapon_level == 2)
 	{
 		App->ball_player2->Enable();
