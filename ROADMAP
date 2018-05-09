@@ -14,20 +14,20 @@ Starting from 0.5 to 1.0
 
 -Insert background animations and walls that do not move  with colliders
 -Main Menu Neo-Geo Animation
--Main Menu Last Resort Animation
 -Moving walls implemented (animation and colliders)
+-Audio (level main track, boss track)
+-Implement player2 sprites
 
 --Version 0.7--
 
+-Main Menu Last Resort Animation
 -Basic enemies 
--Audio and effects (level main track, boss track, different effects)
--Implement player2 sprites
 -Tutorial and Intro Cinematic
+-Game works with gamepad
 
 --Version 0.8--
 
 -Boss and complex enemies
--Game works with gamepad
 
 --Version 0.9--
 -Stage Clear, Win/Lose condition perfectioning
