@@ -19,63 +19,54 @@ ModulePlayer2::ModulePlayer2()
 	position.x = 50;
 	position.y = 100;
 	//Spawn animation
-	spawn.PushBack({ 0,137,64,25 });
-	spawn.PushBack({ 0,162,64,25 });
-	spawn.PushBack({ 0,187,64,25 });
-	spawn.PushBack({ 0,212,64,25 });
-	spawn.PushBack({ 64,137,64,25 });
-	spawn.PushBack({ 64,162,64,25 });
-	spawn.PushBack({ 64,187,64,25 });
-	spawn.PushBack({ 64,212,64,25 });
-	spawn.PushBack({ 128,125,64,25 });
-	spawn.PushBack({ 128,150,64,25 });
+	spawn.PushBack({ 0, 462, 119, 25 });
+	spawn.PushBack({ 139, 462, 93, 25 });
+	spawn.PushBack({ 232, 462, 75, 25 });
+	spawn.PushBack({ 311, 462, 74, 25 });
+	spawn.PushBack({ 384, 462, 64, 25 });
+	spawn.PushBack({ 448, 462, 64, 25 });
+	for (int i = 0; i < 8; ++i)
+		spawn.PushBack({ 0 + 64 * i,487,64,25 });
 	spawn.loop = false;
 	spawn.speed = 0.2f;
 
+	
+
 	//Death animation
-	death.PushBack({ 0,16,55,17 });
-	death.PushBack({ 0,33,55,17 });
-	death.PushBack({ 0,50,55,17 });
-	death.PushBack({ 0,67,55,17 });
-	death.PushBack({ 0,84,55,17 });
-	death.PushBack({ 0,101,55,17 });
-	death.PushBack({ 55,16,55,17 });
-	death.PushBack({ 55,33,55,17 });
-	death.PushBack({ 55,50,55,17 });
-	death.PushBack({ 55,67,55,17 });
-	death.PushBack({ 55,84,55,17 });
-	death.PushBack({ 55,101,55,17 });
-	death.PushBack({ 110,16,55,17 });
-	death.PushBack({ 110,33,55,17 });
-	death.PushBack({ 110,50,55,17 });
-	death.PushBack({ 110,67,55,17 });
-	death.PushBack({ 110,84,55,17 });
-	death.PushBack({ 110,101,55,17 });
+	death.PushBack({0,386,64,24 });
+	death.PushBack({ 64,386,64,24 });
+	death.PushBack({ 128,386,64,24 });
+	death.PushBack({ 458,386,64,24 });
+
+	for (int i=0;i<8;++i)
+		death.PushBack({0+i*64,410,64,24});
+	for (int i = 0; i<8; ++i)
+		death.PushBack({ 0 + i * 64,434,64,28 });
 	death.loop = false;
 	death.speed = 0.3f;
 
-	idle.PushBack({ 64,0,32,14 });
+	idle.PushBack({ 0,367,32,14 });
 	// go upwards animation (neo-geo sprite sheet)
 
 
-	upwards.PushBack({ 32, 0, 32, 14 });
-	upwards.PushBack({ 0, 0, 32, 14 });
+	upwards.PushBack({ 96, 367, 32, 14 });
+	upwards.PushBack({129, 367, 32, 14 });
 	upwards.speed = 0.1f;
 	upwards.loop = false;
 	//Animation when the ship stops going up 
-	upwardstoidle.PushBack({ 32, 0, 32, 14 });
-	upwardstoidle.PushBack({ 64,0,32,14 });
+	upwardstoidle.PushBack({ 96, 367, 32, 14 });
+	upwardstoidle.PushBack({ 0,367,32,14 });
 	upwardstoidle.speed = 0.1f;
 	upwardstoidle.loop = false;
 	// TODO 4: Make the ship go downwards with the correct animations
 
-	downwards.PushBack({ 96,0,32,14 });
-	downwards.PushBack({ 128,0,32,14 });
+	downwards.PushBack({ 32,367,32,14 });
+	downwards.PushBack({ 64,367,32,14 });
 	downwards.speed = 0.1f;
 	downwards.loop = false;
 	//Animation when the ship stops going down
-	downwardstoidle.PushBack({ 96,0,32,14 });
-	downwardstoidle.PushBack({ 64,0,32,14 });
+	downwardstoidle.PushBack({ 64,367,32,14 });
+	downwardstoidle.PushBack({ 0,367,32,14 });
 	downwardstoidle.speed = 0.1f;
 	downwardstoidle.loop = false;
 
@@ -132,25 +123,24 @@ update_status ModulePlayer2::Update()
 
 	if (current_animation != &death && current_animation != &spawn)
 	{
-		if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
+		if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN)
+		{
 			Shoot();
 		}
 
 		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 		{
-			if (position.x - speed >= 0)
+			if (position.x - speed >= App->render->camera.x)
 			{
 				position.x -= speed;
-				App->particles->Laserexplosion.position.x -= speed;
 			}
 		}
 
 		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 		{
-			if (position.x + speed <= SCREEN_WIDTH - 32)   //32 is the ship's width
+			if (position.x + speed <= App->render->camera.x + App->render->camera.w - 32)   //32 is the ship's width
 			{
 				position.x += speed;
-				App->particles->Laserexplosion.position.x += speed;
 			}
 		}
 
@@ -159,7 +149,6 @@ update_status ModulePlayer2::Update()
 			if (position.y + speed <= SCREEN_HEIGHT - 14)
 			{
 				position.y += speed;
-				App->particles->Laserexplosion.position.y += speed;
 			}
 			if (current_animation != &downwards)
 			{
@@ -181,7 +170,6 @@ update_status ModulePlayer2::Update()
 			if (position.y - speed >= 2)
 			{
 				position.y -= speed;
-				App->particles->Laserexplosion.position.y -= speed;
 			}
 			if (current_animation != &upwards)
 			{
@@ -200,15 +188,23 @@ update_status ModulePlayer2::Update()
 		}
 
 	}
+
+	//update the position of the cannon
+	cannon_position.x = position.x + 32;
+	cannon_position.y = position.y-3;
+
+	laser_beam_position.x = position.x + 32;
+	laser_beam_position.y = position.y + 1;
+
 	// Draw everything --------------------------------------
 	player2collider->SetPos(position.x, position.y);
 	if (current_animation == &spawn)
 	{
-		App->render->Blit(graphics, position.x - 32, position.y - 7, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(graphics, position.x - 32, position.y - 7, &(current_animation->GetCurrentFrame())); //We adjust the position of the drawing because of the size of the sprite
 	}
 	else if (current_animation == &death)
 	{
-		App->render->Blit(graphics, position.x - 23, position.y - 5, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(graphics, position.x - 32, position.y - 8, &(current_animation->GetCurrentFrame()));//We adjust the position of the drawing because of the size of the sprite
 	}
 	else
 	{
@@ -224,7 +220,7 @@ update_status ModulePlayer2::Update()
 	sprintf_s(score_text2, 10, "%7d", score2);
 
 	App->fonts->BlitText(50, 25, font_2, score_text2);
-
+	
 
 	return UPDATE_CONTINUE;
 }
@@ -254,12 +250,17 @@ void ModulePlayer2::Shoot()
 	/*App->particles->AddParticle(App->particles->Laserexplosion, position.x + 32, position.y);*/
 	App->particles->AddParticle(App->particles->laser, position.x + 35, position.y + 4, COLLIDER_PLAYER2_SHOT);
 
+	App->particles->AddParticle(App->particles->Laserexplosion, position.x + 35, position.y + 4, COLLIDER_NONE, 0, &cannon_position);
+	App->particles->AddParticle(App->particles->Laserexplosion, position.x + 35, position.y + 4, COLLIDER_NONE, 150, &cannon_position);
+
 	if (SDL_GetTicks() - weapon_fired)
 	{
 		if (weapon == LASER_BEAM && weapon_level >= 3 && SDL_GetTicks() - weapon_fired >= 1000)
 		{
 			App->audio->PlaySoundEffect(laser_sound);
 
+			App->particles->AddParticle(App->particles->laser_cannon, position.x + 35, position.y + 4, COLLIDER_NONE, 0, &laser_beam_position);
+			
 			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER2_SHOT);
 			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER2_SHOT, 20);
 			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER2_SHOT, 40);

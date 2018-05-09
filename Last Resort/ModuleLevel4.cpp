@@ -58,6 +58,16 @@ bool ModuleLevel4::Start()
 	wall = App->textures->Load("assets/sprites/movingwall.png");
 	pinchywall = App->textures->Load("assets/sprites/lastrespinchywall.png");
 
+	
+	boss_fight = false;
+
+	start_time = SDL_GetTicks();
+
+
+	//Music load
+	main_track_lvl4 = App->audio->LoadMusic("assets/music/9. Melting point (stage 4).ogg");
+	boss_track_lvl4 = App->audio->LoadMusic("assets/music/10. Dusky (Boss 4).ogg");
+
 	App->player->p1dead = false;
 	App->player2->p2dead = false;
 	App->player2->life = 1;
@@ -87,6 +97,9 @@ bool ModuleLevel4::CleanUp()
 	App->textures->Unload(wall);
 	App->textures->Unload(pinchywall);
 
+	App->audio->UnloadMusic(main_track_lvl4);
+	App->audio->UnloadMusic(boss_track_lvl4);
+
 	App->player->Disable();
 	App->enemies->Disable();
 
@@ -99,10 +112,22 @@ bool ModuleLevel4::CleanUp()
 // Update: draw background
 update_status ModuleLevel4::Update()
 {
+	if (!boss_fight)
+		App->audio->PlayMusic(main_track_lvl4,ONCE);
+	
+	if (boss_fight)
+		App->audio->PlayMusic(boss_track_lvl4,ONCE);
+	
+	if (SDL_GetTicks() - start_time >= 202000 && !boss_fight) //After 202 seconds, the music changes from the maintrack to the boss track
+	{
+		App->audio->StopAudio();
+		boss_fight = true;
+	}
+
 	// Move camera forward -----------------------------
 	App->render->camera.x += 1 * SCREEN_SIZE;
 	
-
+	
 
 	if (App->player->IsEnabled() == false && App->player2->IsEnabled() == false)
 	{
@@ -134,6 +159,10 @@ update_status ModuleLevel4::Update()
 	{
 		wallmovdownposition.y += 1;
 		
+
+	App->player->position.x += 1;
+	App->player2->position.x += 1;
+	
 
 		if (wallmovdownposition.y == 0)
 			maxreached = true;
@@ -172,7 +201,7 @@ update_status ModuleLevel4::Update()
 	//End of Pinchy Wall movement
 	
 
-	App->player->position.x += 1;
+	
 	App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 1); // back background
 	App->render->Blit(wall, wallmovdownposition.x, wallmovdownposition.y, &wallrect, 1);
 	App->render->Blit(pinchywall, pinchywallposition.x, pinchywallposition.y, &pinchywalanim.GetCurrentFrame());
@@ -180,7 +209,8 @@ update_status ModuleLevel4::Update()
 
 
 
-	if (App->input->keyboard[SDL_SCANCODE_F4] == 1)
+
+	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
 	{
 		if (App->player2->life != 0)
 		{
