@@ -102,7 +102,7 @@ ModuleParticles::ModuleParticles()
 	Laserexplosion.anim.PushBack({ 95, 241, 10, 9 });
 	Laserexplosion.anim.PushBack({ 82, 239, 13, 12 });
 	Laserexplosion.anim.loop = false;
-	Laserexplosion.anim.speed = 0.5f;
+	Laserexplosion.anim.speed = 0.7f;
 
 	//Laser particle
 	laser.anim.PushBack({ 115,244,15,7});

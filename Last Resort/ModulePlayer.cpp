@@ -30,8 +30,8 @@ ModulePlayer::ModulePlayer()
 	spawn.PushBack({ 64,162,64,25 });
 	spawn.PushBack({ 64,187,64,25 });
 	spawn.PushBack({ 64,212,64,25 });
-	spawn.PushBack({ 128,125,64,25 });
-	spawn.PushBack({ 128,150,64,25 });
+	spawn.PushBack({ 128,127,64,25 });
+	spawn.PushBack({ 128,152,64,25 });
 	spawn.loop = false;
 	spawn.speed = 0.2f;
 
@@ -233,11 +233,11 @@ update_status ModulePlayer::Update()
 	// Draw everything --------------------------------------
 	if (current_animation == &spawn)
 	{
-		App->render->Blit(graphics, position.x - 32, position.y - 7, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(graphics, position.x - 32, position.y - 5, &(current_animation->GetCurrentFrame()));//We adjust the position of the drawing because of the size of the sprite
 	}
 	else if (current_animation == &death)
 	{
-		App->render->Blit(graphics, position.x - 23, position.y - 5, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(graphics, position.x - 23, position.y - 5, &(current_animation->GetCurrentFrame()));//We adjust the position of the drawing because of the size of the sprite
 	}
 	else
 	{

@@ -19,63 +19,54 @@ ModulePlayer2::ModulePlayer2()
 	position.x = 50;
 	position.y = 100;
 	//Spawn animation
-	spawn.PushBack({ 0,137,64,25 });
-	spawn.PushBack({ 0,162,64,25 });
-	spawn.PushBack({ 0,187,64,25 });
-	spawn.PushBack({ 0,212,64,25 });
-	spawn.PushBack({ 64,137,64,25 });
-	spawn.PushBack({ 64,162,64,25 });
-	spawn.PushBack({ 64,187,64,25 });
-	spawn.PushBack({ 64,212,64,25 });
-	spawn.PushBack({ 128,125,64,25 });
-	spawn.PushBack({ 128,150,64,25 });
+	spawn.PushBack({ 0, 462, 119, 25 });
+	spawn.PushBack({ 139, 462, 93, 25 });
+	spawn.PushBack({ 232, 462, 75, 25 });
+	spawn.PushBack({ 311, 462, 74, 25 });
+	spawn.PushBack({ 384, 462, 64, 25 });
+	spawn.PushBack({ 448, 462, 64, 25 });
+	for (int i = 0; i < 8; ++i)
+		spawn.PushBack({ 0 + 64 * i,487,64,25 });
 	spawn.loop = false;
 	spawn.speed = 0.2f;
 
+	
+
 	//Death animation
-	death.PushBack({ 0,16,55,17 });
-	death.PushBack({ 0,33,55,17 });
-	death.PushBack({ 0,50,55,17 });
-	death.PushBack({ 0,67,55,17 });
-	death.PushBack({ 0,84,55,17 });
-	death.PushBack({ 0,101,55,17 });
-	death.PushBack({ 55,16,55,17 });
-	death.PushBack({ 55,33,55,17 });
-	death.PushBack({ 55,50,55,17 });
-	death.PushBack({ 55,67,55,17 });
-	death.PushBack({ 55,84,55,17 });
-	death.PushBack({ 55,101,55,17 });
-	death.PushBack({ 110,16,55,17 });
-	death.PushBack({ 110,33,55,17 });
-	death.PushBack({ 110,50,55,17 });
-	death.PushBack({ 110,67,55,17 });
-	death.PushBack({ 110,84,55,17 });
-	death.PushBack({ 110,101,55,17 });
+	death.PushBack({0,386,64,24 });
+	death.PushBack({ 64,386,64,24 });
+	death.PushBack({ 128,386,64,24 });
+	death.PushBack({ 458,386,64,24 });
+
+	for (int i=0;i<8;++i)
+		death.PushBack({0+i*64,410,64,24});
+	for (int i = 0; i<8; ++i)
+		death.PushBack({ 0 + i * 64,434,64,28 });
 	death.loop = false;
 	death.speed = 0.3f;
 
-	idle.PushBack({ 0,387,32,14 });
+	idle.PushBack({ 0,367,32,14 });
 	// go upwards animation (neo-geo sprite sheet)
 
 
-	upwards.PushBack({ 96, 387, 32, 14 });
-	upwards.PushBack({129, 387, 32, 14 });
+	upwards.PushBack({ 96, 367, 32, 14 });
+	upwards.PushBack({129, 367, 32, 14 });
 	upwards.speed = 0.1f;
 	upwards.loop = false;
 	//Animation when the ship stops going up 
-	upwardstoidle.PushBack({ 96, 387, 32, 14 });
-	upwardstoidle.PushBack({ 0,387,32,14 });
+	upwardstoidle.PushBack({ 96, 367, 32, 14 });
+	upwardstoidle.PushBack({ 0,367,32,14 });
 	upwardstoidle.speed = 0.1f;
 	upwardstoidle.loop = false;
 	// TODO 4: Make the ship go downwards with the correct animations
 
-	downwards.PushBack({ 32,387,32,14 });
-	downwards.PushBack({ 64,387,32,14 });
+	downwards.PushBack({ 32,367,32,14 });
+	downwards.PushBack({ 64,367,32,14 });
 	downwards.speed = 0.1f;
 	downwards.loop = false;
 	//Animation when the ship stops going down
-	downwardstoidle.PushBack({ 64,387,32,14 });
-	downwardstoidle.PushBack({ 0,387,32,14 });
+	downwardstoidle.PushBack({ 64,367,32,14 });
+	downwardstoidle.PushBack({ 0,367,32,14 });
 	downwardstoidle.speed = 0.1f;
 	downwardstoidle.loop = false;
 
@@ -122,6 +113,10 @@ bool ModulePlayer2::CleanUp()
 // Update: draw background
 update_status ModulePlayer2::Update()
 {
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN)
+		current_animation = &death;
+
+
 	if (weapon_level == 2)
 	{
 		App->ball_player2->Enable();
@@ -132,13 +127,14 @@ update_status ModulePlayer2::Update()
 
 	if (current_animation != &death && current_animation != &spawn)
 	{
-		if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
+		if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN)
+		{
 			Shoot();
 		}
 
 		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 		{
-			if (position.x - speed >= 0)
+			if (position.x - speed >= App->render->camera.x)
 			{
 				position.x -= speed;
 			}
@@ -208,11 +204,11 @@ update_status ModulePlayer2::Update()
 	player2collider->SetPos(position.x, position.y);
 	if (current_animation == &spawn)
 	{
-		App->render->Blit(graphics, position.x - 32, position.y - 7, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(graphics, position.x - 32, position.y - 7, &(current_animation->GetCurrentFrame())); //We adjust the position of the drawing because of the size of the sprite
 	}
 	else if (current_animation == &death)
 	{
-		App->render->Blit(graphics, position.x - 23, position.y - 5, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(graphics, position.x - 32, position.y - 8, &(current_animation->GetCurrentFrame()));//We adjust the position of the drawing because of the size of the sprite
 	}
 	else
 	{

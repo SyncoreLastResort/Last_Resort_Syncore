@@ -35,6 +35,16 @@ bool ModuleLevel4::Start()
 
 	backgroundtilemap = App->textures->Load("assets/sprites/Stage4_tilemap.png");
 
+	
+	boss_fight = false;
+
+	start_time = SDL_GetTicks();
+
+
+	//Music load
+	main_track_lvl4 = App->audio->LoadMusic("assets/music/9. Melting point (stage 4).ogg");
+	boss_track_lvl4 = App->audio->LoadMusic("assets/music/10. Dusky (Boss 4).ogg");
+
 	App->player->p1dead = false;
 	App->player2->p2dead = false;
 	App->player2->life = 1;
@@ -52,6 +62,9 @@ bool ModuleLevel4::CleanUp()
 
 	App->textures->Unload(backgroundtilemap);
 
+	App->audio->UnloadMusic(main_track_lvl4);
+	App->audio->UnloadMusic(boss_track_lvl4);
+
 	App->player->Disable();
 
 	if (App->player2->IsEnabled() == true)
@@ -63,10 +76,22 @@ bool ModuleLevel4::CleanUp()
 // Update: draw background
 update_status ModuleLevel4::Update()
 {
+	if (!boss_fight)
+		App->audio->PlayMusic(main_track_lvl4,ONCE);
+	
+	if (boss_fight)
+		App->audio->PlayMusic(boss_track_lvl4,ONCE);
+	
+	if (SDL_GetTicks() - start_time >= 202000 && !boss_fight) //After 202 seconds, the music changes from the maintrack to the boss track
+	{
+		App->audio->StopAudio();
+		boss_fight = true;
+	}
+
 	// Move camera forward -----------------------------
 	App->render->camera.x += 1 * SCREEN_SIZE;
 	
-
+	
 
 	if (App->player->IsEnabled() == false && App->player2->IsEnabled() == false)
 	{
