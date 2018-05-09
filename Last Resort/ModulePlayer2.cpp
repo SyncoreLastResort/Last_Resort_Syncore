@@ -81,7 +81,7 @@ bool ModulePlayer2::Start()
 {
 	LOG("Loading player");
 	
-	
+	position.x = App->render->camera.x + 50;
 	death.Reset();
 	spawn.Reset();
 	current_animation = &spawn;

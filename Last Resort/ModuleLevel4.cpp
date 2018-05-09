@@ -118,6 +118,7 @@ update_status ModuleLevel4::Update()
 	App->render->camera.x += 1 * SCREEN_SIZE;
 
 	App->player->position.x += 1;
+
 	if (App->player2->IsEnabled() == true)
 		App->player2->position.x += 1;
 
