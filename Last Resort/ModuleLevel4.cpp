@@ -23,6 +23,17 @@ ModuleLevel4::ModuleLevel4()
 	backgroundtilemaprect.w = 2699;
 	backgroundtilemaprect.h = 224;
 
+	//Background 
+	backgroundrect.x = 0;
+	backgroundrect.y = 0;
+	backgroundrect.w = 4143;
+	backgroundrect.h = 224;
+
+	//Foreground
+	foregroundrect.x = 0;
+	foregroundrect.y = 0;
+	foregroundrect.w = 4143;
+	foregroundrect.h = 224;
 
 	//Wall mov down
 	wallrect.x = 0;
@@ -55,6 +66,9 @@ bool ModuleLevel4::Start()
 	LOG("Loading level1 scene");
 
 	backgroundtilemap = App->textures->Load("assets/sprites/Stage4_tilemap.png");
+	background = App->textures->Load("assets/sprites/Background.png");
+	foreground = App->textures->Load("assets/sprites/Foreground.png");
+
 	wall = App->textures->Load("assets/sprites/movingwall.png");
 	pinchywall = App->textures->Load("assets/sprites/lastrespinchywall.png");
 
@@ -96,6 +110,8 @@ bool ModuleLevel4::CleanUp()
 	App->textures->Unload(backgroundtilemap);
 	App->textures->Unload(wall);
 	App->textures->Unload(pinchywall);
+	App->textures->Unload(background);
+	App->textures->Unload(foreground);
 
 	App->audio->UnloadMusic(main_track_lvl4);
 	App->audio->UnloadMusic(boss_track_lvl4);
@@ -205,12 +221,12 @@ update_status ModuleLevel4::Update()
 	//End of Pinchy Wall movement
 	
 
-	
-	App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 1); // back background
+	App->render->Blit(background, 0, 0, &backgroundrect, 1); //background
+	//App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 1); // back background
 	App->render->Blit(wall, wallmovdownposition.x, wallmovdownposition.y, &wallrect, 1);
 	App->render->Blit(pinchywall, pinchywallposition.x, pinchywallposition.y, &pinchywalanim.GetCurrentFrame());
+	App->render->Blit(foreground, 0, 0, &foregroundrect, 1); //foreground
 	// Draw everything --------------------------------------
-
 
 
 
