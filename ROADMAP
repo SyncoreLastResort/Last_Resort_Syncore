@@ -12,7 +12,7 @@ Starting from 0.5 to 1.0
 
 --Version 0.6--
 
--Insert background animations and walls that do not move  with colliders
+-Insert background and walls that do not move  with colliders
 -Main Menu Neo-Geo Animation
 -Moving walls implemented (animation and colliders)
 -Audio (level main track, boss track)
@@ -20,6 +20,7 @@ Starting from 0.5 to 1.0
 
 --Version 0.7--
 
+-Background Animations
 -Main Menu Last Resort Animation
 -Basic enemies 
 -Tutorial and Intro Cinematic
