@@ -28,13 +28,17 @@ Starting from 0.5 to 1.0
 --Version 0.8--
 
 -Boss and complex enemies
+-Credits system
+-Score system out of player
 
 --Version 0.9--
+
 -Stage Clear, Win/Lose condition perfectioning
 -Imitate original game
 -UI, -Score perfectioning
 
 --Version 1.0--
+
 -Polish, Debug Functionality
 -Intensive testing and 1.0 bugs correction
 
