@@ -24,11 +24,18 @@ public:
 	uint fx = 0;*/
 
 	SDL_Texture * introbackground = nullptr;
+	SDL_Texture * black = nullptr;
 	SDL_Texture * Max330 = nullptr;
 	SDL_Texture * MegaPro = nullptr;
 	SDL_Texture * SNK_Logo = nullptr;
-	SDL_Texture * SNK_Logo2 = nullptr;
-	SDL_Texture * LastResort = nullptr;
+	SDL_Texture * L = nullptr;
+	SDL_Texture * A = nullptr;
+	SDL_Texture * S = nullptr;
+	SDL_Texture * T = nullptr;
+	SDL_Texture * R = nullptr;
+	SDL_Texture * E = nullptr;
+	SDL_Texture * O = nullptr;
+	SDL_Texture * Button = nullptr;
 
 	Animation* current_animation = nullptr;
 	Animation intro_neogeo;
@@ -36,7 +43,14 @@ public:
 	Animation mega_pro;
 	Animation SNK; 
 	Animation C_sprite;
-	
+	Animation L_Anim;
+	Animation A_Anim;
+	Animation S_Anim;
+	Animation T_Anim;
+	Animation R_Anim;
+	Animation E_Anim;
+	Animation O_Anim;
+
 	
 	SDL_Rect introrect;
 	Mix_Music* maintrackintro = nullptr;

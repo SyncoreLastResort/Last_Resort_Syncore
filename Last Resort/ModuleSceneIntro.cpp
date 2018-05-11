@@ -1,5 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
+#include "Animation.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
@@ -23,6 +24,13 @@ ModuleSceneIntro::ModuleSceneIntro()
 	mega_pro.Reset();
 	SNK.Reset();
 	C_sprite.Reset();
+	L_Anim.Reset();
+	A_Anim.Reset();
+	S_Anim.Reset();
+	T_Anim.Reset();
+	R_Anim.Reset();
+	E_Anim.Reset();
+	O_Anim.Reset();
 
 	//NeoGeo
 	intro_neogeo.PushBack({ 0, 0, 39, 40 });
@@ -140,6 +148,143 @@ ModuleSceneIntro::ModuleSceneIntro()
 	C_sprite.PushBack({ 693, 928, 240, 40 });
 	C_sprite.speed = 0.1f;
 
+	//L
+	L_Anim.PushBack({ 341, 297, 21, 121});
+	L_Anim.PushBack({ 320, 297, 21, 121 });
+	L_Anim.PushBack({ 299, 297, 21, 121 });
+	L_Anim.PushBack({ 276, 297, 23, 121 });
+	L_Anim.PushBack({ 253, 297, 23, 121 });
+	L_Anim.PushBack({ 230, 297, 23, 121 });
+	L_Anim.PushBack({ 207, 297, 23, 121 });
+	L_Anim.PushBack({ 184, 297, 23, 121 });
+	L_Anim.PushBack({ 161, 297, 23, 121 });
+	L_Anim.PushBack({ 137, 297, 23, 121 });
+	L_Anim.PushBack({ 92, 297, 32, 121 });
+	L_Anim.PushBack({ 46, 297, 40, 121 });
+	L_Anim.PushBack({ 0, 297, 45, 121 });
+	L_Anim.PushBack({ 425, 171, 32, 126 });
+	L_Anim.PushBack({ 374, 171, 48, 126 });
+	L_Anim.PushBack({ 328, 171, 46, 126 });
+	L_Anim.PushBack({ 280, 171, 48, 126 });
+	L_Anim.PushBack({ 232, 171, 48, 126 });
+	L_Anim.PushBack({ 189, 171, 43, 126 });
+	L_Anim.PushBack({ 141, 171, 48, 126 });
+	L_Anim.PushBack({ 94, 171, 47, 126 });
+	L_Anim.PushBack({ 47, 171, 47, 126 });
+	L_Anim.PushBack({ 0, 171, 46, 126 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 114, 46, 57 });
+	L_Anim.PushBack({ 368, 114, 46, 57 });
+	L_Anim.PushBack({ 322, 114, 46, 57 });
+	L_Anim.PushBack({ 276, 114, 46, 57 });
+	L_Anim.PushBack({ 230, 114, 46, 57 });
+	L_Anim.PushBack({ 184, 114, 46, 57 });
+	L_Anim.PushBack({ 138, 114, 46, 57 });
+	L_Anim.PushBack({ 92, 114, 46, 57 });
+	L_Anim.PushBack({ 46, 114, 46, 57 });
+	L_Anim.PushBack({ 0, 114, 46, 57 });
+	L_Anim.PushBack({ 414, 57, 46, 57 });
+	L_Anim.PushBack({ 368, 57, 46, 57 });
+	L_Anim.PushBack({ 322, 57, 46, 57 });
+	L_Anim.PushBack({ 276, 57, 46, 57 });
+	L_Anim.PushBack({ 230, 57, 46, 57 });
+	L_Anim.PushBack({ 184, 57, 46, 57 });
+	L_Anim.PushBack({ 138, 57, 46, 57 });
+	L_Anim.PushBack({ 92, 57, 46, 57 });
+	L_Anim.PushBack({ 46, 57, 46, 57 });
+	L_Anim.PushBack({ 0, 57, 46, 57 });
+	L_Anim.PushBack({ 414, 0, 46, 57 });
+	L_Anim.PushBack({ 368, 0, 46, 57 });
+	L_Anim.PushBack({ 322, 0, 46, 57 });
+	L_Anim.PushBack({ 276, 0, 46, 57 });
+	L_Anim.PushBack({ 230, 0, 46, 57 });
+	L_Anim.PushBack({ 184, 0, 46, 57 });
+	L_Anim.PushBack({ 138, 0, 46, 57 });
+	L_Anim.PushBack({ 92, 0, 46, 57 });
+	L_Anim.PushBack({ 46, 0, 46, 57 });
+	L_Anim.PushBack({ 0, 0, 46, 57 });
+	L_Anim.PushBack({ 46, 0, 46, 57 });
+	L_Anim.PushBack({ 92, 0, 46, 57 });
+	L_Anim.PushBack({ 138, 0, 46, 57 });
+	L_Anim.PushBack({ 184, 0, 46, 57 });
+	L_Anim.PushBack({ 230, 0, 46, 57 });
+	L_Anim.PushBack({ 276, 0, 46, 57 });
+	L_Anim.PushBack({ 322, 0, 46, 57 });
+	L_Anim.PushBack({ 368, 0, 46, 57 });
+	L_Anim.PushBack({ 414, 0, 46, 57 });
+	L_Anim.PushBack({ 0, 57, 46, 57 });
+	L_Anim.PushBack({ 46, 57, 46, 57 });
+	L_Anim.PushBack({ 92, 57, 46, 57 });
+	L_Anim.PushBack({ 138, 57, 46, 57 });
+	L_Anim.PushBack({ 184, 57, 46, 57 });
+	L_Anim.PushBack({ 230, 57, 46, 57 });
+	L_Anim.PushBack({ 276, 57, 46, 57 });
+	L_Anim.PushBack({ 322, 57, 46, 57 });
+	L_Anim.PushBack({ 368, 57, 46, 57 });
+	L_Anim.PushBack({ 414, 57, 46, 57 });
+	L_Anim.PushBack({ 0, 114, 46, 57 });
+	L_Anim.PushBack({ 46, 114, 46, 57 });
+	L_Anim.PushBack({ 92, 114, 46, 57 });
+	L_Anim.PushBack({ 138, 114, 46, 57 });
+	L_Anim.PushBack({ 184, 114, 46, 57 });
+	L_Anim.PushBack({ 230, 114, 46, 57 });
+	L_Anim.PushBack({ 276, 114, 46, 57 });
+	L_Anim.PushBack({ 322, 114, 46, 57 });
+	L_Anim.PushBack({ 368, 114, 46, 57 });
+	L_Anim.loop = false;
+	L_Anim.speed = 0.3f;
+
+	//A
+
+
+
+
+
+
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -151,10 +296,18 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading intro");
 	
 	introbackground = App->textures->Load("assets/sprites/Intro_Neogeo/Title_Neogeo_Begining_Sprite.png");
+	black = App->textures->Load("assets/sprites/Intro_Neogeo/Black.png");
 	Max330 = App->textures->Load("assets/sprites/Intro_Neogeo/MAX_330.png");
 	MegaPro = App->textures->Load("assets/sprites/Intro_Neogeo/MegaPro.png");
 	SNK_Logo = App->textures->Load("assets/sprites/Intro_Neogeo/SNK_Beginning_Sprite.png");
-	LastResort = App->textures->Load("assets/sprites/Last_Resort_Intro.png");
+	L = App->textures->Load("assets/sprites/Intro_LogoLastResort/L_Sprite.png");
+	A = App->textures->Load("assets/sprites/Intro_LogoLastResort/A_Sprite.png");
+	S = App->textures->Load("assets/sprites/Intro_LogoLastResort/S_Sprite.png");
+	T = App->textures->Load("assets/sprites/Intro_LogoLastResort/T_Sprite.png");
+	R = App->textures->Load("assets/sprites/Intro_LogoLastResort/R_Sprite.png");
+	E = App->textures->Load("assets/sprites/Intro_LogoLastResort/E_Sprite.png");
+	O = App->textures->Load("assets/sprites/Intro_LogoLastResort/O_Sprite.png");
+
 
 	maintrackintro = App->audio->LoadMusic("assets/music/1.Last resort title.ogg");
 	
@@ -171,10 +324,17 @@ bool ModuleSceneIntro::CleanUp()
 	LOG("Unloading intro scene");
 
 	App->textures->Unload(introbackground);
+	App->textures->Unload(black);
 	App->textures->Unload(Max330);
 	App->textures->Unload(MegaPro);
 	App->textures->Unload(SNK_Logo);
-	App->textures->Unload(LastResort);
+	App->textures->Unload(L);
+	App->textures->Unload(A);
+	App->textures->Unload(S);
+	App->textures->Unload(T);
+	App->textures->Unload(R);
+	App->textures->Unload(E); 
+	App->textures->Unload(O);
 
 	/*App->audio->StopAudio();*/
 	App->audio->UnloadMusic(maintrackintro);
@@ -185,7 +345,7 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	App->audio->PlayMusic(maintrackintro, ONCE);
+
 
 
 	// Draw everything --------------------------------------
@@ -206,7 +366,15 @@ update_status ModuleSceneIntro::Update()
 		App->render->Blit(introbackground, 49, 50, &(C_sprite.GetCurrentFrame()));
 	}
 	if (C_sprite.Finished()) {
-		App->render->Blit(LastResort, 0, 0, &introrect);
+		App->render->Blit(black, 0, 0, &introrect);
+		App->audio->PlayMusic(maintrackintro, ONCE);
+		App->render->Blit(L, 56, 16, &(L_Anim.GetCurrentFrame()));
+		App->render->Blit(A, 56, 16, &(A_Anim.GetCurrentFrame()));
+		App->render->Blit(S, 56, 16, &(S_Anim.GetCurrentFrame()));
+		App->render->Blit(T, 56, 16, &(T_Anim.GetCurrentFrame()));
+		App->render->Blit(R, 56, 16, &(R_Anim.GetCurrentFrame()));
+		App->render->Blit(E, 56, 16, &(E_Anim.GetCurrentFrame()));
+		App->render->Blit(O, 56, 16, &(O_Anim.GetCurrentFrame()));
 	}
 	
 
