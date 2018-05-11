@@ -543,7 +543,63 @@ ModuleSceneIntro::ModuleSceneIntro()
 	S_Anim.speed = 0.3f;
 
 	//T
+	T_Anim.PushBack({ 376, 374, 46, 121 });
+	T_Anim.PushBack({ 330, 374, 46, 121 });
+	T_Anim.PushBack({ 284, 374, 46, 121 });
+	T_Anim.PushBack({ 238, 374, 46, 121 });
+	T_Anim.PushBack({ 192, 374, 46, 121 });
+	T_Anim.PushBack({ 144, 374, 48, 121 });
+	T_Anim.PushBack({ 96, 374, 48, 121 });
+	T_Anim.PushBack({ 48, 374, 48, 121 });
+	T_Anim.PushBack({ 0, 374, 48, 121 });
+	T_Anim.PushBack({ 432, 253, 48, 121 });
+	T_Anim.PushBack({ 384, 253, 48, 121 });
+	T_Anim.PushBack({ 336, 253, 48, 121 });
+	T_Anim.PushBack({ 288, 253, 48, 121 });
+	T_Anim.PushBack({ 240, 253, 48, 121 });
+	T_Anim.PushBack({ 192, 253, 48, 121 });
+	T_Anim.PushBack({ 144, 253, 48, 121 });
+	T_Anim.PushBack({ 96, 253, 48, 121 });
+	T_Anim.PushBack({ 48, 253, 48, 121 });
+	T_Anim.PushBack({ 0, 253, 48, 121 });
+	T_Anim.PushBack({ 427, 125, 48, 128 });
+	T_Anim.PushBack({ 379, 125, 48, 128 });
+	T_Anim.PushBack({ 331, 125, 48, 128 });
+	T_Anim.PushBack({ 283, 125, 48, 128 });
+	T_Anim.PushBack({ 234, 125, 49, 128 });
+	T_Anim.PushBack({ 185, 125, 49, 128 });
+	T_Anim.PushBack({ 138, 125, 47, 128 });
+	T_Anim.PushBack({ 92, 125, 46, 128 });
+	T_Anim.PushBack({ 46, 125, 46, 128 });
+	T_Anim.PushBack({ 0, 125, 46, 128 });
 
+	T_Anim.PushBack({ 460, 60, 46, 65 });
+	T_Anim.PushBack({ 414, 60, 46, 65 });
+	T_Anim.PushBack({ 368, 60, 46, 65 });
+	T_Anim.PushBack({ 322, 60, 46, 65 });
+	T_Anim.PushBack({ 276, 60, 46, 65 });
+	T_Anim.PushBack({ 230, 60, 46, 65 });
+	T_Anim.PushBack({ 184, 60, 46, 65 });
+	T_Anim.PushBack({ 138, 60, 46, 65 });
+	T_Anim.PushBack({ 92, 60, 46, 65 });
+	T_Anim.PushBack({ 46, 60, 46, 65 });
+	T_Anim.PushBack({ 0, 60, 46, 65 });
+
+	T_Anim.PushBack({ 460, 0, 45, 59 });
+	T_Anim.PushBack({ 414, 0, 45, 59 });
+	T_Anim.PushBack({ 368, 0, 45, 59 });
+	T_Anim.PushBack({ 322, 0, 45, 59 });
+	T_Anim.PushBack({ 276, 0, 45, 59 });
+	T_Anim.PushBack({ 230, 0, 45, 59 });
+	T_Anim.PushBack({ 184, 0, 45, 59 });
+	T_Anim.PushBack({ 138, 0, 45, 59 });
+	T_Anim.PushBack({ 92, 0, 45, 59 });
+	T_Anim.PushBack({ 46, 0, 45, 59 });
+	T_Anim.PushBack({ 0, 0, 45, 59 });
+
+
+	T_Anim.loop = false;
+	T_Anim.speed = 0.3f;
 
 
 
@@ -632,10 +688,10 @@ update_status ModuleSceneIntro::Update()
 	if (C_sprite.Finished()) {*/
 		App->render->Blit(black, 0, 0, &introrect);
 		App->audio->PlayMusic(maintrackintro, ONCE);
-		App->render->Blit(L, 60, 16, &(L_Anim.GetCurrentFrame()));
-		App->render->Blit(A, 106, 16, &(A_Anim.GetCurrentFrame()));
-		App->render->Blit(S, 158, 16, &(S_Anim.GetCurrentFrame()));
-		App->render->Blit(T, 236, 16, &(T_Anim.GetCurrentFrame()));
+		App->render->Blit(L, 70, 16, &(L_Anim.GetCurrentFrame()));
+		App->render->Blit(A, 116, 16, &(A_Anim.GetCurrentFrame()));
+		App->render->Blit(S, 168, 16, &(S_Anim.GetCurrentFrame()));
+		App->render->Blit(T, 202, 16, &(T_Anim.GetCurrentFrame()));
 		App->render->Blit(R, 6, 16, &(R_Anim.GetCurrentFrame()));
 		App->render->Blit(E, 66, 16, &(E_Anim.GetCurrentFrame()));
 		//App->render->Blit(S, 126, 16, &(S_Anim.GetCurrentFrame()));
