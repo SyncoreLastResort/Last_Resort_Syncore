@@ -32,121 +32,121 @@ ModuleSceneIntro::ModuleSceneIntro()
 	E_Anim.Reset();
 	O_Anim.Reset();
 
-	//NeoGeo
-	intro_neogeo.PushBack({ 0, 0, 39, 40 });
-	intro_neogeo.PushBack({ 38, 0, 39, 40 });
-	intro_neogeo.PushBack({ 77, 0, 66, 40 });
-	intro_neogeo.PushBack({ 143, 0, 68, 40 });
-	intro_neogeo.PushBack({ 211, 0, 85, 40 });
-	intro_neogeo.PushBack({ 296, 0, 100, 40 });
-	intro_neogeo.PushBack({ 396, 0, 112, 40 });
-	intro_neogeo.PushBack({ 508, 0, 127, 40 });
-	intro_neogeo.PushBack({ 635, 0, 141, 40 });
-	intro_neogeo.PushBack({ 776, 0, 156, 40 });
-	intro_neogeo.PushBack({ 0, 40, 168, 40 });
-	intro_neogeo.PushBack({ 169, 40, 186, 40 });
-	intro_neogeo.PushBack({ 355, 40, 199, 40 });
-	intro_neogeo.PushBack({ 554, 40, 210, 40 });
-	intro_neogeo.PushBack({ 766, 40, 227, 40 });
-	intro_neogeo.PushBack({ 0, 82, 227, 36 });
-	intro_neogeo.PushBack({ 227, 82, 227, 36 });
-	intro_neogeo.PushBack({ 454, 82, 227, 36 });
-	intro_neogeo.PushBack({ 681, 82, 227, 36 });
-	intro_neogeo.PushBack({ 0, 118, 227, 28 });
-	intro_neogeo.PushBack({ 227, 118, 227, 28 });
-	intro_neogeo.PushBack({ 454, 118, 227, 28 });
-	intro_neogeo.PushBack({ 681, 118, 227, 28 });
-	intro_neogeo.PushBack({ 0, 146, 227, 18 });
-	intro_neogeo.PushBack({ 227, 146, 227, 18 });
-	intro_neogeo.PushBack({ 454, 146, 224, 18 });
-	intro_neogeo.PushBack({ 678, 146, 227, 18 });
-	intro_neogeo.PushBack({ 0, 164, 224, 9 });
-	intro_neogeo.PushBack({ 227, 164, 221, 9 });
-	intro_neogeo.PushBack({ 454, 164, 227, 9 });
-	intro_neogeo.PushBack({ 680, 164, 227, 9 });
-	intro_neogeo.PushBack({ 0, 387, 221, 9 });
-	intro_neogeo.PushBack({ 221, 387, 224, 9});
-	intro_neogeo.PushBack({ 446, 387, 224, 9 });
-	intro_neogeo.PushBack({ 670, 387, 227, 10 });
-	intro_neogeo.PushBack({ 0, 399, 227, 12 });
-	intro_neogeo.PushBack({ 227, 399, 224, 19 });
-	intro_neogeo.PushBack({ 454, 399, 224, 19});
-	intro_neogeo.PushBack({ 681, 399, 227, 19 });
-	intro_neogeo.PushBack({ 0, 419, 227, 29 });
-	intro_neogeo.PushBack({ 227, 419, 227, 29 });
-	intro_neogeo.PushBack({ 454, 419, 227, 29 });
-	intro_neogeo.PushBack({ 681, 419, 227, 29 });
-	intro_neogeo.PushBack({ 0, 448, 227, 40 });
-	intro_neogeo.PushBack({ 227, 448, 227, 40 });
-	intro_neogeo.PushBack({ 454, 448, 227, 40 });
-	intro_neogeo.PushBack({ 681, 448, 227, 40 });
-	intro_neogeo.loop = false;
-	intro_neogeo.speed = 0.5f;
+	////NeoGeo
+	//intro_neogeo.PushBack({ 0, 0, 39, 40 });
+	//intro_neogeo.PushBack({ 38, 0, 39, 40 });
+	//intro_neogeo.PushBack({ 77, 0, 66, 40 });
+	//intro_neogeo.PushBack({ 143, 0, 68, 40 });
+	//intro_neogeo.PushBack({ 211, 0, 85, 40 });
+	//intro_neogeo.PushBack({ 296, 0, 100, 40 });
+	//intro_neogeo.PushBack({ 396, 0, 112, 40 });
+	//intro_neogeo.PushBack({ 508, 0, 127, 40 });
+	//intro_neogeo.PushBack({ 635, 0, 141, 40 });
+	//intro_neogeo.PushBack({ 776, 0, 156, 40 });
+	//intro_neogeo.PushBack({ 0, 40, 168, 40 });
+	//intro_neogeo.PushBack({ 169, 40, 186, 40 });
+	//intro_neogeo.PushBack({ 355, 40, 199, 40 });
+	//intro_neogeo.PushBack({ 554, 40, 210, 40 });
+	//intro_neogeo.PushBack({ 766, 40, 227, 40 });
+	//intro_neogeo.PushBack({ 0, 82, 227, 36 });
+	//intro_neogeo.PushBack({ 227, 82, 227, 36 });
+	//intro_neogeo.PushBack({ 454, 82, 227, 36 });
+	//intro_neogeo.PushBack({ 681, 82, 227, 36 });
+	//intro_neogeo.PushBack({ 0, 118, 227, 28 });
+	//intro_neogeo.PushBack({ 227, 118, 227, 28 });
+	//intro_neogeo.PushBack({ 454, 118, 227, 28 });
+	//intro_neogeo.PushBack({ 681, 118, 227, 28 });
+	//intro_neogeo.PushBack({ 0, 146, 227, 18 });
+	//intro_neogeo.PushBack({ 227, 146, 227, 18 });
+	//intro_neogeo.PushBack({ 454, 146, 224, 18 });
+	//intro_neogeo.PushBack({ 678, 146, 227, 18 });
+	//intro_neogeo.PushBack({ 0, 164, 224, 9 });
+	//intro_neogeo.PushBack({ 227, 164, 221, 9 });
+	//intro_neogeo.PushBack({ 454, 164, 227, 9 });
+	//intro_neogeo.PushBack({ 680, 164, 227, 9 });
+	//intro_neogeo.PushBack({ 0, 387, 221, 9 });
+	//intro_neogeo.PushBack({ 221, 387, 224, 9});
+	//intro_neogeo.PushBack({ 446, 387, 224, 9 });
+	//intro_neogeo.PushBack({ 670, 387, 227, 10 });
+	//intro_neogeo.PushBack({ 0, 399, 227, 12 });
+	//intro_neogeo.PushBack({ 227, 399, 224, 19 });
+	//intro_neogeo.PushBack({ 454, 399, 224, 19});
+	//intro_neogeo.PushBack({ 681, 399, 227, 19 });
+	//intro_neogeo.PushBack({ 0, 419, 227, 29 });
+	//intro_neogeo.PushBack({ 227, 419, 227, 29 });
+	//intro_neogeo.PushBack({ 454, 419, 227, 29 });
+	//intro_neogeo.PushBack({ 681, 419, 227, 29 });
+	//intro_neogeo.PushBack({ 0, 448, 227, 40 });
+	//intro_neogeo.PushBack({ 227, 448, 227, 40 });
+	//intro_neogeo.PushBack({ 454, 448, 227, 40 });
+	//intro_neogeo.PushBack({ 681, 448, 227, 40 });
+	//intro_neogeo.loop = false;
+	//intro_neogeo.speed = 0.5f;
 
-	//Max330
-	max330.PushBack({ 0, 0, 10, 15 });
-	max330.PushBack({ 0, 0, 20, 15 });
-	max330.PushBack({ 0, 0, 30, 15 });
-	max330.PushBack({ 0, 0, 40, 15 });
-	max330.PushBack({ 0, 0, 50, 15 });
-	max330.PushBack({ 0, 0, 60, 15 });
-	max330.PushBack({ 0, 0, 70, 15 });
-	max330.PushBack({ 0, 0, 80, 15 });
-	max330.PushBack({ 0, 0, 90, 15 });
-	max330.PushBack({ 0, 0, 100, 15 });
-	max330.PushBack({ 0, 0, 110, 15 });
-	max330.PushBack({ 0, 0, 120, 15 });
-	max330.PushBack({ 0, 0, 130, 15 });
-	max330.PushBack({ 0, 0, 133, 15 });
-	max330.loop = false;
-	max330.speed = 0.3f;
+	////Max330
+	//max330.PushBack({ 0, 0, 10, 15 });
+	//max330.PushBack({ 0, 0, 20, 15 });
+	//max330.PushBack({ 0, 0, 30, 15 });
+	//max330.PushBack({ 0, 0, 40, 15 });
+	//max330.PushBack({ 0, 0, 50, 15 });
+	//max330.PushBack({ 0, 0, 60, 15 });
+	//max330.PushBack({ 0, 0, 70, 15 });
+	//max330.PushBack({ 0, 0, 80, 15 });
+	//max330.PushBack({ 0, 0, 90, 15 });
+	//max330.PushBack({ 0, 0, 100, 15 });
+	//max330.PushBack({ 0, 0, 110, 15 });
+	//max330.PushBack({ 0, 0, 120, 15 });
+	//max330.PushBack({ 0, 0, 130, 15 });
+	//max330.PushBack({ 0, 0, 133, 15 });
+	//max330.loop = false;
+	//max330.speed = 0.3f;
 
-	//MegaPro
-	mega_pro.PushBack({ 0, 0, 10, 15 });
-	mega_pro.PushBack({ 0, 0, 20, 15 });
-	mega_pro.PushBack({ 0, 0, 30, 15 });
-	mega_pro.PushBack({ 0, 0, 40, 15 });
-	mega_pro.PushBack({ 0, 0, 50, 15 });
-	mega_pro.PushBack({ 0, 0, 60, 15 });
-	mega_pro.PushBack({ 0, 0, 70, 15 });
-	mega_pro.PushBack({ 0, 0, 80, 15 });
-	mega_pro.PushBack({ 0, 0, 90, 15 });
-	mega_pro.PushBack({ 0, 0, 100, 15 });
-	mega_pro.PushBack({ 0, 0, 110, 15 });
-	mega_pro.PushBack({ 0, 0, 120, 15 });
-	mega_pro.PushBack({ 0, 0, 130, 15 });
-	mega_pro.PushBack({ 0, 0, 133, 15 });
-	mega_pro.loop = false;
-	mega_pro.speed = 0.3f;
+	////MegaPro
+	//mega_pro.PushBack({ 0, 0, 10, 15 });
+	//mega_pro.PushBack({ 0, 0, 20, 15 });
+	//mega_pro.PushBack({ 0, 0, 30, 15 });
+	//mega_pro.PushBack({ 0, 0, 40, 15 });
+	//mega_pro.PushBack({ 0, 0, 50, 15 });
+	//mega_pro.PushBack({ 0, 0, 60, 15 });
+	//mega_pro.PushBack({ 0, 0, 70, 15 });
+	//mega_pro.PushBack({ 0, 0, 80, 15 });
+	//mega_pro.PushBack({ 0, 0, 90, 15 });
+	//mega_pro.PushBack({ 0, 0, 100, 15 });
+	//mega_pro.PushBack({ 0, 0, 110, 15 });
+	//mega_pro.PushBack({ 0, 0, 120, 15 });
+	//mega_pro.PushBack({ 0, 0, 130, 15 });
+	//mega_pro.PushBack({ 0, 0, 133, 15 });
+	//mega_pro.loop = false;
+	//mega_pro.speed = 0.3f;
 
-	//SNK
-	SNK.PushBack({ 216, 0, 72, 18 });
-	SNK.PushBack({ 288, 0, 72, 18 });
-	SNK.PushBack({ 360, 0, 72, 18 });
-	SNK.PushBack({ 432, 0, 72, 18 });
-	SNK.PushBack({ 0, 19, 72, 18 });
-	SNK.PushBack({ 72, 19, 72, 18 });
-	SNK.PushBack({ 144, 19, 72, 18 });
-	SNK.PushBack({ 216, 19, 72, 18 });
-	SNK.PushBack({ 288, 19, 72, 18 });
-	SNK.PushBack({ 360, 19, 72, 18 });
-	SNK.PushBack({ 432, 19, 72, 18 });
-	SNK.PushBack({ 0, 38, 72, 18 });
-	SNK.PushBack({ 72, 38, 72, 18 });
-	SNK.PushBack({ 144, 38, 72, 18 });
-	SNK.PushBack({ 216, 38, 72, 18 });
-	SNK.PushBack({ 288, 38, 72, 18 });
-	SNK.PushBack({ 360, 38, 72, 18 });
-	SNK.loop = false;
-	SNK.speed = 0.3f;
+	////SNK
+	//SNK.PushBack({ 216, 0, 72, 18 });
+	//SNK.PushBack({ 288, 0, 72, 18 });
+	//SNK.PushBack({ 360, 0, 72, 18 });
+	//SNK.PushBack({ 432, 0, 72, 18 });
+	//SNK.PushBack({ 0, 19, 72, 18 });
+	//SNK.PushBack({ 72, 19, 72, 18 });
+	//SNK.PushBack({ 144, 19, 72, 18 });
+	//SNK.PushBack({ 216, 19, 72, 18 });
+	//SNK.PushBack({ 288, 19, 72, 18 });
+	//SNK.PushBack({ 360, 19, 72, 18 });
+	//SNK.PushBack({ 432, 19, 72, 18 });
+	//SNK.PushBack({ 0, 38, 72, 18 });
+	//SNK.PushBack({ 72, 38, 72, 18 });
+	//SNK.PushBack({ 144, 38, 72, 18 });
+	//SNK.PushBack({ 216, 38, 72, 18 });
+	//SNK.PushBack({ 288, 38, 72, 18 });
+	//SNK.PushBack({ 360, 38, 72, 18 });
+	//SNK.loop = false;
+	//SNK.speed = 0.3f;
 
-	//C
-	C_sprite.PushBack({ 693, 928, 240, 40 });
-	C_sprite.PushBack({ 693, 928, 240, 40 });
-	C_sprite.PushBack({ 693, 928, 240, 40 });
-	C_sprite.PushBack({ 693, 928, 240, 40 });
-	C_sprite.PushBack({ 693, 928, 240, 40 });
-	C_sprite.speed = 0.1f;
+	////C
+	//C_sprite.PushBack({ 693, 928, 240, 40 });
+	//C_sprite.PushBack({ 693, 928, 240, 40 });
+	//C_sprite.PushBack({ 693, 928, 240, 40 });
+	//C_sprite.PushBack({ 693, 928, 240, 40 });
+	//C_sprite.PushBack({ 693, 928, 240, 40 });
+	//C_sprite.speed = 0.1f;
 
 	//L
 	L_Anim.PushBack({ 341, 297, 21, 121});
@@ -279,6 +279,138 @@ ModuleSceneIntro::ModuleSceneIntro()
 	L_Anim.speed = 0.3f;
 
 	//A
+	A_Anim.PushBack({ 483, 277, 12, 122 });
+	A_Anim.PushBack({ 483, 277, 12, 122 });
+	A_Anim.PushBack({ 483, 277, 12, 122 });
+	A_Anim.PushBack({ 483, 277, 12, 122 });
+	A_Anim.PushBack({ 483, 277, 12, 122 });
+	A_Anim.PushBack({ 483, 277, 12, 122 });
+	A_Anim.PushBack({ 483, 277, 12, 122 });
+	A_Anim.PushBack({ 483, 277, 12, 122 });
+	A_Anim.PushBack({ 483, 277, 12, 122 });
+	A_Anim.PushBack({ 483, 277, 12, 122 });
+	A_Anim.PushBack({ 483, 277, 12, 122 });
+	A_Anim.PushBack({ 471, 277, 12, 122 });
+	A_Anim.PushBack({ 458, 277, 13, 122 });
+	A_Anim.PushBack({ 445, 277, 13, 122 });
+	A_Anim.PushBack({ 432, 277, 13, 122 });
+	A_Anim.PushBack({ 419, 277, 13, 122 });
+	A_Anim.PushBack({ 406, 277, 13, 122 });
+	A_Anim.PushBack({ 393, 277, 13, 122 });
+	A_Anim.PushBack({ 375, 277, 18, 122 });
+	A_Anim.PushBack({ 356, 277, 18, 122 });
+	A_Anim.PushBack({ 338, 277, 18, 122 });
+	A_Anim.PushBack({ 317, 277, 21, 122 });
+	A_Anim.PushBack({ 295, 277, 22, 122 });
+	A_Anim.PushBack({ 272, 277, 23, 122 });
+	A_Anim.PushBack({ 248, 277, 24, 122 });
+	A_Anim.PushBack({ 216, 277, 32, 122 });
+	A_Anim.PushBack({ 173, 277, 43, 122 });
+	A_Anim.PushBack({ 132, 277, 41, 122 });
+	A_Anim.PushBack({ 93, 277, 39, 122 });
+	A_Anim.PushBack({ 50, 277, 43, 122 });
+	A_Anim.PushBack({ 0, 277, 49, 122 });
+	A_Anim.PushBack({ 457, 171, 51, 106 });
+	A_Anim.PushBack({ 406, 171, 51, 106 });
+	A_Anim.PushBack({ 356, 171, 51, 106 });
+	A_Anim.PushBack({ 305, 171, 51, 106 });
+	A_Anim.PushBack({ 254, 171, 51, 106 });
+	A_Anim.PushBack({ 203, 171, 51, 106 });
+	A_Anim.PushBack({ 152, 171, 51, 106 });
+	A_Anim.PushBack({ 101, 171, 51, 106 });
+	A_Anim.PushBack({ 50, 171, 51, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.PushBack({ 450, 114, 50, 57 });
+	A_Anim.PushBack({ 400, 114, 50, 57 });
+	A_Anim.PushBack({ 350, 114, 50, 57 });
+	A_Anim.PushBack({ 300, 114, 50, 57 });
+	A_Anim.PushBack({ 250, 114, 50, 57 });
+	A_Anim.PushBack({ 200, 114, 50, 57 });
+	A_Anim.PushBack({ 150, 114, 50, 57 });
+	A_Anim.PushBack({ 100, 114, 50, 57 });
+	A_Anim.PushBack({ 50, 114, 50, 57 });
+	A_Anim.PushBack({ 0, 114, 50, 57 });
+	A_Anim.PushBack({ 450, 57, 50, 57 });
+	A_Anim.PushBack({ 400, 57, 50, 57 });
+	A_Anim.PushBack({ 350, 57, 50, 57 });
+	A_Anim.PushBack({ 300, 57, 50, 57 });
+	A_Anim.PushBack({ 250, 57, 50, 57 });
+	A_Anim.PushBack({ 200, 57, 50, 57 });
+	A_Anim.PushBack({ 150, 57, 50, 57 });
+	A_Anim.PushBack({ 100, 57, 50, 57 });
+	A_Anim.PushBack({ 50, 57, 50, 57 });
+	A_Anim.PushBack({ 0, 57, 50, 57 });
+	A_Anim.PushBack({ 450, 0, 50, 57 });
+	A_Anim.PushBack({ 400, 0, 50, 57 });
+	A_Anim.PushBack({ 350, 0, 50, 57 });
+	A_Anim.PushBack({ 300, 0, 50, 57 });
+	A_Anim.PushBack({ 250, 0, 50, 57 });
+	A_Anim.PushBack({ 200, 0, 50, 57 });
+	A_Anim.PushBack({ 150, 0, 50, 57 });
+	A_Anim.PushBack({ 100, 0, 50, 57 });
+	A_Anim.PushBack({ 50, 0, 50, 57 });
+	A_Anim.PushBack({ 0, 0, 50, 57 });
+	A_Anim.PushBack({ 50, 0, 50, 57 });
+	A_Anim.PushBack({ 100, 0, 50, 57 });
+	A_Anim.PushBack({ 150, 0, 50, 57 });
+	A_Anim.PushBack({ 200, 0, 50, 57 });
+	A_Anim.PushBack({ 250, 0, 50, 57 });
+	A_Anim.PushBack({ 300, 0, 50, 57 });
+	A_Anim.PushBack({ 350, 0, 50, 57 });
+	A_Anim.PushBack({ 400, 0, 50, 57 });
+	A_Anim.PushBack({ 450, 0, 50, 57 });
+	A_Anim.PushBack({ 0, 57, 50, 57 });
+	A_Anim.PushBack({ 50, 57, 50, 57 });
+	A_Anim.PushBack({ 100, 57, 50, 57 });
+	A_Anim.PushBack({ 150, 57, 50, 57 });
+	A_Anim.PushBack({ 200, 57, 50, 57 });
+	A_Anim.PushBack({ 250, 57, 50, 57 });
+	A_Anim.PushBack({ 300, 57, 50, 57 });
+	A_Anim.PushBack({ 350, 57, 50, 57 });
+	A_Anim.PushBack({ 400, 57, 50, 57 });
+	A_Anim.PushBack({ 450, 57, 50, 57 });
+	A_Anim.PushBack({ 0, 114, 50, 57 });
+	A_Anim.PushBack({ 50, 114, 50, 57 });
+	A_Anim.PushBack({ 100, 114, 50, 57 });
+	A_Anim.PushBack({ 150, 114, 50, 57 });
+	A_Anim.PushBack({ 200, 114, 50, 57 });
+	A_Anim.PushBack({ 250, 114, 50, 57 });
+	A_Anim.PushBack({ 300, 114, 50, 57 });
+	A_Anim.PushBack({ 350, 114, 50, 57 });
+	A_Anim.PushBack({ 400, 114, 50, 57 });
+	A_Anim.PushBack({ 450, 114, 50, 57 });
+	A_Anim.PushBack({ 0, 171, 50, 106 });
+	A_Anim.loop = false;
+	A_Anim.speed = 0.3f;
+
+
 
 
 
@@ -353,7 +485,7 @@ update_status ModuleSceneIntro::Update()
 	
 	App->render->Blit(introbackground, 50 , 50, &(intro_neogeo.GetCurrentFrame()));
 		
-	if (intro_neogeo.Finished()){
+	/*if (intro_neogeo.Finished()){
 		App->render->Blit(Max330, 90, 100, &(max330.GetCurrentFrame()));
 		}
 	if (max330.Finished()) {
@@ -365,17 +497,20 @@ update_status ModuleSceneIntro::Update()
 	if (SNK.Finished()) {
 		App->render->Blit(introbackground, 49, 50, &(C_sprite.GetCurrentFrame()));
 	}
-	if (C_sprite.Finished()) {
+	if (C_sprite.Finished()) {*/
 		App->render->Blit(black, 0, 0, &introrect);
 		App->audio->PlayMusic(maintrackintro, ONCE);
-		App->render->Blit(L, 56, 16, &(L_Anim.GetCurrentFrame()));
-		App->render->Blit(A, 56, 16, &(A_Anim.GetCurrentFrame()));
-		App->render->Blit(S, 56, 16, &(S_Anim.GetCurrentFrame()));
-		App->render->Blit(T, 56, 16, &(T_Anim.GetCurrentFrame()));
-		App->render->Blit(R, 56, 16, &(R_Anim.GetCurrentFrame()));
-		App->render->Blit(E, 56, 16, &(E_Anim.GetCurrentFrame()));
-		App->render->Blit(O, 56, 16, &(O_Anim.GetCurrentFrame()));
-	}
+		App->render->Blit(L, 60, 16, &(L_Anim.GetCurrentFrame()));
+		App->render->Blit(A, 106, 16, &(A_Anim.GetCurrentFrame()));
+		App->render->Blit(S, 176, 16, &(S_Anim.GetCurrentFrame()));
+		App->render->Blit(T, 236, 16, &(T_Anim.GetCurrentFrame()));
+		App->render->Blit(R, 6, 16, &(R_Anim.GetCurrentFrame()));
+		App->render->Blit(E, 66, 16, &(E_Anim.GetCurrentFrame()));
+		App->render->Blit(S, 126, 16, &(S_Anim.GetCurrentFrame()));
+		App->render->Blit(O, 186, 16, &(O_Anim.GetCurrentFrame()));
+		App->render->Blit(R, 246, 16, &(R_Anim.GetCurrentFrame()));
+		App->render->Blit(T, 306, 16, &(T_Anim.GetCurrentFrame()));
+	//}
 	
 
 	if(App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && App->fade->IsFading() == false)
