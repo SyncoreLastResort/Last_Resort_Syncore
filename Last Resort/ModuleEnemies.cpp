@@ -31,7 +31,7 @@ bool ModuleEnemies::Start()
 
 	
 	sprites = App->textures->Load("assets/sprites/Common_enemyes_Sprite.png");
-	
+	someenemies = App->textures->Load("assets/sprites/Enemys_Stage4_Sprites.png");
 
 	return true;
 }
@@ -95,6 +95,7 @@ bool ModuleEnemies::CleanUp()
 	LOG("Freeing all enemies");
 
 	App->textures->Unload(sprites);
+	App->textures->Unload(someenemies);
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
