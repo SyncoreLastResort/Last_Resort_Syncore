@@ -35,6 +35,7 @@ public:
 	SDL_Texture * R = nullptr;
 	SDL_Texture * E = nullptr;
 	SDL_Texture * O = nullptr;
+	SDL_Texture * lastresort = nullptr;
 	SDL_Texture * Button = nullptr;
 
 	Animation* current_animation = nullptr;
@@ -49,11 +50,16 @@ public:
 	Animation T_Anim;
 	Animation R_Anim;
 	Animation E_Anim;
+	Animation S2_Anim;
 	Animation O_Anim;
+	Animation R2_Anim;
+	Animation T2_Anim;
+	Animation StartButton;
 
-	
 	SDL_Rect introrect;
 	Mix_Music* maintrackintro = nullptr;
+
+	bool end = false;
 };
 
 #endif // __MODULESCENEINTRO_H__
