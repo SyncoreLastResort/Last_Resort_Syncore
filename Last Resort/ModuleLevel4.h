@@ -2,6 +2,7 @@
 #define __MODULELEVEL4_H__
 
 #include "Module.h"
+#include "Animation.h"
 
 
 struct SDL_Texture;
@@ -17,13 +18,17 @@ public:
 	bool CleanUp();
 
 public:
-
-  	SDL_Rect backgroundrect;
-	SDL_Rect foregroundrect;
-	SDL_Texture* background = nullptr;
-	SDL_Texture* foreground = nullptr;
-	Animation Back_lava;
-	Animation Fore_lava;
+	SDL_Rect backgroundtilemaprect;
+	SDL_Rect foregroundtilemaprect;
+	SDL_Rect cannon_platform;
+	SDL_Rect cannon_platform_end;
+	SDL_Texture* backgroundtilemap = nullptr;
+	SDL_Texture* foregroundtilemap = nullptr;
+	SDL_Texture* BackLavaAnim = nullptr;
+	SDL_Texture* Enemies_1 = nullptr;
+	Animation Back_Lava;
+	Animation Front_Lava;
+	Animation op_cannon;
 
 };
 
