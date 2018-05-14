@@ -16,7 +16,8 @@ private:
 	Path powerupholderpath;
 	Path powerupholderpath2;
 	uint changeanim = 1;
-	/*int counterposx = 0;*/
+	/*int counterposx = 0;*/ 
+	bool timetosin = false;
 
 public:
 

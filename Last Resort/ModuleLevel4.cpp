@@ -96,7 +96,11 @@ bool ModuleLevel4::Start()
 	colliderpinchywall = App->collision->AddCollider({ pinchywallposition.x, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
 		
 
-	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 200, SCREEN_HEIGHT-65);
+	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 300, SCREEN_HEIGHT-65);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 500, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 550, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 600, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 650, SCREEN_HEIGHT / 2);
 
 
 	return true;
@@ -131,9 +135,9 @@ update_status ModuleLevel4::Update()
 
 
 	// Move camera forward -----------------------------
-	/*App->render->camera.x += 1 * SCREEN_SIZE;
+	App->render->camera.x += 1 * SCREEN_SIZE;
 
-	App->player->position.x += 1;*/
+	App->player->position.x += 1;
 
 	if (App->player2->IsEnabled() == true)
 		App->player2->position.x += 1;

@@ -14,7 +14,8 @@ enum ENEMY_TYPES
 	Power_Up_Holder,
 	RHINO,
 	POWER_UP,
-	POWER_UP_BOMB
+	POWER_UP_BOMB,
+	RedBird
 };
 
 class Enemy;

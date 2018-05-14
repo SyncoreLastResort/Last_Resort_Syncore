@@ -33,7 +33,7 @@ PowerUpHolder::PowerUpHolder(int x, int y) : Enemy(x, y)
 	collider = App->collision->AddCollider({ 0, 0, 24, 24 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	powerupholderpath.PushBack({ -0.5,0 }, 40, &walk);
-	powerupholderpath2.PushBack({ -0.5,-0.5 }, 20, &fly);
+	powerupholderpath2.PushBack({ -0.5,-0.5 }, 30, &fly);
 
 	original_y = y;
 	original_x = x;
@@ -43,38 +43,52 @@ void PowerUpHolder::Move()
 {
 	
 	
-	if (original_x - position.x <= 20 && animation==&walk)
+	if (original_x - position.x <= 40 && animation==&walk)
 	{
 		position.x = original_x + powerupholderpath.GetCurrentPosition().x;
 		position.y = original_y + powerupholderpath.GetCurrentPosition().y;
 	}
 	else
 	{
-		if (original_y - position.y < 60)
+		if (original_y - position.y < 60 && timetosin==false)
 		{
+			if (changeanim == 1)
+			{
+				original_y = position.y;
+				original_x = position.x;
+			}
 			position.x = original_x + powerupholderpath2.GetCurrentPosition().x;
 		position.y = original_y + powerupholderpath2.GetCurrentPosition().y;
 	    }
 
 		else 
 		{
-
-			if (going_up)
+			if (timetosin == false)
 			{
-				if (wave > 1.0f)
-					going_up = false;
-				else
-					wave += 0.05f;
-			}
-			else
-			{
-				if (wave < -1.0f)
-					going_up = true;
-				else
-					wave -= 0.05f;
+				timetosin = true;
+				original_y = position.y;
+				original_x = position.x;
 			}
 
-			position.y = int(float(original_y) + (25.0f * sinf(wave)));
+			if (original_x - position.x > 10)
+			{
+				if (going_up)
+				{
+					if (wave > 1.0f)
+						going_up = false;
+					else
+						wave += 0.08f;
+				}
+				else
+				{
+					if (wave < -1.0f)
+						going_up = true;
+					else
+						wave -= 0.08f;
+				}
+
+				position.y = int(float(original_y) + (25.0f * sinf(wave)));
+			}
 			position.x -= 1;
 		}
 

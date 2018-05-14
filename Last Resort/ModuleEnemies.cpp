@@ -9,6 +9,7 @@
 #include "ModuleRhino.h"
 #include "PowerUp.h"
 #include "PowerUpBomb.h"
+#include "EnemyRedBird.h"
 
 
 
@@ -154,6 +155,10 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 
 		case ENEMY_TYPES::POWER_UP_BOMB:
 			enemies[i] = new Power_Up_Bomb(info.x, info.y);
+			break;
+
+		case ENEMY_TYPES::RedBird:
+			enemies[i] = new Enemy_RedBird(info.x, info.y);
 			break;
 	
 		}

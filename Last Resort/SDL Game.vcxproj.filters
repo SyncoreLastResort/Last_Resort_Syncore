@@ -113,6 +113,9 @@
     <ClInclude Include="PowerUpHolder.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyRedBird.h">
+      <Filter>Modules\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -197,6 +200,9 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="PowerUpHolder.cpp">
+      <Filter>Modules\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyRedBird.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
