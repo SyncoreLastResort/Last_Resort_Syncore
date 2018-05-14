@@ -5,9 +5,12 @@
 #include "Animation.h"
 #include "ModulePlayer.h"
 #include "ModulePlayer2.h"
+#include "String.h"
+
 
 struct SDL_Texture;
 struct Collider;
+struct SDL_Texture;
 enum WEAPON_TYPE;
 
 class Enemy
@@ -20,6 +23,7 @@ public:
 	fPoint position;
 	float life;
 	uint score;
+	SDL_Texture * texturename;
 	enum WEAPON_TYPE weapon_upgraded;
 	
 

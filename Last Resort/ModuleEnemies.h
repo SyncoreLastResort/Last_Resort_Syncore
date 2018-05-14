@@ -11,10 +11,11 @@
 enum ENEMY_TYPES
 {
 	NO_TYPE,
-	WASP,
+	Power_Up_Holder,
 	RHINO,
 	POWER_UP,
-	POWER_UP_BOMB
+	POWER_UP_BOMB,
+	RedBird
 };
 
 class Enemy;
@@ -41,6 +42,9 @@ public:
 
 	bool AddEnemy(ENEMY_TYPES type, int x, int y);
 
+	SDL_Texture* sprites = nullptr;
+	SDL_Texture* someenemies = nullptr;
+
 private:
 
 	void SpawnEnemy(const EnemyInfo& info);
@@ -48,8 +52,6 @@ private:
 private:
 	EnemyInfo queue[MAX_ENEMIES];
 	Enemy* enemies[MAX_ENEMIES];
-	SDL_Texture* sprites = nullptr;
-	SDL_Texture* powerups = nullptr;
 };
 
 #endif // __ModuleEnemies_H__
