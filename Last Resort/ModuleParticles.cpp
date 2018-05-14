@@ -15,11 +15,14 @@ ModuleParticles::ModuleParticles()
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
 	
-	for (int i = 0; i < 2; ++i)
-		for (int j = 0; j < 4; ++j)
-			laser_cannon.anim.PushBack({ 0+i*31, 319+j*13, 31, 13 });
-
 	
+	for (int j = 0; j < 3; ++j)
+		laser_cannon.anim.PushBack({ 0, 319+j*13, 31, 13 });
+
+	laser_cannon.anim.PushBack({0,358,31,9});
+
+	for (int j = 0; j < 3; ++j)
+		laser_cannon.anim.PushBack({ 31, 319 + j * 13, 31, 13 });
 
 	laser_cannon.anim.loop = false;
 	laser_cannon.anim.speed = 0.3;
@@ -152,6 +155,7 @@ ModuleParticles::ModuleParticles()
 	boss_cooling.anim.loop = false;
 	boss_cooling.speed.x = -0.5;
 
+
 	enemy_explosion.anim.PushBack({ 286, 347, 16, 16 });
 	enemy_explosion.anim.PushBack({ 302, 347, 22, 22 });
 	enemy_explosion.anim.PushBack({ 324, 347, 27, 27 });
@@ -167,8 +171,6 @@ ModuleParticles::ModuleParticles()
 	enemy_explosion.anim.speed = 0.7;
 	enemy_explosion.speed.x = -0.5;
 	enemy_explosion.anim.loop = false;
-
-
 }
 
 ModuleParticles::~ModuleParticles()

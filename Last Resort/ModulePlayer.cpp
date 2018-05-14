@@ -97,6 +97,8 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 
+	App->ball_player1->Enable();
+
 	deathsound = App->audio->LoadSoundEffect("assets/sounds/005.Death.wav");
 	laser_sound = App->audio->LoadSoundEffect("assets/sounds/013.Laser1_Center.wav");
 	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
@@ -138,19 +140,22 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	
+	initial_pos = position;
+
 	if (weapon_level == 2)
 	{
 		App->ball_player1->Enable();
 	}
-	
+
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
 	{
 		godmode = !godmode;
 	}
-	
+
 	if (current_animation == &spawn&&current_animation->Finished())
 		current_animation = &idle;
-	
+
 	if (current_animation != &death && current_animation != &spawn)
 	{
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
@@ -217,16 +222,16 @@ update_status ModulePlayer::Update()
 				current_animation = &upwardstoidle;
 			}
 		}
-		
+
 	}
-	
+
 
 	//update the particles that appear when we shoot
 	cannon_position.x = position.x + 32;
-	cannon_position.y = position.y-1;
+	cannon_position.y = position.y - 1;
 
 	laser_beam_position.x = position.x + 32;
-	laser_beam_position.y = position.y+1;
+	laser_beam_position.y = position.y + 1;
 
 	playercollider->SetPos(position.x, position.y); //Update the position of the collider
 
@@ -241,10 +246,10 @@ update_status ModulePlayer::Update()
 	}
 	else
 	{
-	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 	}
-	
-	if (current_animation == &death &&current_animation->Finished() && App->player2->IsEnabled()==false)
+
+	if (current_animation == &death &&current_animation->Finished() && App->player2->IsEnabled() == false)
 	{
 		App->fade->FadeToBlack((Module*)App->level4, (Module *)App->gameover);
 		App->player->Disable();
@@ -253,9 +258,42 @@ update_status ModulePlayer::Update()
 	// Draw UI (score) --------------------------------------
 	sprintf_s(score_text, 10, "%7d", score);
 
-	// TODO 3: Blit the text of the score in at the bottom of the screen
 	App->fonts->BlitText(0, 25, font_score, score_text);
 
+
+
+
+	if (final_pos->x > initial_pos.x)
+	{
+		going_left = false;
+		going_right = true;
+	}
+	else if (final_pos->x < initial_pos.x)
+	{
+		going_right = false;
+		going_left = true;
+	}
+	else if (final_pos->x==initial_pos.x)
+	{
+		going_right = false;
+		going_left = false;
+	}
+
+	if (final_pos->y > initial_pos.y)
+	{
+		going_up = false;
+		going_down = true;
+	}
+	else if (final_pos->y < initial_pos.y)
+	{
+		going_down = false;
+		going_up = true;
+	}
+	else if (final_pos->y == initial_pos.y)
+	{
+		going_down = false;
+		going_up = false;
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -287,13 +325,12 @@ void ModulePlayer::OnCollision(Collider * col_1, Collider * col_2)
 void ModulePlayer::Shoot()
 {
 	
-		/*App->particles->AddParticle(App->particles->Laserexplosion, App->player->position.x + 32, App->player->position.y);*/
-		App->particles->AddParticle(App->particles->laser, position.x + 35, position.y + 4, COLLIDER_PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->laser, position.x + 35, position.y + 4, COLLIDER_PLAYER_SHOT);
 
 		App->particles->AddParticle(App->particles->Laserexplosion, position.x + 35, position.y + 4, COLLIDER_NONE, 0, &cannon_position);
 		App->particles->AddParticle(App->particles->Laserexplosion, position.x + 35, position.y + 4, COLLIDER_NONE,150, &cannon_position);
-
-
+		
+		
 		if (SDL_GetTicks() - weapon_fired)
 		{
 			if (weapon == LASER_BEAM && weapon_level >= 3 && SDL_GetTicks() - weapon_fired >= 1000)

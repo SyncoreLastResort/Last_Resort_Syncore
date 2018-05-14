@@ -158,15 +158,16 @@ update_status ModuleLevel4::Update()
 	if (maxreached == false && wallmovdownposition.y <= 0)
 	{
 		wallmovdownposition.y += 1;
-		
+	}
 
 	App->player->position.x += 1;
 	App->player2->position.x += 1;
 	
 
 		if (wallmovdownposition.y == 0)
+		{	
 			maxreached = true;
-	}
+		}
 	if (maxreached == true && wallmovdownposition.y >= -157)
 	{
 		wallmovdownposition.y -= 1;

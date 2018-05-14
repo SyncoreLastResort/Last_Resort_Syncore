@@ -57,12 +57,23 @@ ModuleBall::~ModuleBall()
 
 bool ModuleBall::Start()
 {
+	//Initial angle
+	angle = 0;
+
+	fix_position = false;
+	ball_fixed=false;
+
+
+	//Load audio
 	fix_ball = App->audio->LoadSoundEffect("assets/sounds/011.Death_ball_fix.wav");
 	unfix_ball = App->audio->LoadSoundEffect("assets/sounds/012.Death_ball_unfix.wav");
-	ball_aditional_effects = App->textures->Load("assets/sprites/Ball_aditional_effects.png");
 	release_ball_sound = App->audio->LoadSoundEffect("assets/sounds/009.Charged_shot_release.wav");
 	charge_ball_sound = App->audio->LoadSoundEffect("assets/sounds/008.Charging_shot.wav");
 	
+	//Load the texrure
+	ball_aditional_effects = App->textures->Load("assets/sprites/Ball_aditional_effects.png");
+
+	//Load colliders
 	position = { App->player->position.x +42, App->player->position.y};
 	ball1_collider = App->collision->AddCollider({ position.x, position.y, 22, 22 }, COLLIDER_BALL,this);
 	current_animation = &blueball_0;
@@ -86,22 +97,28 @@ bool ModuleBall::CleanUp()
 
 update_status ModuleBall::Update()
 {
-	
+	laps =int ( angle / (2 * PI));
+
 	if (ball_thrown == false)
 	{
-		if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
-		{
-			if (fixed)
-				App->audio->PlaySoundEffect(unfix_ball);
-			if(!fixed)
-				App->audio->PlaySoundEffect(fix_ball);
-			fixed = !fixed;
-		}
-		if (fixed == false)
-			MoveAround();
+		//move the ball
+		MoveAround();
+		if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_REPEAT)
+			aim_angle += 6;
 
-		if (fixed == true)
-			BallFixed();
+		if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN) //We fix/unfix the ball
+		{
+			if (fix_position)
+				App->audio->PlaySoundEffect(unfix_ball);
+			
+			if(!fix_position)
+				App->audio->PlaySoundEffect(fix_ball);
+			
+			fix_position = !fix_position;
+			
+			ball_fixed = false;
+		}
+		
 
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
 			ChargeBall();
@@ -131,191 +148,136 @@ update_status ModuleBall::Update()
 			ReturnBall();
 		}
 	}
+	
 
-	App->render->Blit(App->player->graphics, position.x, position.y, &current_animation->GetCurrentFrame());
-	
-	
 	ball1_collider->SetPos(position.x, position.y);
+	
+	App->render->Blit_rotate(App->player->graphics, position, 22, 16, &current_animation->GetCurrentFrame(),ball_center, aim_angle);
 	
 	return UPDATE_CONTINUE;
 }
 
 void ModuleBall::MoveAround()
 {
-	uint speed =2;
-	//Ship goes down  -  ball moves to the sides
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+
+	if (ball_fixed == false) //If the ball is fixed, it will stop rotating around the ship
 	{
-		if (position.y >= App->player->position.y - 35 || position.x != App->player->position.x +8)
+		if (App->player->going_up && App->player->going_left)
 		{
-			if (position.x >= App->player->position.x + 8 && position.y <= App->player->position.y - 1)
+			if ((SDL_sin(angle) <= sqrt(2) / 2 - 0.1 || SDL_sin(angle) >= sqrt(2) / 2 + 0.1) || (SDL_cos(angle) <= sqrt(2) / 2 - 0.1 || SDL_cos(angle) >= sqrt(2) / 2 + 0.1)) //Bottom right 
 			{
-				position.x -= speed;
-			}
-			else if (position.x >= App->player->position.x + 8 && position.y > App->player->position.y - 1)
-			{
-				position.x += speed;
-			}
-			else if (position.x < App->player->position.x + 8 && position.y <= App->player->position.y - 1)
-			{
-				position.x += speed;
-			}
-			else if (position.x < App->player->position.x + 8 && position.y > App->player->position.y - 1)
-			{
-				position.x -= speed;
+				if (SDL_sin(angle) < -sqrt(2) / 2 || cos(angle) > sqrt(2) / 2)
+					angle += rotation_speed;
+				else
+					angle -= rotation_speed;
 			}
 		}
-	}
-	//Ship goes up, ball moves to the sides
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
-	{
-		if (position.y <= App->player->position.y + 35 || position.x != App->player->position.x + 8)
+
+		else if (App->player->going_up && App->player->going_right)
 		{
-			if (position.x >= App->player->position.x + 8 && position.y <= App->player->position.y - 1)
+			if ((SDL_sin(angle) <= sqrt(2) / 2 - 0.1 || SDL_sin(angle) >= sqrt(2) / 2 + 0.1) || (SDL_cos(angle) <= -sqrt(2) / 2 - 0.1 || SDL_cos(angle) >= -sqrt(2) / 2 + 0.1))
 			{
-				position.x += speed;
-			}
-			else if (position.x >= App->player->position.x + 8 && position.y > App->player->position.y - 1)
-			{
-				position.x -= speed;
-			}
-			else if (position.x < App->player->position.x + 8 && position.y <= App->player->position.y - 1)
-			{
-				position.x -= speed;
-			}
-			else if (position.x < App->player->position.x + 8 && position.y > App->player->position.y - 1)
-			{
-				position.x += speed;
+				if (SDL_sin(angle) < -sqrt(2) / 2 || cos(angle) < -sqrt(2) / 2)
+					angle -= rotation_speed;
+				else
+					angle += rotation_speed;
 			}
 		}
-	}
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
-	{
-		if (position.x <= App->player->position.x + 42)
+
+		else if (App->player->going_down && App->player->going_right)
 		{
-			if (position.x >= App->player->position.x + 8 && position.y <= App->player->position.y - 1)
+			if ((SDL_sin(angle) <= -sqrt(2) / 2 - 0.1 || SDL_sin(angle) >= -sqrt(2) / 2 + 0.1) || (SDL_cos(angle) <= -sqrt(2) / 2 - 0.1 || SDL_cos(angle) >= -sqrt(2) / 2 + 0.1))
 			{
-				position.y += speed;
-			}
-			else if (position.x >= App->player->position.x + 8 && position.y > App->player->position.y - 1)
-			{
-				position.y -= speed;
-			}
-			else if (position.x < App->player->position.x + 8 && position.y <= App->player->position.y - 1)
-			{
-				position.y -= speed;
-			}
-			else if (position.x < App->player->position.x + 8 && position.y > App->player->position.y - 1)
-			{
-				position.y += speed;
+				if (SDL_sin(angle) > sqrt(2) / 2 || cos(angle) < -sqrt(2) / 2)
+					angle += rotation_speed;
+				else
+					angle -= rotation_speed;
 			}
 		}
+
+		else if (App->player->going_down && App->player->going_left)
+		{
+			if ((SDL_sin(angle) <= -sqrt(2) / 2 - 0.1 || SDL_sin(angle) >= -sqrt(2) / 2 + 0.1) || (SDL_cos(angle) <= sqrt(2) / 2 - 0.1 || SDL_cos(angle) >= sqrt(2) / 2 + 0.1))
+			{
+				if (SDL_sin(angle) > sqrt(2) / 2 || cos(angle) > sqrt(2) / 2)
+					angle -= rotation_speed;
+				else
+					angle += rotation_speed;
+			}
+		}
+
+		else if (App->player->going_up)
+		{
+			if (SDL_sin(angle) < 0.999) // When the ball gets to the lowest position - The sin of the angle never gets to 1, so we try to get as close as posible
+			{
+				if (position.x + 8 > App->player->position.x + 16)
+					angle += rotation_speed;
+
+				else if (position.x + 8 <= App->player->position.x + 16)
+					angle -= rotation_speed;
+			}
+
+		}
+
+		else if (App->player->going_down)
+		{
+			if (SDL_sin(angle) > -0.999)// When the ball gets to the highest position - The sin of the angle never gets to 1, so we try to get as close as posible
+			{
+				if (position.x + 8 >= App->player->position.x + 14)
+					angle -= rotation_speed;
+
+				else if (position.x + 8 < App->player->position.x + 14)
+					angle += rotation_speed;
+			}
+		}
+
+		else if (App->player->going_left)
+		{
+			if (SDL_cos(angle) < 0.999)// When the ball gets to the right - The cos of the angle never gets to 1, so we try to get as close as posible
+			{
+				if (position.y + 8 < App->player->position.y + 7)
+					angle += rotation_speed;
+
+				else if (position.y + 8 >= App->player->position.y + 7)
+					angle -= rotation_speed;
+			}
+
+		}
+
+		else if (App->player->going_right)
+		{
+			if (SDL_cos(angle) > -0.999)// When the ball gets to the left - The cos of the angle never gets to 1, so we try to get as close as posible
+			{
+				if (position.y + 8 >= App->player->position.y + 11)
+					angle += rotation_speed;
+				if (position.y + 8 < App->player->position.y + 11)
+					angle -= rotation_speed;
+			}
+		}
+
+		if (fix_position == true)
+		{
+			//We fix the ball at the spots we want to
+			if ((SDL_sin(angle) >= sqrt(2) / 2 - 0.1 && SDL_sin(angle) <= sqrt(2) / 2 + 0.1)) //bottom corners
+				ball_fixed = true;
+
+			if ((SDL_sin(angle) >= -sqrt(2) / 2 - 0.1 && SDL_sin(angle) <= -sqrt(2) / 2 + 0.1)) // top corners 
+				ball_fixed = true;
 		
-	}
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
-	{
-		if (position.x >= App->player->position.x - 26)
-		{
-			if (position.x >= App->player->position.x + 8 && position.y <= App->player->position.y - 1)
-			{
-				position.y -= speed;
-			}
-			else if (position.x >= App->player->position.x + 8 && position.y > App->player->position.y - 1)
-			{
-				position.y += speed;
-			}
-			else if (position.x < App->player->position.x + 8 && position.y <= App->player->position.y - 1)
-			{
-				position.y += speed;
-			}
-			else if (position.x < App->player->position.x + 8 && position.y > App->player->position.y - 1)
-			{
-				position.y -= speed;
-			}
+			if (SDL_sin(angle) < 0.05 && SDL_sin(angle) > -0.01) //sides
+				ball_fixed = true;
+
+			if (SDL_cos(angle) < 0.05 && SDL_cos(angle) > -0.05) // top or bottom
+				ball_fixed = true;
 		}
 	}
-	//We change the animation depending on the position of the ball
-	if (getPosition() == TOP)
-		current_animation = &blueball_90;
-
-	else if (getPosition() == BOTTOM)
-		current_animation = &blueball_270;
-
-	else if (getPosition() == RIGHT_SIDE)
-		current_animation = &blueball_0;
-
-	else if (getPosition() == RIGHT_TOP)
-		current_animation = &blueball_45;
-
-	else if (getPosition() == RIGHT_BOTTOM)
-		current_animation = &blueball_315;
-
-	else if (getPosition() == LEFT_SIDE)
-		current_animation = &blueball_180;
 	
-	else if (getPosition() == LEFT_TOP)
-		current_animation = &blueball_135;
-	
-	else if (getPosition() == LEFT_BOTTOM)
-		current_animation = &blueball_225;
-
-	//Limits
-	if (position.x <= App->player->position.x - 26)
-		position.x = App->player->position.x - 26;
-
-	if (position.x >= App->player->position.x + 42)
-		position.x = App->player->position.x + 42;
-
-	if (position.y >= App->player->position.y + 35)
-		position.y = App->player->position.y + 35;
-
-	if (position.y <= App->player->position.y - 35)
-		position.y = App->player->position.y - 35;
+	//Define the position of the ball depending on the angle
+	position.x = App->player->position.x + radius * SDL_cos(angle) + 8;
+	position.y = App->player->position.y + 1 + radius * SDL_sin(angle);
 }
 
-void ModuleBall::BallFixed()
-{
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && (App->player->position.x - App->player->speed >= 0))
-	{
-		position.x -= App->player->speed;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && (App->player->position.x + App->player->speed <= SCREEN_WIDTH-32))
-	{
-		position.x += App->player->speed;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && (App->player->position.y - App->player->speed > 0))
-	{
-		position.y -= App->player->speed;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && (App->player->position.y + App->player->speed <= SCREEN_HEIGHT-14))
-	{
-		position.y += App->player->speed;
-	}
 
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT&&App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
-		current_animation = &blueball_315;
-
-	else if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT&&App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
-		current_animation = &blueball_225;
-
-	else if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT&&App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE)
-		current_animation = &blueball_270;
-
-	else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT&&App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
-		current_animation = &blueball_45;
-
-	else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT&&App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
-		current_animation = &blueball_135;
-
-	else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT&&App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE)
-		current_animation = &blueball_90;
-
-	else if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT &&App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE &&App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE)
-		current_animation = &blueball_180;
-
-	else if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT &&App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE &&App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE)
-		current_animation = &blueball_0;
-}
 
 void ModuleBall::ChargeBall()
 {
@@ -496,6 +458,7 @@ void ModuleBall::Trail()
 	if (SDL_GetTicks()%80>=0&& SDL_GetTicks() % 80 <= 20)
 		App->particles->AddParticle(App->particles->ball_trail, position.x - 6, position.y - 6);
 }
+
 void ModuleBall::OnCollision(Collider* c1, Collider* c2) 
 {
 	if (ball_thrown == true) 
