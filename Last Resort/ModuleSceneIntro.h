@@ -37,6 +37,7 @@ public:
 	SDL_Texture * O = nullptr;
 	SDL_Texture * lastresort = nullptr;
 	SDL_Texture * Button = nullptr;
+	SDL_Texture * PressStart = nullptr;
 
 	Animation* current_animation = nullptr;
 	Animation intro_neogeo;
@@ -55,9 +56,11 @@ public:
 	Animation R2_Anim;
 	Animation T2_Anim;
 	Animation StartButton;
+	Animation LastFade;
 
 	SDL_Rect introrect;
 	Mix_Music* maintrackintro = nullptr;
+	Mix_Music* neogeotrack = nullptr;
 
 	bool end = false;
 };

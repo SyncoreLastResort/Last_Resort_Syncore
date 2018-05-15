@@ -34,6 +34,8 @@ ModuleSceneIntro::ModuleSceneIntro()
 	O_Anim.Reset();
 	R2_Anim.Reset();
 	T2_Anim.Reset();
+	StartButton.Reset();
+	LastFade.Reset();
 
 	//NeoGeo
 	intro_neogeo.PushBack({ 0, 0, 39, 40 });
@@ -84,7 +86,7 @@ ModuleSceneIntro::ModuleSceneIntro()
 	intro_neogeo.PushBack({ 454, 448, 227, 40 });
 	intro_neogeo.PushBack({ 681, 448, 227, 40 });
 	intro_neogeo.loop = false;
-	intro_neogeo.speed = 0.5f;
+	intro_neogeo.speed = 0.4f;
 
 	//Max330
 	max330.PushBack({ 0, 0, 10, 15 });
@@ -140,10 +142,33 @@ ModuleSceneIntro::ModuleSceneIntro()
 	SNK.PushBack({ 216, 38, 72, 18 });
 	SNK.PushBack({ 288, 38, 72, 18 });
 	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
+	SNK.PushBack({ 360, 38, 72, 18 });
 	SNK.loop = false;
 	SNK.speed = 0.3f;
 
 	//C
+	C_sprite.PushBack({ 693, 928, 240, 40 });
+	C_sprite.PushBack({ 693, 928, 240, 40 });
+	C_sprite.PushBack({ 693, 928, 240, 40 });
+	C_sprite.PushBack({ 693, 928, 240, 40 });
+	C_sprite.PushBack({ 693, 928, 240, 40 });
+	C_sprite.PushBack({ 693, 928, 240, 40 });
+	C_sprite.PushBack({ 693, 928, 240, 40 });
 	C_sprite.PushBack({ 693, 928, 240, 40 });
 	C_sprite.PushBack({ 693, 928, 240, 40 });
 	C_sprite.PushBack({ 693, 928, 240, 40 });
@@ -250,34 +275,6 @@ ModuleSceneIntro::ModuleSceneIntro()
 	L_Anim.PushBack({ 92, 0, 46, 57 });
 	L_Anim.PushBack({ 46, 0, 46, 57 });
 	L_Anim.PushBack({ 0, 0, 46, 57 });
-	L_Anim.PushBack({ 46, 0, 46, 57 });
-	L_Anim.PushBack({ 92, 0, 46, 57 });
-	L_Anim.PushBack({ 138, 0, 46, 57 });
-	L_Anim.PushBack({ 184, 0, 46, 57 });
-	L_Anim.PushBack({ 230, 0, 46, 57 });
-	L_Anim.PushBack({ 276, 0, 46, 57 });
-	L_Anim.PushBack({ 322, 0, 46, 57 });
-	L_Anim.PushBack({ 368, 0, 46, 57 });
-	L_Anim.PushBack({ 414, 0, 46, 57 });
-	L_Anim.PushBack({ 0, 57, 46, 57 });
-	L_Anim.PushBack({ 46, 57, 46, 57 });
-	L_Anim.PushBack({ 92, 57, 46, 57 });
-	L_Anim.PushBack({ 138, 57, 46, 57 });
-	L_Anim.PushBack({ 184, 57, 46, 57 });
-	L_Anim.PushBack({ 230, 57, 46, 57 });
-	L_Anim.PushBack({ 276, 57, 46, 57 });
-	L_Anim.PushBack({ 322, 57, 46, 57 });
-	L_Anim.PushBack({ 368, 57, 46, 57 });
-	L_Anim.PushBack({ 414, 57, 46, 57 });
-	L_Anim.PushBack({ 0, 114, 46, 57 });
-	L_Anim.PushBack({ 46, 114, 46, 57 });
-	L_Anim.PushBack({ 92, 114, 46, 57 });
-	L_Anim.PushBack({ 138, 114, 46, 57 });
-	L_Anim.PushBack({ 184, 114, 46, 57 });
-	L_Anim.PushBack({ 230, 114, 46, 57 });
-	L_Anim.PushBack({ 276, 114, 46, 57 });
-	L_Anim.PushBack({ 322, 114, 46, 57 });
-	L_Anim.PushBack({ 368, 114, 46, 57 });
 	L_Anim.loop = false;
 	L_Anim.speed = 0.3f;
 
@@ -381,36 +378,6 @@ ModuleSceneIntro::ModuleSceneIntro()
 	A_Anim.PushBack({ 100, 0, 50, 57 });
 	A_Anim.PushBack({ 50, 0, 50, 57 });
 	A_Anim.PushBack({ 0, 0, 50, 57 });
-	A_Anim.PushBack({ 50, 0, 50, 57 });
-	A_Anim.PushBack({ 100, 0, 50, 57 });
-	A_Anim.PushBack({ 150, 0, 50, 57 });
-	A_Anim.PushBack({ 200, 0, 50, 57 });
-	A_Anim.PushBack({ 250, 0, 50, 57 });
-	A_Anim.PushBack({ 300, 0, 50, 57 });
-	A_Anim.PushBack({ 350, 0, 50, 57 });
-	A_Anim.PushBack({ 400, 0, 50, 57 });
-	A_Anim.PushBack({ 450, 0, 50, 57 });
-	A_Anim.PushBack({ 0, 57, 50, 57 });
-	A_Anim.PushBack({ 50, 57, 50, 57 });
-	A_Anim.PushBack({ 100, 57, 50, 57 });
-	A_Anim.PushBack({ 150, 57, 50, 57 });
-	A_Anim.PushBack({ 200, 57, 50, 57 });
-	A_Anim.PushBack({ 250, 57, 50, 57 });
-	A_Anim.PushBack({ 300, 57, 50, 57 });
-	A_Anim.PushBack({ 350, 57, 50, 57 });
-	A_Anim.PushBack({ 400, 57, 50, 57 });
-	A_Anim.PushBack({ 450, 57, 50, 57 });
-	A_Anim.PushBack({ 0, 114, 50, 57 });
-	A_Anim.PushBack({ 50, 114, 50, 57 });
-	A_Anim.PushBack({ 100, 114, 50, 57 });
-	A_Anim.PushBack({ 150, 114, 50, 57 });
-	A_Anim.PushBack({ 200, 114, 50, 57 });
-	A_Anim.PushBack({ 250, 114, 50, 57 });
-	A_Anim.PushBack({ 300, 114, 50, 57 });
-	A_Anim.PushBack({ 350, 114, 50, 57 });
-	A_Anim.PushBack({ 400, 114, 50, 57 });
-	A_Anim.PushBack({ 450, 114, 50, 57 });
-	A_Anim.PushBack({ 0, 171, 50, 106 });
 	A_Anim.loop = false;
 	A_Anim.speed = 0.3f;
 
@@ -520,27 +487,6 @@ ModuleSceneIntro::ModuleSceneIntro()
 	S_Anim.PushBack({ 0, 0, 32, 58 });
 	S_Anim.PushBack({ 0, 0, 32, 58 });
 	S_Anim.PushBack({ 0, 0, 32, 58 });
-	S_Anim.PushBack({ 32, 0, 32, 58 });
-	S_Anim.PushBack({ 64, 0, 32, 58 });
-	S_Anim.PushBack({ 96, 0, 32, 58 });
-	S_Anim.PushBack({ 128, 0, 32, 58 });
-	S_Anim.PushBack({ 160, 0, 32, 58 });
-	S_Anim.PushBack({ 192, 0, 32, 58 });
-	S_Anim.PushBack({ 224, 0, 32, 58 });
-	S_Anim.PushBack({ 256, 0, 32, 58 });
-	S_Anim.PushBack({ 288, 0, 32, 58 });
-	S_Anim.PushBack({ 320, 0, 32, 58 });
-	S_Anim.PushBack({ 352, 0, 32, 58 });
-	S_Anim.PushBack({ 384, 0, 32, 58 });
-	S_Anim.PushBack({ 416, 0, 32, 58 });
-	S_Anim.PushBack({ 448, 0, 32, 58 });
-	S_Anim.PushBack({ 480, 0, 32, 58 });
-	S_Anim.PushBack({ 0, 58, 32, 123 });
-	S_Anim.PushBack({ 32, 58, 32, 123 });
-	S_Anim.PushBack({ 64, 58, 32, 123 });
-	S_Anim.PushBack({ 96, 58, 32, 123 });
-	S_Anim.PushBack({ 128, 58, 32, 123 });
-	S_Anim.PushBack({ 160, 58, 32, 123 });
 	S_Anim.loop = false;
 	S_Anim.speed = 0.3f;
 
@@ -644,37 +590,6 @@ ModuleSceneIntro::ModuleSceneIntro()
 	T_Anim.PushBack({ 92, 0, 46, 59 });
 	T_Anim.PushBack({ 46, 0, 46, 59 });
 	T_Anim.PushBack({ 0, 0, 46, 59 });
-	T_Anim.PushBack({ 46, 0, 46, 59 });
-	T_Anim.PushBack({ 92, 0, 46, 59 });
-	T_Anim.PushBack({ 138, 0, 46, 59 });
-	T_Anim.PushBack({ 184, 0, 46, 59 });
-	T_Anim.PushBack({ 230, 0, 46, 59 });
-	T_Anim.PushBack({ 276, 0, 46, 59 });
-	T_Anim.PushBack({ 322, 0, 46, 59 });
-	T_Anim.PushBack({ 368, 0, 46, 59 });
-	T_Anim.PushBack({ 414, 0, 46, 59 });
-	T_Anim.PushBack({ 460, 0, 46, 59 });
-	T_Anim.PushBack({ 0, 59, 46, 59 });
-	T_Anim.PushBack({ 46, 59, 46, 59 });
-	T_Anim.PushBack({ 92, 59, 46, 59 });
-	T_Anim.PushBack({ 138, 59, 46, 59 });
-	T_Anim.PushBack({ 184, 59, 46, 59 });
-	T_Anim.PushBack({ 230, 59, 46, 59 });
-	T_Anim.PushBack({ 276, 59, 46, 59 });
-	T_Anim.PushBack({ 322, 59, 46, 59 });
-	T_Anim.PushBack({ 368, 59, 46, 59 });
-	T_Anim.PushBack({ 414, 59, 46, 59 });
-	T_Anim.PushBack({ 460, 59, 46, 59 });
-	T_Anim.PushBack({ 0, 118, 46, 59 });
-	T_Anim.PushBack({ 46, 118, 46, 59 });
-	T_Anim.PushBack({ 92, 118, 46, 59 });
-	T_Anim.PushBack({ 138, 118, 46, 59 });
-	T_Anim.PushBack({ 184, 118, 46, 59 });
-	T_Anim.PushBack({ 230, 118, 46, 59 });
-	T_Anim.PushBack({ 276, 118, 46, 59 });
-	T_Anim.PushBack({ 322, 118, 46, 59 });
-	T_Anim.PushBack({ 368, 118, 46, 59 });
-	T_Anim.PushBack({ 414, 118, 46, 59 });
 	T_Anim.loop = false;
 	T_Anim.speed = 0.3f;
 
@@ -780,36 +695,6 @@ ModuleSceneIntro::ModuleSceneIntro()
 	R_Anim.PushBack({ 96, 0, 48, 58 });
 	R_Anim.PushBack({ 48, 0, 48, 58 });
 	R_Anim.PushBack({ 0, 0, 48, 58 });
-	R_Anim.PushBack({ 48, 0, 48, 58 });
-	R_Anim.PushBack({ 96, 0, 48, 58 });
-	R_Anim.PushBack({ 144, 0, 48, 58 });
-	R_Anim.PushBack({ 192, 0, 48, 58 });
-	R_Anim.PushBack({ 240, 0, 48, 58 });
-	R_Anim.PushBack({ 288, 0, 48, 58 });
-	R_Anim.PushBack({ 336, 0, 48, 58 });
-	R_Anim.PushBack({ 384, 0, 48, 58 });
-	R_Anim.PushBack({ 432, 0, 48, 58 });
-	R_Anim.PushBack({ 0, 58, 48, 58 });
-	R_Anim.PushBack({ 48, 58, 48, 58 });
-	R_Anim.PushBack({ 96, 58, 48, 58 });
-	R_Anim.PushBack({ 144, 58, 48, 58 });
-	R_Anim.PushBack({ 192, 58, 48, 58 });
-	R_Anim.PushBack({ 240, 58, 48, 58 });
-	R_Anim.PushBack({ 288, 58, 48, 58 });
-	R_Anim.PushBack({ 336, 58, 48, 58 });
-	R_Anim.PushBack({ 384, 58, 48, 58 });
-	R_Anim.PushBack({ 432, 58, 48, 58 });
-	R_Anim.PushBack({ 0, 116, 48, 58 });
-	R_Anim.PushBack({ 48, 116, 48, 58 });
-	R_Anim.PushBack({ 96, 116, 48, 58 });
-	R_Anim.PushBack({ 144, 116, 48, 58 });
-	R_Anim.PushBack({ 192, 116, 48, 58 });
-	R_Anim.PushBack({ 240, 116, 48, 58 });
-	R_Anim.PushBack({ 288, 116, 48, 58 });
-	R_Anim.PushBack({ 336, 116, 48, 58 });
-	R_Anim.PushBack({ 384, 116, 48, 58 });
-	R_Anim.PushBack({ 432, 116, 48, 58 });
-	R_Anim.PushBack({ 0, 174, 48, 102 });
 	R_Anim.loop = false;
 	R_Anim.speed = 0.3f;
 
@@ -915,37 +800,6 @@ ModuleSceneIntro::ModuleSceneIntro()
 	E_Anim.PushBack({ 84, 0, 42, 57 });
 	E_Anim.PushBack({ 42, 0, 42, 57 });
 	E_Anim.PushBack({ 0, 0, 42, 57 });
-	E_Anim.PushBack({ 42, 0, 42, 57 });
-	E_Anim.PushBack({ 84, 0, 42, 57 });
-	E_Anim.PushBack({ 126, 0, 42, 57 });
-	E_Anim.PushBack({ 168, 0, 42, 57 });
-	E_Anim.PushBack({ 210, 0, 42, 57 });
-	E_Anim.PushBack({ 252, 0, 42, 57 });
-	E_Anim.PushBack({ 294, 0, 42, 57 });
-	E_Anim.PushBack({ 336, 0, 42, 57 });
-	E_Anim.PushBack({ 378, 0, 42, 57 });
-	E_Anim.PushBack({ 420, 0, 42, 57 });
-	E_Anim.PushBack({ 462, 0, 42, 57 });
-	E_Anim.PushBack({ 0, 57, 42, 57 });
-	E_Anim.PushBack({ 42, 57, 42, 57 });
-	E_Anim.PushBack({ 84, 57, 42, 57 });
-	E_Anim.PushBack({ 126, 57, 42, 57 });
-	E_Anim.PushBack({ 168, 57, 42, 57 });
-	E_Anim.PushBack({ 210, 57, 42, 57 });
-	E_Anim.PushBack({ 252, 57, 42, 57 });
-	E_Anim.PushBack({ 294, 57, 42, 57 });
-	E_Anim.PushBack({ 336, 57, 42, 57 });
-	E_Anim.PushBack({ 378, 57, 42, 57 });
-	E_Anim.PushBack({ 420, 57, 42, 57 });
-	E_Anim.PushBack({ 462, 57, 42, 57 });
-	E_Anim.PushBack({ 0, 114, 42, 64 });
-	E_Anim.PushBack({ 42, 114, 42, 64 });
-	E_Anim.PushBack({ 84, 114, 42, 64 });
-	E_Anim.PushBack({ 126, 114, 42, 64 });
-	E_Anim.PushBack({ 168, 114, 42, 64 });
-	E_Anim.PushBack({ 210, 114, 42, 64 });
-	E_Anim.PushBack({ 252, 114, 42, 64 });
-	E_Anim.PushBack({ 294, 114, 42, 64 });
 	E_Anim.loop = false;
 	E_Anim.speed = 0.3f;
 
@@ -1058,27 +912,6 @@ ModuleSceneIntro::ModuleSceneIntro()
 	S2_Anim.PushBack({ 0, 0, 32, 58 });
 	S2_Anim.PushBack({ 0, 0, 32, 58 });
 	S2_Anim.PushBack({ 0, 0, 32, 58 });
-	S2_Anim.PushBack({ 32, 0, 32, 58 });
-	S2_Anim.PushBack({ 64, 0, 32, 58 });
-	S2_Anim.PushBack({ 96, 0, 32, 58 });
-	S2_Anim.PushBack({ 128, 0, 32, 58 });
-	S2_Anim.PushBack({ 160, 0, 32, 58 });
-	S2_Anim.PushBack({ 192, 0, 32, 58 });
-	S2_Anim.PushBack({ 224, 0, 32, 58 });
-	S2_Anim.PushBack({ 256, 0, 32, 58 });
-	S2_Anim.PushBack({ 288, 0, 32, 58 });
-	S2_Anim.PushBack({ 320, 0, 32, 58 });
-	S2_Anim.PushBack({ 352, 0, 32, 58 });
-	S2_Anim.PushBack({ 384, 0, 32, 58 });
-	S2_Anim.PushBack({ 416, 0, 32, 58 });
-	S2_Anim.PushBack({ 448, 0, 32, 58 });
-	S2_Anim.PushBack({ 480, 0, 32, 58 });
-	S2_Anim.PushBack({ 0, 58, 32, 123 });
-	S2_Anim.PushBack({ 32, 58, 32, 123 });
-	S2_Anim.PushBack({ 64, 58, 32, 123 });
-	S2_Anim.PushBack({ 96, 58, 32, 123 });
-	S2_Anim.PushBack({ 128, 58, 32, 123 });
-	S2_Anim.PushBack({ 160, 58, 32, 123 });
 	S2_Anim.loop = false;
 	S2_Anim.speed = 0.3f;
 
@@ -1193,27 +1026,6 @@ ModuleSceneIntro::ModuleSceneIntro()
 	O_Anim.PushBack({ 0, 0, 48, 59 });
 	O_Anim.PushBack({ 0, 0, 48, 59 });
 	O_Anim.PushBack({ 0, 0, 48, 59 });
-	O_Anim.PushBack({ 48, 0, 48, 59 });
-	O_Anim.PushBack({ 96, 0, 48, 59 });
-	O_Anim.PushBack({ 144, 0, 48, 59 });
-	O_Anim.PushBack({ 192, 0, 48, 59 });
-	O_Anim.PushBack({ 240, 0, 48, 59 });
-	O_Anim.PushBack({ 288, 0, 48, 59 });
-	O_Anim.PushBack({ 336, 0, 48, 59 });
-	O_Anim.PushBack({ 384, 0, 48, 59 });
-	O_Anim.PushBack({ 432, 0, 48, 59 });
-	O_Anim.PushBack({ 0, 59, 48, 59 });
-	O_Anim.PushBack({ 48, 59, 48, 59 });
-	O_Anim.PushBack({ 96, 59, 48, 59 });
-	O_Anim.PushBack({ 144, 59, 48, 59 });
-	O_Anim.PushBack({ 192, 59, 48, 59 });
-	O_Anim.PushBack({ 240, 59, 48, 59 });
-	O_Anim.PushBack({ 288, 59, 48, 59 });
-	O_Anim.PushBack({ 336, 59, 48, 59 });
-	O_Anim.PushBack({ 384, 59, 48, 59 });
-	O_Anim.PushBack({ 432, 59, 48, 59 });
-	O_Anim.PushBack({ 0, 118, 48, 104 });
-	O_Anim.PushBack({ 48, 118, 48, 104 });
 	O_Anim.loop = false;
 	O_Anim.speed = 0.3f;
 
@@ -1319,36 +1131,6 @@ ModuleSceneIntro::ModuleSceneIntro()
 	R2_Anim.PushBack({ 96, 0, 48, 58 });
 	R2_Anim.PushBack({ 48, 0, 48, 58 });
 	R2_Anim.PushBack({ 0, 0, 48, 58 });
-	R2_Anim.PushBack({ 48, 0, 48, 58 });
-	R2_Anim.PushBack({ 96, 0, 48, 58 });
-	R2_Anim.PushBack({ 144, 0, 48, 58 });
-	R2_Anim.PushBack({ 192, 0, 48, 58 });
-	R2_Anim.PushBack({ 240, 0, 48, 58 });
-	R2_Anim.PushBack({ 288, 0, 48, 58 });
-	R2_Anim.PushBack({ 336, 0, 48, 58 });
-	R2_Anim.PushBack({ 384, 0, 48, 58 });
-	R2_Anim.PushBack({ 432, 0, 48, 58 });
-	R2_Anim.PushBack({ 0, 58, 48, 58 });
-	R2_Anim.PushBack({ 48, 58, 48, 58 });
-	R2_Anim.PushBack({ 96, 58, 48, 58 });
-	R2_Anim.PushBack({ 144, 58, 48, 58 });
-	R2_Anim.PushBack({ 192, 58, 48, 58 });
-	R2_Anim.PushBack({ 240, 58, 48, 58 });
-	R2_Anim.PushBack({ 288, 58, 48, 58 });
-	R2_Anim.PushBack({ 336, 58, 48, 58 });
-	R2_Anim.PushBack({ 384, 58, 48, 58 });
-	R2_Anim.PushBack({ 432, 58, 48, 58 });
-	R2_Anim.PushBack({ 0, 116, 48, 58 });
-	R2_Anim.PushBack({ 48, 116, 48, 58 });
-	R2_Anim.PushBack({ 96, 116, 48, 58 });
-	R2_Anim.PushBack({ 144, 116, 48, 58 });
-	R2_Anim.PushBack({ 192, 116, 48, 58 });
-	R2_Anim.PushBack({ 240, 116, 48, 58 });
-	R2_Anim.PushBack({ 288, 116, 48, 58 });
-	R2_Anim.PushBack({ 336, 116, 48, 58 });
-	R2_Anim.PushBack({ 384, 116, 48, 58 });
-	R2_Anim.PushBack({ 432, 116, 48, 58 });
-	R2_Anim.PushBack({ 0, 174, 48, 102 });
 	R2_Anim.loop = false;
 	R2_Anim.speed = 0.3f;
 	
@@ -1455,37 +1237,8 @@ ModuleSceneIntro::ModuleSceneIntro()
 	T2_Anim.PushBack({ 92, 0, 46, 59 });
 	T2_Anim.PushBack({ 46, 0, 46, 59 });
 	T2_Anim.PushBack({ 0, 0, 46, 59 });
-	T2_Anim.PushBack({ 46, 0, 46, 59 });
-	T2_Anim.PushBack({ 92, 0, 46, 59 });
-	T2_Anim.PushBack({ 138, 0, 46, 59 });
-	T2_Anim.PushBack({ 184, 0, 46, 59 });
-	T2_Anim.PushBack({ 230, 0, 46, 59 });
-	T2_Anim.PushBack({ 276, 0, 46, 59 });
-	T2_Anim.PushBack({ 322, 0, 46, 59 });
-	T2_Anim.PushBack({ 368, 0, 46, 59 });
-	T2_Anim.PushBack({ 414, 0, 46, 59 });
-	T2_Anim.PushBack({ 460, 0, 46, 59 });
-	T2_Anim.PushBack({ 0, 59, 46, 59 });
-	T2_Anim.PushBack({ 46, 59, 46, 59 });
-	T2_Anim.PushBack({ 92, 59, 46, 59 });
-	T2_Anim.PushBack({ 138, 59, 46, 59 });
-	T2_Anim.PushBack({ 184, 59, 46, 59 });
-	T2_Anim.PushBack({ 230, 59, 46, 59 });
-	T2_Anim.PushBack({ 276, 59, 46, 59 });
-	T2_Anim.PushBack({ 322, 59, 46, 59 });
-	T2_Anim.PushBack({ 368, 59, 46, 59 });
-	T2_Anim.PushBack({ 414, 59, 46, 59 });
-	T2_Anim.PushBack({ 460, 59, 46, 59 });
-	T2_Anim.PushBack({ 0, 118, 46, 59 });
-	T2_Anim.PushBack({ 46, 118, 46, 59 });
-	T2_Anim.PushBack({ 92, 118, 46, 59 });
-	T2_Anim.PushBack({ 138, 118, 46, 59 });
-	T2_Anim.PushBack({ 184, 118, 46, 59 });
 	T2_Anim.PushBack({ 230, 118, 46, 59 });
 	T2_Anim.PushBack({ 276, 118, 46, 59 });
-	T2_Anim.PushBack({ 322, 118, 46, 59 });
-	T2_Anim.PushBack({ 368, 118, 46, 59 });
-	T2_Anim.PushBack({ 414, 118, 46, 59 });
 	T2_Anim.loop = false;
 	T2_Anim.speed = 0.3f;
 
@@ -1516,6 +1269,42 @@ ModuleSceneIntro::ModuleSceneIntro()
 	StartButton.loop = true;
 	StartButton.speed = 0.1f;
 
+	//Final Animation
+	LastFade.PushBack({ 272, 1390, 272, 139 });
+	LastFade.PushBack({ 0, 1390, 272, 139 });	
+	LastFade.PushBack({ 544, 1251, 272, 139 });
+	LastFade.PushBack({ 272, 1251, 272, 139 });
+	LastFade.PushBack({ 0, 1251, 272, 139 });
+	LastFade.PushBack({ 544, 1112, 272, 139 });
+	LastFade.PushBack({ 272, 1112, 272, 139 });
+	LastFade.PushBack({ 0, 1112, 272, 139 });
+	LastFade.PushBack({ 544, 973, 272, 139 });
+	LastFade.PushBack({ 272, 973, 272, 139 });
+	LastFade.PushBack({ 0, 973, 272, 139 });
+	LastFade.PushBack({ 544, 834, 272, 139 });
+	LastFade.PushBack({ 272, 834, 272, 139 });
+	LastFade.PushBack({ 0, 834, 272, 139 });
+	LastFade.PushBack({ 544, 695, 272, 139 });
+	LastFade.PushBack({ 272, 695, 272, 139 });
+	LastFade.PushBack({ 0, 695, 272, 139 });
+	LastFade.PushBack({ 544, 556, 272, 139 });
+	LastFade.PushBack({ 272, 556, 272, 139 });
+	LastFade.PushBack({ 0, 556, 272, 139 });
+	LastFade.PushBack({ 544, 417, 272, 139 });
+	LastFade.PushBack({ 272, 417, 272, 139 });
+	LastFade.PushBack({ 0, 417, 272, 139 });
+	LastFade.PushBack({ 544, 278, 272, 139 });
+	LastFade.PushBack({ 272, 278, 272, 139 });
+	LastFade.PushBack({ 0, 278, 272, 139 });
+	LastFade.PushBack({ 544, 139, 272, 139 });
+	LastFade.PushBack({ 272, 139, 272, 139 });
+	LastFade.PushBack({ 0, 139, 272, 139 });
+	LastFade.PushBack({ 544, 0, 272, 139 });
+	LastFade.PushBack({ 272, 0, 272, 139 });
+	LastFade.PushBack({ 0, 0, 272, 139 });
+	LastFade.loop = false;
+	LastFade.speed = 0.3f;
+
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -1538,11 +1327,13 @@ bool ModuleSceneIntro::Start()
 	R = App->textures->Load("assets/sprites/Intro_LogoLastResort/R_Sprite.png");
 	E = App->textures->Load("assets/sprites/Intro_LogoLastResort/E_Sprite.png");
 	O = App->textures->Load("assets/sprites/Intro_LogoLastResort/O_Sprite.png");
-	lastresort = App->textures->Load("assets/sprites/Last_Resort_Intro.png");
+	lastresort = App->textures->Load("assets/sprites/Intro_LogoLastResort/Last_Resort_TitleScreen_Sprite.png");
 	Button = App->textures->Load("assets/sprites/Intro_LogoLastResort/Push_Start_Button_TittleScreen_Sprite.png");
+	PressStart = App->textures->Load("assets/sprites/Last_Resort_Intro.png");
 
-
+	neogeotrack = App->audio->LoadMusic("assets/music/0.Neo Geo.ogg");
 	maintrackintro = App->audio->LoadMusic("assets/music/1.Last resort title.ogg");
+
 	
 	App->render->camera.x = App->render->camera.y = 0;
 
@@ -1570,8 +1361,10 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(O);
 	App->textures->Unload(lastresort);
 	App->textures->Unload(Button);
+	App->textures->Unload(PressStart);
 
 	/*App->audio->StopAudio();*/
+	App->audio->UnloadMusic(neogeotrack);
 	App->audio->UnloadMusic(maintrackintro);
 	
 	return true;
@@ -1582,7 +1375,7 @@ update_status ModuleSceneIntro::Update()
 {
 	// Draw everything --------------------------------------
 		
-	
+	App->audio->PlayMusic(neogeotrack, TWICE);
 	App->render->Blit(introbackground, 50 , 50, &(intro_neogeo.GetCurrentFrame()));
 		
 	if (intro_neogeo.Finished()){
@@ -1598,28 +1391,32 @@ update_status ModuleSceneIntro::Update()
 		App->render->Blit(introbackground, 49, 50, &(C_sprite.GetCurrentFrame()));
 	}
 	if (C_sprite.Finished() && end == false) {
-		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN || T2_Anim.Finished()) {
+		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN) {
 			end = true;
 		}
-			App->render->Blit(black, 0, 0, &introrect);
-			App->audio->PlayMusic(maintrackintro, ONCE);
-			App->render->Blit(L, 56, 16, &(L_Anim.GetCurrentFrame()));
-			App->render->Blit(A, 103, 15, &(A_Anim.GetCurrentFrame()));
-			App->render->Blit(S, 164, 16, &(S_Anim.GetCurrentFrame()));
-			App->render->Blit(T, 208, 16, &(T_Anim.GetCurrentFrame()));
-			App->render->Blit(R, 20, 88, &(R_Anim.GetCurrentFrame()));
-			App->render->Blit(E, 70, 88, &(E_Anim.GetCurrentFrame()));
-			App->render->Blit(S, 115, 88, &(S2_Anim.GetCurrentFrame()));
-			App->render->Blit(O, 147, 85, &(O_Anim.GetCurrentFrame()));
-			App->render->Blit(R, 194, 88, &(R2_Anim.GetCurrentFrame()));
-			App->render->Blit(T, 238, 85, &(T2_Anim.GetCurrentFrame()));
+		App->render->Blit(black, 0, 0, &introrect);
+		App->audio->PlayMusic(maintrackintro, ONCE);
+		App->render->Blit(L, 56, 16, &(L_Anim.GetCurrentFrame()));
+		App->render->Blit(A, 103, 15, &(A_Anim.GetCurrentFrame()));
+		App->render->Blit(S, 164, 16, &(S_Anim.GetCurrentFrame()));
+		App->render->Blit(T, 208, 16, &(T_Anim.GetCurrentFrame()));
+		App->render->Blit(R, 20, 88, &(R_Anim.GetCurrentFrame()));
+		App->render->Blit(E, 70, 88, &(E_Anim.GetCurrentFrame()));
+		App->render->Blit(S, 115, 88, &(S2_Anim.GetCurrentFrame()));
+		App->render->Blit(O, 147, 85, &(O_Anim.GetCurrentFrame()));
+		App->render->Blit(R, 194, 88, &(R2_Anim.GetCurrentFrame()));
+		App->render->Blit(T, 238, 85, &(T2_Anim.GetCurrentFrame()));
 	}
-	if (end == true) {
-		App->render->Blit(lastresort, 0, 0, &introrect);
+	if (end == true || T2_Anim.Finished()) {
+		App->render->Blit(black, 0, 0, &introrect);
+		App->render->Blit(lastresort, 16, 9, &(LastFade.GetCurrentFrame()));
+	}
+	if (LastFade.Finished()) {
+		App->render->Blit(PressStart, 0, 0, &introrect);
 		App->render->Blit(Button, 104, 176, &(StartButton.GetCurrentFrame()));
 	}
 	
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && C_sprite.Finished() && App->fade->IsFading() == false && StartButton.Finished())
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && C_sprite.Finished() && App->fade->IsFading() == false && LastFade.Finished())
 		{
 			Mix_FadeOutMusic(1000);
 			App->fade->FadeToBlack(this, (Module*)App->level4);
