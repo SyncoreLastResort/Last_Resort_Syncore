@@ -24,7 +24,6 @@ Starting from 0.5 to 1.0
 -Main Menu Last Resort Animation
 -Main Menu Neo-Geo Animation
 -Basic enemies 
--Tutorial and Intro Cinematic
 
 
 --Version 0.8--
@@ -37,7 +36,9 @@ Starting from 0.5 to 1.0
 
 -Stage Clear, Win/Lose condition perfectioning
 -Imitate original game
--UI, -Score perfectioning
+-UI, 
+-Score perfectioning
+-Tutorial and Intro Cinematic
 
 --Version 1.0--
 
