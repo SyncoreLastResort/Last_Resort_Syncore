@@ -1237,8 +1237,6 @@ ModuleSceneIntro::ModuleSceneIntro()
 	T2_Anim.PushBack({ 92, 0, 46, 59 });
 	T2_Anim.PushBack({ 46, 0, 46, 59 });
 	T2_Anim.PushBack({ 0, 0, 46, 59 });
-	T2_Anim.PushBack({ 230, 118, 46, 59 });
-	T2_Anim.PushBack({ 276, 118, 46, 59 });
 	T2_Anim.loop = false;
 	T2_Anim.speed = 0.3f;
 
