@@ -13,6 +13,7 @@ public:
 	bool Start();
 	update_status Update();
 	bool FadeToBlack(Module* module_off, Module* module_on, float time = 1.0f);
+	bool FadeToWhite(float time = 1.0f);
 	bool IsFading() const;
 
 private:
@@ -21,7 +22,9 @@ private:
 	{
 		none,
 		fade_to_black,
-		fade_from_black
+		fade_from_black,
+		fade_to_white,
+		fade_from_white
 	} current_step = fade_step::none;
 
 	Uint32 start_time = 0;

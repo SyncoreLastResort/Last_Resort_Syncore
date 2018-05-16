@@ -62,6 +62,7 @@ public:
 	Mix_Music* maintrackintro = nullptr;
 	Mix_Music* neogeotrack = nullptr;
 
+	bool endofmusic1 = false;
 	bool end = false;
 };
 

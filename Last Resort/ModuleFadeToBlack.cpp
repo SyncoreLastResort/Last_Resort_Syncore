@@ -52,10 +52,33 @@ update_status ModuleFadeToBlack::Update()
 			if(now >= total_time)
 				current_step = fade_step::none;
 		} break;
+
+		case fade_step::fade_to_white:
+		{
+			if (now >= total_time)
+			{
+				total_time += total_time;
+				start_time = SDL_GetTicks();
+				current_step = fade_step::fade_from_white;
+			}
+		} break;
+
+		case fade_step::fade_from_white:
+		{
+			normalized = 1.0f - normalized;
+
+			if (now >= total_time)
+				current_step = fade_step::none;
+		} break;
+
 	}
 
 	// Finally render the black square with alpha on the screen
+	if(current_step==fade_to_white || current_step==fade_from_white)
+		SDL_SetRenderDrawColor(App->render->renderer, 255, 255, 255, (Uint8)(normalized * 255.0f));
+	else
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(normalized * 255.0f));
+
 	SDL_RenderFillRect(App->render->renderer, &screen);
 
 	return UPDATE_CONTINUE;
@@ -73,6 +96,21 @@ bool ModuleFadeToBlack::FadeToBlack(Module* module_off, Module* module_on, float
 		total_time = (Uint32)(time * 0.5f * 1000.0f);
 		to_enable = module_on;
 		to_disable = module_off;
+		ret = true;
+	}
+
+	return ret;
+}
+
+bool ModuleFadeToBlack::FadeToWhite(float time)
+{
+	bool ret = false;
+
+	if (current_step == fade_step::none)
+	{
+		current_step = fade_step::fade_to_white;
+		start_time = SDL_GetTicks();
+		total_time = (Uint32)(time * 0.5f * 1000.0f);
 		ret = true;
 	}
 

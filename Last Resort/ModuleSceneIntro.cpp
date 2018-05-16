@@ -1373,7 +1373,12 @@ update_status ModuleSceneIntro::Update()
 {
 	// Draw everything --------------------------------------
 		
-	App->audio->PlayMusic(neogeotrack, TWICE);
+	if (App->input->keyboard[SDL_SCANCODE_P] == 1)
+		App->fade->FadeToWhite();
+
+	if(endofmusic1!=true)
+	App->audio->PlayMusic(neogeotrack, ONCE);
+
 	App->render->Blit(introbackground, 50 , 50, &(intro_neogeo.GetCurrentFrame()));
 		
 	if (intro_neogeo.Finished()){
@@ -1393,7 +1398,14 @@ update_status ModuleSceneIntro::Update()
 			end = true;
 		}
 		App->render->Blit(black, 0, 0, &introrect);
-		App->audio->PlayMusic(maintrackintro, ONCE);
+
+		if (endofmusic1 == false)
+		{
+			endofmusic1 = true;
+			App->audio->StopAudio();
+			App->audio->PlayMusic(maintrackintro, ONCE);
+		}
+
 		App->render->Blit(L, 56, 16, &(L_Anim.GetCurrentFrame()));
 		App->render->Blit(A, 103, 15, &(A_Anim.GetCurrentFrame()));
 		App->render->Blit(S, 164, 16, &(S_Anim.GetCurrentFrame()));
@@ -1404,6 +1416,7 @@ update_status ModuleSceneIntro::Update()
 		App->render->Blit(O, 147, 85, &(O_Anim.GetCurrentFrame()));
 		App->render->Blit(R, 194, 88, &(R2_Anim.GetCurrentFrame()));
 		App->render->Blit(T, 238, 85, &(T2_Anim.GetCurrentFrame()));
+		
 	}
 	if (end == true || T2_Anim.Finished()) {
 		App->render->Blit(black, 0, 0, &introrect);
