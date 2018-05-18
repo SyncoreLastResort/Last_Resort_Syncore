@@ -101,7 +101,7 @@ ModuleBall::~ModuleBall()
 bool ModuleBall::Start()
 {
 	//Color (to test)
-	ball_color = BLUE;
+	ball_color = RED;
 
 	//Initial angle
 	angle = 0;
@@ -152,7 +152,7 @@ update_status ModuleBall::Update()
 		MoveAround();
 		Aim();
 		if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_REPEAT)
-			aim_angle += 2*PI/180;
+			aim_angle += 2*PI/60;
 
 		if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN) //We fix/unfix the ball
 		{
@@ -328,23 +328,18 @@ void ModuleBall::MoveAround()
 
 void ModuleBall::Aim()
 {
-	if (SDL_cos(aim_angle) > 0.95 && SDL_sin(aim_angle)>-0.05 &&SDL_sin(aim_angle)>0.05)
+	//Decimal numbers are used to give some margin of error 
+	//Depending on the angle, the slope of sin or cos changes, so i'll use on or the other as i see which one is better
+
+	if (SDL_sin(aim_angle) > 0.999)
 	{
 		if (ball_color == BLUE)
-			current_animation = &blueball_0;
+			current_animation = &blueball_270;
 		else
-			current_animation = &redball_0;
+			current_animation = &redball_270;
 	}
 
-	else if (SDL_sin(aim_angle) > sqrt(2)/2 - 0.05 && SDL_sin(aim_angle) < sqrt(2) / 2 + 0.05 && SDL_cos(aim_angle)>sqrt(2) / 2 -0.05 && SDL_cos(aim_angle) < sqrt(2) / 2 +0.05)
-	{
-		if (ball_color == BLUE)
-			current_animation = &blueball_315;
-		else
-			current_animation = &redball_315;
-	}
-
-	else if (SDL_sin(aim_angle) < -0.95)
+	else if (SDL_sin(aim_angle) < -0.999)
 	{
 		if (ball_color == BLUE)
 			current_animation = &blueball_90;
@@ -352,7 +347,7 @@ void ModuleBall::Aim()
 			current_animation = &redball_90;
 	}
 
-	else if (SDL_cos(aim_angle) < -0.95&& SDL_sin(aim_angle)>-0.05 &&SDL_sin(aim_angle)>0.05)
+	else if (SDL_cos(aim_angle) < -0.999)
 	{
 		if (ball_color == BLUE)
 			current_animation = &blueball_180;
@@ -360,13 +355,120 @@ void ModuleBall::Aim()
 			current_animation = &redball_180;
 	}
 
-	else if (SDL_sin(aim_angle) > 0.95)
+	else if (SDL_cos(aim_angle) > 0.999)
 	{
 		if (ball_color == BLUE)
-			current_animation = &blueball_270;
+			current_animation = &blueball_0;
 		else
-			current_animation = &redball_270;
+			current_animation = &redball_0;
 	}
+
+	else if (SDL_sin(aim_angle) > SIN_45 - 0.05 && SDL_sin(aim_angle) < SIN_45 + 0.05)
+	{
+		if (SDL_cos(aim_angle) > 0)
+		{
+			if (ball_color == BLUE)
+				current_animation = &blueball_315;
+			else
+				current_animation = &redball_315;
+		}
+		else
+		{
+			if (ball_color == BLUE)
+				current_animation = &blueball_225;
+			else
+				current_animation = &redball_225;
+		}
+	}
+
+	else if (SDL_sin(aim_angle) > -SIN_45 - 0.05 && SDL_sin(aim_angle) < -SIN_45 + 0.05)
+	{
+		if (SDL_cos(aim_angle) > 0)
+		{
+			if (ball_color == BLUE)
+				current_animation = &blueball_45;
+			else
+				current_animation = &redball_45;
+		}
+		else
+		{
+			if (ball_color == BLUE)
+				current_animation = &blueball_135;
+			else
+				current_animation = &redball_135;
+		}
+	}
+
+	else if (SDL_cos(aim_angle) >COS_30 - 0.05 && SDL_cos(aim_angle) < COS_30 + 0.05)
+	{
+		if (SDL_sin(aim_angle) > 0) //aims downwards
+		{
+			if (ball_color == BLUE)
+				current_animation = &blueball_330;
+			else
+				current_animation = &redball_330;
+		}
+		else //aims upwards
+		{
+			if (ball_color == BLUE)
+				current_animation = &blueball_30;
+			else
+				current_animation = &redball_30;
+		}
+	}
+
+	else if (SDL_cos(aim_angle) >-COS_30 - 0.05 && SDL_cos(aim_angle) < -COS_30 + 0.05)
+	{
+		if (SDL_sin(aim_angle) > 0) //aims downwards
+		{
+			if (ball_color == BLUE)
+				current_animation = &blueball_210;
+			else
+				current_animation = &redball_210;
+		}
+		else //aims upwards
+		{
+			if (ball_color == BLUE)
+				current_animation = &blueball_150;
+			else
+				current_animation = &redball_150;
+		}
+	}
+
+	else if (SDL_sin(aim_angle) > -SIN_60 - 0.05 && SDL_sin(aim_angle) < -SIN_60 + 0.05)
+	{
+		if (SDL_cos(aim_angle) > 0)
+		{
+			if (ball_color == BLUE)
+				current_animation = &blueball_60;
+			else
+				current_animation = &redball_60;
+		}
+		else
+		{
+			if (ball_color == BLUE)
+				current_animation = &blueball_120;
+			else current_animation = &redball_120;
+		}
+	}
+
+	else if (SDL_sin(aim_angle) > SIN_60 - 0.05 && SDL_sin(aim_angle) < SIN_60 + 0.05)
+	{
+		if (SDL_cos(aim_angle) > 0)
+		{
+			if (ball_color == BLUE)
+				current_animation = &blueball_300;
+			else
+				current_animation = &redball_300;
+		}
+		else
+		{
+			if (ball_color == BLUE)
+				current_animation = &blueball_240;
+			else current_animation = &redball_240;
+		}
+	}
+
 }
 
 void ModuleBall::ChargeBall()
