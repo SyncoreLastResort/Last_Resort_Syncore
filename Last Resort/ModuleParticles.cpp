@@ -67,17 +67,17 @@ ModuleParticles::ModuleParticles()
 	ball_trail.speed = { 0,0 };
 	
 	//Ball green shot
-	ball_shot.anim.PushBack({103,252,13, 13});
-	ball_shot.anim.PushBack({ 117,252,13, 13 });
+	for (int i=0;i<4;++i)
+		ball_shot.anim.PushBack({87+14*i,253,13, 13});
 	ball_shot.anim.loop = true;
-	ball_shot.anim.speed = 0.5f;
+	ball_shot.anim.speed = 0.3f;
 	ball_shot.speed = { 0,0 };
 	ball_shot.life = 650;
 	ball_shot.end_particle = &ball_shot_explosion;
 
 	//Ball2 green shot
-	ball2_shot.anim.PushBack({ 103,252,13, 13 });
-	ball2_shot.anim.PushBack({ 117,252,13, 13 });
+	for (int i = 0; i<4; ++i)
+		ball2_shot.anim.PushBack({ 87 + 14 * i,253,13, 13 });
 	ball2_shot.anim.loop = true;
 	ball2_shot.anim.speed = 0.5f;
 	ball2_shot.speed = { 0,0 };

@@ -5,40 +5,81 @@
 #include "ModuleInput.h"
 ModuleBall::ModuleBall()
 {
-	//right
-	for (int i=0;i<8;++i)
-		blueball_0.PushBack({ 195,2+i*16, 22, 16 });
-	blueball_0.speed = 0.2;
-	//up & right
+	//BALL ANIMATIONS
+
 	for (int i = 0; i < 8; ++i)
+	{
+		//Blue ball animations  pushbacks
+		blueball_0.PushBack({ 195,2 + i * 16, 22, 16 });
 		blueball_45.PushBack({ 240, 2 + i * 22, 21, 21 });
-	blueball_45.speed = 0.1;
-	//up
-	for (int i = 0; i < 8; ++i)
-		blueball_90.PushBack({ 278, 2 + i * 22, 16, 22});
-	blueball_90.speed = 0.1;
-	//up and left
-	for (int i = 0; i < 8; ++i)
+		blueball_90.PushBack({ 278, 2 + i * 22, 16, 22 });
 		blueball_135.PushBack({ 311, 2 + i * 22, 21, 21 });
-	blueball_135.speed = 0.1;
-	//lwft
-	for (int i = 0; i < 8; ++i)
 		blueball_180.PushBack({ 354, 2 + i * 16, 22, 16 });
-	blueball_180.speed = 0.1;
-	//left & downards
-	for (int i = 0; i < 8; ++i)
 		blueball_225.PushBack({ 398, 2 + i * 22, 21, 21 });
-	blueball_225.speed = 0.1;
-	//downwards
-	for (int i = 0; i < 8; ++i)
 		blueball_270.PushBack({ 436, 2 + i * 22, 16, 22 });
-	blueball_270.speed = 0.1;
-
-	//downwards & right
-	for (int i = 0; i < 8; ++i)
 		blueball_315.PushBack({ 469, 2 + i * 22,21, 21 });
-	blueball_315.speed = 0.1;
+		blueball_30.PushBack({ 218, 2 + i * 17,22,17 });
+		blueball_60.PushBack({ 261, 2 + i * 23,17,23 });
+		blueball_120.PushBack({ 294,2 + i * 23,17,23 });
+		blueball_150.PushBack({ 332, 2 + i * 17,22,17 });
+		blueball_210.PushBack({ 376,2 + i * 17,22,17 });
+		blueball_240.PushBack({ 419, 2 + i * 23,17,23 });
+		blueball_300.PushBack({ 452,2 + i * 23,17,23 });
+		blueball_330.PushBack({ 490,2 + i * 17,22,17 });
 
+		//Red ball animations pushbacks
+		redball_0.PushBack({ 195,186 + i * 16, 22, 16 });
+		redball_45.PushBack({ 240, 186 + i * 22, 21, 21 });
+		redball_90.PushBack({ 278, 186 + i * 22, 16, 22 });
+		redball_135.PushBack({ 311, 186 + i * 22, 21, 21 });
+		redball_180.PushBack({ 354, 186 + i * 16, 22, 16 });
+		redball_225.PushBack({ 398, 186 + i * 22, 21, 21 });
+		redball_270.PushBack({ 436, 186 + i * 22, 16, 22 });
+		redball_315.PushBack({ 469, 186 + i * 22,21, 21 });
+		redball_30.PushBack({ 218, 186 + i * 17,22,17 });
+		redball_60.PushBack({ 261, 186 + i * 23,17,23 });
+		redball_120.PushBack({ 294,186 + i * 23,17,23 });
+		redball_150.PushBack({ 332, 186 + i * 17,22,17 });
+		redball_210.PushBack({ 376,186 + i * 17,22,17 });
+		redball_240.PushBack({ 419, 186 + i * 23,17,23 });
+		redball_300.PushBack({ 452,186 + i * 23,17,23 });
+		redball_330.PushBack({ 490,186 + i * 17,22,17 });
+	}
+
+	blueball_0.speed = 0.2;
+	blueball_45.speed = 0.2;
+	blueball_90.speed = 0.2;
+	blueball_135.speed = 0.2;
+	blueball_180.speed = 0.2;
+	blueball_225.speed = 0.2;
+	blueball_270.speed = 0.2;
+	blueball_315.speed = 0.2;
+	blueball_30.speed = 0.2;
+	blueball_60.speed = 0.2;
+	blueball_120.speed = 0.2;
+	blueball_150.speed = 0.2;
+	blueball_210.speed = 0.2;
+	blueball_240.speed = 0.2;
+	blueball_300.speed= 0.2;
+	blueball_330.speed = 0.2;
+	
+	redball_0.speed = 0.2;
+	redball_45.speed = 0.2;
+	redball_90.speed = 0.2;
+	redball_135.speed = 0.2;
+	redball_180.speed = 0.2;
+	redball_225.speed = 0.2;
+	redball_270.speed = 0.2;
+	redball_315.speed = 0.2;
+	redball_30.speed = 0.2;
+	redball_60.speed = 0.2;
+	redball_120.speed = 0.2;
+	redball_150.speed = 0.2;
+	redball_210.speed = 0.2;
+	redball_240.speed = 0.2;
+	redball_300.speed = 0.2;
+	redball_330.speed = 0.2;
+	
 	for (int i = 0; i < 6; ++i)
 		blueball_thrown.PushBack({169, 180 +i*26, 26,26});
 	blueball_thrown.speed = 0.30;
@@ -47,6 +88,8 @@ ModuleBall::ModuleBall()
 		for (int j = 0; j < 5; ++j)
 			blueball_charging.PushBack({ 230+46*j,45+46*i,46,46 });
 	blueball_charging.speed = 0.3;
+
+
 
 };
 
@@ -57,6 +100,9 @@ ModuleBall::~ModuleBall()
 
 bool ModuleBall::Start()
 {
+	//Color (to test)
+	ball_color = BLUE;
+
 	//Initial angle
 	angle = 0;
 
@@ -76,7 +122,8 @@ bool ModuleBall::Start()
 	//Load colliders
 	position = { App->player->position.x +42, App->player->position.y};
 	ball1_collider = App->collision->AddCollider({ position.x, position.y, 22, 22 }, COLLIDER_BALL,this);
-	current_animation = &blueball_0;
+	
+	current_animation = &redball_0;
 	return true;
 }
 
@@ -103,8 +150,9 @@ update_status ModuleBall::Update()
 	{
 		//move the ball
 		MoveAround();
+		Aim();
 		if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_REPEAT)
-			aim_angle += 6;
+			aim_angle += 2*PI/180;
 
 		if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN) //We fix/unfix the ball
 		{
@@ -152,7 +200,8 @@ update_status ModuleBall::Update()
 
 	ball1_collider->SetPos(position.x, position.y);
 	
-	App->render->Blit_rotate(App->player->graphics, position, 22, 16, &current_animation->GetCurrentFrame(),ball_center, aim_angle);
+	
+	App->render->Blit(App->player->graphics, position.x, position.y, &current_animation->GetCurrentFrame());
 	
 	return UPDATE_CONTINUE;
 }
@@ -277,7 +326,48 @@ void ModuleBall::MoveAround()
 	position.y = App->player->position.y + 1 + radius * SDL_sin(angle);
 }
 
+void ModuleBall::Aim()
+{
+	if (SDL_cos(aim_angle) > 0.95 && SDL_sin(aim_angle)>-0.05 &&SDL_sin(aim_angle)>0.05)
+	{
+		if (ball_color == BLUE)
+			current_animation = &blueball_0;
+		else
+			current_animation = &redball_0;
+	}
 
+	else if (SDL_sin(aim_angle) > sqrt(2)/2 - 0.05 && SDL_sin(aim_angle) < sqrt(2) / 2 + 0.05 && SDL_cos(aim_angle)>sqrt(2) / 2 -0.05 && SDL_cos(aim_angle) < sqrt(2) / 2 +0.05)
+	{
+		if (ball_color == BLUE)
+			current_animation = &blueball_315;
+		else
+			current_animation = &redball_315;
+	}
+
+	else if (SDL_sin(aim_angle) < -0.95)
+	{
+		if (ball_color == BLUE)
+			current_animation = &blueball_90;
+		else
+			current_animation = &redball_90;
+	}
+
+	else if (SDL_cos(aim_angle) < -0.95&& SDL_sin(aim_angle)>-0.05 &&SDL_sin(aim_angle)>0.05)
+	{
+		if (ball_color == BLUE)
+			current_animation = &blueball_180;
+		else
+			current_animation = &redball_180;
+	}
+
+	else if (SDL_sin(aim_angle) > 0.95)
+	{
+		if (ball_color == BLUE)
+			current_animation = &blueball_270;
+		else
+			current_animation = &redball_270;
+	}
+}
 
 void ModuleBall::ChargeBall()
 {
