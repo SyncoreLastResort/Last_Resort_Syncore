@@ -38,6 +38,8 @@ Application::Application()
 	modules[i++] = ball_player2 = new ModuleBall2();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = player2 = new ModulePlayer2();
+	modules[i++] = particles = new ModuleParticles();
+	
 	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = fade = new ModuleFadeToBlack();
 }	
