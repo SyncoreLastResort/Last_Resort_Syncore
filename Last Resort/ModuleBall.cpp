@@ -177,6 +177,13 @@ bool ModuleBall::CleanUp()
 	App->audio->UnloadSoundEffect(release_ball_sound);
 	App->audio->UnloadSoundEffect(charge_ball_sound);
 
+	for (int i = 0; i < 32; ++i)
+	{
+		if (ball_animations[i] != nullptr)
+			ball_animations[i]= nullptr;
+		
+	}
+
 	return true;
 }
 
