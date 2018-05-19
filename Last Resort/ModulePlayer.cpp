@@ -30,8 +30,8 @@ ModulePlayer::ModulePlayer()
 	spawn.PushBack({ 64,162,64,25 });
 	spawn.PushBack({ 64,187,64,25 });
 	spawn.PushBack({ 64,212,64,25 });
-	spawn.PushBack({ 128,125,64,25 });
-	spawn.PushBack({ 128,150,64,25 });
+	spawn.PushBack({ 128,127,64,25 });
+	spawn.PushBack({ 128,152,64,25 });
 	spawn.loop = false;
 	spawn.speed = 0.2f;
 
@@ -109,9 +109,6 @@ bool ModulePlayer::Start()
 	position.y = 100;
 	score = 0;
 
-	//App->ball_player1->Enable();
-	
-	// TODO 2: Add a collider to the player
 
 	playercollider=App->collision->AddCollider({ position.x,position.y,32,14 }, COLLIDER_PLAYER, this);   // this = App->player																						
 	
@@ -166,7 +163,6 @@ update_status ModulePlayer::Update()
 			if (position.x - speed >= App->render->camera.x)
 			{
 				position.x -= speed;
-				App->particles->Laserexplosion.position.x -= speed;
 			}
 		}
 
@@ -175,7 +171,6 @@ update_status ModulePlayer::Update()
 			if (position.x + speed <= App->render->camera.x + App->render->camera.w - 32)   //32 is the ship's width
 			{
 				position.x += speed;
-				App->particles->Laserexplosion.position.x += speed;
 			}
 		}
 
@@ -184,7 +179,6 @@ update_status ModulePlayer::Update()
 			if (position.y + speed <= SCREEN_HEIGHT - 14)
 			{
 				position.y += speed;
-				App->particles->Laserexplosion.position.y += speed;
 			}
 			if (current_animation != &downwards)
 			{
@@ -207,7 +201,6 @@ update_status ModulePlayer::Update()
 			if (position.y - speed >= 2)
 			{
 				position.y -= speed;
-				App->particles->Laserexplosion.position.y -= speed;
 			}
 			if (current_animation != &upwards)
 			{
@@ -226,18 +219,25 @@ update_status ModulePlayer::Update()
 		}
 		
 	}
-	// TODO 3: Update collider position to player position
+	
 
-	playercollider->SetPos(position.x, position.y);
+	//update the particles that appear when we shoot
+	cannon_position.x = position.x + 32;
+	cannon_position.y = position.y-1;
+
+	laser_beam_position.x = position.x + 32;
+	laser_beam_position.y = position.y+1;
+
+	playercollider->SetPos(position.x, position.y); //Update the position of the collider
 
 	// Draw everything --------------------------------------
 	if (current_animation == &spawn)
 	{
-		App->render->Blit(graphics, position.x - 32, position.y - 7, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(graphics, position.x - 32, position.y - 5, &(current_animation->GetCurrentFrame()));//We adjust the position of the drawing because of the size of the sprite
 	}
 	else if (current_animation == &death)
 	{
-		App->render->Blit(graphics, position.x - 23, position.y - 5, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(graphics, position.x - 23, position.y - 5, &(current_animation->GetCurrentFrame()));//We adjust the position of the drawing because of the size of the sprite
 	}
 	else
 	{
@@ -290,12 +290,18 @@ void ModulePlayer::Shoot()
 		/*App->particles->AddParticle(App->particles->Laserexplosion, App->player->position.x + 32, App->player->position.y);*/
 		App->particles->AddParticle(App->particles->laser, position.x + 35, position.y + 4, COLLIDER_PLAYER_SHOT);
 
+		App->particles->AddParticle(App->particles->Laserexplosion, position.x + 35, position.y + 4, COLLIDER_NONE, 0, &cannon_position);
+		App->particles->AddParticle(App->particles->Laserexplosion, position.x + 35, position.y + 4, COLLIDER_NONE,150, &cannon_position);
+
+
 		if (SDL_GetTicks() - weapon_fired)
 		{
 			if (weapon == LASER_BEAM && weapon_level >= 3 && SDL_GetTicks() - weapon_fired >= 1000)
 			{
-
+				App->particles->AddParticle(App->particles->laser_cannon, position.x + 35, position.y + 4, COLLIDER_NONE, 0, &laser_beam_position);
+				
 				App->audio->PlaySoundEffect(laser_sound);
+				
 				App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT);
 				App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 20);
 				App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER_SHOT, 40);

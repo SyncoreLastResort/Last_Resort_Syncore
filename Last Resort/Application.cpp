@@ -33,7 +33,6 @@ Application::Application()
 	modules[i++] = stageclear = new ModuleStageClear();
 	modules[i++] = gameover = new ModuleGameOver();
 	modules[i++] = enemies = new ModuleEnemies();
-	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = ball_player1 = new ModuleBall();
 	modules[i++] = ball_player2 = new ModuleBall2();
