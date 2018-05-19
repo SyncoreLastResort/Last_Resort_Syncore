@@ -123,7 +123,45 @@ bool ModuleBall::Start()
 	position = { App->player->position.x +42, App->player->position.y};
 	ball1_collider = App->collision->AddCollider({ position.x, position.y, 22, 22 }, COLLIDER_BALL,this);
 	
-	current_animation = &redball_0;
+	current_animation = &blueball_0;
+	
+	int i = 0;
+
+	ball_animations[i] = &blueball_0;
+	ball_animations[i++] = &blueball_30;
+	ball_animations[i++] = &blueball_45;
+	ball_animations[i++] = &blueball_60;
+	ball_animations[i++] = &blueball_90;
+	ball_animations[i++] = &blueball_120;
+	ball_animations[i++] = &blueball_135;
+	ball_animations[i++] = &blueball_150;
+	ball_animations[i++] = &blueball_180;
+	ball_animations[i++] = &blueball_210;
+	ball_animations[i++] = &blueball_225;
+	ball_animations[i++] = &blueball_240;
+	ball_animations[i++] = &blueball_270;
+	ball_animations[i++] = &blueball_300;
+	ball_animations[i++] = &blueball_315;
+	ball_animations[i++] = &blueball_330;
+	ball_animations[i++] = &redball_0;
+	ball_animations[i++] = &redball_30;
+	ball_animations[i++] = &redball_45;
+	ball_animations[i++] = &redball_60;
+	ball_animations[i++] = &redball_90;
+	ball_animations[i++] = &redball_120;
+	ball_animations[i++] = &redball_135;
+	ball_animations[i++] = &redball_150;
+	ball_animations[i++] = &redball_180;
+	ball_animations[i++] = &redball_210;
+	ball_animations[i++] = &redball_225;
+	ball_animations[i++] = &redball_240;
+	ball_animations[i++] = &redball_270;
+	ball_animations[i++] = &redball_300;
+	ball_animations[i++] = &redball_315;
+	ball_animations[i++] = &redball_330;
+		
+
+
 	return true;
 }
 
@@ -144,7 +182,12 @@ bool ModuleBall::CleanUp()
 
 update_status ModuleBall::Update()
 {
-	laps =int ( angle / (2 * PI));
+	for (int i = 0; i < 32; ++i)
+	{
+		if (current_animation != ball_animations[i] && ball_animations[i]!=nullptr)
+			ball_animations[i]->GetCurrentFrame();
+	}
+	
 
 	if (ball_thrown == false)
 	{

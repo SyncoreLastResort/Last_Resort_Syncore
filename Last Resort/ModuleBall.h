@@ -148,6 +148,6 @@ private:
 	Animation redball_charging; //red ball charging
 	Animation redball_thrown; //red ball thrown
 
-	Animation *ball_animations[25];
+	Animation *ball_animations[32];
 };
 #endif // !1
