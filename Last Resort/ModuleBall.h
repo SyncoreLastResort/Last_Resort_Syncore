@@ -55,7 +55,7 @@ private:
 	void ModuleBall::ReturnBall();
 	void ModuleBall::Trail();
 	void ModuleBall::Shoot();
-	BALL_POSITION ModuleBall::getPosition();
+	
 
 public:
 	iPoint position;
@@ -74,13 +74,14 @@ private:
 
 	//Ball center
 	iPoint ball_center = { 8,8 };
-	
-	//Orientative int; laps = angle/2*PI --> 
-	int laps = 0;
+
 
 	//Ball speed
-	float rotation_speed = 2 * PI / 100;
+	float rotation_speed = 2 * PI / 90;
 
+	//Aim speed
+	float aim_speed = 2 * PI / 35;
+	
 	//Bools to fix the ball
 	bool fix_position, ball_fixed;
 

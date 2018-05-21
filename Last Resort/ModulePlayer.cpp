@@ -311,6 +311,7 @@ void ModulePlayer::OnCollision(Collider * col_1, Collider * col_2)
 				if (current_animation != &death)
 				{
 					p1dead = true;
+					App->ball_player1->Disable();
 					weapon_level = 1;
 					App->audio->PlaySoundEffect(deathsound);
 					current_animation = &death;

@@ -58,13 +58,23 @@ ModuleParticles::ModuleParticles()
 	laser_beam.life = 1000;
 	
 	//ball trail
-	ball_trail.anim.PushBack({ 251,1,32,32 });
-	ball_trail.anim.PushBack({ 283,1,32,32 });
-	ball_trail.anim.PushBack({ 315,1,32,32 });
-	ball_trail.anim.PushBack({ 347,1,32,32 });
-	ball_trail.anim.loop = false;
-	ball_trail.anim.speed = 0.5;
-	ball_trail.speed = { 0,0 };
+	blueball_trail.anim.PushBack({ 347,1,32,32 });
+	blueball_trail.anim.PushBack({ 315,1,32,32 });
+	blueball_trail.anim.PushBack({ 283,1,32,32 });
+	blueball_trail.anim.PushBack({ 251,1,32,32 });
+	
+	blueball_trail.anim.loop = false;
+	blueball_trail.anim.speed = 0.4;
+	blueball_trail.speed = { 0,0 };
+
+	redball_trail.anim.PushBack({ 0,1,32,32 });
+	redball_trail.anim.PushBack({ 32,1,32,32 });
+	redball_trail.anim.PushBack({ 64,1,32,32 });
+	redball_trail.anim.PushBack({ 96,1,32,32 });
+
+	redball_trail.anim.loop = false;
+	redball_trail.anim.speed = 0.4;
+	redball_trail.speed = { 0,0 };
 	
 	//Ball green shot
 	for (int i=0;i<4;++i)
@@ -219,7 +229,9 @@ bool ModuleParticles::Start()
 	bomb_explosion.sound = App->audio->LoadSoundEffect("assets/sounds/010.Bomb_center.wav");
 	bomb_explosion.texture = enemy_explosion.texture;
 	//Ball trail particles
-	ball_trail.texture = App->textures->Load("assets/sprites/Ball_aditional_effects.png");
+	ball_effects = App->textures->Load("assets/sprites/Ball_aditional_effects.png");
+	redball_trail.texture = ball_effects;
+	blueball_trail.texture = ball_effects;
 	return true;
 }
 
@@ -239,6 +251,7 @@ bool ModuleParticles::CleanUp()
 		}
 	}
 
+	App->textures->Unload(ball_effects);
 	App->textures->Unload(graphics);
 	
 	return true;

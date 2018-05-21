@@ -84,10 +84,19 @@ ModuleBall::ModuleBall()
 		blueball_thrown.PushBack({169, 180 +i*26, 26,26});
 	blueball_thrown.speed = 0.30;
 
+	for (int i = 0; i < 6; ++i)
+		redball_thrown.PushBack({ 143, 180 + i * 26, 26,26 });
+	redball_thrown.speed = 0.30;
+
 	for (int i = 0; i < 3; ++i)
 		for (int j = 0; j < 5; ++j)
 			blueball_charging.PushBack({ 230+46*j,45+46*i,46,46 });
 	blueball_charging.speed = 0.3;
+
+	for (int i = 0; i < 3; ++i)
+		for (int j = 0; j < 5; ++j)
+			redball_charging.PushBack({0 + 46 * j,45 + 46 * i,46,46 });
+	redball_charging.speed = 0.3;
 
 
 
@@ -101,7 +110,7 @@ ModuleBall::~ModuleBall()
 bool ModuleBall::Start()
 {
 	//Color (to test)
-	ball_color = RED;
+	ball_color = BLUE;
 
 	//Initial angle
 	angle = 0;
@@ -121,7 +130,7 @@ bool ModuleBall::Start()
 
 	//Load colliders
 	position = { App->player->position.x +42, App->player->position.y};
-	ball1_collider = App->collision->AddCollider({ position.x, position.y, 22, 22 }, COLLIDER_BALL,this);
+	ball1_collider = App->collision->AddCollider({ position.x, position.y,16, 16 }, COLLIDER_BALL,this);
 	
 	current_animation = &blueball_0;
 	
@@ -201,9 +210,7 @@ update_status ModuleBall::Update()
 		//move the ball
 		MoveAround();
 		Aim();
-		if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_REPEAT)
-			aim_angle += 2*PI/60;
-
+		
 		if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN) //We fix/unfix the ball
 		{
 			if (fix_position)
@@ -236,7 +243,7 @@ update_status ModuleBall::Update()
 	if (ball_thrown == true)
 	{
 		Trail();
-		current_animation = &blueball_thrown;
+		//current_animation = &blueball_thrown;
 		if (back_to_player == false)
 		{
 			Path();
@@ -248,11 +255,73 @@ update_status ModuleBall::Update()
 	}
 	
 
+	
+	
+	
 	ball1_collider->SetPos(position.x, position.y);
 	
+
 	
-	App->render->Blit(App->player->graphics, position.x, position.y, &current_animation->GetCurrentFrame());
+	if (current_animation == &blueball_30 || current_animation == &redball_30)
+	{
+		App->render->Blit(App->player->graphics, position.x, position.y-1, &current_animation->GetCurrentFrame());
+	}
+
+	else if (current_animation == &blueball_45 || current_animation == &redball_45)
+	{
+		App->render->Blit(App->player->graphics, position.x, position.y - 5, &current_animation->GetCurrentFrame());
+	}
+
+	else if (current_animation == &blueball_60 || current_animation == &redball_60)
+	{
+		App->render->Blit(App->player->graphics, position.x, position.y - 7, &current_animation->GetCurrentFrame());
+	}
+
+	else if (current_animation == &blueball_90 || current_animation == &redball_90)
+	{
+		App->render->Blit(App->player->graphics, position.x, position.y - 6, &current_animation->GetCurrentFrame());
+	}
+
+	else if (current_animation == &blueball_120 || current_animation == &redball_120)
+	{
+		App->render->Blit(App->player->graphics, position.x-1, position.y - 7, &current_animation->GetCurrentFrame());
+	}
 	
+	else if (current_animation == &blueball_135||current_animation == &redball_135)
+	{
+		App->render->Blit(App->player->graphics, position.x-5, position.y - 5, &current_animation->GetCurrentFrame());
+	}
+
+	else if (current_animation == &blueball_150 || current_animation == &redball_150)
+	{
+		App->render->Blit(App->player->graphics, position.x-6, position.y-1, &current_animation->GetCurrentFrame());
+	}
+	
+	else if (current_animation == &blueball_180 || current_animation == &redball_180)
+	{
+		App->render->Blit(App->player->graphics, position.x - 6, position.y, &current_animation->GetCurrentFrame());
+	}
+
+	else if (current_animation == &blueball_210 || current_animation == &redball_210)
+	{
+		App->render->Blit(App->player->graphics, position.x - 6, position.y, &current_animation->GetCurrentFrame());
+	}
+
+	else if (current_animation == &blueball_225 || current_animation == &redball_225)
+	{
+		App->render->Blit(App->player->graphics, position.x - 6, position.y, &current_animation->GetCurrentFrame());
+	}
+
+	else if (current_animation == &blueball_240 || current_animation == &redball_240)
+	{
+		App->render->Blit(App->player->graphics, position.x - 1, position.y, &current_animation->GetCurrentFrame());
+	}
+
+	else
+	{
+		App->render->Blit(App->player->graphics, position.x, position.y, &current_animation->GetCurrentFrame());
+		
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -381,7 +450,100 @@ void ModuleBall::Aim()
 	//Decimal numbers are used to give some margin of error 
 	//Depending on the angle, the slope of sin or cos changes, so i'll use on or the other as i see which one is better
 
-	if (SDL_sin(aim_angle) > 0.999)
+	if (App->player->going_up && App->player->going_left)
+	{
+		if ((SDL_sin(aim_angle) <= sqrt(2) / 2 - 0.1 || SDL_sin(aim_angle) >= sqrt(2) / 2 + 0.1) || (SDL_cos(aim_angle) <= sqrt(2) / 2 - 0.1 || SDL_cos(aim_angle) >= sqrt(2) / 2 + 0.1)) //Bottom right 
+		{
+			if (SDL_sin(aim_angle) < -sqrt(2) / 2 || cos(aim_angle) > sqrt(2) / 2)
+				aim_angle += aim_speed;
+			else
+				aim_angle -= aim_speed;
+		}
+	}
+
+	else if (App->player->going_up && App->player->going_right)
+	{
+		if ((SDL_sin(aim_angle) <= sqrt(2) / 2 - 0.1 || SDL_sin(aim_angle) >= sqrt(2) / 2 + 0.1) || (SDL_cos(aim_angle) <= -sqrt(2) / 2 - 0.1 || SDL_cos(aim_angle) >= -sqrt(2) / 2 + 0.1))
+		{
+			if (SDL_sin(aim_angle) < -sqrt(2) / 2 || cos(aim_angle) < -sqrt(2) / 2)
+				aim_angle -= aim_speed;
+			else
+				aim_angle += aim_speed;
+		}
+	}
+
+	else if (App->player->going_down && App->player->going_right)
+	{
+		if ((SDL_sin(aim_angle) <= -sqrt(2) / 2 - 0.1 || SDL_sin(aim_angle) >= -sqrt(2) / 2 + 0.1) || (SDL_cos(aim_angle) <= -sqrt(2) / 2 - 0.1 || SDL_cos(aim_angle) >= -sqrt(2) / 2 + 0.1))
+		{
+			if (SDL_sin(aim_angle) > sqrt(2) / 2 || cos(aim_angle) < -sqrt(2) / 2)
+				aim_angle += aim_speed;
+			else
+				aim_angle -= aim_speed;
+		}
+	}
+
+	else if (App->player->going_down && App->player->going_left)
+	{
+		if ((SDL_sin(aim_angle) <= -sqrt(2) / 2 - 0.1 || SDL_sin(aim_angle) >= -sqrt(2) / 2 + 0.1) || (SDL_cos(aim_angle) <= sqrt(2) / 2 - 0.1 || SDL_cos(aim_angle) >= sqrt(2) / 2 + 0.1))
+		{
+			if (SDL_sin(aim_angle) > sqrt(2) / 2 || cos(aim_angle) > sqrt(2) / 2)
+				aim_angle -= aim_speed;
+			else
+				aim_angle += aim_speed;
+		}
+	}
+
+	else if (App->player->going_up)
+	{
+		if (SDL_sin(aim_angle) < 0.999) // When the ball gets to the lowest position - The sin of the angle never gets to 1, so we try to get as close as posible
+		{
+			if (SDL_cos(aim_angle)>0)
+				aim_angle += aim_speed;
+
+			else 
+				aim_angle -= aim_speed;
+		}
+
+	}
+
+	else if (App->player->going_down)
+	{
+		if (SDL_sin(aim_angle) > -0.999)// When the ball gets to the highest position - The sin of the angle never gets to 1, so we try to get as close as posible
+		{
+			if (SDL_cos(aim_angle)>0)
+				aim_angle -= aim_speed;
+
+			else 
+				aim_angle += aim_speed;
+		}
+	}
+
+	else if (App->player->going_left)
+	{
+		if (SDL_cos(aim_angle) < 0.999)// When the ball gets to the right - The cos of the angle never gets to 1, so we try to get as close as posible
+		{
+			if (SDL_sin(aim_angle)<0)
+				aim_angle += aim_speed;
+
+			else
+				aim_angle -= aim_speed;
+		}
+
+	}
+
+	else if (App->player->going_right)
+	{
+		if (SDL_cos(aim_angle) > -0.999)// When the ball gets to the left - The cos of the angle never gets to 1, so we try to get as close as posible
+		{
+			if (SDL_sin(aim_angle)>0)
+				aim_angle += aim_speed;
+			else
+				aim_angle -= aim_speed;
+		}
+	}
+
+	if (SDL_sin(aim_angle) > 0.99)
 	{
 		if (ball_color == BLUE)
 			current_animation = &blueball_270;
@@ -389,7 +551,7 @@ void ModuleBall::Aim()
 			current_animation = &redball_270;
 	}
 
-	else if (SDL_sin(aim_angle) < -0.999)
+	else if (SDL_sin(aim_angle) < -0.99)
 	{
 		if (ball_color == BLUE)
 			current_animation = &blueball_90;
@@ -397,7 +559,7 @@ void ModuleBall::Aim()
 			current_animation = &redball_90;
 	}
 
-	else if (SDL_cos(aim_angle) < -0.999)
+	else if (SDL_cos(aim_angle) < -0.99)
 	{
 		if (ball_color == BLUE)
 			current_animation = &blueball_180;
@@ -405,7 +567,7 @@ void ModuleBall::Aim()
 			current_animation = &redball_180;
 	}
 
-	else if (SDL_cos(aim_angle) > 0.999)
+	else if (SDL_cos(aim_angle) > 0.99)
 	{
 		if (ball_color == BLUE)
 			current_animation = &blueball_0;
@@ -519,90 +681,96 @@ void ModuleBall::Aim()
 		}
 	}
 
+	//Now we change the direction of the shot depending on where the ball is aiming at
+	if (current_animation == &blueball_0 || current_animation == &redball_0)
+		App->particles->ball_shot.speed = { 6,0 };
+
+	else if (current_animation == &blueball_180 || current_animation == &redball_180)
+		App->particles->ball_shot.speed = { -6,0 };
+
+	else if (current_animation == &blueball_90 || current_animation == &redball_90)
+		App->particles->ball_shot.speed = { 1,-6 };
+
+	else if (current_animation == &blueball_270 || current_animation == &redball_270)
+		App->particles->ball_shot.speed = { 1,6 };
+	
+	else if (current_animation == &blueball_30 || current_animation == &redball_30)
+		App->particles->ball_shot.speed = {int(6*COS_30),int(-6*SIN_30 )};
+
+	else if (current_animation == &blueball_45 || current_animation == &redball_45)
+		App->particles->ball_shot.speed = {int( 6 * COS_45),int(-6 * SIN_45 )};
+
+	else if (current_animation == &blueball_60 || current_animation == &redball_60)
+		App->particles->ball_shot.speed = {int( 6 * COS_60),int(-6 * SIN_60 )};
+
+	else if (current_animation == &blueball_120 || current_animation == &redball_120)
+		App->particles->ball_shot.speed = {int( -6 * COS_60),int(-6 * SIN_60 )};
+
+	else if (current_animation == &blueball_135 || current_animation == &redball_135)
+		App->particles->ball_shot.speed = {int( -6 * COS_45),int(-6 * SIN_45 )};
+
+	else if (current_animation == &blueball_150 || current_animation == &redball_150)
+		App->particles->ball_shot.speed = { int(-6 * COS_30),int(-6 * SIN_30 )};
+
+	else if (current_animation == &blueball_210 || current_animation == &redball_210)
+		App->particles->ball_shot.speed = {int( -6 * COS_30),int(6 * SIN_30 )};
+
+	else if (current_animation == &blueball_225 || current_animation == &redball_225)
+		App->particles->ball_shot.speed = {int( -6 * COS_45),int(6 * SIN_45 )};
+
+	else if (current_animation == &blueball_240 || current_animation == &redball_240)
+		App->particles->ball_shot.speed = { int(-6 * COS_60),int(6 * SIN_60 )};
+
+	else if (current_animation == &blueball_300 || current_animation == &redball_300)
+		App->particles->ball_shot.speed = { int (6 * COS_60),int(6 * SIN_60 )};
+
+	else if (current_animation == &blueball_315 || current_animation == &redball_315)
+		App->particles->ball_shot.speed = { int(6 * COS_45),int(6 * SIN_45 )};
+
+	else if (current_animation == &blueball_330 || current_animation == &redball_330)
+		App->particles->ball_shot.speed = {int( 6 * COS_30),int(6 * SIN_30 )};
+	
+	
 }
 
 void ModuleBall::ChargeBall()
 {
 	charge_ball_sound->volume = 128;
-	charge+=2;
+	charge+=3;
 	if (charge > 80)
 		shot_charged = true;
 	if (SDL_GetTicks() - charge_time > 200)
 	{
-		if (charge>=20&&charge<=26)
+		if (charge>=20&&charge<=40)
 			App->audio->PlaySoundEffect(charge_ball_sound);
 
-		if (current_animation == &blueball_0)
-			App->render->Blit(ball_aditional_effects, position.x - 15, position.y - 15, &blueball_charging.GetCurrentFrame());
+		//Charging animations
+		if (ball_color == BLUE)
+			App->render->Blit(ball_aditional_effects, position.x-15, position.y-15, &blueball_charging.GetCurrentFrame());
+		else 
+			App->render->Blit(ball_aditional_effects, position.x - 15, position.y - 15, &redball_charging.GetCurrentFrame());
 
-		if (current_animation == &blueball_45)
-			App->render->Blit(ball_aditional_effects, position.x - 15, position.y - 10, &blueball_charging.GetCurrentFrame());
-
-		if (current_animation == &blueball_90)
-			App->render->Blit(ball_aditional_effects, position.x - 15, position.y - 9, &blueball_charging.GetCurrentFrame());
-
-		if (current_animation == &blueball_135)
-			App->render->Blit(ball_aditional_effects, position.x - 10, position.y - 10, &blueball_charging.GetCurrentFrame());
-
-		if (current_animation == &blueball_180)
-			App->render->Blit(ball_aditional_effects, position.x - 9, position.y - 15, &blueball_charging.GetCurrentFrame());
-
-		if (current_animation == &blueball_225)
-			App->render->Blit(ball_aditional_effects, position.x - 10, position.y - 15, &blueball_charging.GetCurrentFrame());
-
-		if (current_animation == &blueball_270)
-			App->render->Blit(ball_aditional_effects, position.x - 15, position.y - 15, &blueball_charging.GetCurrentFrame());
-
-		if (current_animation == &blueball_315)
-			App->render->Blit(ball_aditional_effects, position.x - 15, position.y - 15, &blueball_charging.GetCurrentFrame());
 	}
-	
-
-
 }
 
 void ModuleBall::ReleaseBall()
 {
 	charge_ball_sound->volume = 0;
+	
 	blueball_charging.Reset();
+	
 	if (!shot_charged)
 		charge = 0;
+	
 	if (shot_charged)
 	{
+		if (ball_color == BLUE)
+			current_animation = &blueball_thrown;
+		else
+			current_animation = &redball_thrown;
 		shot_charged = false;
 		App->audio->PlaySoundEffect(release_ball_sound);
-		if (getPosition() == RIGHT_SIDE)
-		{
-			velocity = { 8,0 };
-		}
-		if (getPosition() == RIGHT_TOP)
-		{
-			velocity = { 6,-6 };
-		}
-		if (getPosition() == RIGHT_BOTTOM)
-		{
-			velocity = { 6,6 };
-		}
-		if (getPosition() == LEFT_SIDE)
-		{
-			velocity = { -8,0 };
-		}
-		if (getPosition() == LEFT_TOP)
-		{
-			velocity = { -8,-6 };
-		}
-		if (getPosition() == LEFT_BOTTOM)
-		{
-			velocity = { -8,6 };
-		}
-		if (getPosition() == BOTTOM)
-		{
-			velocity = {0 ,8 };
-		}
-		if (getPosition() == TOP)
-		{
-			velocity = { 0,-8 };
-		}
+		velocity = { int(8 * SDL_cos(angle)), int(8 * SDL_sin(angle)) };
 		ball_thrown = true;
 	}
 	
@@ -636,36 +804,6 @@ void ModuleBall::ReturnBall()
 	}
 }
 
-BALL_POSITION ModuleBall::getPosition()
-{
-	BALL_POSITION ret = NONE;
-	if (position.x < App->player->position.x + 15 && position.x >= App->player->position.x - 10 &&position.y < App->player->position.y - 1 && position.y > App->player->position.y - 25)
-		ret = LEFT_TOP;
-	
-	else if (position.x < App->player->position.x + 10 && position.x >= App->player->position.x - 10 && position.y>App->player->position.y - 1 && position.y < App->player->position.y + 25)
-		ret = LEFT_BOTTOM;
-	
-	else if (position.x <= App->player->position.x - 10)
-		ret = LEFT_SIDE;
-	
-	else if (position.x >= App->player->position.x + 15 && position.y < App->player->position.y - 1&& position.y > App->player->position.y - 25&& position.x < App->player->position.x + 41)
-		ret = RIGHT_TOP;
-	
-	else if (position.x >= App->player->position.x + 10 && position.y > App->player->position.y - 1 && position.y < App->player->position.y + 25 && position.x < App->player->position.x + 41)
-		ret = RIGHT_BOTTOM;
-	
-	else if (position.x >= App->player->position.x + 41)
-		ret = RIGHT_SIDE;
-	
-	else if (position.y <= App->player->position.y - 25)
-		ret = TOP;
-	
-	else if (position.y >= App->player->position.y + 25)
-		ret = BOTTOM;
-
-	return ret;
-}
-
 void ModuleBall::Shoot()
 {
 	if (current_animation == &blueball_0)
@@ -697,8 +835,13 @@ void ModuleBall::Shoot()
 
 void ModuleBall::Trail()
 {
-	if (SDL_GetTicks()%80>=0&& SDL_GetTicks() % 80 <= 20)
-		App->particles->AddParticle(App->particles->ball_trail, position.x - 6, position.y - 6);
+	if (SDL_GetTicks() % 80 >= 0 && SDL_GetTicks() % 80 <= 20)
+	{
+		if (ball_color==BLUE)
+			App->particles->AddParticle(App->particles->blueball_trail, position.x - 6, position.y - 6);
+		else 
+			App->particles->AddParticle(App->particles->redball_trail, position.x - 6, position.y - 6);
+	}
 }
 
 void ModuleBall::OnCollision(Collider* c1, Collider* c2) 

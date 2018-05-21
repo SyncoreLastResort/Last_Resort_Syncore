@@ -58,9 +58,11 @@ private:
 	
 public:
 	SDL_Texture * graphics;
+	SDL_Texture * ball_effects;
 
 	Particle laser_cannon;
-	Particle ball_trail;
+	Particle blueball_trail;
+	Particle redball_trail;
 	Particle boss_shot;
 	Particle boss_explosion;
 	Particle boss_dying;
