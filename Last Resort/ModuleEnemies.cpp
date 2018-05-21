@@ -9,6 +9,7 @@
 #include "ModuleRhino.h"
 #include "PowerUp.h"
 #include "PowerUpBomb.h"
+#include "EnemyRedBird.h"
 
 
 
@@ -31,7 +32,7 @@ bool ModuleEnemies::Start()
 
 	
 	sprites = App->textures->Load("assets/sprites/Common_enemyes_Sprite.png");
-	
+	someenemies = App->textures->Load("assets/sprites/Enemys_Stage4_Sprites.png");
 
 	return true;
 }
@@ -95,6 +96,7 @@ bool ModuleEnemies::CleanUp()
 	LOG("Freeing all enemies");
 
 	App->textures->Unload(sprites);
+	App->textures->Unload(someenemies);
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
@@ -153,6 +155,10 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 
 		case ENEMY_TYPES::POWER_UP_BOMB:
 			enemies[i] = new Power_Up_Bomb(info.x, info.y);
+			break;
+
+		case ENEMY_TYPES::RedBird:
+			enemies[i] = new Enemy_RedBird(info.x, info.y);
 			break;
 	
 		}

@@ -9,23 +9,96 @@ PowerUpHolder::PowerUpHolder(int x, int y) : Enemy(x, y)
 	life = 1;
 	score = 100;
 
-	fly.PushBack({ 0,178,32,16 });
-	fly.PushBack({ 0, 194, 32, 15 });
-	fly.PushBack({ 0, 209, 32, 16 });
-	fly.PushBack({ 0, 225, 32, 15 });
-	fly.PushBack({ 0, 240, 32, 16 });
+	walk.PushBack({ 146,158,24,31 });
+	walk.PushBack({ 173, 159, 25, 30 });
+	walk.PushBack({ 201, 158, 24, 31 });
+	walk.PushBack({ 230, 159, 24, 30 });
+	walk.PushBack({ 146,189,24,31 });
+	walk.PushBack({ 173, 190, 25, 30 });
+	walk.PushBack({ 202, 193, 24, 27 });
+	walk.PushBack({ 229, 197, 24, 23 });
+	walk.PushBack({ 228, 222, 28, 29 });
+	walk.speed = 0.075f;
+	walk.loop = true;
+
+	fly.PushBack({ 32,161,32,26 });
+	fly.PushBack({ 64, 161, 32, 26 });
+	fly.PushBack({ 96, 161, 32, 26 });
+	fly.PushBack({ 128, 161, 32, 26 });
 	fly.speed = 0.075f;
 	fly.loop = true;
 
-	animation = &fly;
+	animation = &walk;
 
 	collider = App->collision->AddCollider({ 0, 0, 24, 24 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
+	powerupholderpath.PushBack({ -0.5,0 }, 40, &walk);
+	powerupholderpath2.PushBack({ -0.5,-0.5 }, 30, &fly);
+
 	original_y = y;
+	original_x = x;
 }
 
 void PowerUpHolder::Move()
 {
 	
-	position.x -= 1;
+	
+	if (original_x - position.x <= 40 && animation==&walk)
+	{
+		position.x = original_x + powerupholderpath.GetCurrentPosition().x;
+		position.y = original_y + powerupholderpath.GetCurrentPosition().y;
+	}
+	else
+	{
+		if (original_y - position.y < 60 && timetosin==false)
+		{
+			if (changeanim == 1)
+			{
+				original_y = position.y;
+				original_x = position.x;
+			}
+			position.x = original_x + powerupholderpath2.GetCurrentPosition().x;
+		position.y = original_y + powerupholderpath2.GetCurrentPosition().y;
+	    }
+
+		else 
+		{
+			if (timetosin == false)
+			{
+				timetosin = true;
+				original_y = position.y;
+				original_x = position.x;
+			}
+
+			if (original_x - position.x > 10)
+			{
+				if (going_up)
+				{
+					if (wave > 1.0f)
+						going_up = false;
+					else
+						wave += 0.08f;
+				}
+				else
+				{
+					if (wave < -1.0f)
+						going_up = true;
+					else
+						wave -= 0.08f;
+				}
+
+				position.y = int(float(original_y) + (25.0f * sinf(wave)));
+			}
+			position.x -= 1;
+		}
+
+		if (changeanim == 1)
+		{
+			animation = &fly;
+			changeanim = 0;
+			texturename = App->enemies->sprites;
+		}
+	}
+
+
 }
