@@ -2,13 +2,12 @@
 #define __MODULELEVEL4_H__
 
 #include "Module.h"
-<<<<<<< HEAD
 #include "Animation.h"
 
-=======
+
 #include "p2Point.h"
 #include "Animation.h"
->>>>>>> 587b1c792a64c40ea13967d8d33cb11da1297d00
+
 
 struct SDL_Texture;
 
