@@ -26,7 +26,6 @@ ModuleLevel4::ModuleLevel4()
 	//Background
 	backgroundtilemaprect.x = 0;
 	backgroundtilemaprect.y = 0;
-<<<<<<< HEAD
 	backgroundtilemaprect.w = 4143;
 	backgroundtilemaprect.h = 219;
 
@@ -67,7 +66,7 @@ ModuleLevel4::ModuleLevel4()
 	op_cannon.PushBack({ 0,0,79,49 });
 	op_cannon.Finished();
 	
-=======
+
 	backgroundtilemaprect.w = 2699;
 	backgroundtilemaprect.h = 224;
 
@@ -103,7 +102,6 @@ ModuleLevel4::ModuleLevel4()
 	pinchywalanim.speed = 0.15f;
 	pinchywalanim.loop = true;
 
->>>>>>> 587b1c792a64c40ea13967d8d33cb11da1297d00
 }
 
 ModuleLevel4::~ModuleLevel4()
@@ -114,13 +112,11 @@ bool ModuleLevel4::Start()
 {
 	LOG("Loading level1 scene");
 
-<<<<<<< HEAD
 //	backgroundtilemap = App->textures->Load("assets/sprites/Stage4_tilemap.png");
 	backgroundtilemap = App->textures->Load("assets/sprites/Background.png");
 	foregroundtilemap = App->textures->Load("assets/sprites/Foreground.png");
 	BackLavaAnim = App->textures->Load("assets/sprites/Back_Lava_Anim.png");
 	Enemies_1 = App->textures->Load("assets/sprites/Enemys_Stage4_Sprites.png");
-=======
 	backgroundtilemap = App->textures->Load("assets/sprites/Stage4_tilemap.png");
 	background = App->textures->Load("assets/sprites/Background.png");
 	foreground = App->textures->Load("assets/sprites/Foreground.png");
@@ -137,7 +133,7 @@ bool ModuleLevel4::Start()
 	//Music load
 	main_track_lvl4 = App->audio->LoadMusic("assets/music/9. Melting point (stage 4).ogg");
 	boss_track_lvl4 = App->audio->LoadMusic("assets/music/10. Dusky (Boss 4).ogg");
->>>>>>> 587b1c792a64c40ea13967d8d33cb11da1297d00
+
 
 	App->player->p1dead = false;
 	App->player2->p2dead = false;
@@ -242,20 +238,21 @@ update_status ModuleLevel4::Update()
 	if (maxreached == false && wallmovdownposition.y <= 0)
 	{
 		wallmovdownposition.y += 1;
-		
-	
+	}
+
+	App->player->position.x += 1;
+	App->player2->position.x += 1;
 
 		if (wallmovdownposition.y == 0)
+		{	
 			maxreached = true;
-	}
+		}
 	if (maxreached == true && wallmovdownposition.y >= -157)
 	{
 		wallmovdownposition.y -= 1;
 		
 
-<<<<<<< HEAD
-	App->player->position.x += 1;
-=======
+
 		if (wallmovdownposition.y == -157)
 			maxreached = false;
 	}
@@ -284,7 +281,6 @@ update_status ModuleLevel4::Update()
 	colliderpinchywall->SetPos(pinchywallposition.x, pinchywallposition.y);
 	//End of Pinchy Wall movement
 	
->>>>>>> 587b1c792a64c40ea13967d8d33cb11da1297d00
 
 	App->render->Blit(background, 0, 0, &backgroundrect, 1); //background
 	//App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 1); // back background
