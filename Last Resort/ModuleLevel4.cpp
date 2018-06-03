@@ -240,7 +240,7 @@ update_status ModuleLevel4::Update()
 		wallmovdownposition.y += 1;
 	}
 
-	App->player->position.x += 1;
+	/*App->player->position.x += 1;*/
 	App->player2->position.x += 1;
 
 		if (wallmovdownposition.y == 0)
