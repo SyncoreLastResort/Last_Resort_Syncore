@@ -497,7 +497,7 @@ void ModuleBall2::Shoot()
 void ModuleBall2::Trail()
 {
 	if (SDL_GetTicks() % 80 >= 0 && SDL_GetTicks() % 80 <= 20)
-		App->particles->AddParticle(App->particles->ball_trail, position.x - 6, position.y - 6);
+		App->particles->AddParticle(App->particles->blueball_trail, position.x - 6, position.y - 6);
 }
 void ModuleBall2::OnCollision(Collider* c1, Collider* c2)
 {

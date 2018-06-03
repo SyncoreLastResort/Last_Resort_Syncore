@@ -131,6 +131,32 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, f
 	return ret;
 }
 
+bool ModuleRender::Blit_rotate(SDL_Texture* texture, iPoint position, int w, int h, SDL_Rect* section, iPoint center, float angle, float speed, bool use_camera)
+{
+	bool ret = true;
+	SDL_Rect rect;
+	SDL_Point rotation_center;
+
+	rect.x = position.x;
+	rect.y = position.y;
+	rect.w = w;
+	rect.h = h;
+
+	rotation_center.x = center.x;
+	rotation_center.y = center.y;
+
+	if (use_camera)
+	{
+		rect.x = (int)(-camera.x * speed) + position.x * SCREEN_SIZE;
+		rect.y = (int)(-camera.y * speed) + position.y * SCREEN_SIZE;
+	}
+
+	SDL_RenderCopyEx(renderer, texture, section, &rect, angle, &rotation_center, SDL_FLIP_NONE);
+
+
+	return ret;
+}
+
 bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera)
 {
 	bool ret = true;

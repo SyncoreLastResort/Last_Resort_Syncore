@@ -15,11 +15,22 @@ ModuleParticles::ModuleParticles()
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
 	
-	for (int i = 0; i < 2; ++i)
+	/*for (int i = 0; i < 2; ++i)
 		for (int j = 0; j < 4; ++j)
 			laser_cannon.anim.PushBack({ 0+i*31, 319+j*13, 31, 13 });
+*/
 
+	for (int j = 0; j < 3; ++j)
+	{
+		laser_cannon.anim.PushBack({ 0, 319 + j * 13, 31, 13 });
+	}
 	
+		laser_cannon.anim.PushBack({ 0,358,31,9 });
+	
+	for (int j = 0; j < 3; ++j)
+	{
+		laser_cannon.anim.PushBack({ 31, 319 + j * 13, 31, 13 });
+	}
 
 	laser_cannon.anim.loop = false;
 	laser_cannon.anim.speed = 0.3;
@@ -55,26 +66,37 @@ ModuleParticles::ModuleParticles()
 	laser_beam.life = 1000;
 	
 	//ball trail
-	ball_trail.anim.PushBack({ 251,1,32,32 });
-	ball_trail.anim.PushBack({ 283,1,32,32 });
-	ball_trail.anim.PushBack({ 315,1,32,32 });
-	ball_trail.anim.PushBack({ 347,1,32,32 });
-	ball_trail.anim.loop = false;
-	ball_trail.anim.speed = 0.5;
-	ball_trail.speed = { 0,0 };
+	
+	blueball_trail.anim.PushBack({ 347,1,32,32 });
+	blueball_trail.anim.PushBack({ 315,1,32,32 });
+	blueball_trail.anim.PushBack({ 283,1,32,32 });
+	blueball_trail.anim.PushBack({ 251,1,32,32 });
+	
+	blueball_trail.anim.loop = false;
+	blueball_trail.anim.speed = 0.4;
+	blueball_trail.speed = { 0,0 };
+	
+	redball_trail.anim.PushBack({ 0,1,32,32 });
+	redball_trail.anim.PushBack({ 32,1,32,32 });
+	redball_trail.anim.PushBack({ 64,1,32,32 });
+	redball_trail.anim.PushBack({ 96,1,32,32 });
+	
+	redball_trail.anim.loop = false;
+	redball_trail.anim.speed = 0.4;
+	redball_trail.speed = { 0,0 };
 	
 	//Ball green shot
-	ball_shot.anim.PushBack({103,252,13, 13});
-	ball_shot.anim.PushBack({ 117,252,13, 13 });
+	for (int i = 0; i<4; ++i)
+		ball_shot.anim.PushBack({ 87 + 14 * i,253,13, 13 });
 	ball_shot.anim.loop = true;
-	ball_shot.anim.speed = 0.5f;
+	ball_shot.anim.speed = 0.3f;
 	ball_shot.speed = { 0,0 };
 	ball_shot.life = 650;
 	ball_shot.end_particle = &ball_shot_explosion;
 
 	//Ball2 green shot
-	ball2_shot.anim.PushBack({ 103,252,13, 13 });
-	ball2_shot.anim.PushBack({ 117,252,13, 13 });
+	for (int i = 0; i<4; ++i)
+		ball2_shot.anim.PushBack({ 87 + 14 * i,253,13, 13 });
 	ball2_shot.anim.loop = true;
 	ball2_shot.anim.speed = 0.5f;
 	ball2_shot.speed = { 0,0 };
@@ -217,7 +239,9 @@ bool ModuleParticles::Start()
 	bomb_explosion.sound = App->audio->LoadSoundEffect("assets/sounds/010.Bomb_center.wav");
 	bomb_explosion.texture = enemy_explosion.texture;
 	//Ball trail particles
-	ball_trail.texture = App->textures->Load("assets/sprites/Ball_aditional_effects.png");
+	ball_effects = App->textures->Load("assets/sprites/Ball_aditional_effects.png");
+	redball_trail.texture = ball_effects;
+	blueball_trail.texture = ball_effects;
 	return true;
 }
 
@@ -237,6 +261,7 @@ bool ModuleParticles::CleanUp()
 		}
 	}
 
+	App->textures->Unload(ball_effects);
 	App->textures->Unload(graphics);
 	
 	return true;

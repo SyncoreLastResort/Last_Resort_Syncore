@@ -97,6 +97,8 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 
+	App->ball_player1->Enable();
+
 	deathsound = App->audio->LoadSoundEffect("assets/sounds/005.Death.wav");
 	laser_sound = App->audio->LoadSoundEffect("assets/sounds/013.Laser1_Center.wav");
 	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
@@ -138,6 +140,8 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	initial_pos = position;
+
 	if (weapon_level == 2)
 	{
 		App->ball_player1->Enable();
@@ -256,6 +260,39 @@ update_status ModulePlayer::Update()
 	// TODO 3: Blit the text of the score in at the bottom of the screen
 	App->fonts->BlitText(0, 25, font_score, score_text);
 
+
+	if (final_pos->x > initial_pos.x)
+	{
+		going_left = false;
+		going_right = true;
+	}
+	else if (final_pos->x < initial_pos.x)
+	{
+		going_right = false;
+		going_left = true;
+	}
+	else if (final_pos->x == initial_pos.x)
+	{
+		going_right = false;
+		going_left = false;
+	}
+
+	if (final_pos->y > initial_pos.y)
+	{
+		going_up = false;
+		going_down = true;
+	}
+	else if (final_pos->y < initial_pos.y)
+	{
+		going_down = false;
+		going_up = true;
+	}
+	else if (final_pos->y == initial_pos.y)
+	{
+		going_down = false;
+		going_up = false;
+	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -273,6 +310,7 @@ void ModulePlayer::OnCollision(Collider * col_1, Collider * col_2)
 				if (current_animation != &death)
 				{
 					p1dead = true;
+					App->ball_player1->Disable();
 					weapon_level = 1;
 					App->audio->PlaySoundEffect(deathsound);
 					current_animation = &death;
