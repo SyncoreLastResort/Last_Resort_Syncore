@@ -50,6 +50,7 @@ ModuleLevel4::ModuleLevel4()
 	Back_Lava.PushBack({ 0,224,2493,219 });	
 	Back_Lava.PushBack({ 0,224,2493,219 });
 	Back_Lava.PushBack({ 0,0,2493,219 });
+	Back_Lava.speed = 0.05f;
 	
 	op_cannon.PushBack({ 161,130,79,26 });
 	op_cannon.PushBack({ 81,129,79,27 });
@@ -63,7 +64,25 @@ ModuleLevel4::ModuleLevel4()
 	op_cannon.PushBack({ 160,3,79,43 });
 	op_cannon.PushBack({ 80,2,79,45 });
 	op_cannon.PushBack({ 0,0,79,49 });
-	op_cannon.Finished();
+
+	op_cannon.PushBack({ 80,2,79,45 });
+	op_cannon.PushBack({ 160,3,79,43 });
+	op_cannon.PushBack({ 0,50,79,41 });
+	op_cannon.PushBack({ 80,51,79,39 });
+	op_cannon.PushBack({ 160,52,79,37 });
+	op_cannon.PushBack({ 0,92,79,35 });
+	op_cannon.PushBack({ 80,93,79,33 });
+	op_cannon.PushBack({ 160,94,79,31 });
+	op_cannon.PushBack({ 0,128,79,29 });
+	op_cannon.PushBack({ 81,129,79,27 });
+	op_cannon.PushBack({ 161,130,79,26 });
+
+	op_cannon.speed = 0.15f;
+
+	/*op_cannon.Finished();*/
+
+
+
 	
 }
 
@@ -146,13 +165,16 @@ update_status ModuleLevel4::Update()
 	App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 0.75); // back background
 	App->render->Blit(BackLavaAnim, 0, 0, &Back_Lava.GetCurrentFrame(), 0.75);
 	App->render->Blit(foregroundtilemap, 0, 0, &foregroundtilemaprect, 0.75); // back background
+
 //	App->render->Blit(Enemies_1, 400, 100, &cannon_platform, 0.75);
-	if (op_cannon.Finished() != true) {
+	/*if (op_cannon.Finished() != true) {
 		App->render->Blit(Enemies_1, 400, 100, &op_cannon.GetCurrentFrame(), 0.75);
 	}
 	else {
 		App->render->Blit(Enemies_1, 400, 100, &cannon_platform_end, 0.75);
-	}
+	}*/
+
+	App->render->Blit(Enemies_1, 400, 100, &op_cannon.GetCurrentFrame(), 0.75);
 
 	if (App->input->keyboard[SDL_SCANCODE_F4] == 1)
 	{
