@@ -6,6 +6,20 @@
 #include "p2Point.h" 
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
+
+#define PI 3.141592653589
+#define SIN_45 sqrt(2) / 2
+#define COS_45 sqrt(2) / 2
+#define SIN_30 1 / 2
+#define COS_30 sqrt(3) / 2
+#define SIN_60 sqrt(3) / 2
+#define COS_60 1 / 2
+
+enum COLOR {
+	RED,
+	BLUE
+	
+};
 enum BALL_POSITION {
 	NONE,
 	LEFT_SIDE,
