@@ -100,7 +100,6 @@ private:
 	Collider *ball1_collider;
 	SDL_Texture* ball_aditional_effects=nullptr;
 	
-
 	//Animation we want to show
 	Animation* current_animation;
 	

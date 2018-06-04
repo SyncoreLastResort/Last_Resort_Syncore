@@ -51,6 +51,7 @@ ModuleLevel4::ModuleLevel4()
 	Back_Lava.PushBack({ 0,224,2493,219 });	
 	Back_Lava.PushBack({ 0,224,2493,219 });
 	Back_Lava.PushBack({ 0,0,2493,219 });
+	Back_Lava.speed = 0.1;
 	
 	op_cannon.PushBack({ 161,130,79,26 });
 	op_cannon.PushBack({ 81,129,79,27 });
@@ -140,6 +141,7 @@ bool ModuleLevel4::Start()
 	App->player2->life = 1;
 
 	App->player->Enable();
+	App->player2->Enable();
 	App->enemies->Enable();
 
 
@@ -241,7 +243,7 @@ update_status ModuleLevel4::Update()
 	}
 
 	/*App->player->position.x += 1;*/
-	App->player2->position.x += 1;
+	//App->player2->position.x += 1;
 
 		if (wallmovdownposition.y == 0)
 		{	
@@ -289,9 +291,10 @@ update_status ModuleLevel4::Update()
 	App->render->Blit(foreground, 0, 0, &foregroundrect, 1); //foreground
 	// Draw everything --------------------------------------
 
-	App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 0.75); // back background
-	App->render->Blit(BackLavaAnim, 0, 0, &Back_Lava.GetCurrentFrame(), 0.75);
-	App->render->Blit(foregroundtilemap, 0, 0, &foregroundtilemaprect, 0.75); // back background
+	App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 1); // back background
+	App->render->Blit(BackLavaAnim, 0, 0, &Back_Lava.GetCurrentFrame(), 1);
+	App->render->Blit(foregroundtilemap, 0, 0, &foregroundtilemaprect, 1); // back background
+
 //	App->render->Blit(Enemies_1, 400, 100, &cannon_platform, 0.75);
 	if (op_cannon.Finished() != true) {
 		App->render->Blit(Enemies_1, 400, 100, &op_cannon.GetCurrentFrame(), 0.75);

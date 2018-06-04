@@ -20,6 +20,17 @@ public:
 	void OnCollision(Collider* col_1, Collider* col_2) override;
 
 public:
+	bool going_right;
+	bool going_left;
+	bool going_up;
+	bool going_down;
+
+	//player position at the beggining of the update
+	iPoint initial_pos;
+
+	//player position at the end of the update
+	iPoint* final_pos = &position;
+
 
 	uint life = 1;
 	bool p2dead = false;
