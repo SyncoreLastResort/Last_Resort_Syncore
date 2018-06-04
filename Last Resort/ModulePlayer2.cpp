@@ -113,9 +113,6 @@ bool ModulePlayer2::CleanUp()
 // Update: draw background
 update_status ModulePlayer2::Update()
 {
-	initial_pos = position;
-	App->ball_player2->Enable();
-
 	if (weapon_level == 2)
 	{
 		App->ball_player2->Enable();
@@ -224,37 +221,6 @@ update_status ModulePlayer2::Update()
 
 	App->fonts->BlitText(50, 25, font_2, score_text2);
 	
-	if (final_pos->x > initial_pos.x)
-	{
-		going_left = false;
-		going_right = true;
-	}
-	else if (final_pos->x < initial_pos.x)
-	{
-		going_right = false;
-		going_left = true;
-	}
-	else if (final_pos->x == initial_pos.x)
-	{
-		going_right = false;
-		going_left = false;
-	}
-
-	if (final_pos->y > initial_pos.y)
-	{
-		going_up = false;
-		going_down = true;
-	}
-	else if (final_pos->y < initial_pos.y)
-	{
-		going_down = false;
-		going_up = true;
-	}
-	else if (final_pos->y == initial_pos.y)
-	{
-		going_down = false;
-		going_up = false;
-	}
 
 	return UPDATE_CONTINUE;
 }

@@ -15,14 +15,22 @@ ModuleParticles::ModuleParticles()
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
 	
+	/*for (int i = 0; i < 2; ++i)
+		for (int j = 0; j < 4; ++j)
+			laser_cannon.anim.PushBack({ 0+i*31, 319+j*13, 31, 13 });
+*/
+
+	for (int j = 0; j < 3; ++j)
+	{
+		laser_cannon.anim.PushBack({ 0, 319 + j * 13, 31, 13 });
+	}
+	
+		laser_cannon.anim.PushBack({ 0,358,31,9 });
 	
 	for (int j = 0; j < 3; ++j)
-		laser_cannon.anim.PushBack({ 0, 319+j*13, 31, 13 });
-
-	laser_cannon.anim.PushBack({0,358,31,9});
-
-	for (int j = 0; j < 3; ++j)
+	{
 		laser_cannon.anim.PushBack({ 31, 319 + j * 13, 31, 13 });
+	}
 
 	laser_cannon.anim.loop = false;
 	laser_cannon.anim.speed = 0.3;
@@ -58,6 +66,7 @@ ModuleParticles::ModuleParticles()
 	laser_beam.life = 1000;
 	
 	//ball trail
+	
 	blueball_trail.anim.PushBack({ 347,1,32,32 });
 	blueball_trail.anim.PushBack({ 315,1,32,32 });
 	blueball_trail.anim.PushBack({ 283,1,32,32 });
@@ -66,19 +75,19 @@ ModuleParticles::ModuleParticles()
 	blueball_trail.anim.loop = false;
 	blueball_trail.anim.speed = 0.4;
 	blueball_trail.speed = { 0,0 };
-
+	
 	redball_trail.anim.PushBack({ 0,1,32,32 });
 	redball_trail.anim.PushBack({ 32,1,32,32 });
 	redball_trail.anim.PushBack({ 64,1,32,32 });
 	redball_trail.anim.PushBack({ 96,1,32,32 });
-
+	
 	redball_trail.anim.loop = false;
 	redball_trail.anim.speed = 0.4;
 	redball_trail.speed = { 0,0 };
 	
 	//Ball green shot
-	for (int i=0;i<4;++i)
-		ball_shot.anim.PushBack({87+14*i,253,13, 13});
+	for (int i = 0; i<4; ++i)
+		ball_shot.anim.PushBack({ 87 + 14 * i,253,13, 13 });
 	ball_shot.anim.loop = true;
 	ball_shot.anim.speed = 0.3f;
 	ball_shot.speed = { 0,0 };
@@ -165,7 +174,6 @@ ModuleParticles::ModuleParticles()
 	boss_cooling.anim.loop = false;
 	boss_cooling.speed.x = -0.5;
 
-
 	enemy_explosion.anim.PushBack({ 286, 347, 16, 16 });
 	enemy_explosion.anim.PushBack({ 302, 347, 22, 22 });
 	enemy_explosion.anim.PushBack({ 324, 347, 27, 27 });
@@ -181,6 +189,8 @@ ModuleParticles::ModuleParticles()
 	enemy_explosion.anim.speed = 0.7;
 	enemy_explosion.speed.x = -0.5;
 	enemy_explosion.anim.loop = false;
+
+
 }
 
 ModuleParticles::~ModuleParticles()

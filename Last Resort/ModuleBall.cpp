@@ -60,9 +60,9 @@ ModuleBall::ModuleBall()
 	blueball_150.speed = 0.2;
 	blueball_210.speed = 0.2;
 	blueball_240.speed = 0.2;
-	blueball_300.speed= 0.2;
+	blueball_300.speed = 0.2;
 	blueball_330.speed = 0.2;
-	
+
 	redball_0.speed = 0.2;
 	redball_45.speed = 0.2;
 	redball_90.speed = 0.2;
@@ -79,9 +79,9 @@ ModuleBall::ModuleBall()
 	redball_240.speed = 0.2;
 	redball_300.speed = 0.2;
 	redball_330.speed = 0.2;
-	
+
 	for (int i = 0; i < 6; ++i)
-		blueball_thrown.PushBack({169, 180 +i*26, 26,26});
+		blueball_thrown.PushBack({ 169, 180 + i * 26, 26,26 });
 	blueball_thrown.speed = 0.30;
 
 	for (int i = 0; i < 6; ++i)
@@ -90,12 +90,12 @@ ModuleBall::ModuleBall()
 
 	for (int i = 0; i < 3; ++i)
 		for (int j = 0; j < 5; ++j)
-			blueball_charging.PushBack({ 230+46*j,45+46*i,46,46 });
+			blueball_charging.PushBack({ 230 + 46 * j,45 + 46 * i,46,46 });
 	blueball_charging.speed = 0.3;
 
 	for (int i = 0; i < 3; ++i)
 		for (int j = 0; j < 5; ++j)
-			redball_charging.PushBack({0 + 46 * j,45 + 46 * i,46,46 });
+			redball_charging.PushBack({ 0 + 46 * j,45 + 46 * i,46,46 });
 	redball_charging.speed = 0.3;
 
 
@@ -116,7 +116,7 @@ bool ModuleBall::Start()
 	angle = 0;
 
 	fix_position = false;
-	ball_fixed=false;
+	ball_fixed = false;
 
 
 	//Load audio
@@ -124,16 +124,16 @@ bool ModuleBall::Start()
 	unfix_ball = App->audio->LoadSoundEffect("assets/sounds/012.Death_ball_unfix.wav");
 	release_ball_sound = App->audio->LoadSoundEffect("assets/sounds/009.Charged_shot_release.wav");
 	charge_ball_sound = App->audio->LoadSoundEffect("assets/sounds/008.Charging_shot.wav");
-	
+
 	//Load the texrure
 	ball_aditional_effects = App->textures->Load("assets/sprites/Ball_aditional_effects.png");
 
 	//Load colliders
-	position = { App->player->position.x +42, App->player->position.y};
-	ball1_collider = App->collision->AddCollider({ position.x, position.y,16, 16 }, COLLIDER_BALL,this);
-	
+	position = { App->player->position.x + 42, App->player->position.y };
+	ball1_collider = App->collision->AddCollider({ position.x, position.y,16, 16 }, COLLIDER_BALL, this);
+
 	current_animation = &blueball_0;
-	
+
 	int i = 0;
 
 	ball_animations[i] = &blueball_0;
@@ -168,7 +168,7 @@ bool ModuleBall::Start()
 	ball_animations[i++] = &redball_300;
 	ball_animations[i++] = &redball_315;
 	ball_animations[i++] = &redball_330;
-		
+
 
 
 	return true;
@@ -176,7 +176,7 @@ bool ModuleBall::Start()
 
 bool ModuleBall::CleanUp()
 {
-	
+
 	if (ball1_collider != nullptr)
 
 		ball1_collider->to_delete = true;
@@ -189,8 +189,8 @@ bool ModuleBall::CleanUp()
 	for (int i = 0; i < 32; ++i)
 	{
 		if (ball_animations[i] != nullptr)
-			ball_animations[i]= nullptr;
-		
+			ball_animations[i] = nullptr;
+
 	}
 
 	return true;
@@ -200,30 +200,30 @@ update_status ModuleBall::Update()
 {
 	for (int i = 0; i < 32; ++i)
 	{
-		if (current_animation != ball_animations[i] && ball_animations[i]!=nullptr)
+		if (current_animation != ball_animations[i] && ball_animations[i] != nullptr)
 			ball_animations[i]->GetCurrentFrame();
 	}
-	
+
 
 	if (ball_thrown == false)
 	{
 		//move the ball
 		MoveAround();
 		Aim();
-		
+
 		if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN) //We fix/unfix the ball
 		{
 			if (fix_position)
 				App->audio->PlaySoundEffect(unfix_ball);
-			
-			if(!fix_position)
+
+			if (!fix_position)
 				App->audio->PlaySoundEffect(fix_ball);
-			
+
 			fix_position = !fix_position;
-			
+
 			ball_fixed = false;
 		}
-		
+
 
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
 			ChargeBall();
@@ -253,18 +253,18 @@ update_status ModuleBall::Update()
 			ReturnBall();
 		}
 	}
-	
 
-	
-	
-	
+
+
+
+
 	ball1_collider->SetPos(position.x, position.y);
-	
 
-	
+
+
 	if (current_animation == &blueball_30 || current_animation == &redball_30)
 	{
-		App->render->Blit(App->player->graphics, position.x, position.y-1, &current_animation->GetCurrentFrame());
+		App->render->Blit(App->player->graphics, position.x, position.y - 1, &current_animation->GetCurrentFrame());
 	}
 
 	else if (current_animation == &blueball_45 || current_animation == &redball_45)
@@ -284,19 +284,19 @@ update_status ModuleBall::Update()
 
 	else if (current_animation == &blueball_120 || current_animation == &redball_120)
 	{
-		App->render->Blit(App->player->graphics, position.x-1, position.y - 7, &current_animation->GetCurrentFrame());
+		App->render->Blit(App->player->graphics, position.x - 1, position.y - 7, &current_animation->GetCurrentFrame());
 	}
-	
-	else if (current_animation == &blueball_135||current_animation == &redball_135)
+
+	else if (current_animation == &blueball_135 || current_animation == &redball_135)
 	{
-		App->render->Blit(App->player->graphics, position.x-5, position.y - 5, &current_animation->GetCurrentFrame());
+		App->render->Blit(App->player->graphics, position.x - 5, position.y - 5, &current_animation->GetCurrentFrame());
 	}
 
 	else if (current_animation == &blueball_150 || current_animation == &redball_150)
 	{
-		App->render->Blit(App->player->graphics, position.x-6, position.y-1, &current_animation->GetCurrentFrame());
+		App->render->Blit(App->player->graphics, position.x - 6, position.y - 1, &current_animation->GetCurrentFrame());
 	}
-	
+
 	else if (current_animation == &blueball_180 || current_animation == &redball_180)
 	{
 		App->render->Blit(App->player->graphics, position.x - 6, position.y, &current_animation->GetCurrentFrame());
@@ -320,7 +320,7 @@ update_status ModuleBall::Update()
 	else
 	{
 		App->render->Blit(App->player->graphics, position.x, position.y, &current_animation->GetCurrentFrame());
-		
+
 	}
 	return UPDATE_CONTINUE;
 }
@@ -431,7 +431,7 @@ void ModuleBall::MoveAround()
 
 			if ((SDL_sin(angle) >= -sqrt(2) / 2 - 0.1 && SDL_sin(angle) <= -sqrt(2) / 2 + 0.1)) // top corners 
 				ball_fixed = true;
-		
+
 			if (SDL_sin(angle) < 0.05 && SDL_sin(angle) > -0.01) //sides
 				ball_fixed = true;
 
@@ -439,7 +439,7 @@ void ModuleBall::MoveAround()
 				ball_fixed = true;
 		}
 	}
-	
+
 	//Define the position of the ball depending on the angle
 	position.x = App->player->position.x + radius * SDL_cos(angle) + 8;
 	position.y = App->player->position.y + 1 + radius * SDL_sin(angle);
@@ -501,7 +501,7 @@ void ModuleBall::Aim()
 			if (SDL_cos(aim_angle)>0)
 				aim_angle += aim_speed;
 
-			else 
+			else
 				aim_angle -= aim_speed;
 		}
 
@@ -514,7 +514,7 @@ void ModuleBall::Aim()
 			if (SDL_cos(aim_angle)>0)
 				aim_angle -= aim_speed;
 
-			else 
+			else
 				aim_angle += aim_speed;
 		}
 	}
@@ -693,61 +693,61 @@ void ModuleBall::Aim()
 
 	else if (current_animation == &blueball_270 || current_animation == &redball_270)
 		App->particles->ball_shot.speed = { 1,6 };
-	
+
 	else if (current_animation == &blueball_30 || current_animation == &redball_30)
-		App->particles->ball_shot.speed = {int(6*COS_30),int(-6*SIN_30 )};
+		App->particles->ball_shot.speed = { int(6 * COS_30),int(-6 * SIN_30) };
 
 	else if (current_animation == &blueball_45 || current_animation == &redball_45)
-		App->particles->ball_shot.speed = {int( 6 * COS_45),int(-6 * SIN_45 )};
+		App->particles->ball_shot.speed = { int(6 * COS_45),int(-6 * SIN_45) };
 
 	else if (current_animation == &blueball_60 || current_animation == &redball_60)
-		App->particles->ball_shot.speed = {int( 6 * COS_60),int(-6 * SIN_60 )};
+		App->particles->ball_shot.speed = { int(6 * COS_60),int(-6 * SIN_60) };
 
 	else if (current_animation == &blueball_120 || current_animation == &redball_120)
-		App->particles->ball_shot.speed = {int( -6 * COS_60),int(-6 * SIN_60 )};
+		App->particles->ball_shot.speed = { int(-6 * COS_60),int(-6 * SIN_60) };
 
 	else if (current_animation == &blueball_135 || current_animation == &redball_135)
-		App->particles->ball_shot.speed = {int( -6 * COS_45),int(-6 * SIN_45 )};
+		App->particles->ball_shot.speed = { int(-6 * COS_45),int(-6 * SIN_45) };
 
 	else if (current_animation == &blueball_150 || current_animation == &redball_150)
-		App->particles->ball_shot.speed = { int(-6 * COS_30),int(-6 * SIN_30 )};
+		App->particles->ball_shot.speed = { int(-6 * COS_30),int(-6 * SIN_30) };
 
 	else if (current_animation == &blueball_210 || current_animation == &redball_210)
-		App->particles->ball_shot.speed = {int( -6 * COS_30),int(6 * SIN_30 )};
+		App->particles->ball_shot.speed = { int(-6 * COS_30),int(6 * SIN_30) };
 
 	else if (current_animation == &blueball_225 || current_animation == &redball_225)
-		App->particles->ball_shot.speed = {int( -6 * COS_45),int(6 * SIN_45 )};
+		App->particles->ball_shot.speed = { int(-6 * COS_45),int(6 * SIN_45) };
 
 	else if (current_animation == &blueball_240 || current_animation == &redball_240)
-		App->particles->ball_shot.speed = { int(-6 * COS_60),int(6 * SIN_60 )};
+		App->particles->ball_shot.speed = { int(-6 * COS_60),int(6 * SIN_60) };
 
 	else if (current_animation == &blueball_300 || current_animation == &redball_300)
-		App->particles->ball_shot.speed = { int (6 * COS_60),int(6 * SIN_60 )};
+		App->particles->ball_shot.speed = { int(6 * COS_60),int(6 * SIN_60) };
 
 	else if (current_animation == &blueball_315 || current_animation == &redball_315)
-		App->particles->ball_shot.speed = { int(6 * COS_45),int(6 * SIN_45 )};
+		App->particles->ball_shot.speed = { int(6 * COS_45),int(6 * SIN_45) };
 
 	else if (current_animation == &blueball_330 || current_animation == &redball_330)
-		App->particles->ball_shot.speed = {int( 6 * COS_30),int(6 * SIN_30 )};
-	
-	
+		App->particles->ball_shot.speed = { int(6 * COS_30),int(6 * SIN_30) };
+
+
 }
 
 void ModuleBall::ChargeBall()
 {
 	charge_ball_sound->volume = 128;
-	charge+=3;
+	charge += 3;
 	if (charge > 80)
 		shot_charged = true;
 	if (SDL_GetTicks() - charge_time > 200)
 	{
-		if (charge>=20&&charge<=40)
+		if (charge >= 20 && charge <= 40)
 			App->audio->PlaySoundEffect(charge_ball_sound);
 
 		//Charging animations
 		if (ball_color == BLUE)
-			App->render->Blit(ball_aditional_effects, position.x-15, position.y-15, &blueball_charging.GetCurrentFrame());
-		else 
+			App->render->Blit(ball_aditional_effects, position.x - 15, position.y - 15, &blueball_charging.GetCurrentFrame());
+		else
 			App->render->Blit(ball_aditional_effects, position.x - 15, position.y - 15, &redball_charging.GetCurrentFrame());
 
 	}
@@ -756,12 +756,12 @@ void ModuleBall::ChargeBall()
 void ModuleBall::ReleaseBall()
 {
 	charge_ball_sound->volume = 0;
-	
+
 	blueball_charging.Reset();
-	
+
 	if (!shot_charged)
 		charge = 0;
-	
+
 	if (shot_charged)
 	{
 		if (ball_color == BLUE)
@@ -773,13 +773,13 @@ void ModuleBall::ReleaseBall()
 		velocity = { int(8 * SDL_cos(angle)), int(8 * SDL_sin(angle)) };
 		ball_thrown = true;
 	}
-	
+
 }
 
 void ModuleBall::Path()
 {
 	position += velocity;
-	if (abs(position.x-App->player->position.x)>=300|| abs(position.y - App->player->position.y) >= 300)
+	if (abs(position.x - App->player->position.x) >= 300 || abs(position.y - App->player->position.y) >= 300)
 		back_to_player = true;
 }
 
@@ -808,28 +808,28 @@ void ModuleBall::Shoot()
 {
 	if (current_animation == &blueball_0)
 		App->particles->ball_shot.speed = { 7,0 };
-	
+
 	else if (current_animation == &blueball_45)
 		App->particles->ball_shot.speed = { 5,-5 };
-	
+
 	else if (current_animation == &blueball_90)
 		App->particles->ball_shot.speed = { 0,-7 };
-	
+
 	else if (current_animation == &blueball_135)
 		App->particles->ball_shot.speed = { -5,-5 };
-	
+
 	else if (current_animation == &blueball_180)
 		App->particles->ball_shot.speed = { -7,0 };
-	
+
 	else if (current_animation == &blueball_225)
 		App->particles->ball_shot.speed = { -5,5 };
-	
+
 	else if (current_animation == &blueball_270)
 		App->particles->ball_shot.speed = { 0,7 };
-	
+
 	else if (current_animation == &blueball_315)
 		App->particles->ball_shot.speed = { 5,5 };
-	
+
 	App->particles->AddParticle(App->particles->ball_shot, position.x, position.y, COLLIDER_PLAYER_SHOT);
 }
 
@@ -837,22 +837,22 @@ void ModuleBall::Trail()
 {
 	if (SDL_GetTicks() % 80 >= 0 && SDL_GetTicks() % 80 <= 20)
 	{
-		if (ball_color==BLUE)
+		if (ball_color == BLUE)
 			App->particles->AddParticle(App->particles->blueball_trail, position.x - 6, position.y - 6);
-		else 
+		else
 			App->particles->AddParticle(App->particles->redball_trail, position.x - 6, position.y - 6);
 	}
 }
 
-void ModuleBall::OnCollision(Collider* c1, Collider* c2) 
+void ModuleBall::OnCollision(Collider* c1, Collider* c2)
 {
-	if (ball_thrown == true) 
+	if (ball_thrown == true)
 	{
 		if (c1->type == COLLIDER_WALL || c2->type == COLLIDER_WALL || c1->type == COLLIDER_BOSS || c2->type == COLLIDER_BOSS)
 		{
 			back_to_player = true;
 		}
-		if (c1->type == COLLIDER_ENEMY || c2->type == COLLIDER_ENEMY )
+		if (c1->type == COLLIDER_ENEMY || c2->type == COLLIDER_ENEMY)
 		{
 			if (charge < 200)
 				back_to_player = true;

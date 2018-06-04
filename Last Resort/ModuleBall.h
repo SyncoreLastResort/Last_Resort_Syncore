@@ -8,16 +8,17 @@
 #include "ModuleTextures.h"
 
 #define PI 3.141592653589
-#define SIN_45 sqrt(2)/2
-#define COS_45 sqrt(2)/2
-#define SIN_30 1/2
-#define COS_30 sqrt(3)/2
-#define SIN_60 sqrt(3)/2
-#define COS_60 1/2
+#define SIN_45 sqrt(2) / 2
+#define COS_45 sqrt(2) / 2
+#define SIN_30 1 / 2
+#define COS_30 sqrt(3) / 2
+#define SIN_60 sqrt(3) / 2
+#define COS_60 1 / 2
 
-enum COLOR { 
+enum COLOR {
 	RED,
 	BLUE
+	
 };
 enum BALL_POSITION {
 	NONE,
@@ -36,7 +37,7 @@ public:
 	ModuleBall();
 	~ModuleBall();
 
-	
+
 
 	bool Start();
 	update_status Update();
@@ -55,12 +56,12 @@ private:
 	void ModuleBall::ReturnBall();
 	void ModuleBall::Trail();
 	void ModuleBall::Shoot();
-	
+
 
 public:
 	iPoint position;
-	
-	
+
+
 private:
 
 	//Radius
@@ -81,28 +82,29 @@ private:
 
 	//Aim speed
 	float aim_speed = 2 * PI / 35;
-	
+
 	//Bools to fix the ball
 	bool fix_position, ball_fixed;
 
 	//Color of the ball
 	COLOR ball_color;
 
-	Mix_Chunk* fix_ball=nullptr;
+	Mix_Chunk* fix_ball = nullptr;
 	Mix_Chunk* unfix_ball = nullptr;
 	Mix_Chunk* release_ball_sound = nullptr;
 	Mix_Chunk* charge_ball_sound = nullptr;
 
-	uint charge=0, charge_time=0;
+	uint charge = 0, charge_time = 0;
 	iPoint velocity = { 0,0 };
 	bool  shot_charged = false, ball_thrown = false, back_to_player = false;;
 
 	Collider *ball1_collider;
-	SDL_Texture* ball_aditional_effects=nullptr;
-	
+	SDL_Texture* ball_aditional_effects = nullptr;
+
+
 	//Animation we want to show
 	Animation* current_animation;
-	
+
 	//Animations of the blue ball
 	Animation blueball_0;
 	Animation blueball_45;
@@ -126,7 +128,7 @@ private:
 	Animation blueball_thrown; // blue ball when it's thrown
 
 
-	//Animations of the red ball
+							   //Animations of the red ball
 	Animation redball_0;
 	Animation redball_45;
 	Animation redball_90;
@@ -149,5 +151,6 @@ private:
 	Animation redball_thrown; //red ball thrown
 
 	Animation *ball_animations[32];
+
 };
 #endif // !1
