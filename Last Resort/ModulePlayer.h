@@ -90,9 +90,9 @@ public:
 	Animation upwardstoidle;
 	Animation downwardstoidle;
 
-	//Position
-	
+	//Life
 
+	int life = 1;
 };
 
 #endif

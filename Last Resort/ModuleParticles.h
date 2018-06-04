@@ -59,6 +59,7 @@ private:
 public:
 	SDL_Texture * graphics;
 	SDL_Texture * ball_effects;
+	SDL_Texture * graphics2;
 
 	//Particle laser_cannon;
 	//Particle ball_trail;
@@ -96,6 +97,9 @@ public:
 	Particle bomb_upwards;
 	Particle bomb_downwards;
 	Particle bomb_explosion;
+
+	//Bee
+	Particle BeeShot;
 
 };
 

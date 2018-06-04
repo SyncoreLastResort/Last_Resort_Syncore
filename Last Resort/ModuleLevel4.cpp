@@ -13,6 +13,7 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleUI.h"
 
 
 ModuleLevel4::ModuleLevel4()
@@ -163,7 +164,7 @@ bool ModuleLevel4::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 550, SCREEN_HEIGHT / 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 600, SCREEN_HEIGHT / 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 650, SCREEN_HEIGHT / 2);
-
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 750, SCREEN_HEIGHT / 2);
 
 	return true;
 }
@@ -197,7 +198,31 @@ bool ModuleLevel4::CleanUp()
 // Update: draw background
 update_status ModuleLevel4::Update()
 {
+	//Player respawning
 
+	if (App->UI->coins > 0)
+	{
+		if (App->player2->IsEnabled() == false)
+		{
+			App->player2->Enable();
+		    App->UI->coins -= 1;
+	    }
+
+		if (App->UI->coins > 0)
+		{
+			if (App->player->IsEnabled() == false)
+			{
+				App->player->Enable();
+				App->UI->coins -= 1;
+			}
+		}
+	}
+
+	/*if (App->UI->coins > 0 && App->player->IsEnabled() == false)
+		App->player->Enable();
+
+	if (App->UI->coins > 0 && App->player2->IsEnabled() == false)
+		App->player2->Enable();*/
 
 	// Move camera forward -----------------------------
 	App->render->camera.x += 1 * SCREEN_SIZE;
@@ -220,8 +245,7 @@ update_status ModuleLevel4::Update()
 	}
 	
 	
-
-	if (App->player->IsEnabled() == false && App->player2->IsEnabled() == false)
+	if (App->player->IsEnabled() == false && App->player2->IsEnabled() == false && App->UI->coins==0)
 	{
 		App->fade->FadeToBlack(this, App->gameover);
 	}
@@ -290,7 +314,7 @@ update_status ModuleLevel4::Update()
 	//End of Pinchy Wall movement
 	
 	App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 1); // back background
-
+	App->render->Blit(BackLavaAnim, 0, 0, &Back_Lava.GetCurrentFrame(), 1);
 	/*App->render->Blit(background, 0, 0, &backgroundrect, 1);*/ //background
 	//App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 1); // back background
 	App->render->Blit(wall, wallmovdownposition.x, wallmovdownposition.y, &wallrect, 1);
@@ -299,18 +323,22 @@ update_status ModuleLevel4::Update()
 	// Draw everything --------------------------------------
 
 	
-	App->render->Blit(BackLavaAnim, 0, 0, &Back_Lava.GetCurrentFrame(), 1);
 	App->render->Blit(foregroundtilemap, 0, 0, &foregroundtilemaprect, 1); // back background
 
 	App->render->Blit(Enemies_1, 400, 100, &op_cannon.GetCurrentFrame(), 1);
 
 	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
 	{
-		if (App->player2->life != 0)
+		/*if (App->player2->life != 0)
 		{
 			App->player2->Enable();
 			App->player2->life -= 1;
-		}
+		}*/
+		/*if (App->UI->coins > 0)
+		{
+			App->player2->Enable();
+			App->UI->coins -= 1;
+		}*/
 	}
 
 	return UPDATE_CONTINUE;

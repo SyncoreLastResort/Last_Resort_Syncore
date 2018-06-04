@@ -12,6 +12,7 @@
 #include "SDL/include/SDL_render.h"
 #include "ModuleBall.h"
 #include "ModulePlayer2.h"
+#include "ModuleUI.h"
 
 #include<stdio.h>
 
@@ -248,7 +249,7 @@ update_status ModulePlayer::Update()
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 	}
 	
-	if (current_animation == &death &&current_animation->Finished() && App->player2->IsEnabled()==false)
+	if (current_animation == &death &&current_animation->Finished() && App->player2->IsEnabled()==false && /*App->UI->coins==0 &&*/ IsEnabled()==true)
 	{
 		App->fade->FadeToBlack((Module*)App->level4, (Module *)App->gameover);
 		App->player->Disable();

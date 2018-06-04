@@ -33,6 +33,7 @@ public:
 	SDL_Rect backgroundrect;
 	SDL_Rect scoresrect;
 	Mix_Music *scores_Sound = nullptr;
+
 };
 
 #endif

@@ -10,6 +10,7 @@
 #include "PowerUp.h"
 #include "PowerUpBomb.h"
 #include "EnemyRedBird.h"
+#include "EnemyTrackingBee.h"
 
 
 
@@ -33,6 +34,7 @@ bool ModuleEnemies::Start()
 	
 	sprites = App->textures->Load("assets/sprites/Common_enemyes_Sprite.png");
 	someenemies = App->textures->Load("assets/sprites/Enemys_Stage4_Sprites.png");
+	trackingbee = App->textures->Load("assets/sprites/TrackingBee.png");
 
 	return true;
 }
@@ -97,6 +99,7 @@ bool ModuleEnemies::CleanUp()
 
 	App->textures->Unload(sprites);
 	App->textures->Unload(someenemies);
+	App->textures->Unload(trackingbee);
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
@@ -160,6 +163,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		case ENEMY_TYPES::RedBird:
 			enemies[i] = new Enemy_RedBird(info.x, info.y);
 			break;
+		case ENEMY_TYPES::TrackingBee:
+			enemies[i] = new EnemyTrackingBee(info.x, info.y);
+			break;
 	
 		}
 		
@@ -176,7 +182,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			{
 				if (c2->type == COLLIDER_BALL || c2->type == COLLIDER_BALL2)
 				{
-					enemies[i]->life -= 0.1f;
+					enemies[i]->life -= 0.05f;
 				}
 
 				else 

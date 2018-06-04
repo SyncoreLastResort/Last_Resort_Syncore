@@ -6,8 +6,9 @@
 #include "p2Point.h" 
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
+#include "Globals.h"
 
-#define PI 3.141592653589
+//#define PI 3.141592653589
 #define SIN_45 sqrt(2) / 2
 #define COS_45 sqrt(2) / 2
 #define SIN_30 1 / 2

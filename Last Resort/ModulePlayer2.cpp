@@ -8,6 +8,7 @@
 #include "ModuleCollision.h"
 #include "ModuleFonts.h"
 #include "ModuleBall2.h"
+#include "ModuleUI.h"
 
 #include<stdio.h>
 

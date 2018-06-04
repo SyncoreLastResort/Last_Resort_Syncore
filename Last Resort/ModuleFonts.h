@@ -33,6 +33,7 @@ public:
 private:
 
 	Font	 fonts[MAX_FONTS];
+
 };
 
 

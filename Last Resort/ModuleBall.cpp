@@ -3,6 +3,9 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
+#include "Globals.h"
+
+
 ModuleBall::ModuleBall()
 {
 	//BALL ANIMATIONS
