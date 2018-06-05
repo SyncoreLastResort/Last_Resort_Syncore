@@ -48,6 +48,9 @@ public:
 	//Coins 
 	int coins;
 	char coins_text[10];
+
+	SDL_Rect UI_ship;
+	SDL_Rect UI_ship2;
 };
 
 #endif

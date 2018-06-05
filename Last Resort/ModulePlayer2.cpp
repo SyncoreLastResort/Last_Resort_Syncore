@@ -227,7 +227,7 @@ update_status ModulePlayer2::Update()
 
 	sprintf_s(score_text2, 10, "%7d", score2);
 
-	App->fonts->BlitText(250, 24, font_2, score_text2);
+	App->fonts->BlitText((SCREEN_WIDTH - 65), 24, font_2, score_text2);
 	
 
 	return UPDATE_CONTINUE;

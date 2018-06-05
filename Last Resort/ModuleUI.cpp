@@ -30,6 +30,16 @@ bool ModuleUI::Start() {
 	font = App->fonts->Load("assets/fonts/Font_score.png", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_.,[]&$ ", 2);
 	Insert_Coin = App->audio->LoadSoundEffect("assets/sounds/Insert_Coin.wav");
 
+	UI_ship.x = 0; //UI_Ship
+	UI_ship.y = 9;
+	UI_ship.w = 16;
+	UI_ship.h = 8;
+
+
+	UI_ship2.x = 168;
+	UI_ship2.y = 25;
+	UI_ship2.w = 17;
+	UI_ship2.h = 6;
 
 	coins = 0;
 	return true;
@@ -71,13 +81,23 @@ update_status ModuleUI::Update() {
 		sprintf_s(life2_text, "%7d", P2Life);
 
 		App->fonts->BlitText(30, 24, font, "X");
+		App->fonts->BlitText(13, 16, font, "P1");
+		/*App->fonts->BlitText(13, 11, font, "_");
+		App->fonts->BlitText(29, 15, font, "_");*/
+
+		App->render->Blit(UI_Main_Menu, 13, 24, &UI_ship, 0.0f, false); 
+
 		App->fonts->BlitText(-2, 24, font, life_text);
 
 
-		App->fonts->BlitText((SCREEN_WIDTH - 93), 24, font, "X");
-		App->fonts->BlitText((SCREEN_WIDTH - 125), 24, font, life2_text);
+		App->fonts->BlitText((SCREEN_WIDTH - 75), 24, font, "X");
+		App->fonts->BlitText((SCREEN_WIDTH - 107), 24, font, life2_text);
 
+		App->fonts->BlitText((SCREEN_WIDTH - 92), 16, font, "P2");
+		/*App->fonts->BlitText((SCREEN_WIDTH - 76), 15, font, "_");
+		App->fonts->BlitText((SCREEN_WIDTH - 76), 11, font, "_");*/
 
+		App->render->Blit(UI_Main_Menu, (SCREEN_WIDTH - 92), 24, &UI_ship2, 0.0f, false);
 	}
 
 	////TOP Score

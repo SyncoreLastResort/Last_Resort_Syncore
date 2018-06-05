@@ -79,8 +79,8 @@ update_status ModuleScores::Update()
 
 
 			// TODO 3: Blit the text of the score in at the bottom of the screen
-			App->fonts->BlitText(120, 52, font_scorenums, score_text);
-			App->fonts->BlitText(120, 66, font_scorenums, score_text2);
+			App->fonts->BlitText(40, 16, font_scorenums, score_text);
+			App->fonts->BlitText((SCREEN_WIDTH - 65), 16, font_scorenums, score_text2);
 
 			App->fonts->BlitText(SCREEN_WIDTH - 122, 52, App->player->font_score, "PLAYER1");
 			App->fonts->BlitText(SCREEN_WIDTH - 122, 66, App->player->font_score, "PLAYER2");
