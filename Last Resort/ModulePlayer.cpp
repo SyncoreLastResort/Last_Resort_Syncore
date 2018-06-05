@@ -98,7 +98,7 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 
-	App->ball_player1->Enable();
+	
 
 	deathsound = App->audio->LoadSoundEffect("assets/sounds/005.Death.wav");
 	laser_sound = App->audio->LoadSoundEffect("assets/sounds/013.Laser1_Center.wav");
