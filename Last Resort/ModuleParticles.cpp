@@ -249,7 +249,7 @@ ModuleParticles::ModuleParticles()
 	Cannon_laser.anim.PushBack({ 95, 160, 49, 8 });
 	Cannon_laser.anim.loop = false;
 	Cannon_laser.speed.x = 0;
-	Cannon_laser.life = 3000;
+	Cannon_laser.life = 1000;
 
 	laser3_end.anim.PushBack({83,268,16,47});
 	laser3_end.anim.PushBack({ 103,268,16,47 });
