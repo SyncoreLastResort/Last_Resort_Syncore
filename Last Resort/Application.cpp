@@ -18,7 +18,9 @@
 #include "ModuleFonts.h"
 #include "ModuleBall.h"
 #include "ModuleBall2.h"
+#include "ModuleBoss4.h"
 #include "ModuleUI.h"
+
 
 Application::Application()
 {
@@ -40,7 +42,7 @@ Application::Application()
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = player2 = new ModulePlayer2();
 	modules[i++] = particles = new ModuleParticles();
-	
+	modules[i++] = boss4 = new ModuleBoss4();
 	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = UI = new ModuleUI();
 	modules[i++] = fade = new ModuleFadeToBlack();
@@ -66,6 +68,7 @@ bool Application::Init()
 	level4->Disable();
 	ball_player1->Disable();
 	ball_player2->Disable();
+	boss4->Disable();
 
 	// ----------------------------
 

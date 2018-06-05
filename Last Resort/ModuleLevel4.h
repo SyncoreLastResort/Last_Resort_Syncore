@@ -53,7 +53,7 @@ public:
 	bool maxreachedpinchy = false;
 	iPoint pinchywallposition;
 
-	//Uri
+	//Background and foreground
 	SDL_Rect backgroundtilemaprect;
 	SDL_Rect foregroundtilemaprect1;
 	SDL_Rect foregroundtilemaprect2;
@@ -64,7 +64,15 @@ public:
 	SDL_Texture* foreground_platform = nullptr;
 	SDL_Texture* BackLavaAnim = nullptr;
 	Animation Back_Lava;
-	Animation Front_Lava;
+	Animation platform_up;
+	Animation platform_down;
+	bool platformmaxpos;
+	
+
+	//opening cannon
+	SDL_Rect cannon_platform;
+	SDL_Rect cannon_platform_end;
+	SDL_Texture* Enemies_1 = nullptr;
 	Animation op_cannon;
 
 	bool coinisminus = false;

@@ -13,8 +13,10 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleBoss4.h"
 #include "ModuleUI.h"
 #include "ModuleScores.h"
+
 
 
 ModuleLevel4::ModuleLevel4()
@@ -41,18 +43,36 @@ ModuleLevel4::ModuleLevel4()
 	backgroundtilemaprect.x = 0;
 	backgroundtilemaprect.y = 0;
 	backgroundtilemaprect.w = 2862;
-	backgroundtilemaprect.h = SCREEN_HEIGHT;   
+	backgroundtilemaprect.h = SCREEN_HEIGHT;
 
 	//Foreground
 	foregroundtilemaprect1.x = 0;
 	foregroundtilemaprect1.y = 0;
 	foregroundtilemaprect1.w = 2734;
-	foregroundtilemaprect1.h = SCREEN_HEIGHT;  
+	foregroundtilemaprect1.h = SCREEN_HEIGHT;
 
 	foregroundtilemaprect2.x = 0;
 	foregroundtilemaprect2.y = 0;
 	foregroundtilemaprect2.w = 1271;
-	foregroundtilemaprect2.h = SCREEN_HEIGHT;  
+	foregroundtilemaprect2.h = SCREEN_HEIGHT;
+
+	//up & down platforms and animations
+	foreground_platforms.x = 46;
+	foreground_platforms.y = 67;
+	foreground_platforms.w = 63;
+	foreground_platforms.h = 8;
+
+	platform_up.PushBack({ 46,67,63,8 });
+	platform_up.PushBack({ 9,46,63,7 });
+	platform_up.PushBack({ 9,85,63,7 });
+	platform_up.PushBack({ 9,46,63,7 });
+	platform_up.PushBack({ 46,67,63,8 });
+
+	platform_down.PushBack({ 46,67,63,8 });
+	platform_down.PushBack({ 82,47,63,7 });
+	platform_down.PushBack({ 82,85,63,7 });
+	platform_down.PushBack({ 82,47,63,7 });
+	platform_down.PushBack({ 46,67,63,8 });
 
 	//Background lava animations
 	Back_Lava.PushBack({ 0,0,1216,219 });
@@ -121,6 +141,7 @@ bool ModuleLevel4::Start()
 	backgroundtilemap = App->textures->Load("assets/sprites/Background.png");
 	foregroundtilemap1 = App->textures->Load("assets/sprites/foreground_1.png");
 	foregroundtilemap2 = App->textures->Load("assets/sprites/foreground_2.png");
+	foreground_platform = App->textures->Load("assets/sprites/foreground_3.png");
 	BackLavaAnim = App->textures->Load("assets/sprites/Back_Lava_Anim.png");
 
 	wall = App->textures->Load("assets/sprites/movingwall.png");
@@ -144,6 +165,7 @@ bool ModuleLevel4::Start()
 	App->enemies->Enable();
 	App->scores->Enable();
 
+	
 
 	// Enemies ---
 	
@@ -205,6 +227,8 @@ bool ModuleLevel4::CleanUp()
 	App->scores->Disable();
 	App->UI->Disable();
 
+	
+
 	if (App->player2->IsEnabled() == true)
 		App->player2->Disable();
 
@@ -233,8 +257,8 @@ update_status ModuleLevel4::Update()
 	if (App->player2->IsEnabled() == true)
 		App->player2->position.x += 1;
 
-	if (!boss_fight)
-		App->audio->PlayMusic(main_track_lvl4,ONCE);
+	/*if (!boss_fight)
+		App->audio->PlayMusic(main_track_lvl4,ONCE);*/
 	
 	if (boss_fight)
 		App->audio->PlayMusic(boss_track_lvl4,ONCE);
@@ -321,6 +345,39 @@ update_status ModuleLevel4::Update()
 	App->render->Blit(pinchywall, pinchywallposition.x, pinchywallposition.y, &pinchywalanim.GetCurrentFrame());
 	App->render->Blit(foregroundtilemap1, 0, 0, &foregroundtilemaprect1, 1); //foregorund
 	App->render->Blit(foregroundtilemap2, 4100, 0, &foregroundtilemaprect2, 1); //foregorund
+	App->render->Blit(Enemies_1, 400, 100, &op_cannon.GetCurrentFrame(), 1);
+
+//----------------------platforms--------------------------
+
+	App->render->Blit(foreground_platform, 2760, -120, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, -80, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, -40, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 20, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 60, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 140, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 180, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 100, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 220, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 260, &foreground_platforms, 1);
+	
+
+//	App->render->Blit(foreground_platform, 2760, 100, &platform_up.GetCurrentFrame(), 1);
+	
+	App->render->Blit(foreground_platform, 2860, -90, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, -50, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, -10, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 30, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 70, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 110, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 150, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 190, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 230, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 270, &foreground_platforms, 1);
+
+
+//	App->render->Blit(foreground_platform, 2860, 110, &platform_down.GetCurrentFrame(), 1);
+//-----------------------------------------------------------------------------------
+
 
 	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
 	{
