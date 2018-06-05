@@ -115,7 +115,7 @@ bool ModulePlayer2::CleanUp()
 update_status ModulePlayer2::Update()
 {
 	initial_pos = position;
-	App->ball_player2->Enable();
+	
 
 	if (weapon_level == 2)
 	{

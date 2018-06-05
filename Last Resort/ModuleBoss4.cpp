@@ -44,15 +44,15 @@ bool ModuleBoss4::Start()
 	core_cannonleft_alive = true;
 
 	//Initial positions
-	core_position.x = App->player->position.x+100;
-	core_position.y = App->player->position.y;
+	core_position.x = 5200;
+	core_position.y = 100;
 	module1_position.x = core_position.x + 8;
 	module1_position.y = core_position.y + 8;
 	module2_position = module3_position = module4_position = module1_position;
 	head_position.x = core_position.x - 9;
-	head_position.y = core_position.y - 17;
+	head_position.y = core_position.y - 11;
 	bottom_position.x = core_position.x - 5;
-	bottom_position.y = core_position.y+24;
+	bottom_position.y = core_position.y+5;
 
 	//Colliders
 	core_collider = App->collision->AddCollider({ core_position.x,core_position.y,46,32 }, COLLIDER_BOSS, this);
@@ -76,7 +76,17 @@ bool ModuleBoss4::Start()
 	//Load the texture
 	boss_textures = App->textures->Load("assets/sprites/Boss4_sprites.png");
 	
+	rightcore_hp = 50;
+	leftcore_hp = 50;
 
+	boss4_dead = false;
+	closed = true;
+	opening = false;
+	open = false;
+	closing = false;
+
+	move_right = true;
+	move_right = false;
 	return true;
 }
 
@@ -113,20 +123,45 @@ bool ModuleBoss4::CleanUp()
 
 update_status ModuleBoss4::Update()
 {
-	
-	core_position.x++;
-	head_position.x++;
-	bottom_position.x++;
 	module1_position.x = module2_position.x = module3_position.x = module4_position.x = core_position.x + 8;
+	bottom_position.x = core_position.x - 5;
+	head_position.x = core_position.x - 9;
 
-	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_REPEAT)
-		Open();
 
-	if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN)
-		Shot2();
 
-	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_REPEAT)
-		Close();
+	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_REPEAT)
+		core_position.x++;
+		
+	if (App->player->position.x > 5000 || App->player2->position.x > 5000)
+	{
+		if (closed)
+			Move();
+
+		if (closing)
+			Close();
+
+		if (opening)
+			Open();
+		
+		if (open)
+		{
+			open_timer++;
+			if (open_timer == 100)
+				Shot1();
+
+			if (open_timer == 350)
+				Shot2();
+
+			if (open_timer == 500)
+				Shot2();
+
+			if (open_timer > 600)
+				closing = true;
+		}
+		
+
+	}
+
 
 	//	~~~~~~~~~~~~BLITS~~~~~~~~~~
 	App->render->Blit(boss_textures, module1_position.x, module1_position.y, &body_module);
@@ -241,31 +276,44 @@ update_status ModuleBoss4::Update()
 
 void ModuleBoss4::Open()
 {
+	closed = false;
+	closing = false;
 	if (head_position.y>core_position.y-64)
 	{
-		head_position.y -= 2;
+		head_position.y -= 1;
 
 		if (module1_position.y > module2_position.y - 16)
-			module1_position.y -= 2;
+			module1_position.y -= 1;
 
 		if (module2_position.y > core_position.y - 16)
-			module2_position.y -= 2; 
+			module2_position.y -= 1; 
 	}
 
 	if (bottom_position.y < core_position.y + 64)
 	{
-		bottom_position.y += 2;
+		bottom_position.y += 1;
 
 		if (module3_position.y < core_position.y + 32)
-			module3_position.y += 2;
+			module3_position.y += 1;
 	
 		if (module4_position.y < module3_position.y + 16)
-			module4_position.y += 2;
+			module4_position.y += 1;
 	}
+
+	if (head_position.y <= core_position.y - 64 && bottom_position.y >= core_position.y + 64)
+	{
+		open = true;
+		opening = false;
+		open_timer = 0;
+	}
+
 }
 
 void ModuleBoss4::Close()
 {
+	open = false;
+	opening = false;
+
 	if (head_position.y < core_position.y - 11)
 	{
 		head_position.y += 2;
@@ -291,7 +339,11 @@ void ModuleBoss4::Close()
 			module3_position.y -= 2;
 	}
 
-
+	if (head_position.y >= core_position.y - 11 && bottom_position.y <= core_position.y + 5)
+	{
+		closed = true;
+		closing = false;
+	}
 	
 }
 
@@ -350,6 +402,26 @@ void ModuleBoss4::Shot3()
 	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x + 28, bottom_position.y+16, COLLIDER_ENEMY_SHOT, 0, nullptr, { 1,0 });
 	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x + 28, bottom_position.y + 16, COLLIDER_ENEMY_SHOT, 0, nullptr, { 1,-1 });
 	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x + 28, bottom_position.y + 16, COLLIDER_ENEMY_SHOT, 0, nullptr, { 1,1 });
+}
+
+void ModuleBoss4::Move()
+{
+
+	if (move_right)
+		core_position.x+=2;
+
+	else if (move_left)
+		core_position.x -= 2;
+	
+	move_timer += 2;
+	if (move_timer >= 500)
+	{
+		move_right = !move_right;
+		move_left = !move_left;
+		move_timer = 2;
+		opening = true;
+	}
+
 }
 
 void ModuleBoss4::OnCollision(Collider* col_1, Collider* col_2)
@@ -432,5 +504,6 @@ void ModuleBoss4::OnCollision(Collider* col_1, Collider* col_2)
 		}
 	}
 	
-
+	if (rightcore_hp < 1 && leftcore_hp < 1)
+		boss4_dead = true;
 }
