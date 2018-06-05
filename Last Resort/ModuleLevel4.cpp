@@ -207,9 +207,9 @@ bool ModuleLevel4::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 700, SCREEN_HEIGHT - 65);
 	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 775, SCREEN_HEIGHT / 6 - 5);
 	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 850, SCREEN_HEIGHT - 65);
-	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 900, SCREEN_HEIGHT /2);
-	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1000, SCREEN_HEIGHT / 3);
-	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1100, SCREEN_HEIGHT / 4);
+	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 875, SCREEN_HEIGHT /2);
+	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 975, SCREEN_HEIGHT / 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1075, SCREEN_HEIGHT / 4);
 
 
 
