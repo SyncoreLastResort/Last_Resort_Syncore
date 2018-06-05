@@ -16,7 +16,7 @@
 
 
 
-#define SPAWN_MARGIN 50
+#define SPAWN_MARGIN 320
 
 ModuleEnemies::ModuleEnemies()
 {
