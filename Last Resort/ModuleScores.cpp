@@ -9,6 +9,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleScores.h"
 #include "ModuleFonts.h"
+#include "ModuleStageClear.h"
 
 
 #include<stdio.h>
@@ -52,7 +53,8 @@ bool ModuleScores::Start()
 update_status ModuleScores::Update()
 {
 	bool end = false;
-
+	if (App->stageclear->IsEnabled()==true)
+	{
 	// Draw everything --------------------------------------
 	App->render->Blit(backgroundscores, 0, 0, &backgroundrect); 
 	App->render->Blit(scoresranking, 50, 20, &scoresrect);
@@ -64,40 +66,43 @@ update_status ModuleScores::Update()
 	}
 
 	// Draw UI (score) --------------------------------------
-	if (App->player->score >= App->player2->score2)
-	{
-		sprintf_s(score_text, 10, "%7d", App->player->score);
-		sprintf_s(score_text2, 10, "%7d", App->player2->score2);
-		
-		SumofScores = App->player->score + App->player2->score2;
-
-		sprintf_s(scoresum_text, 10, "%7d", SumofScores);
 
 
-		// TODO 3: Blit the text of the score in at the bottom of the screen
-		App->fonts->BlitText(120, 52, font_scorenums, score_text);
-		App->fonts->BlitText(120, 66, font_scorenums, score_text2);
-		
-		App->fonts->BlitText(SCREEN_WIDTH - 122, 52, App->player->font_score, "PLAYER1");
-		App->fonts->BlitText(SCREEN_WIDTH - 122, 66, App->player->font_score, "PLAYER2");
+		if (App->player->score >= App->player2->score2)
+		{
+			sprintf_s(score_text, 10, "%7d", App->player->score);
+			sprintf_s(score_text2, 10, "%7d", App->player2->score2);
 
-		App->fonts->BlitText(SCREEN_WIDTH -260, SCREEN_HEIGHT-10,  App->player->font_score, "SUM OF SCORES");
-		App->fonts->BlitText(SCREEN_WIDTH - 150, SCREEN_HEIGHT - 10, font_scorenums, scoresum_text);
-	}
+			SumofScores = App->player->score + App->player2->score2;
 
-	else
-	{
-		sprintf_s(score_text, 10, "%7d", App->player->score);
-		sprintf_s(score_text2, 10, "%7d", App->player2->score2);
+			sprintf_s(scoresum_text, 10, "%7d", SumofScores);
 
 
-		// TODO 3: Blit the text of the score in at the bottom of the screen
-		App->fonts->BlitText(120, 66, font_scorenums, score_text);
-		App->fonts->BlitText(120, 52, font_scorenums, score_text2);
-		App->fonts->BlitText(SCREEN_WIDTH - 122, 66, App->player->font_score, "PLAYER1");
-		App->fonts->BlitText(SCREEN_WIDTH - 122, 52, App->player->font_score, "PLAYER2");
+			// TODO 3: Blit the text of the score in at the bottom of the screen
+			App->fonts->BlitText(120, 52, font_scorenums, score_text);
+			App->fonts->BlitText(120, 66, font_scorenums, score_text2);
+
+			App->fonts->BlitText(SCREEN_WIDTH - 122, 52, App->player->font_score, "PLAYER1");
+			App->fonts->BlitText(SCREEN_WIDTH - 122, 66, App->player->font_score, "PLAYER2");
+
+			App->fonts->BlitText(SCREEN_WIDTH - 260, SCREEN_HEIGHT - 10, App->player->font_score, "SUM OF SCORES");
+			App->fonts->BlitText(SCREEN_WIDTH - 150, SCREEN_HEIGHT - 10, font_scorenums, scoresum_text);
+		}
+
+		else
+		{
+			sprintf_s(score_text, 10, "%7d", App->player->score);
+			sprintf_s(score_text2, 10, "%7d", App->player2->score2);
 
 
+			// TODO 3: Blit the text of the score in at the bottom of the screen
+			App->fonts->BlitText(120, 66, font_scorenums, score_text);
+			App->fonts->BlitText(120, 52, font_scorenums, score_text2);
+			App->fonts->BlitText(SCREEN_WIDTH - 122, 66, App->player->font_score, "PLAYER1");
+			App->fonts->BlitText(SCREEN_WIDTH - 122, 52, App->player->font_score, "PLAYER2");
+
+
+		}
 	}
 
 	return UPDATE_CONTINUE;

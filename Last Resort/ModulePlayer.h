@@ -6,6 +6,7 @@
 #include "p2Point.h"
 #include "ModuleParticles.h"
 
+
 struct SDL_Texture;
 struct Collider;
 
@@ -93,6 +94,7 @@ public:
 	//Life
 
 	int life = 1;
+
 };
 
 #endif

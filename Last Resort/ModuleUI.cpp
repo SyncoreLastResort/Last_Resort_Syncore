@@ -31,7 +31,7 @@ bool ModuleUI::Start() {
 	Insert_Coin = App->audio->LoadSoundEffect("assets/sounds/Insert_Coin.wav");
 
 
-	coins = 1;
+	coins = 0;
 	return true;
 }
 
@@ -48,27 +48,37 @@ bool ModuleUI::CleanUp() {
 
 update_status ModuleUI::Update() {
 
+	P1Life = App->player->life;
+	P2Life = App->player2->life;
 
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && coins < 100) {
-		coins++;
-		Mix_PlayChannel(-1, Insert_Coin, 0);
+	if (App->scene_intro->IsEnabled() == true)
+	{
+		if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && coins < 100) {
+			coins++;
+			Mix_PlayChannel(-1, Insert_Coin, 0);
+		}
+
+
+		sprintf_s(coins_text, "%7d", coins);
+		App->fonts->BlitText((SCREEN_WIDTH - 104), (SCREEN_HEIGHT - 10), font, "CREDITS");
+		App->fonts->BlitText((SCREEN_WIDTH - 75), (SCREEN_HEIGHT - 10), font, coins_text);
 	}
 
-	sprintf_s(coins_text, "%7d", coins);
-	App->fonts->BlitText((SCREEN_WIDTH - 104), (SCREEN_HEIGHT - 10), font, "CREDITS");
-	App->fonts->BlitText((SCREEN_WIDTH - 75), (SCREEN_HEIGHT - 10), font, coins_text);
+	
+	if (App->level4->IsEnabled())
+	{
+		sprintf_s(life_text, "%7d", P1Life);
+		sprintf_s(life2_text, "%7d", P2Life);
+
+		App->fonts->BlitText(30, 24, font, "X");
+		App->fonts->BlitText(-2, 24, font, life_text);
 
 
-	//P1 Life
-	sprintf_s(life_text, "%7d", P1Life);
-	App->fonts->BlitText(30, 24, font, "X0");
-	App->fonts->BlitText(-2, 24, font, life_text);
+		App->fonts->BlitText((SCREEN_WIDTH - 93), 24, font, "X");
+		App->fonts->BlitText((SCREEN_WIDTH - 125), 24, font, life2_text);
 
-		
-	//P2 Life
-	sprintf_s(life2_text, "%7d", P2Life);
-	App->fonts->BlitText((SCREEN_WIDTH - 75), 24, font, "X0");
-	App->fonts->BlitText((SCREEN_WIDTH - 107), 24, font, life2_text);
+
+	}
 
 	////TOP Score
 	//if (App->scene1background->IsEnabled() == true) {
@@ -93,8 +103,6 @@ update_status ModuleUI::Update() {
 			App->fonts->BlitText(39, SCREEN_HEIGHT - 10, font, "MODE");
 		}
 
-		App->player2->life = coins;
-		App->player->life = coins;
 
 		return UPDATE_CONTINUE;
 	}

@@ -55,7 +55,6 @@ public:
 	char score_text2[10];
 	uint score2 = 0;
 
-
 };
 
 #endif

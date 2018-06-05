@@ -65,6 +65,10 @@ public:
 	Animation Back_Lava;
 	Animation Front_Lava;
 	Animation op_cannon;
+
+	bool coinisminus = false;
+
+	bool createcollidersonce = false;
 };
 
 #endif // __MODULELEVEL4_H__

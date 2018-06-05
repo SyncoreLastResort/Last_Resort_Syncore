@@ -108,7 +108,7 @@ bool ModulePlayer::Start()
 	death.Reset();
 	spawn.Reset();
 	current_animation = &spawn;
-	position.x = 50;
+	position.x = App->render->camera.x+50;
 	position.y = 100;
 	score = 0;
 
@@ -141,6 +141,8 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	
+
 	initial_pos = position;
 
 	if (weapon_level == 2)
@@ -249,17 +251,18 @@ update_status ModulePlayer::Update()
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 	}
 	
-	if (current_animation == &death &&current_animation->Finished() && App->player2->IsEnabled()==false && /*App->UI->coins==0 &&*/ IsEnabled()==true)
+	if (current_animation == &death &&current_animation->Finished() && App->player2->IsEnabled()==false && IsEnabled()==true)
 	{
-		App->fade->FadeToBlack((Module*)App->level4, (Module *)App->gameover);
-		App->player->Disable();
+	     App->fade->FadeToBlack((Module*)App->level4, (Module *)App->gameover);
+		
+	    App->player->Disable();
 	}
 
 	// Draw UI (score) --------------------------------------
 	sprintf_s(score_text, 10, "%7d", score);
 
 	// TODO 3: Blit the text of the score in at the bottom of the screen
-	App->fonts->BlitText(0, 25, font_score, score_text);
+	App->fonts->BlitText(50, 24, font_score, score_text);
 
 
 	if (final_pos->x > initial_pos.x)

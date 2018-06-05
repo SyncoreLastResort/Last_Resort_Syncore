@@ -10,6 +10,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleBall.h"
+#include "ModuleUI.h"
 
 
 ModuleSceneIntro::ModuleSceneIntro()
@@ -1321,7 +1322,7 @@ bool ModuleSceneIntro::Start()
 	maintrackintro = App->audio->LoadMusic("assets/music/1.Last resort title.ogg");
 	
 	App->render->camera.x = App->render->camera.y = 0;*/
-	
+	App->UI->Enable();
 
 	introbackground = App->textures->Load("assets/sprites/Intro_Neogeo/Title_Neogeo_Begining_Sprite.png");
 	black = App->textures->Load("assets/sprites/Intro_Neogeo/Black.png");
@@ -1450,7 +1451,7 @@ update_status ModuleSceneIntro::Update()
 		App->render->Blit(Button, 104, 176, &(StartButton.GetCurrentFrame()));
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && C_sprite.Finished() && App->fade->IsFading() == false && LastFade.Finished())
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && C_sprite.Finished() && App->fade->IsFading() == false && LastFade.Finished() && App->UI->coins>0)
 	{
 		Mix_FadeOutMusic(1000);
 		App->fade->FadeToBlack(this, (Module*)App->level4);

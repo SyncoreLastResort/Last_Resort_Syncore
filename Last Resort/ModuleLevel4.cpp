@@ -14,6 +14,7 @@
 #include "ModuleParticles.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleUI.h"
+#include "ModuleScores.h"
 
 
 ModuleLevel4::ModuleLevel4()
@@ -151,12 +152,17 @@ bool ModuleLevel4::Start()
 
 	App->player->Enable();
 	App->enemies->Enable();
+	App->scores->Enable();
 
 
 	// Enemies ---
 	
-	colliderwallmovdown = App->collision->AddCollider({ wallmovdownposition.x, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
-	colliderpinchywall = App->collision->AddCollider({ pinchywallposition.x, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
+	if (createcollidersonce == false)
+	{
+		colliderwallmovdown = App->collision->AddCollider({ wallmovdownposition.x, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderpinchywall = App->collision->AddCollider({ pinchywallposition.x, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
+		createcollidersonce = true;
+	}
 		
 
 	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 300, SCREEN_HEIGHT-65);
@@ -165,6 +171,7 @@ bool ModuleLevel4::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 600, SCREEN_HEIGHT / 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 650, SCREEN_HEIGHT / 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 750, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 500, SCREEN_HEIGHT / 6);
 
 	return true;
 }
@@ -188,6 +195,8 @@ bool ModuleLevel4::CleanUp()
 
 	App->player->Disable();
 	App->enemies->Disable();
+	App->scores->Disable();
+	App->UI->Disable();
 
 	if (App->player2->IsEnabled() == true)
 		App->player2->Disable();
@@ -199,30 +208,15 @@ bool ModuleLevel4::CleanUp()
 update_status ModuleLevel4::Update()
 {
 	//Player respawning
-
-	if (App->UI->coins > 0)
+	if (App->player2->IsEnabled() == false && App->player2->life != 0)
 	{
-		if (App->player2->IsEnabled() == false)
-		{
-			App->player2->Enable();
-		    App->UI->coins -= 1;
-	    }
-
-		if (App->UI->coins > 0)
-		{
-			if (App->player->IsEnabled() == false)
-			{
-				App->player->Enable();
-				App->UI->coins -= 1;
-			}
-		}
+		App->player2->life = 0;
 	}
 
-	/*if (App->UI->coins > 0 && App->player->IsEnabled() == false)
-		App->player->Enable();
-
-	if (App->UI->coins > 0 && App->player2->IsEnabled() == false)
-		App->player2->Enable();*/
+	if (App->player->IsEnabled() == false && App->player->life != 0)
+	{
+		App->player->life = 0;
+	}
 
 	// Move camera forward -----------------------------
 	App->render->camera.x += 1 * SCREEN_SIZE;
@@ -245,7 +239,7 @@ update_status ModuleLevel4::Update()
 	}
 	
 	
-	if (App->player->IsEnabled() == false && App->player2->IsEnabled() == false && App->UI->coins==0)
+	if (App->player->IsEnabled() == false && App->player2->IsEnabled() == false )
 	{
 		App->fade->FadeToBlack(this, App->gameover);
 	}
@@ -329,17 +323,23 @@ update_status ModuleLevel4::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
 	{
-		/*if (App->player2->life != 0)
+		if (App->player2->life != 0)
 		{
 			App->player2->Enable();
 			App->player2->life -= 1;
-		}*/
-		/*if (App->UI->coins > 0)
+		}
+		if (App->UI->coins > 0)
 		{
 			App->player2->Enable();
 			App->UI->coins -= 1;
-		}*/
+		}
 	}
+
+	/*if (coinisminus == true)
+	{
+		App->UI->coins -= 1;
+		coinisminus = false;
+	}*/
 
 	return UPDATE_CONTINUE;
 }

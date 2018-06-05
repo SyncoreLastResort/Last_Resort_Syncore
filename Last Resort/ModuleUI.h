@@ -45,7 +45,7 @@ public:
 	char life2_text[10];
 	uint P2Life;
 
-	//Coins
+	//Coins 
 	int coins;
 	char coins_text[10];
 };

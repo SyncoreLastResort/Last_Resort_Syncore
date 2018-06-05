@@ -17,20 +17,28 @@ EnemySpider::EnemySpider(int x, int y) : Enemy(x, y)
 	left_bottom.PushBack({ 64, 0, 32, 31 });
 	left_bottom.PushBack({ 96, 0, 32, 31 });
 
+	left_bottom.speed = 0.1f;
+
 	right_bottom.PushBack({ 0, 31, 32, 31 });
 	right_bottom.PushBack({ 32, 31, 32, 31 });
 	right_bottom.PushBack({ 64, 31, 32, 31 });
 	right_bottom.PushBack({ 96, 31, 32, 31 });
+
+	right_bottom.speed = 0.1f;
 
 	left_top.PushBack({ 0, 62, 32, 31 });
 	left_top.PushBack({ 32, 62, 32, 31 });
 	left_top.PushBack({ 64, 62, 32, 31 });
 	left_top.PushBack({ 96, 62, 32, 31 });
 
+	left_top.speed = 0.1f;
+
 	right_top.PushBack({ 0, 93, 32, 31 });
 	right_top.PushBack({ 32, 93, 32, 31 });
 	right_top.PushBack({ 64, 93, 32, 31 });
 	right_top.PushBack({ 96, 93, 32, 31 });
+
+	right_top.speed = 0.1f;
 
 	score = 200;
 	life = 5;
@@ -38,7 +46,7 @@ EnemySpider::EnemySpider(int x, int y) : Enemy(x, y)
 
 
 	animation = &left_top;
-	left_top.speed = 0.04f;
+	/*left_top.speed = 0.04f;*/
 	left_top.loop = true;
 
 
