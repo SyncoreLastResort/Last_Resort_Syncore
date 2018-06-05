@@ -173,7 +173,9 @@ bool ModuleLevel4::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 600, SCREEN_HEIGHT / 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 650, SCREEN_HEIGHT / 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 750, SCREEN_HEIGHT / 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 500, SCREEN_HEIGHT / 6);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 500, SCREEN_HEIGHT / 6 -5);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 700, SCREEN_HEIGHT -65);
+
 
 	return true;
 }
