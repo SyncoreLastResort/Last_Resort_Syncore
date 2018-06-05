@@ -89,13 +89,9 @@ void EnemySpider::Move()
 			App->particles->BeeShot.speed.x++;
 			App->particles->BeeShot.speed.y = 3 * (sin(angle2*PI / 180));
 			App->particles->AddParticle(App->particles->BeeShot, position.x + 20, position.y, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT);
-			App->particles->BeeShot.speed.x = 4 * (cos(angle2*PI / 180));
-			App->particles->BeeShot.speed.x++;
-			App->particles->BeeShot.speed.y = 4 * (sin(angle2*PI / 180));
-			App->particles->AddParticle(App->particles->BeeShot, position.x + 20, position.y, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT);
 		}
 		else
-			position.x -= 2;
+			position.x -= 1;
 	}
 	else
 	{
@@ -113,14 +109,10 @@ void EnemySpider::Move()
 			App->particles->BeeShot.speed.x++;
 			App->particles->BeeShot.speed.y = 3 * (sin(angle2*PI / 180));
 			App->particles->AddParticle(App->particles->BeeShot, position.x + 20, position.y, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT);
-			App->particles->BeeShot.speed.x = 4 * (cos(angle2*PI / 180));
-			App->particles->BeeShot.speed.x++;
-			App->particles->BeeShot.speed.y = 4 * (sin(angle2*PI / 180));
-			App->particles->AddParticle(App->particles->BeeShot, position.x + 20, position.y, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT);
 
 		}
 		else
-			position.x += 2;
+			position.x += 1;
 	}
 
 }
