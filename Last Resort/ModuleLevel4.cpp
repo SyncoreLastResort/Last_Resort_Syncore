@@ -375,7 +375,7 @@ bool ModuleLevel4::CleanUp()
 	App->scores->Disable();
 	App->UI->Disable();
 
-	
+	App->boss4->Disable();
 
 	if (App->player2->IsEnabled() == true)
 		App->player2->Disable();
@@ -451,7 +451,7 @@ update_status ModuleLevel4::Update()
 			App->player->Disable();
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN || App->boss4->boss4_dead==true)
 	{
 		Mix_FadeOutMusic(1000);
 		App->fade->FadeToBlack(this, App->stageclear);
