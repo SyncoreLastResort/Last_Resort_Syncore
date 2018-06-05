@@ -41,7 +41,7 @@ EnemySpider::EnemySpider(int x, int y) : Enemy(x, y)
 	right_top.speed = 0.1f;
 
 	score = 200;
-	life = 5;
+	life = 3;
 	texturename = App->enemies->spider;
 
 
@@ -73,7 +73,7 @@ void EnemySpider::Move()
 
 	if (going_left)
 	{
-		if (counter >= 20 || PlayerPosition.x > position.x +10)
+		if (PlayerPosition.x > position.x +30)
 		{
 			going_left = false;
 			if (original_y > SCREEN_HEIGHT / 2) { animation = &right_bottom; }
@@ -83,15 +83,13 @@ void EnemySpider::Move()
 			App->particles->SpiderShot.speed.x++;
 			App->particles->SpiderShot.speed.y = 3 * (sin(angle2*PI / 180));
 			App->particles->AddParticle(App->particles->SpiderShot, position.x + 20, position.y, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT);
-			counter = 0;
 		}
 		else
-			position.x--;
-			counter++;
+			position.x -= 2;
 	}
 	else
 	{
-		if (counter >= 20 || PlayerPosition.x < position.x -10)
+		if (PlayerPosition.x < position.x - 30)
 		{
 			going_left = true;
 			if (original_y > SCREEN_HEIGHT / 2) { animation = &left_bottom; }
@@ -101,11 +99,9 @@ void EnemySpider::Move()
 			App->particles->SpiderShot.speed.x++;
 			App->particles->SpiderShot.speed.y = 3 * (sin(angle2*PI / 180));
 			App->particles->AddParticle(App->particles->SpiderShot, position.x + 20, position.y, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT);
-			counter = 0;
 		}
 		else
-			position.x++;
-			counter++;
+			position.x += 2;
 	}
 
 }
