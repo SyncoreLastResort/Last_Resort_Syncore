@@ -214,8 +214,9 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 
 	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
-	graphics2= App->textures->Load("Images/Particles/BossWeapons&parts_EnemyShip&structure_Multiple-effects-and-explosions.png");
+	graphics2= App->textures->Load("assets/sprites/BossWeapons&parts_EnemyShip&structure_Multiple-effects-and-explosions.png");
 	
+	BeeShot.texture = graphics2;
 	//Player sprites && sounds
 	laser_cannon.texture = graphics;
 	Laserexplosion.texture = graphics;

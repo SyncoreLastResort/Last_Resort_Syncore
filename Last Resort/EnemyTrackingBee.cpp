@@ -11,7 +11,6 @@ EnemyTrackingBee::EnemyTrackingBee(int x, int y) : Enemy(x, y)
 {
 
 
-
 	Front.PushBack({ 0 ,0,48,45 });
 	Front.PushBack({ 48 ,0,48,45 });
 
