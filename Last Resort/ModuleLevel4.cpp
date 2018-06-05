@@ -40,14 +40,19 @@ ModuleLevel4::ModuleLevel4()
 	//Background
 	backgroundtilemaprect.x = 0;
 	backgroundtilemaprect.y = 0;
-	backgroundtilemaprect.w = 4143;
-	backgroundtilemaprect.h = SCREEN_HEIGHT;   //219
+	backgroundtilemaprect.w = 2862;
+	backgroundtilemaprect.h = SCREEN_HEIGHT;   
 
 	//Foreground
-	foregroundtilemaprect.x = 0;
-	foregroundtilemaprect.y = 0;
-	foregroundtilemaprect.w = 4143;
-	foregroundtilemaprect.h = SCREEN_HEIGHT;   //222
+	foregroundtilemaprect1.x = 0;
+	foregroundtilemaprect1.y = 0;
+	foregroundtilemaprect1.w = 2734;
+	foregroundtilemaprect1.h = SCREEN_HEIGHT;  
+
+	foregroundtilemaprect2.x = 0;
+	foregroundtilemaprect2.y = 0;
+	foregroundtilemaprect2.w = 1271;
+	foregroundtilemaprect2.h = SCREEN_HEIGHT;  
 
 	//cannon platform
 	cannon_platform.x = 161;
@@ -61,10 +66,10 @@ ModuleLevel4::ModuleLevel4()
 	cannon_platform_end.h = 49;
 
 	//Background lava animations
-	Back_Lava.PushBack({ 0,0,2493,219 });
-	Back_Lava.PushBack({ 0,224,2493,219 });
-	Back_Lava.PushBack({ 0,224,2493,219 });
-	Back_Lava.PushBack({ 0,0,2493,219 });
+	Back_Lava.PushBack({ 0,0,1216,219 });
+	Back_Lava.PushBack({ 0,224,1216,219 });
+	Back_Lava.PushBack({ 0,224,1216,219 });
+	Back_Lava.PushBack({ 0,0,1216,219 });
 	Back_Lava.speed = 0.05f;
 
 	op_cannon.PushBack({ 161,130,79,26 });
@@ -129,7 +134,8 @@ bool ModuleLevel4::Start()
 	foreground = App->textures->Load("assets/sprites/Foreground.png");*/
 
 	backgroundtilemap = App->textures->Load("assets/sprites/Background.png");
-	foregroundtilemap = App->textures->Load("assets/sprites/Foreground.png");
+	foregroundtilemap1 = App->textures->Load("assets/sprites/foreground_1.png");
+	foregroundtilemap2 = App->textures->Load("assets/sprites/foreground_2.png");
 	BackLavaAnim = App->textures->Load("assets/sprites/Back_Lava_Anim.png");
 	Enemies_1 = App->textures->Load("assets/sprites/Enemys_Stage4_Sprites.png");
 
@@ -182,14 +188,13 @@ bool ModuleLevel4::CleanUp()
 	LOG("Unloading space scene");
 
 	App->textures->Unload(backgroundtilemap);
-	App->textures->Unload(foregroundtilemap);
+	App->textures->Unload(foregroundtilemap1);
+	App->textures->Unload(foregroundtilemap2);
 	App->textures->Unload(BackLavaAnim);
 	App->textures->Unload(Enemies_1);
 	App->textures->Unload(wall);
 	App->textures->Unload(pinchywall);
-	/*App->textures->Unload(background);
-	App->textures->Unload(foreground);*/
-
+	
 	App->audio->UnloadMusic(main_track_lvl4);
 	App->audio->UnloadMusic(boss_track_lvl4);
 
@@ -307,17 +312,13 @@ update_status ModuleLevel4::Update()
 	colliderpinchywall->SetPos(pinchywallposition.x, pinchywallposition.y);
 	//End of Pinchy Wall movement
 	
-	App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 1); // back background
-	App->render->Blit(BackLavaAnim, 0, 0, &Back_Lava.GetCurrentFrame(), 1);
-	/*App->render->Blit(background, 0, 0, &backgroundrect, 1);*/ //background
-	//App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 1); // back background
+	// Draw everything --------------------------------------
+	App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 0.5); // back background
+	App->render->Blit(BackLavaAnim, 0, 0, &Back_Lava.GetCurrentFrame(), 0.5); // back lava animation
 	App->render->Blit(wall, wallmovdownposition.x, wallmovdownposition.y, &wallrect, 1);
 	App->render->Blit(pinchywall, pinchywallposition.x, pinchywallposition.y, &pinchywalanim.GetCurrentFrame());
-	/*App->render->Blit(foreground, 0, 0, &foregroundrect, 1); *///foreground
-	// Draw everything --------------------------------------
-
-	
-	App->render->Blit(foregroundtilemap, 0, 0, &foregroundtilemaprect, 1); // back background
+	App->render->Blit(foregroundtilemap1, 0, 0, &foregroundtilemaprect1, 1); //foregorund
+	App->render->Blit(foregroundtilemap2, 4100, 0, &foregroundtilemaprect2, 1); //foregorund
 
 	App->render->Blit(Enemies_1, 400, 100, &op_cannon.GetCurrentFrame(), 1);
 
