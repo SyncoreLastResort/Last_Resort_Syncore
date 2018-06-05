@@ -27,5 +27,5 @@ Power_Up::Power_Up(int x, int y) : Enemy(x, y)
 void Power_Up::Move()
 {
 
-	position.x -= 1;
+	/*position.x -= 1;*/
 }
