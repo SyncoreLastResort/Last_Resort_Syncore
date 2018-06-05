@@ -41,18 +41,18 @@ ModuleLevel4::ModuleLevel4()
 	backgroundtilemaprect.x = 0;
 	backgroundtilemaprect.y = 0;
 	backgroundtilemaprect.w = 2862;
-	backgroundtilemaprect.h = SCREEN_HEIGHT;   
+	backgroundtilemaprect.h = SCREEN_HEIGHT;
 
 	//Foreground
 	foregroundtilemaprect1.x = 0;
 	foregroundtilemaprect1.y = 0;
 	foregroundtilemaprect1.w = 2734;
-	foregroundtilemaprect1.h = SCREEN_HEIGHT;  
+	foregroundtilemaprect1.h = SCREEN_HEIGHT;
 
 	foregroundtilemaprect2.x = 0;
 	foregroundtilemaprect2.y = 0;
 	foregroundtilemaprect2.w = 1271;
-	foregroundtilemaprect2.h = SCREEN_HEIGHT;  
+	foregroundtilemaprect2.h = SCREEN_HEIGHT;
 
 	//cannon platform
 	cannon_platform.x = 161;
@@ -64,6 +64,24 @@ ModuleLevel4::ModuleLevel4()
 	cannon_platform_end.y = 0;
 	cannon_platform_end.w = 79;
 	cannon_platform_end.h = 49;
+
+	//up & down platforms and animations
+	foreground_platforms.x = 46;
+	foreground_platforms.y = 67;
+	foreground_platforms.w = 63;
+	foreground_platforms.h = 8;
+
+	platform_up.PushBack({ 46,67,63,8 });
+	platform_up.PushBack({ 9,46,63,7 });
+	platform_up.PushBack({ 9,85,63,7 });
+	platform_up.PushBack({ 9,46,63,7 });
+	platform_up.PushBack({ 46,67,63,8 });
+
+	platform_down.PushBack({ 46,67,63,8 });
+	platform_down.PushBack({ 82,47,63,7 });
+	platform_down.PushBack({ 82,85,63,7 });
+	platform_down.PushBack({ 82,47,63,7 });
+	platform_down.PushBack({ 46,67,63,8 });
 
 	//Background lava animations
 	Back_Lava.PushBack({ 0,0,1216,219 });
@@ -132,6 +150,7 @@ bool ModuleLevel4::Start()
 	backgroundtilemap = App->textures->Load("assets/sprites/Background.png");
 	foregroundtilemap1 = App->textures->Load("assets/sprites/foreground_1.png");
 	foregroundtilemap2 = App->textures->Load("assets/sprites/foreground_2.png");
+	foreground_platform = App->textures->Load("assets/sprites/foreground_3.png");
 	BackLavaAnim = App->textures->Load("assets/sprites/Back_Lava_Anim.png");
 	Enemies_1 = App->textures->Load("assets/sprites/Enemys_Stage4_Sprites.png");
 
@@ -330,6 +349,38 @@ update_status ModuleLevel4::Update()
 	App->render->Blit(foregroundtilemap2, 4100, 0, &foregroundtilemaprect2, 1); //foregorund
 
 	App->render->Blit(Enemies_1, 400, 100, &op_cannon.GetCurrentFrame(), 1);
+
+//----------------------platforms--------------------------
+
+	App->render->Blit(foreground_platform, 2760, -120 + i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, -80 + i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, -40 + i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 20 + i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 60 + i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 140 + i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 180 + i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 100 + i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 220 + i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 260 + i, &foreground_platforms, 1);
+	
+
+//	App->render->Blit(foreground_platform, 2760, 100, &platform_up.GetCurrentFrame(), 1);
+	
+	App->render->Blit(foreground_platform, 2860, -90+i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, -50+i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, -10+i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 30+i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 70+i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 110+i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 150+i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 190+i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 230+i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 270+i, &foreground_platforms, 1);
+
+
+//	App->render->Blit(foreground_platform, 2860, 110, &platform_down.GetCurrentFrame(), 1);
+//-----------------------------------------------------------------------------------
+
 
 	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
 	{
