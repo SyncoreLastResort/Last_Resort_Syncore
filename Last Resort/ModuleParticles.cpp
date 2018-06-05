@@ -197,7 +197,7 @@ ModuleParticles::ModuleParticles()
 	boss4_heat_ball.anim.PushBack({ 46,219,14,14 });
 	boss4_heat_ball.anim.PushBack({ 60,219,13,14 });
 	boss4_heat_ball.anim.PushBack({ 73,219,13,14 });
-	boss4_heat_ball.anim.speed = 0.05;
+	boss4_heat_ball.anim.speed = 0.10;
 	boss4_heat_ball.anim.loop = true;
 	boss4_heat_ball.life = 2000;
 	boss4_heat_ball.end_particle = &boss4_heat_end;

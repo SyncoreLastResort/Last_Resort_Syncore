@@ -85,8 +85,10 @@ bool ModuleBoss4::Start()
 	open = false;
 	closing = false;
 
+	
+
 	move_right = true;
-	move_right = false;
+	move_left = false;
 	return true;
 }
 
@@ -153,10 +155,12 @@ update_status ModuleBoss4::Update()
 				Shot2();
 
 			if (open_timer == 500)
-				Shot2();
+				Shot3();
 
 			if (open_timer > 600)
 				closing = true;
+
+			move_timer = 0;
 		}
 		
 
@@ -343,12 +347,15 @@ void ModuleBoss4::Close()
 	{
 		closed = true;
 		closing = false;
+		move_timer = 0;
 	}
 	
+
 }
 
 void ModuleBoss4::Shot1()
 {
+	
 	if (core_cannonleft_alive)
 	{
 		App->particles->AddParticle(App->particles->boss4_small_shot, core_position.x, core_position.y, COLLIDER_ENEMY_SHOT, 0, nullptr, { -1,2 });
@@ -357,6 +364,7 @@ void ModuleBoss4::Shot1()
 		App->particles->AddParticle(App->particles->boss4_small_shot, core_position.x, core_position.y, COLLIDER_ENEMY_SHOT, 0, nullptr, { -1,2 });
 		App->particles->AddParticle(App->particles->boss4_small_shot, core_position.x, core_position.y, COLLIDER_ENEMY_SHOT, 0, nullptr, { -1,1 });
 	}
+	
 	if (core_cannonright_alive)
 	{
 		App->particles->AddParticle(App->particles->boss4_small_shot, core_position.x, core_position.y, COLLIDER_ENEMY_SHOT, 0, nullptr, { 1,-2 });
@@ -365,60 +373,63 @@ void ModuleBoss4::Shot1()
 		App->particles->AddParticle(App->particles->boss4_small_shot, core_position.x, core_position.y, COLLIDER_ENEMY_SHOT, 0, nullptr, { 1,2 });
 		App->particles->AddParticle(App->particles->boss4_small_shot, core_position.x, core_position.y, COLLIDER_ENEMY_SHOT, 0, nullptr, { 1,1 });
 	}
+
 }
 
 void ModuleBoss4::Shot2()
 {
 	if (module1_cannonleft_alive)
-		App->particles->AddParticle(App->particles->boss4_heat_ball, module1_leftcannon_position.x, module1_leftcannon_position.y, COLLIDER_ENEMY_SHOT, 0, nullptr, { -2,0 });
+		App->particles->AddParticle(App->particles->boss4_heat_ball, module1_leftcannon_position.x, module1_leftcannon_position.y, COLLIDER_BOSS_SHOT, 0, nullptr, { -2,0 });
 	
 	if (module1_cannonright_alive)
-		App->particles->AddParticle(App->particles->boss4_heat_ball, module1_rightcannon_position.x, module1_rightcannon_position.y, COLLIDER_ENEMY_SHOT, 0, nullptr, { 2,0 });
+		App->particles->AddParticle(App->particles->boss4_heat_ball, module1_rightcannon_position.x, module1_rightcannon_position.y, COLLIDER_BOSS_SHOT, 0, nullptr, { 2,0 });
 
 	if (module2_cannonleft_alive)
-		App->particles->AddParticle(App->particles->boss4_heat_ball, module2_leftcannon_position.x, module2_leftcannon_position.y, COLLIDER_ENEMY_SHOT, 0, nullptr, { -2,0 });
+		App->particles->AddParticle(App->particles->boss4_heat_ball, module2_leftcannon_position.x, module2_leftcannon_position.y, COLLIDER_BOSS_SHOT, 0, nullptr, { -2,0 });
 
 	if (module2_cannonright_alive)
-		App->particles->AddParticle(App->particles->boss4_heat_ball, module2_rightcannon_position.x, module2_rightcannon_position.y, COLLIDER_ENEMY_SHOT, 0, nullptr, { 2,0 });
+		App->particles->AddParticle(App->particles->boss4_heat_ball, module2_rightcannon_position.x, module2_rightcannon_position.y, COLLIDER_BOSS_SHOT, 0, nullptr, { 2,0 });
 
 	if (module3_cannonleft_alive)
-		App->particles->AddParticle(App->particles->boss4_heat_ball, module3_leftcannon_position.x, module3_leftcannon_position.y, COLLIDER_ENEMY_SHOT, 0, nullptr, { -2,0 });
+		App->particles->AddParticle(App->particles->boss4_heat_ball, module3_leftcannon_position.x, module3_leftcannon_position.y, COLLIDER_BOSS_SHOT, 0, nullptr, { -2,0 });
 
 	if (module3_cannonright_alive)
-		App->particles->AddParticle(App->particles->boss4_heat_ball, module3_rightcannon_position.x, module3_rightcannon_position.y, COLLIDER_ENEMY_SHOT, 0, nullptr, { 2,0 });
+		App->particles->AddParticle(App->particles->boss4_heat_ball, module3_rightcannon_position.x, module3_rightcannon_position.y, COLLIDER_BOSS_SHOT, 0, nullptr, { 2,0 });
 
 	if (module4_cannonleft_alive)
-		App->particles->AddParticle(App->particles->boss4_heat_ball, module4_leftcannon_position.x, module4_leftcannon_position.y, COLLIDER_ENEMY_SHOT, 0, nullptr, { -2,0 });
+		App->particles->AddParticle(App->particles->boss4_heat_ball, module4_leftcannon_position.x, module4_leftcannon_position.y, COLLIDER_BOSS_SHOT, 0, nullptr, { -2,0 });
 
 	if (module4_cannonright_alive)
-		App->particles->AddParticle(App->particles->boss4_heat_ball, module4_rightcannon_position.x, module4_rightcannon_position.y, COLLIDER_ENEMY_SHOT, 0, nullptr, { 2,0 });
+		App->particles->AddParticle(App->particles->boss4_heat_ball, module4_rightcannon_position.x, module4_rightcannon_position.y, COLLIDER_BOSS_SHOT, 0, nullptr, { 2,0 });
 }
 
 void ModuleBoss4::Shot3()
 {
-	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x+28, bottom_position.y+16, COLLIDER_ENEMY_SHOT, 0, nullptr, { -1,0 });
-	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x + 28, bottom_position.y+16, COLLIDER_ENEMY_SHOT, 0, nullptr, { -1,-1 });
-	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x + 28, bottom_position.y+16, COLLIDER_ENEMY_SHOT, 0, nullptr, { -1,1 });
-	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x + 28, bottom_position.y+16, COLLIDER_ENEMY_SHOT, 0, nullptr, { 1,0 });
-	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x + 28, bottom_position.y + 16, COLLIDER_ENEMY_SHOT, 0, nullptr, { 1,-1 });
-	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x + 28, bottom_position.y + 16, COLLIDER_ENEMY_SHOT, 0, nullptr, { 1,1 });
+	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x+28, bottom_position.y+16, COLLIDER_BOSS_SHOT, 0, nullptr, { -1,0 });
+	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x + 28, bottom_position.y+16, COLLIDER_BOSS_SHOT, 0, nullptr, { -1,-1 });
+	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x + 28, bottom_position.y+16, COLLIDER_BOSS_SHOT, 0, nullptr, { -1,1 });
+	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x + 28, bottom_position.y+16, COLLIDER_BOSS_SHOT, 0, nullptr, { 1,0 });
+	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x + 28, bottom_position.y + 16, COLLIDER_BOSS_SHOT, 0, nullptr, { 1,-1 });
+	App->particles->AddParticle(App->particles->boss4_blue_circle, bottom_position.x + 28, bottom_position.y + 16, COLLIDER_BOSS_SHOT, 0, nullptr, { 1,1 });
 }
 
 void ModuleBoss4::Move()
 {
+	if (move_timer < 200)
+	{
+		if (move_right)
+			core_position.x += 1;
 
-	if (move_right)
-		core_position.x+=2;
+		if (move_left)
+			core_position.x -= 1;
 
-	else if (move_left)
-		core_position.x -= 2;
-	
-	move_timer += 2;
-	if (move_timer >= 500)
+		move_timer += 2;
+	}
+	else if (move_timer >= 200)
 	{
 		move_right = !move_right;
 		move_left = !move_left;
-		move_timer = 2;
+		move_timer = 0;
 		opening = true;
 	}
 
