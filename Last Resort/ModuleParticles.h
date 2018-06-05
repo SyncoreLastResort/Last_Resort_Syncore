@@ -80,6 +80,9 @@ public:
 	//Particle bomb_upwards;
 	//Particle bomb_downwards;
 	//Particle bomb_explosion;
+	Particle laser3_shot;
+	Particle laser3_end;
+	Particle laser3_spawn;
 
 	Particle laser_cannon;
 	Particle blueball_trail;
@@ -103,6 +106,7 @@ public:
 
 	//Boss level 4
 	SDL_Texture* boss4_texture;
+	
 
 	Particle boss4_blue_circle;
 	Particle boss4_heat_ball;
