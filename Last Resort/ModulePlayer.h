@@ -6,6 +6,7 @@
 #include "p2Point.h"
 #include "ModuleParticles.h"
 
+
 struct SDL_Texture;
 struct Collider;
 
@@ -90,8 +91,9 @@ public:
 	Animation upwardstoidle;
 	Animation downwardstoidle;
 
-	//Position
-	
+	//Life
+
+	int life = 1;
 
 };
 

@@ -8,6 +8,7 @@
 #include "ModuleCollision.h"
 #include "ModuleFonts.h"
 #include "ModuleBall2.h"
+#include "ModuleUI.h"
 
 #include<stdio.h>
 
@@ -113,6 +114,13 @@ bool ModulePlayer2::CleanUp()
 // Update: draw background
 update_status ModulePlayer2::Update()
 {
+
+	//if (assigncoins == false)
+	//{
+	//	life = App->UI->coins;
+	//	assigncoins = true;
+	//}
+
 	if (weapon_level == 2)
 	{
 		App->ball_player2->Enable();
@@ -219,7 +227,7 @@ update_status ModulePlayer2::Update()
 
 	sprintf_s(score_text2, 10, "%7d", score2);
 
-	App->fonts->BlitText(50, 25, font_2, score_text2);
+	App->fonts->BlitText((SCREEN_WIDTH - 65), 24, font_2, score_text2);
 	
 
 	return UPDATE_CONTINUE;

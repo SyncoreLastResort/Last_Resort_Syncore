@@ -221,6 +221,18 @@ ModuleParticles::ModuleParticles()
 	boss4_heat_end.anim.loop = false;
 	boss4_heat_end.anim.speed = 0.2;
 
+	//Tracking Bee
+
+	BeeShot.anim.PushBack({ 261,270,5,5 });
+	BeeShot.anim.PushBack({ 266,270,5,5 });
+	BeeShot.anim.PushBack({ 271,270,5,5 });
+	BeeShot.anim.PushBack({ 276,270,5,5 });
+	BeeShot.anim.loop = true;
+	BeeShot.life = 3000;
+	BeeShot.anim.speed = 0.2f;
+	BeeShot.speed.x = 0;
+	BeeShot.speed.y = 0;
+
 }
 
 ModuleParticles::~ModuleParticles()
@@ -232,6 +244,9 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 
 	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
+	graphics2= App->textures->Load("assets/sprites/BossWeapons&parts_EnemyShip&structure_Multiple-effects-and-explosions.png");
+	
+	BeeShot.texture = graphics2;
 	//Player sprites && sounds
 	laser_cannon.texture = graphics;
 	Laserexplosion.texture = graphics;
@@ -303,6 +318,8 @@ bool ModuleParticles::CleanUp()
 	App->textures->Unload(ball_effects);
 	App->textures->Unload(graphics);
 	App->textures->Unload(boss4_texture);
+	App->textures->Unload(graphics2);
+
 	
 	return true;
 }

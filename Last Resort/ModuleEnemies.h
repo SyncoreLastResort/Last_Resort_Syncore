@@ -15,7 +15,9 @@ enum ENEMY_TYPES
 	RHINO,
 	POWER_UP,
 	POWER_UP_BOMB,
-	RedBird
+	RedBird,
+	TrackingBee,
+	Spider
 };
 
 class Enemy;
@@ -44,6 +46,8 @@ public:
 
 	SDL_Texture* sprites = nullptr;
 	SDL_Texture* someenemies = nullptr;
+	SDL_Texture* trackingbee = nullptr;
+	SDL_Texture* spider = nullptr;
 
 private:
 

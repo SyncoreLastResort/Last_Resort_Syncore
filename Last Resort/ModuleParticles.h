@@ -61,6 +61,7 @@ private:
 public:
 	SDL_Texture * graphics;
 	SDL_Texture * ball_effects;
+	SDL_Texture * graphics2;
 
 	//Particle laser_cannon;
 	//Particle ball_trail;
@@ -99,6 +100,7 @@ public:
 	Particle bomb_downwards;
 	Particle bomb_explosion;
 
+
 	//Boss level 4
 	SDL_Texture* boss4_texture;
 
@@ -108,6 +110,11 @@ public:
 	Particle boss4_heat_end;
 	
 
+
+
+	//Bee
+	Particle BeeShot;
+	/*Particle SpiderShot;*/
 
 
 };

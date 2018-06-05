@@ -116,9 +116,21 @@
     <ClInclude Include="EnemyRedBird.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="ModuleBoss4.h">
       <Filter>Modules</Filter>
     </ClInclude>
+=======
+    <ClInclude Include="EnemyTrackingBee.h">
+      <Filter>Modules\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleUI.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpider.h">
+      <Filter>Modules\Enemies</Filter>
+    </ClInclude>
+>>>>>>> 028fecaff5551aa8ca4c2e247ee55e7e24f2c5d8
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -208,8 +220,20 @@
     <ClCompile Include="EnemyRedBird.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="ModuleBoss4.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+=======
+    <ClCompile Include="EnemyTrackingBee.cpp">
+      <Filter>Modules\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleUI.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySpider.cpp">
+      <Filter>Modules\Enemies</Filter>
+    </ClCompile>
+>>>>>>> 028fecaff5551aa8ca4c2e247ee55e7e24f2c5d8
   </ItemGroup>
 </Project>

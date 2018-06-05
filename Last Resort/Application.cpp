@@ -19,6 +19,8 @@
 #include "ModuleBall.h"
 #include "ModuleBall2.h"
 #include "ModuleBoss4.h"
+#include "ModuleUI.h"
+
 
 Application::Application()
 {
@@ -42,6 +44,7 @@ Application::Application()
 	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = boss4 = new ModuleBoss4();
 	modules[i++] = scene_intro = new ModuleSceneIntro();
+	modules[i++] = UI = new ModuleUI();
 	modules[i++] = fade = new ModuleFadeToBlack();
 }	
 

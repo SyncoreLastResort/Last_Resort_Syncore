@@ -8,7 +8,7 @@
 
 #define MAX_KEYS 300
 #define MAX_BUTTONS 150
-#define DEATHZONE  6400
+#define DEATHZONE  15000
 #define MAX_GAME_CONTROLLERS 2
 
 enum KEY_STATE
@@ -46,6 +46,7 @@ public:
 
 	bool Player1_Gamepad_Connected = false;             //boolean that checks if the gamepad is connected.
 	bool Player1_Gamepad_A_pressed = false;             //boolean that checks if the A button is pressed.
+	bool Player1_Gamepad_X_pressed = false;             //boolean that checks if the A button is pressed.
 	bool Player1_Gamepad_RightShoulder_pressed = false; //boolean that checks if the RightShoulder button is pressed. 
 	bool Player1_Gamepad_Start_pressed = false;         //boolean that checks if the Start button is pressed.
 
@@ -61,6 +62,7 @@ public:
 
 	bool Player2_Gamepad_Connected = false;             //boolean that checks if the gamepad is connected.
 	bool Player2_Gamepad_A_pressed = false;             //boolean that checks if the A button is pressed.
+	bool Player2_Gamepad_X_pressed = false;             //boolean that checks if the A button is pressed.
 	bool Player2_Gamepad_RightShoulder_pressed = false; //boolean that checks if the RightShoulder button is pressed. 
 	bool Player2_Gamepad_Start_pressed = false;         //boolean that checks if the Start button is pressed.
 
