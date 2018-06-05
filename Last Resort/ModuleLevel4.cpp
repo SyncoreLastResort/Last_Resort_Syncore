@@ -232,7 +232,15 @@ bool ModuleLevel4::Start()
 
 		createcollidersonce = true;
 	}
-		
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP, 500, SCREEN_HEIGHT / 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP_BOMB, 500, SCREEN_HEIGHT -75);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP, 2500, SCREEN_HEIGHT / 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP_BOMB, 2500, SCREEN_HEIGHT -75);
+
+
 	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 300, SCREEN_HEIGHT-65);
 	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 350, SCREEN_HEIGHT - 65);
 	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 400, SCREEN_HEIGHT - 65);

@@ -25,6 +25,6 @@ Power_Up_Bomb::Power_Up_Bomb(int x, int y) : Enemy(x, y)
 void Power_Up_Bomb::Move()
 {
 
-	position.x -= 1;
+	/*position.x -= 1;*/
 }
 
