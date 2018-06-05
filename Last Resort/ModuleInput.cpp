@@ -106,7 +106,8 @@ update_status ModuleInput::PreUpdate()
 					//Assigning the boolean values to the booleans defined in input.h  
 
 					Player1_Gamepad_A_pressed = SDL_GameControllerGetButton(Player1_Gamepad, SDL_CONTROLLER_BUTTON_A);
-					/*Player1_Gamepad_RightShoulder_pressed = SDL_GameControllerGetButton(Player1_Gamepad, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER);*/
+					Player1_Gamepad_X_pressed = SDL_GameControllerGetButton(Player1_Gamepad, SDL_CONTROLLER_BUTTON_X);
+					Player1_Gamepad_RightShoulder_pressed = SDL_GameControllerGetButton(Player1_Gamepad, SDL_CONTROLLER_BUTTON_RIGHTSTICK);
 					Player1_Gamepad_Start_pressed = SDL_GameControllerGetButton(Player1_Gamepad, SDL_CONTROLLER_BUTTON_START);
 
 					Player1_Gamepad_Connected = true;
@@ -148,7 +149,8 @@ update_status ModuleInput::PreUpdate()
 					//Assigning the boolean values to the booleans defined in input.h 
 
 					Player2_Gamepad_A_pressed = SDL_GameControllerGetButton(Player2_Gamepad, SDL_CONTROLLER_BUTTON_A);
-					/*	Player2_Gamepad_RightShoulder_pressed = SDL_GameControllerGetButton(Player2_Gamepad, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER);*/
+					Player2_Gamepad_X_pressed = SDL_GameControllerGetButton(Player2_Gamepad, SDL_CONTROLLER_BUTTON_X);
+					Player2_Gamepad_RightShoulder_pressed = SDL_GameControllerGetButton(Player2_Gamepad, SDL_CONTROLLER_BUTTON_RIGHTSTICK);
 					Player2_Gamepad_Start_pressed = SDL_GameControllerGetButton(Player2_Gamepad, SDL_CONTROLLER_BUTTON_START);
 
 					Player2_Gamepad_Connected = true;
@@ -172,7 +174,7 @@ update_status ModuleInput::PreUpdate()
 
 	//Checking PLAYER1's Left Axis X & Y
 
-	if (Player1_Gamepad_LAxisX > 6400) 
+	if (Player1_Gamepad_LAxisX > DEATHZONE) 
 	{
 
 		App->input->keyboard[SDL_SCANCODE_D] = KEY_STATE::KEY_REPEAT;
@@ -215,19 +217,33 @@ update_status ModuleInput::PreUpdate()
 
 	}
 
-	/*if (Player1_Gamepad_RightShoulder_pressed == true && App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_IDLE)
+	if (Player1_Gamepad_X_pressed == true && App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_IDLE)
 	{
 
-		App->input->keyboard[SDL_SCANCODE_SPACE] = KEY_STATE::KEY_DOWN;
+		App->input->keyboard[SDL_SCANCODE_M] = KEY_STATE::KEY_DOWN;
+
+	}
+
+	else if (Player1_Gamepad_X_pressed == true)
+	{
+
+		App->input->keyboard[SDL_SCANCODE_M] = KEY_STATE::KEY_REPEAT;
+
+	}
+
+	if (Player1_Gamepad_RightShoulder_pressed == true && App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_IDLE)
+	{
+
+		App->input->keyboard[SDL_SCANCODE_C] = KEY_STATE::KEY_DOWN;
 
 	}
 
 	else if (Player1_Gamepad_RightShoulder_pressed == true)
 	{
 
-		App->input->keyboard[SDL_SCANCODE_SPACE] = KEY_STATE::KEY_REPEAT;
+		App->input->keyboard[SDL_SCANCODE_C] = KEY_STATE::KEY_REPEAT;
 
-	}*/
+	}
 
 
 
@@ -273,6 +289,35 @@ update_status ModuleInput::PreUpdate()
 	{
 
 		App->input->keyboard[SDL_SCANCODE_RCTRL] = KEY_STATE::KEY_REPEAT;
+
+	}
+
+
+	if (Player2_Gamepad_X_pressed == true && App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_IDLE)
+	{
+
+		App->input->keyboard[SDL_SCANCODE_RSHIFT] = KEY_STATE::KEY_DOWN;
+
+	}
+
+	else if (Player2_Gamepad_X_pressed == true)
+	{
+
+		App->input->keyboard[SDL_SCANCODE_RSHIFT] = KEY_STATE::KEY_REPEAT;
+
+	}
+
+	if (Player2_Gamepad_RightShoulder_pressed == true && App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_IDLE)
+	{
+
+		App->input->keyboard[SDL_SCANCODE_C] = KEY_STATE::KEY_DOWN;
+
+	}
+
+	else if (Player2_Gamepad_RightShoulder_pressed == true)
+	{
+
+		App->input->keyboard[SDL_SCANCODE_C] = KEY_STATE::KEY_REPEAT;
 
 	}
 
