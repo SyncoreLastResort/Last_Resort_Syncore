@@ -129,10 +129,6 @@ bool ModuleLevel4::Start()
 {
 	LOG("Loading level1 scene");
 
-	/*backgroundtilemap = App->textures->Load("assets/sprites/Stage4_tilemap.png");*/
-	/*background = App->textures->Load("assets/sprites/Background.png");
-	foreground = App->textures->Load("assets/sprites/Foreground.png");*/
-
 	backgroundtilemap = App->textures->Load("assets/sprites/Background.png");
 	foregroundtilemap1 = App->textures->Load("assets/sprites/foreground_1.png");
 	foregroundtilemap2 = App->textures->Load("assets/sprites/foreground_2.png");
@@ -342,18 +338,14 @@ update_status ModuleLevel4::Update()
 			App->player2->Enable();
 			App->player2->life -= 1;
 		}
-		if (App->UI->coins > 0)
+		/*if (App->UI->coins > 0)
 		{
 			App->player2->Enable();
 			App->UI->coins -= 1;
-		}
+		}*/
 	}
 
-	/*if (coinisminus == true)
-	{
-		App->UI->coins -= 1;
-		coinisminus = false;
-	}*/
+
 
 	return UPDATE_CONTINUE;
 }
