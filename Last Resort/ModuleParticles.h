@@ -100,6 +100,7 @@ public:
 
 	//Bee
 	Particle BeeShot;
+	Particle SpiderShot;
 
 };
 

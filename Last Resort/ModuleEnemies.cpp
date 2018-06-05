@@ -11,6 +11,7 @@
 #include "PowerUpBomb.h"
 #include "EnemyRedBird.h"
 #include "EnemyTrackingBee.h"
+#include "EnemySpider.h"
 
 
 
@@ -35,6 +36,7 @@ bool ModuleEnemies::Start()
 	sprites = App->textures->Load("assets/sprites/Common_enemyes_Sprite.png");
 	someenemies = App->textures->Load("assets/sprites/Enemys_Stage4_Sprites.png");
 	trackingbee = App->textures->Load("assets/sprites/TrackingBee.png");
+	spider = App->textures->Load("assets/sprites/spider.png");
 
 	return true;
 }
@@ -100,6 +102,7 @@ bool ModuleEnemies::CleanUp()
 	App->textures->Unload(sprites);
 	App->textures->Unload(someenemies);
 	App->textures->Unload(trackingbee);
+	App->textures->Unload(spider);
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
@@ -165,6 +168,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES::TrackingBee:
 			enemies[i] = new EnemyTrackingBee(info.x, info.y);
+			break;
+		case ENEMY_TYPES::Spider:
+			enemies[i] = new EnemySpider(info.x, info.y);
 			break;
 	
 		}
