@@ -10,6 +10,9 @@
 
 CannonPlatform::CannonPlatform(int x, int y) : Enemy(x, y)
 {
+	idle.PushBack({ 160, 150, 80, 50 });
+	idle.loop = true;
+
 	shooting.PushBack({160, 150, 80, 50});
 	shooting.PushBack({ 80, 150, 80, 50 });
 	shooting.PushBack({ 0, 150, 80, 50 });
@@ -33,15 +36,15 @@ CannonPlatform::CannonPlatform(int x, int y) : Enemy(x, y)
 	shooting.PushBack({ 0, 150, 80, 50 });
 	shooting.PushBack({ 80, 150, 80, 50 });
 	shooting.PushBack({ 160, 150, 80, 50 });
-
 	shooting.speed = 0.2f;
 	shooting.loop = false;
 
+	animation = &idle;
 	score = 500;
 	life = 10;
 	texturename = App->enemies->cannonplatform;
 	
-	collider = App->collision->AddCollider({ 0, 12, 80, 27 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 10, 80, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 
 }
