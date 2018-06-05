@@ -219,7 +219,13 @@ bool ModuleLevel4::Start()
 		colliderwallmovdown4 = App->collision->AddCollider({ wallmovdownposition.x + 1800, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
 		colliderpinchywall4 = App->collision->AddCollider({ pinchywallposition.x + 1800, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
 
-
+		colliderplatform1 = App->collision->AddCollider({ 875, SCREEN_HEIGHT/2 +10, 80, 30 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderplatform2 = App->collision->AddCollider({ 975, SCREEN_HEIGHT / 3 + 10, 80, 30 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderplatform3 = App->collision->AddCollider({ 1075, SCREEN_HEIGHT -100 + 10, 80, 30 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderplatform4 = App->collision->AddCollider({ 1175, SCREEN_HEIGHT / 4 + 10, 80, 30 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderplatform5 = App->collision->AddCollider({ 1420, SCREEN_HEIGHT / 2 + 10, 80, 30 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderplatform6 = App->collision->AddCollider({ 1500, SCREEN_HEIGHT / 4 + 10, 80, 30 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderplatform7 = App->collision->AddCollider({ 1580, SCREEN_HEIGHT / 3 + 10, 80, 30 }, COLLIDER_TYPE::COLLIDER_WALL);
 
 	/*	colliderwallmovdown = App->collision->AddCollider({ wallmovdownposition.x, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
 		colliderpinchywall = App->collision->AddCollider({ pinchywallposition.x, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
@@ -257,7 +263,6 @@ bool ModuleLevel4::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 900, SCREEN_HEIGHT / 6 - 5);
 	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 975, SCREEN_HEIGHT / 3);
 	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 1000, SCREEN_HEIGHT / 6 - 5);
-
 	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1075, SCREEN_HEIGHT - 100);
 	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 1100, SCREEN_HEIGHT - 65);
 	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1175, SCREEN_HEIGHT / 4);

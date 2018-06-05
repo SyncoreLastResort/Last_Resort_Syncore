@@ -43,9 +43,6 @@ CannonPlatform::CannonPlatform(int x, int y) : Enemy(x, y)
 	score = 500;
 	life = 10;
 	texturename = App->enemies->cannonplatform;
-	
-	collider = App->collision->AddCollider({ 0, 0, 80, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
-
 
 }
 
