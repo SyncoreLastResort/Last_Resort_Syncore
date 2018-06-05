@@ -53,12 +53,13 @@ public:
 
 	iPoint cannon_position;// position of the basic shot particles
 	iPoint laser_beam_position;// position of the laser beam particles
-
+	iPoint laser_position;
 	//god mode
 	bool godmode = false;
 	//FX
 	Mix_Chunk* deathsound;
 	Mix_Chunk* laser_sound;
+	Mix_Chunk* laser3_sound;
 	//Move speed
 	int speed = 2;
 	//Fonts

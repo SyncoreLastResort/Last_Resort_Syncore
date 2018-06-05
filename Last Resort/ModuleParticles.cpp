@@ -59,6 +59,8 @@ ModuleParticles::ModuleParticles()
 	bomb_explosion.anim.loop = false;
 	bomb_explosion.anim.speed = 0.5;
 
+	
+
 	//Laser beam
 	laser_beam.anim.PushBack({ 47, 245, 16,3 });
 	laser_beam.anim.loop = true;
@@ -233,6 +235,7 @@ ModuleParticles::ModuleParticles()
 	BeeShot.speed.x = 0;
 	BeeShot.speed.y = 0;
 
+<<<<<<< HEAD
 	Cannon_shot.anim.PushBack({ 0, 158, 15, 12 });
 	Cannon_shot.anim.PushBack({ 15, 158, 17, 12 });
 	Cannon_shot.anim.PushBack({ 32, 158, 12, 12 });
@@ -248,6 +251,30 @@ ModuleParticles::ModuleParticles()
 	Cannon_laser.anim.loop = false;
 	Cannon_laser.speed.x = 0;
 	Cannon_laser.life = 3000;
+=======
+	laser3_end.anim.PushBack({83,268,16,47});
+	laser3_end.anim.PushBack({ 103,268,16,47 });
+	laser3_end.anim.PushBack({ 123,268,16,47 });
+	laser3_end.anim.PushBack({ 70,317,16,47 });
+	laser3_end.anim.PushBack({91,317,16,47 });
+	laser3_end.anim.PushBack({ 109,317,16,47 });
+	laser3_end.anim.PushBack({ 127,317,16,47 });
+	laser3_end.anim.loop = false;
+	laser3_end.anim.speed = 0.5;
+
+	laser3_shot.anim.PushBack({380,322,16,47});
+	laser3_shot.life = 2000;
+	laser3_shot.end_particle = &laser3_end;
+	laser3_shot.speed.x = 5;
+
+	laser3_spawn.anim.PushBack({333,322,16,47});
+	laser3_spawn.anim.PushBack({ 348,322,16,47 });
+	laser3_spawn.anim.PushBack({ 364,322,16,47 });
+	laser3_spawn.anim.PushBack({ 380,322,16,47 });
+	laser3_spawn.anim.speed = 0.30;
+	laser3_spawn.anim.loop = false;
+
+>>>>>>> 3475292d956634865290fe9d1c493a3cabfff461
 }
 
 ModuleParticles::~ModuleParticles()
@@ -271,6 +298,7 @@ bool ModuleParticles::Start()
 	laser_beam.texture = graphics;
 	bomb_downwards.texture = graphics;
 	bomb_upwards.texture = graphics;
+	
 	/*laser.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	explosion.texture = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");*/
 	laser.texture = graphics;
@@ -314,6 +342,10 @@ bool ModuleParticles::Start()
 	boss4_small_shot.texture = boss4_texture;
 	boss4_heat_end.texture = boss4_texture;
 	
+	laser3_end.texture = graphics;
+	laser3_shot.texture = graphics;
+	laser3_spawn.texture = graphics;
+
 	return true;
 }
 

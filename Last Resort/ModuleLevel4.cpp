@@ -165,12 +165,30 @@ bool ModuleLevel4::Start()
 	App->enemies->Enable();
 	App->scores->Enable();
 
+	//Background colliders
 	
 
 	// Enemies ---
 	
 	if (createcollidersonce == false)
 	{
+		foregroundcoll = App->collision->AddCollider({ foregroundtilemaprect1.x, foregroundtilemaprect1.y, foregroundtilemaprect1.w - 1125,35 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll2 = App->collision->AddCollider({ foregroundtilemaprect1.x, SCREEN_HEIGHT - 35, foregroundtilemaprect1.w - 1125,35 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll3 = App->collision->AddCollider({ foregroundtilemaprect1.w-1125, SCREEN_HEIGHT - 18, 1000, 18 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll4 = App->collision->AddCollider({ foregroundtilemaprect1.w - 1125, 0, 1000, 18 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll5 = App->collision->AddCollider({ foregroundtilemaprect1.w - 990, 0, 60, 36 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll5 = App->collision->AddCollider({ foregroundtilemaprect1.w - 990, SCREEN_HEIGHT-36, 60, 36 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll6 = App->collision->AddCollider({ foregroundtilemaprect1.w-380, foregroundtilemaprect1.y, 380, 35 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll7 = App->collision->AddCollider({ foregroundtilemaprect1.w-380, SCREEN_HEIGHT - 35, 380, 35 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll8 = App->collision->AddCollider({ 4100, SCREEN_HEIGHT - 35, 1300, 32 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll9 = App->collision->AddCollider({ 4100, 0, 1300, 32 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll10 = App->collision->AddCollider({ 5045, 0, 50, 95 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll11 = App->collision->AddCollider({ 5045, SCREEN_HEIGHT-98, 50, 100 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll12 = App->collision->AddCollider({ 5045, SCREEN_HEIGHT - 98, 65, 32 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll13 = App->collision->AddCollider({ 5045, 60, 65, 32 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll14 = App->collision->AddCollider({ 5330, 0, 55, SCREEN_HEIGHT }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll15 = App->collision->AddCollider({ foregroundtilemaprect1.w-685, 90, 230, 40 }, COLLIDER_TYPE::COLLIDER_WALL);
+
 		colliderwallmovdown = App->collision->AddCollider({ wallmovdownposition.x, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
 		colliderpinchywall = App->collision->AddCollider({ pinchywallposition.x, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
 		createcollidersonce = true;
@@ -192,7 +210,6 @@ bool ModuleLevel4::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 875, SCREEN_HEIGHT /2);
 	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 975, SCREEN_HEIGHT / 3);
 	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1075, SCREEN_HEIGHT / 4);
-
 
 
 
@@ -238,6 +255,13 @@ bool ModuleLevel4::CleanUp()
 // Update: draw background
 update_status ModuleLevel4::Update()
 {
+	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_DOWN)
+	{
+		App->render->camera.x += 100;
+		App->player->position.x += 100;
+		
+	}
+	
 	//Player respawning
 	if (App->player2->IsEnabled() == false && App->player2->life != 0)
 	{

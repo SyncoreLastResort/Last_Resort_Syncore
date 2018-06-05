@@ -78,6 +78,24 @@ public:
 	bool coinisminus = false;
 
 	bool createcollidersonce = false;
+
+	//Background colliders
+
+	Collider* foregroundcoll = nullptr;
+	Collider* foregroundcoll2 = nullptr;
+	Collider* foregroundcoll3 = nullptr;
+	Collider* foregroundcoll4 = nullptr;
+	Collider* foregroundcoll5 = nullptr;
+	Collider* foregroundcoll6 = nullptr;
+	Collider* foregroundcoll7 = nullptr;
+	Collider* foregroundcoll8 = nullptr;
+	Collider* foregroundcoll9 = nullptr;
+	Collider* foregroundcoll10 = nullptr;
+	Collider* foregroundcoll11 = nullptr;
+	Collider* foregroundcoll12 = nullptr;
+	Collider* foregroundcoll13 = nullptr;
+	Collider* foregroundcoll14 = nullptr;
+	Collider* foregroundcoll15 = nullptr;
 };
 
 #endif // __MODULELEVEL4_H__

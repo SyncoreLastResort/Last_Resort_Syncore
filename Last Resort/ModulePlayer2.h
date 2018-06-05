@@ -54,9 +54,11 @@ public:
 
 	iPoint cannon_position;// position of the basic shot particles
 	iPoint laser_beam_position;// position of the laser beam particles
+	iPoint laser_position;
 
 	Mix_Chunk* deathsound;
 	Mix_Chunk* laser_sound;
+	Mix_Chunk* laser3_sound;
 	Mix_Chunk* powerup_sound;
 
 	//Texture
