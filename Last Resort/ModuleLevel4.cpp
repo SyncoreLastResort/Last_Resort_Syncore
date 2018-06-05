@@ -158,7 +158,7 @@ bool ModuleLevel4::Start()
 	App->enemies->Enable();
 	App->scores->Enable();
 
-	App->boss4->Enable();
+	
 
 	// Enemies ---
 	
