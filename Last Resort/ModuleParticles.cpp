@@ -235,7 +235,6 @@ ModuleParticles::ModuleParticles()
 	BeeShot.speed.x = 0;
 	BeeShot.speed.y = 0;
 
-<<<<<<< HEAD
 	Cannon_shot.anim.PushBack({ 0, 158, 15, 12 });
 	Cannon_shot.anim.PushBack({ 15, 158, 17, 12 });
 	Cannon_shot.anim.PushBack({ 32, 158, 12, 12 });
@@ -251,7 +250,7 @@ ModuleParticles::ModuleParticles()
 	Cannon_laser.anim.loop = false;
 	Cannon_laser.speed.x = 0;
 	Cannon_laser.life = 3000;
-=======
+
 	laser3_end.anim.PushBack({83,268,16,47});
 	laser3_end.anim.PushBack({ 103,268,16,47 });
 	laser3_end.anim.PushBack({ 123,268,16,47 });
@@ -274,7 +273,6 @@ ModuleParticles::ModuleParticles()
 	laser3_spawn.anim.speed = 0.30;
 	laser3_spawn.anim.loop = false;
 
->>>>>>> 3475292d956634865290fe9d1c493a3cabfff461
 }
 
 ModuleParticles::~ModuleParticles()
