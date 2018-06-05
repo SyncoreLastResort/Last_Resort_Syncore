@@ -46,6 +46,13 @@ public:
 	Collider* colliderwallmovdown2 = nullptr;
 	Collider* colliderwallmovdown3 = nullptr;
 	Collider* colliderwallmovdown4 = nullptr;
+	Collider* colliderplatform1 = nullptr;
+	Collider* colliderplatform2 = nullptr;
+	Collider* colliderplatform3 = nullptr;
+	Collider* colliderplatform4 = nullptr;
+	Collider* colliderplatform5 = nullptr;
+	Collider* colliderplatform6 = nullptr;
+	Collider* colliderplatform7 = nullptr;
 	bool maxreached = false;
 	iPoint wallmovdownposition;
 	iPoint wallmovdownposition2;

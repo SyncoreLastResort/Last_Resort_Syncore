@@ -143,7 +143,7 @@ ModuleLevel4::ModuleLevel4()
 	pinchywalanim.PushBack({ 32, 0, 32, 177 });
 	pinchywalanim.PushBack({ 64, 0, 32, 177 });
 	pinchywalanim.PushBack({ 96, 0, 30, 177 });
-	pinchywalanim.speed = 0.15f;
+	pinchywalanim.speed = 0.075f;
 	pinchywalanim.loop = true;
 
 }
@@ -219,7 +219,13 @@ bool ModuleLevel4::Start()
 		colliderwallmovdown4 = App->collision->AddCollider({ wallmovdownposition.x + 1800, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
 		colliderpinchywall4 = App->collision->AddCollider({ pinchywallposition.x + 1800, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
 
-
+		colliderplatform1 = App->collision->AddCollider({ 875, SCREEN_HEIGHT/2 +10, 80, 30 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderplatform2 = App->collision->AddCollider({ 975, SCREEN_HEIGHT / 3 + 10, 80, 30 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderplatform3 = App->collision->AddCollider({ 1075, SCREEN_HEIGHT -100 + 10, 80, 30 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderplatform4 = App->collision->AddCollider({ 1175, SCREEN_HEIGHT / 4 + 10, 80, 30 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderplatform5 = App->collision->AddCollider({ 1420, SCREEN_HEIGHT / 2 + 10, 80, 30 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderplatform6 = App->collision->AddCollider({ 1500, SCREEN_HEIGHT / 4 + 10, 80, 30 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderplatform7 = App->collision->AddCollider({ 1580, SCREEN_HEIGHT / 3 + 20, 80, 30 }, COLLIDER_TYPE::COLLIDER_WALL);
 
 	/*	colliderwallmovdown = App->collision->AddCollider({ wallmovdownposition.x, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
 		colliderpinchywall = App->collision->AddCollider({ pinchywallposition.x, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
@@ -232,33 +238,119 @@ bool ModuleLevel4::Start()
 
 		createcollidersonce = true;
 	}
-		
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP, 500, SCREEN_HEIGHT / 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP_BOMB, 500, SCREEN_HEIGHT -75);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP, 2500, SCREEN_HEIGHT / 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWER_UP_BOMB, 2500, SCREEN_HEIGHT -75);
+
 
 	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 300, SCREEN_HEIGHT-65);
-	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 350, SCREEN_HEIGHT - 65);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 350, SCREEN_HEIGHT - 65);*/
 	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 400, SCREEN_HEIGHT - 65);
 	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 450, SCREEN_HEIGHT / 6 - 5);
-	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 500, SCREEN_HEIGHT - 65);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::Spider, 500, SCREEN_HEIGHT - 65);*/
 	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 550, SCREEN_HEIGHT / 6 - 5);
-	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 560, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 560, SCREEN_HEIGHT - 50);
 	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 600, SCREEN_HEIGHT - 65);
 	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 675, SCREEN_HEIGHT - 65);
 	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 700, SCREEN_HEIGHT - 65);
 	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 775, SCREEN_HEIGHT / 6 - 5);
-	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 850, SCREEN_HEIGHT - 65);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::Spider, 850, SCREEN_HEIGHT - 65);*/
 	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 875, SCREEN_HEIGHT /2);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::Spider, 900, SCREEN_HEIGHT / 6 - 5);*/
 	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 975, SCREEN_HEIGHT / 3);
-	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1075, SCREEN_HEIGHT / 4);
-
-
-
-	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 500, SCREEN_HEIGHT / 2);
-	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 550, SCREEN_HEIGHT / 2);
-	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 600, SCREEN_HEIGHT / 2);
-	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 650, SCREEN_HEIGHT / 2);
-	//App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 800, SCREEN_HEIGHT / 2);
-
-
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 1000, SCREEN_HEIGHT / 6 - 5);
+	//App->enemies->AddEnemy(ENEMY_TYPES::Spider, 1000, SCREEN_HEIGHT / 6 - 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1075, SCREEN_HEIGHT - 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 1100, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1175, SCREEN_HEIGHT / 4);
+	//App->enemies->AddEnemy(ENEMY_TYPES::Spider, 1200, SCREEN_HEIGHT - 65);
+	//App->enemies->AddEnemy(ENEMY_TYPES::Spider, 1225, SCREEN_HEIGHT - 65);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::Spider, 1300, SCREEN_HEIGHT / 6 - 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 1330, SCREEN_HEIGHT / 6 - 5);*/
+	/*App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1350, SCREEN_HEIGHT / 3);*/
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 1400, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1420, SCREEN_HEIGHT / 2);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::Spider, 1450, SCREEN_HEIGHT / 6 - 5);*/
+	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1500, SCREEN_HEIGHT / 4);
+	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1580, SCREEN_HEIGHT / 3 +10);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 1600, SCREEN_HEIGHT - 65);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::Spider, 1650, SCREEN_HEIGHT / 6 - 5);*/
+	//App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 1700, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 1900, SCREEN_HEIGHT / 2 +50);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 1930, SCREEN_HEIGHT / 2 +50);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 1960, SCREEN_HEIGHT / 2 +50);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 1990, SCREEN_HEIGHT / 2 +50);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2020, SCREEN_HEIGHT / 2 +50);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2050, SCREEN_HEIGHT / 2 +50);*/
+	//App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 1950, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 1980, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2010, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2040, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2070, SCREEN_HEIGHT / 5);
+	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2100, SCREEN_HEIGHT / 5);
+	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2130, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 2350, SCREEN_HEIGHT - 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 2420, SCREEN_HEIGHT /2 + 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 2490, SCREEN_HEIGHT - 50);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 2530, SCREEN_HEIGHT - 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 2560, SCREEN_HEIGHT - 50);*/
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2600, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2630, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2660, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2690, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 2700, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 2800, SCREEN_HEIGHT / 6 - 10);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 2800, SCREEN_HEIGHT - 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2850, SCREEN_HEIGHT / 2 + 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2880, SCREEN_HEIGHT / 2 + 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2910, SCREEN_HEIGHT / 2 + 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 2940, SCREEN_HEIGHT / 2 + 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3100, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3150, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3200, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3250, SCREEN_HEIGHT / 2);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3300, SCREEN_HEIGHT -20);
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3350, SCREEN_HEIGHT -20);*/
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3400, SCREEN_HEIGHT -20);
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3450, SCREEN_HEIGHT -20);
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3500, SCREEN_HEIGHT -20);
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3550, SCREEN_HEIGHT / 2);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3600, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3650, SCREEN_HEIGHT / 2);*/
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3700, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3750, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3800, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3850, SCREEN_HEIGHT / 5);
+	//App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3900, SCREEN_HEIGHT / 5);
+	//App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 3950, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 4050, SCREEN_HEIGHT / 2 + 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 4080, SCREEN_HEIGHT / 2 + 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 4110, SCREEN_HEIGHT / 2 + 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 4140, SCREEN_HEIGHT / 2 + 50);
+	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 4170, SCREEN_HEIGHT / 2 + 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 4150, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 4180, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 4210, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 4240, SCREEN_HEIGHT / 5);
+	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 4270, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 4350, SCREEN_HEIGHT / 6 - 10);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 4350, SCREEN_HEIGHT - 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 4400, SCREEN_HEIGHT / 6 - 10);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 4400, SCREEN_HEIGHT - 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 4500, SCREEN_HEIGHT / 4);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 4550, SCREEN_HEIGHT / 3);*/
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 4600, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 4650, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 4700, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 4750, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 4800, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::RHINO, 4850, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 4900, SCREEN_HEIGHT / 6 - 10);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 4900, SCREEN_HEIGHT - 60);
 
 	return true;
 }
@@ -427,7 +519,7 @@ update_status ModuleLevel4::Update()
 		wallmovdownposition3.y -= 1;
 
 
-		if (wallmovdownposition3.y == -150)
+		if (wallmovdownposition3.y == -100)
 			maxreached = false;
 	}
 
@@ -448,7 +540,7 @@ update_status ModuleLevel4::Update()
 		wallmovdownposition4.y -= 1;
 
 
-		if (wallmovdownposition4.y == -150)
+		if (wallmovdownposition4.y == -100)
 			maxreached = false;
 	}
 
@@ -500,12 +592,12 @@ update_status ModuleLevel4::Update()
 
 	/////////////////////////////////////////
 
-	if (maxreachedpinchy == false && pinchywallposition3.y + 100 >= SCREEN_HEIGHT)
+	if (maxreachedpinchy == false && pinchywallposition3.y + 150 >= SCREEN_HEIGHT)
 	{
 		pinchywallposition3.y -= 1;
 
 
-		if (pinchywallposition3.y + 100 == SCREEN_HEIGHT)
+		if (pinchywallposition3.y + 150 == SCREEN_HEIGHT)
 			maxreachedpinchy = true;
 	}
 	if (maxreachedpinchy == true && pinchywallposition3.y <= SCREEN_HEIGHT)
@@ -519,12 +611,12 @@ update_status ModuleLevel4::Update()
 
 	/////////////////////////////////////////
 
-	if (maxreachedpinchy == false && pinchywallposition4.y + 100 >= SCREEN_HEIGHT)
+	if (maxreachedpinchy == false && pinchywallposition4.y + 150 >= SCREEN_HEIGHT)
 	{
 		pinchywallposition4.y -= 1;
 
 
-		if (pinchywallposition4.y + 100 == SCREEN_HEIGHT)
+		if (pinchywallposition4.y + 150 == SCREEN_HEIGHT)
 			maxreachedpinchy = true;
 	}
 	if (maxreachedpinchy == true && pinchywallposition4.y <= SCREEN_HEIGHT)
