@@ -8,9 +8,10 @@ class CannonPlatform : public Enemy
 
 public:
 	int counter = 0;
-	bool shot = false;
 	Animation shooting;
 	Animation idle;
+
+	iPoint PlayerPosition;
 
 	CannonPlatform(int x, int y);
 	void Move();

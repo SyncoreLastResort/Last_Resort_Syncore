@@ -233,6 +233,21 @@ ModuleParticles::ModuleParticles()
 	BeeShot.speed.x = 0;
 	BeeShot.speed.y = 0;
 
+	Cannon_shot.anim.PushBack({ 0, 158, 15, 12 });
+	Cannon_shot.anim.PushBack({ 15, 158, 17, 12 });
+	Cannon_shot.anim.PushBack({ 32, 158, 12, 12 });
+	Cannon_shot.anim.PushBack({ 44, 158, 13, 12 });
+	Cannon_shot.anim.PushBack({ 58, 158, 14, 12 });
+	Cannon_shot.anim.PushBack({ 72, 158, 12, 12 });
+	Cannon_shot.anim.PushBack({ 84, 158, 11, 12 });
+	Cannon_shot.anim.loop = false;
+	Cannon_shot.life = 500;
+	Cannon_shot.anim.speed = 0.2f;
+
+	Cannon_laser.anim.PushBack({ 95, 160, 49, 8 });
+	Cannon_laser.anim.loop = false;
+	Cannon_laser.speed.x = 0;
+	Cannon_laser.life = 3000;
 }
 
 ModuleParticles::~ModuleParticles()
@@ -245,8 +260,11 @@ bool ModuleParticles::Start()
 
 	graphics = App->textures->Load("assets/sprites/Ship&Ball_Sprite.png");
 	graphics2= App->textures->Load("assets/sprites/BossWeapons&parts_EnemyShip&structure_Multiple-effects-and-explosions.png");
+	graphics3 = App->textures->Load("assets/sprites/Enemys_Stage4_Sprites.png");
 	
 	BeeShot.texture = graphics2;
+	Cannon_shot.texture = graphics3;
+	Cannon_laser.texture = graphics3;
 	//Player sprites && sounds
 	laser_cannon.texture = graphics;
 	Laserexplosion.texture = graphics;
@@ -319,7 +337,7 @@ bool ModuleParticles::CleanUp()
 	App->textures->Unload(graphics);
 	App->textures->Unload(boss4_texture);
 	App->textures->Unload(graphics2);
-
+	App->textures->Unload(graphics3);
 	
 	return true;
 }
