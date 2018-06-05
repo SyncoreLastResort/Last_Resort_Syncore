@@ -34,6 +34,8 @@
 
 >>Oriol Sabaté as QA   [Github account](https://github.com/urisabate)
 
+Final Release : [Release](https://github.com/SyncoreLastResort/Last_Resort_Syncore/releases/tag/1.0)
+
 
 
 
