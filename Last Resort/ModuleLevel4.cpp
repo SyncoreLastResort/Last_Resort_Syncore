@@ -172,13 +172,24 @@ bool ModuleLevel4::Start()
 		
 
 	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 300, SCREEN_HEIGHT-65);
+	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 350, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 400, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 450, SCREEN_HEIGHT / 6 - 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 500, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 550, SCREEN_HEIGHT / 6 - 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 560, SCREEN_HEIGHT / 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 600, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 650, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 650, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 750, SCREEN_HEIGHT / 6 - 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 800, SCREEN_HEIGHT - 65);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 500, SCREEN_HEIGHT / 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 550, SCREEN_HEIGHT / 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 600, SCREEN_HEIGHT / 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 650, SCREEN_HEIGHT / 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 750, SCREEN_HEIGHT / 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 500, SCREEN_HEIGHT / 6 -5);
-	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 700, SCREEN_HEIGHT -65);
+
 
 
 	return true;
