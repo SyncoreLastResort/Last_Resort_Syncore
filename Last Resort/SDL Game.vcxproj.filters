@@ -130,7 +130,13 @@
     <ClInclude Include="EnemySpider.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="CannonPlatform.h">
+      <Filter>Modules\Enemies</Filter>
+    </ClInclude>
+=======
 >>>>>>> 028fecaff5551aa8ca4c2e247ee55e7e24f2c5d8
+>>>>>>> bafdbee10addf54b58fb7fb8d7331450b7a6703f
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -234,6 +240,12 @@
     <ClCompile Include="EnemySpider.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="CannonPlatform.cpp">
+      <Filter>Modules\Enemies</Filter>
+    </ClCompile>
+=======
 >>>>>>> 028fecaff5551aa8ca4c2e247ee55e7e24f2c5d8
+>>>>>>> bafdbee10addf54b58fb7fb8d7331450b7a6703f
   </ItemGroup>
 </Project>

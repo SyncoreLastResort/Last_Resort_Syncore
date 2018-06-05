@@ -56,17 +56,6 @@ ModuleLevel4::ModuleLevel4()
 	foregroundtilemaprect2.w = 1271;
 	foregroundtilemaprect2.h = SCREEN_HEIGHT;
 
-	//cannon platform
-	cannon_platform.x = 161;
-	cannon_platform.y = 130;
-	cannon_platform.w = 79;
-	cannon_platform.h = 26;
-
-	cannon_platform_end.x = 0;
-	cannon_platform_end.y = 0;
-	cannon_platform_end.w = 79;
-	cannon_platform_end.h = 49;
-
 	//up & down platforms and animations
 	foreground_platforms.x = 46;
 	foreground_platforms.y = 67;
@@ -154,7 +143,6 @@ bool ModuleLevel4::Start()
 	foregroundtilemap2 = App->textures->Load("assets/sprites/foreground_2.png");
 	foreground_platform = App->textures->Load("assets/sprites/foreground_3.png");
 	BackLavaAnim = App->textures->Load("assets/sprites/Back_Lava_Anim.png");
-	Enemies_1 = App->textures->Load("assets/sprites/Enemys_Stage4_Sprites.png");
 
 	wall = App->textures->Load("assets/sprites/movingwall.png");
 	pinchywall = App->textures->Load("assets/sprites/lastrespinchywall.png");
@@ -197,16 +185,22 @@ bool ModuleLevel4::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 550, SCREEN_HEIGHT / 6 - 5);
 	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 560, SCREEN_HEIGHT / 5);
 	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 600, SCREEN_HEIGHT - 65);
-	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 650, SCREEN_HEIGHT - 65);
-	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 650, SCREEN_HEIGHT - 65);
-	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 750, SCREEN_HEIGHT / 6 - 5);
-	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 800, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 675, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 700, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 775, SCREEN_HEIGHT / 6 - 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 850, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 900, SCREEN_HEIGHT /2);
+	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1000, SCREEN_HEIGHT / 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1100, SCREEN_HEIGHT / 4);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 500, SCREEN_HEIGHT / 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 550, SCREEN_HEIGHT / 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 600, SCREEN_HEIGHT / 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 650, SCREEN_HEIGHT / 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 750, SCREEN_HEIGHT / 2);
+
+
+
+	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 500, SCREEN_HEIGHT / 2);
+	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 550, SCREEN_HEIGHT / 2);
+	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 600, SCREEN_HEIGHT / 2);
+	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 650, SCREEN_HEIGHT / 2);
+	//App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 800, SCREEN_HEIGHT / 2);
 
 
 
@@ -222,7 +216,6 @@ bool ModuleLevel4::CleanUp()
 	App->textures->Unload(foregroundtilemap1);
 	App->textures->Unload(foregroundtilemap2);
 	App->textures->Unload(BackLavaAnim);
-	App->textures->Unload(Enemies_1);
 	App->textures->Unload(wall);
 	App->textures->Unload(pinchywall);
 	
@@ -352,21 +345,22 @@ update_status ModuleLevel4::Update()
 	App->render->Blit(pinchywall, pinchywallposition.x, pinchywallposition.y, &pinchywalanim.GetCurrentFrame());
 	App->render->Blit(foregroundtilemap1, 0, 0, &foregroundtilemaprect1, 1); //foregorund
 	App->render->Blit(foregroundtilemap2, 4100, 0, &foregroundtilemaprect2, 1); //foregorund
-
 	App->render->Blit(Enemies_1, 400, 100, &op_cannon.GetCurrentFrame(), 1);
 
 //----------------------platforms--------------------------
 
-	App->render->Blit(foreground_platform, 2760, -120 , &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, -80 , &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, -40 , &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, 20 , &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, 60 , &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, 140 , &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, 180 , &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, 100 , &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, 220 , &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, 260 , &foreground_platforms, 1);
+
+	App->render->Blit(foreground_platform, 2760, -120, &foreground_platforms, 1);
+App->render->Blit(foreground_platform, 2760, -80, &foreground_platforms, 1);
+App->render->Blit(foreground_platform, 2760, -40, &foreground_platforms, 1);
+App->render->Blit(foreground_platform, 2760, 20, &foreground_platforms, 1);
+App->render->Blit(foreground_platform, 2760, 60, &foreground_platforms, 1);
+App->render->Blit(foreground_platform, 2760, 140, &foreground_platforms, 1);
+App->render->Blit(foreground_platform, 2760, 180, &foreground_platforms, 1);
+App->render->Blit(foreground_platform, 2760, 100, &foreground_platforms, 1);
+App->render->Blit(foreground_platform, 2760, 220, &foreground_platforms, 1);
+App->render->Blit(foreground_platform, 2760, 260, &foreground_platforms, 1);
+
 	
 
 //	App->render->Blit(foreground_platform, 2760, 100, &platform_up.GetCurrentFrame(), 1);

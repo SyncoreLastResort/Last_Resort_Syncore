@@ -41,10 +41,10 @@ EnemySpider::EnemySpider(int x, int y) : Enemy(x, y)
 	right_top.speed = 0.1f;
 
 	score = 200;
-	life = 3;
+	life = 1;
 	texturename = App->enemies->spider;
 	original_y = y;
-	collider = App->collision->AddCollider({ 0, 0, 48, 45 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 32, 31 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	if (original_y > SCREEN_HEIGHT / 2) {
 		animation = &left_bottom;
@@ -89,13 +89,9 @@ void EnemySpider::Move()
 			App->particles->BeeShot.speed.x++;
 			App->particles->BeeShot.speed.y = 3 * (sin(angle2*PI / 180));
 			App->particles->AddParticle(App->particles->BeeShot, position.x + 20, position.y, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT);
-			App->particles->BeeShot.speed.x = 4 * (cos(angle2*PI / 180));
-			App->particles->BeeShot.speed.x++;
-			App->particles->BeeShot.speed.y = 4 * (sin(angle2*PI / 180));
-			App->particles->AddParticle(App->particles->BeeShot, position.x + 20, position.y, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT);
 		}
 		else
-			position.x -= 2;
+			position.x -= 1;
 	}
 	else
 	{
@@ -113,14 +109,10 @@ void EnemySpider::Move()
 			App->particles->BeeShot.speed.x++;
 			App->particles->BeeShot.speed.y = 3 * (sin(angle2*PI / 180));
 			App->particles->AddParticle(App->particles->BeeShot, position.x + 20, position.y, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT);
-			App->particles->BeeShot.speed.x = 4 * (cos(angle2*PI / 180));
-			App->particles->BeeShot.speed.x++;
-			App->particles->BeeShot.speed.y = 4 * (sin(angle2*PI / 180));
-			App->particles->AddParticle(App->particles->BeeShot, position.x + 20, position.y, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT);
 
 		}
 		else
-			position.x += 2;
+			position.x += 1;
 	}
 
 }
