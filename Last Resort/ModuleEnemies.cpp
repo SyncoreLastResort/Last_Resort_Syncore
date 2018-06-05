@@ -12,6 +12,7 @@
 #include "EnemyRedBird.h"
 #include "EnemyTrackingBee.h"
 #include "EnemySpider.h"
+#include "CannonPlatform.h"
 
 
 
@@ -37,6 +38,7 @@ bool ModuleEnemies::Start()
 	someenemies = App->textures->Load("assets/sprites/Enemys_Stage4_Sprites.png");
 	trackingbee = App->textures->Load("assets/sprites/TrackingBee.png");
 	spider = App->textures->Load("assets/sprites/spider.png");
+	cannonplatform = App->textures->Load("assets/sprites/cannon_platform.png");
 
 	return true;
 }
@@ -103,6 +105,7 @@ bool ModuleEnemies::CleanUp()
 	App->textures->Unload(someenemies);
 	App->textures->Unload(trackingbee);
 	App->textures->Unload(spider);
+	App->textures->Unload(cannonplatform);
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
@@ -172,6 +175,10 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		case ENEMY_TYPES::Spider:
 			enemies[i] = new EnemySpider(info.x, info.y);
 			break;
+		case ENEMY_TYPES::CannonPlatf:
+			enemies[i] = new CannonPlatform(info.x, info.y);
+			break;
+
 	
 		}
 		

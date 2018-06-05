@@ -41,10 +41,10 @@ EnemySpider::EnemySpider(int x, int y) : Enemy(x, y)
 	right_top.speed = 0.1f;
 
 	score = 200;
-	life = 3;
+	life = 1;
 	texturename = App->enemies->spider;
 	original_y = y;
-	collider = App->collision->AddCollider({ 0, 0, 48, 45 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 32, 31 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	if (original_y > SCREEN_HEIGHT / 2) {
 		animation = &left_bottom;

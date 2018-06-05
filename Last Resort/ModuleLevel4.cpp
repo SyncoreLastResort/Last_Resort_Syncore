@@ -54,17 +54,6 @@ ModuleLevel4::ModuleLevel4()
 	foregroundtilemaprect2.w = 1271;
 	foregroundtilemaprect2.h = SCREEN_HEIGHT;  
 
-	//cannon platform
-	cannon_platform.x = 161;
-	cannon_platform.y = 130;
-	cannon_platform.w = 79;
-	cannon_platform.h = 26;
-
-	cannon_platform_end.x = 0;
-	cannon_platform_end.y = 0;
-	cannon_platform_end.w = 79;
-	cannon_platform_end.h = 49;
-
 	//Background lava animations
 	Back_Lava.PushBack({ 0,0,1216,219 });
 	Back_Lava.PushBack({ 0,224,1216,219 });
@@ -133,7 +122,6 @@ bool ModuleLevel4::Start()
 	foregroundtilemap1 = App->textures->Load("assets/sprites/foreground_1.png");
 	foregroundtilemap2 = App->textures->Load("assets/sprites/foreground_2.png");
 	BackLavaAnim = App->textures->Load("assets/sprites/Back_Lava_Anim.png");
-	Enemies_1 = App->textures->Load("assets/sprites/Enemys_Stage4_Sprites.png");
 
 	wall = App->textures->Load("assets/sprites/movingwall.png");
 	pinchywall = App->textures->Load("assets/sprites/lastrespinchywall.png");
@@ -175,16 +163,22 @@ bool ModuleLevel4::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 550, SCREEN_HEIGHT / 6 - 5);
 	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 560, SCREEN_HEIGHT / 5);
 	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 600, SCREEN_HEIGHT - 65);
-	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 650, SCREEN_HEIGHT - 65);
-	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 650, SCREEN_HEIGHT - 65);
-	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 750, SCREEN_HEIGHT / 6 - 5);
-	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 800, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 675, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::Power_Up_Holder, 700, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 775, SCREEN_HEIGHT / 6 - 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::Spider, 850, SCREEN_HEIGHT - 65);
+	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 900, SCREEN_HEIGHT /2);
+	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1000, SCREEN_HEIGHT / 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::CannonPlatf, 1100, SCREEN_HEIGHT / 4);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 500, SCREEN_HEIGHT / 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 550, SCREEN_HEIGHT / 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 600, SCREEN_HEIGHT / 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 650, SCREEN_HEIGHT / 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 750, SCREEN_HEIGHT / 2);
+
+
+
+	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 500, SCREEN_HEIGHT / 2);
+	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 550, SCREEN_HEIGHT / 2);
+	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 600, SCREEN_HEIGHT / 2);
+	//App->enemies->AddEnemy(ENEMY_TYPES::RedBird, 650, SCREEN_HEIGHT / 2);
+	//App->enemies->AddEnemy(ENEMY_TYPES::TrackingBee, 800, SCREEN_HEIGHT / 2);
 
 
 
@@ -200,7 +194,6 @@ bool ModuleLevel4::CleanUp()
 	App->textures->Unload(foregroundtilemap1);
 	App->textures->Unload(foregroundtilemap2);
 	App->textures->Unload(BackLavaAnim);
-	App->textures->Unload(Enemies_1);
 	App->textures->Unload(wall);
 	App->textures->Unload(pinchywall);
 	
@@ -328,8 +321,6 @@ update_status ModuleLevel4::Update()
 	App->render->Blit(pinchywall, pinchywallposition.x, pinchywallposition.y, &pinchywalanim.GetCurrentFrame());
 	App->render->Blit(foregroundtilemap1, 0, 0, &foregroundtilemaprect1, 1); //foregorund
 	App->render->Blit(foregroundtilemap2, 4100, 0, &foregroundtilemaprect2, 1); //foregorund
-
-	App->render->Blit(Enemies_1, 400, 100, &op_cannon.GetCurrentFrame(), 1);
 
 	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
 	{
