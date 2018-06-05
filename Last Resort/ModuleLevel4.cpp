@@ -143,7 +143,7 @@ ModuleLevel4::ModuleLevel4()
 	pinchywalanim.PushBack({ 32, 0, 32, 177 });
 	pinchywalanim.PushBack({ 64, 0, 32, 177 });
 	pinchywalanim.PushBack({ 96, 0, 30, 177 });
-	pinchywalanim.speed = 0.15f;
+	pinchywalanim.speed = 0.075f;
 	pinchywalanim.loop = true;
 
 }
@@ -427,7 +427,7 @@ update_status ModuleLevel4::Update()
 		wallmovdownposition3.y -= 1;
 
 
-		if (wallmovdownposition3.y == -150)
+		if (wallmovdownposition3.y == -100)
 			maxreached = false;
 	}
 
@@ -448,7 +448,7 @@ update_status ModuleLevel4::Update()
 		wallmovdownposition4.y -= 1;
 
 
-		if (wallmovdownposition4.y == -150)
+		if (wallmovdownposition4.y == -100)
 			maxreached = false;
 	}
 
@@ -500,12 +500,12 @@ update_status ModuleLevel4::Update()
 
 	/////////////////////////////////////////
 
-	if (maxreachedpinchy == false && pinchywallposition3.y + 100 >= SCREEN_HEIGHT)
+	if (maxreachedpinchy == false && pinchywallposition3.y + 150 >= SCREEN_HEIGHT)
 	{
 		pinchywallposition3.y -= 1;
 
 
-		if (pinchywallposition3.y + 100 == SCREEN_HEIGHT)
+		if (pinchywallposition3.y + 150 == SCREEN_HEIGHT)
 			maxreachedpinchy = true;
 	}
 	if (maxreachedpinchy == true && pinchywallposition3.y <= SCREEN_HEIGHT)
@@ -519,12 +519,12 @@ update_status ModuleLevel4::Update()
 
 	/////////////////////////////////////////
 
-	if (maxreachedpinchy == false && pinchywallposition4.y + 100 >= SCREEN_HEIGHT)
+	if (maxreachedpinchy == false && pinchywallposition4.y + 150 >= SCREEN_HEIGHT)
 	{
 		pinchywallposition4.y -= 1;
 
 
-		if (pinchywallposition4.y + 100 == SCREEN_HEIGHT)
+		if (pinchywallposition4.y + 150 == SCREEN_HEIGHT)
 			maxreachedpinchy = true;
 	}
 	if (maxreachedpinchy == true && pinchywallposition4.y <= SCREEN_HEIGHT)
