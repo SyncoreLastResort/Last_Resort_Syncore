@@ -29,21 +29,21 @@ Starting from 0.5 to 1.0
 
 --Version 0.8--
 
--Boss and complex enemies
+-complex enemies
 -Credits system
--Score system out of player
+-UI
+-Score perfectioning
 
 --Version 0.9--
 
+-Boss and last enemy adjustments
 -Stage Clear, Win/Lose condition perfectioning
 -Imitate original game
--UI, 
--Score perfectioning
-
+-Background platforms and colliders
 
 --Version 1.0--
 
--Improve webpage for presentation, trailer and gameplay
+-Improve webpage for presentation, trailer
 -Polish, Debug Functionality
 -Intensive testing and 1.0 bugs correction
 
