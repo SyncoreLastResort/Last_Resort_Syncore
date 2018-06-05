@@ -190,6 +190,36 @@ ModuleParticles::ModuleParticles()
 	enemy_explosion.speed.x = -0.5;
 	enemy_explosion.anim.loop = false;
 
+	//Boss level 4
+	boss4_heat_ball.anim.PushBack({32,219,14,14});
+	boss4_heat_ball.anim.PushBack({ 46,219,14,14 });
+	boss4_heat_ball.anim.PushBack({ 60,219,13,14 });
+	boss4_heat_ball.anim.PushBack({ 73,219,13,14 });
+	boss4_heat_ball.anim.speed = 0.05;
+	boss4_heat_ball.anim.loop = true;
+	boss4_heat_ball.life = 2000;
+	boss4_heat_ball.end_particle = &boss4_heat_end;
+
+	boss4_blue_circle.anim.PushBack({ 0,237,16,16 });
+	boss4_blue_circle.anim.PushBack({ 16,237,16,16 });
+	boss4_blue_circle.anim.PushBack({ 32,237,16,16 });
+	
+	boss4_blue_circle.anim.loop = true;
+	boss4_blue_circle.anim.speed = 0.1;
+	boss4_blue_circle.life = 2000;
+
+	boss4_small_shot.anim.PushBack({0,182,5,5});
+	boss4_small_shot.anim.PushBack({5,182,5,5});
+	boss4_small_shot.anim.PushBack({10,182,5,5});
+	boss4_small_shot.anim.PushBack({15,182,5,5});
+	boss4_small_shot.anim.loop = true;
+	boss4_small_shot.anim.speed = 0.05;
+	boss4_small_shot.life = 2000;
+
+	for (int i = 0; i < 8; ++i)
+		boss4_heat_end.anim.PushBack({ 48 + 23 * i, 233, 23, 23 });
+	boss4_heat_end.anim.loop = false;
+	boss4_heat_end.anim.speed = 0.2;
 
 }
 
@@ -238,10 +268,19 @@ bool ModuleParticles::Start()
 
 	bomb_explosion.sound = App->audio->LoadSoundEffect("assets/sounds/010.Bomb_center.wav");
 	bomb_explosion.texture = enemy_explosion.texture;
+	
 	//Ball trail particles
 	ball_effects = App->textures->Load("assets/sprites/Ball_aditional_effects.png");
 	redball_trail.texture = ball_effects;
 	blueball_trail.texture = ball_effects;
+	
+	//Boss4 textures
+	boss4_texture = App->textures->Load("assets/sprites/Boss4_sprites.png");
+	boss4_blue_circle.texture = boss4_texture;
+	boss4_heat_ball.texture = boss4_texture;
+	boss4_small_shot.texture = boss4_texture;
+	boss4_heat_end.texture = boss4_texture;
+	
 	return true;
 }
 
@@ -263,6 +302,7 @@ bool ModuleParticles::CleanUp()
 
 	App->textures->Unload(ball_effects);
 	App->textures->Unload(graphics);
+	App->textures->Unload(boss4_texture);
 	
 	return true;
 }
@@ -296,13 +336,16 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, Uint32 delay, iPoint *position)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, Uint32 delay, iPoint *position, iPoint velocity_)
 {
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		if(active[i] == nullptr)
 		{
 			Particle* p = new Particle(particle);
+			p->updated_speed.x = 0;
+			p->updated_speed.y = 0;
+			p->updated_speed = velocity_;
 			p->position_to_attach = position;
 			p->born = SDL_GetTicks() + delay;
 			p->position.x = x;
@@ -350,7 +393,7 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) : 
 anim(p.anim), position(p.position), speed(p.speed), end_particle(p.end_particle),
-fx(p.fx), born(p.born), life(p.life), position_to_attach(p.position_to_attach)
+fx(p.fx), born(p.born), life(p.life), position_to_attach(p.position_to_attach), updated_speed(p.updated_speed)
 {}
 
 Particle::~Particle()
@@ -362,6 +405,7 @@ Particle::~Particle()
 bool Particle::Update()
 {
 	bool ret = true;
+	if (updated_speed.x !=0 ||updated_speed.y!=0) speed = updated_speed;
 
 	if(life > 0)
 	{

@@ -13,6 +13,7 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleBoss4.h"
 
 
 ModuleLevel4::ModuleLevel4()
@@ -151,6 +152,7 @@ bool ModuleLevel4::Start()
 	App->player->Enable();
 	App->enemies->Enable();
 
+	App->boss4->Enable();
 
 	// Enemies ---
 	
@@ -188,6 +190,8 @@ bool ModuleLevel4::CleanUp()
 	App->player->Disable();
 	App->enemies->Disable();
 
+	
+
 	if (App->player2->IsEnabled() == true)
 		App->player2->Disable();
 
@@ -207,8 +211,8 @@ update_status ModuleLevel4::Update()
 	if (App->player2->IsEnabled() == true)
 		App->player2->position.x += 1;
 
-	if (!boss_fight)
-		App->audio->PlayMusic(main_track_lvl4,ONCE);
+	/*if (!boss_fight)
+		App->audio->PlayMusic(main_track_lvl4,ONCE);*/
 	
 	if (boss_fight)
 		App->audio->PlayMusic(boss_track_lvl4,ONCE);

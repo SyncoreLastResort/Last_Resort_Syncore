@@ -30,6 +30,8 @@ struct Particle
 	Mix_Chunk* sound = nullptr;
 	Particle* end_particle = nullptr;
 	iPoint * position_to_attach = nullptr;
+	iPoint updated_speed;
+	
 	
 	
 	Particle();
@@ -50,7 +52,7 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0, iPoint *position=nullptr);
+	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0, iPoint *position = nullptr, iPoint velocity_ = {0,0});
 
 private:
 
@@ -96,6 +98,17 @@ public:
 	Particle bomb_upwards;
 	Particle bomb_downwards;
 	Particle bomb_explosion;
+
+	//Boss level 4
+	SDL_Texture* boss4_texture;
+
+	Particle boss4_blue_circle;
+	Particle boss4_heat_ball;
+	Particle boss4_small_shot;
+	Particle boss4_heat_end;
+	
+
+
 
 };
 

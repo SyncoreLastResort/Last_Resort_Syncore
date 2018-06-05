@@ -60,6 +60,8 @@ private:
 
 public:
 	iPoint position;
+	//Color of the ball
+	COLOR ball_color;
 
 
 private:
@@ -86,8 +88,7 @@ private:
 	//Bools to fix the ball
 	bool fix_position, ball_fixed;
 
-	//Color of the ball
-	COLOR ball_color;
+	
 
 	Mix_Chunk* fix_ball = nullptr;
 	Mix_Chunk* unfix_ball = nullptr;
