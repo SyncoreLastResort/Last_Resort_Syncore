@@ -20,11 +20,22 @@ public:
 	void OnCollision(Collider* col_1, Collider* col_2) override;
 
 public:
+	bool going_right;
+	bool going_left;
+	bool going_up;
+	bool going_down;
+
+	//player position at the beggining of the update
+	iPoint initial_pos;
+
+	//player position at the end of the update
+	iPoint* final_pos = &position;
+
 
 	uint life = 1;
 	bool p2dead = false;
 	WEAPON_TYPE weapon = BASIC;
-	uint weapon_level=1, weapon_fired;
+	uint weapon_level = 1, weapon_fired;
 	int speed = 2;
 	Animation spawn;
 	Animation death;
@@ -38,9 +49,9 @@ public:
 	Animation downwards;
 	Animation upwardstoidle;
 	Animation downwardstoidle;
-	
+
 	iPoint position;
-	
+
 	iPoint cannon_position;// position of the basic shot particles
 	iPoint laser_beam_position;// position of the laser beam particles
 
@@ -54,6 +65,7 @@ public:
 	int font_2 = -1;
 	char score_text2[10];
 	uint score2 = 0;
+
 
 };
 

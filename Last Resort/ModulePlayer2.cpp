@@ -8,7 +8,6 @@
 #include "ModuleCollision.h"
 #include "ModuleFonts.h"
 #include "ModuleBall2.h"
-#include "ModuleUI.h"
 
 #include<stdio.h>
 
@@ -31,16 +30,16 @@ ModulePlayer2::ModulePlayer2()
 	spawn.loop = false;
 	spawn.speed = 0.2f;
 
-	
+
 
 	//Death animation
-	death.PushBack({0,386,64,24 });
+	death.PushBack({ 0,386,64,24 });
 	death.PushBack({ 64,386,64,24 });
 	death.PushBack({ 128,386,64,24 });
 	death.PushBack({ 458,386,64,24 });
 
-	for (int i=0;i<8;++i)
-		death.PushBack({0+i*64,410,64,24});
+	for (int i = 0; i<8; ++i)
+		death.PushBack({ 0 + i * 64,410,64,24 });
 	for (int i = 0; i<8; ++i)
 		death.PushBack({ 0 + i * 64,434,64,28 });
 	death.loop = false;
@@ -51,7 +50,7 @@ ModulePlayer2::ModulePlayer2()
 
 
 	upwards.PushBack({ 96, 367, 32, 14 });
-	upwards.PushBack({129, 367, 32, 14 });
+	upwards.PushBack({ 129, 367, 32, 14 });
 	upwards.speed = 0.1f;
 	upwards.loop = false;
 	//Animation when the ship stops going up 
@@ -81,7 +80,7 @@ ModulePlayer2::~ModulePlayer2()
 bool ModulePlayer2::Start()
 {
 	LOG("Loading player");
-	
+
 	position.x = App->render->camera.x + 50;
 	death.Reset();
 	spawn.Reset();
@@ -96,7 +95,7 @@ bool ModulePlayer2::Start()
 
 	/*App->player->font_2 = App->player->font_score;*/
 
-	font_2=App->fonts->Load("assets/fonts/Font_score.png", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_.,[]&$ ", 2);
+	font_2 = App->fonts->Load("assets/fonts/Font_score.png", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_.,[]&$ ", 2);
 	return true;
 }
 
@@ -114,12 +113,8 @@ bool ModulePlayer2::CleanUp()
 // Update: draw background
 update_status ModulePlayer2::Update()
 {
-
-	//if (assigncoins == false)
-	//{
-	//	life = App->UI->coins;
-	//	assigncoins = true;
-	//}
+	initial_pos = position;
+	App->ball_player2->Enable();
 
 	if (weapon_level == 2)
 	{
@@ -199,7 +194,7 @@ update_status ModulePlayer2::Update()
 
 	//update the position of the cannon
 	cannon_position.x = position.x + 32;
-	cannon_position.y = position.y-3;
+	cannon_position.y = position.y - 3;
 
 	laser_beam_position.x = position.x + 32;
 	laser_beam_position.y = position.y + 1;
@@ -227,8 +222,39 @@ update_status ModulePlayer2::Update()
 
 	sprintf_s(score_text2, 10, "%7d", score2);
 
-	App->fonts->BlitText((SCREEN_WIDTH - 65), 24, font_2, score_text2);
-	
+	App->fonts->BlitText(50, 25, font_2, score_text2);
+
+	if (final_pos->x > initial_pos.x)
+	{
+		going_left = false;
+		going_right = true;
+	}
+	else if (final_pos->x < initial_pos.x)
+	{
+		going_right = false;
+		going_left = true;
+	}
+	else if (final_pos->x == initial_pos.x)
+	{
+		going_right = false;
+		going_left = false;
+	}
+
+	if (final_pos->y > initial_pos.y)
+	{
+		going_up = false;
+		going_down = true;
+	}
+	else if (final_pos->y < initial_pos.y)
+	{
+		going_down = false;
+		going_up = true;
+	}
+	else if (final_pos->y == initial_pos.y)
+	{
+		going_down = false;
+		going_up = false;
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -236,9 +262,9 @@ void ModulePlayer2::OnCollision(Collider * col_1, Collider * col_2)
 {
 	if (!App->player->godmode)
 	{
-		if ((col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL || col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT|| col_1->type == COLLIDER_BOSS || col_2->type == COLLIDER_BOSS || col_1->type == COLLIDER_BOSS_SHOT || col_2->type == COLLIDER_BOSS_SHOT))
+		if ((col_1->type == COLLIDER_WALL || col_2->type == COLLIDER_WALL || col_1->type == COLLIDER_ENEMY || col_2->type == COLLIDER_ENEMY || col_1->type == COLLIDER_ENEMY_SHOT || col_2->type == COLLIDER_ENEMY_SHOT || col_1->type == COLLIDER_BOSS || col_2->type == COLLIDER_BOSS || col_1->type == COLLIDER_BOSS_SHOT || col_2->type == COLLIDER_BOSS_SHOT))
 		{
-		
+
 			if (current_animation != &death)
 			{
 				p2dead = true;
@@ -268,7 +294,7 @@ void ModulePlayer2::Shoot()
 			App->audio->PlaySoundEffect(laser_sound);
 
 			App->particles->AddParticle(App->particles->laser_cannon, position.x + 35, position.y + 4, COLLIDER_NONE, 0, &laser_beam_position);
-			
+
 			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER2_SHOT);
 			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER2_SHOT, 20);
 			App->particles->AddParticle(App->particles->laser_beam, position.x + 32, position.y + 6, COLLIDER_PLAYER2_SHOT, 40);
@@ -287,6 +313,6 @@ void ModulePlayer2::Shoot()
 			App->particles->AddParticle(App->particles->bomb_upwards, position.x + 32, position.y + 6, COLLIDER_PLAYER2_SHOT);
 			weapon_fired = SDL_GetTicks();
 		}
-		
+
 	}
 }

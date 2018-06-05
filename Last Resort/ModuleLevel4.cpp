@@ -264,8 +264,8 @@ update_status ModuleLevel4::Update()
 	if (App->player2->IsEnabled() == true)
 		App->player2->position.x += 1;
 
-	/*if (!boss_fight)
-		App->audio->PlayMusic(main_track_lvl4,ONCE);*/
+	if (!boss_fight)
+		App->audio->PlayMusic(main_track_lvl4,ONCE);
 	
 	if (boss_fight)
 		App->audio->PlayMusic(boss_track_lvl4,ONCE);
@@ -357,30 +357,30 @@ update_status ModuleLevel4::Update()
 
 //----------------------platforms--------------------------
 
-	App->render->Blit(foreground_platform, 2760, -120 + i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, -80 + i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, -40 + i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, 20 + i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, 60 + i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, 140 + i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, 180 + i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, 100 + i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, 220 + i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2760, 260 + i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, -120 , &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, -80 , &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, -40 , &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 20 , &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 60 , &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 140 , &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 180 , &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 100 , &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 220 , &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2760, 260 , &foreground_platforms, 1);
 	
 
 //	App->render->Blit(foreground_platform, 2760, 100, &platform_up.GetCurrentFrame(), 1);
 	
-	App->render->Blit(foreground_platform, 2860, -90+i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, -50+i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, -10+i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, 30+i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, 70+i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, 110+i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, 150+i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, 190+i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, 230+i, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, 270+i, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, -90, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, -50, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, -10, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 30, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 70, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 110, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 150, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 190, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 230, &foreground_platforms, 1);
+	App->render->Blit(foreground_platform, 2860, 270, &foreground_platforms, 1);
 
 
 //	App->render->Blit(foreground_platform, 2860, 110, &platform_down.GetCurrentFrame(), 1);
