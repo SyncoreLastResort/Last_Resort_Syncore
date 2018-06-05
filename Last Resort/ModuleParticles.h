@@ -9,7 +9,7 @@
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
 
-#define MAX_ACTIVE_PARTICLES 150
+#define MAX_ACTIVE_PARTICLES 350
 
 struct SDL_Texture;
 struct Collider;

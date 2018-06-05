@@ -91,7 +91,7 @@ void EnemySpider::Move()
 			App->particles->AddParticle(App->particles->BeeShot, position.x + 20, position.y, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT);
 		}
 		else
-			position.x -= 1;
+			position.x --;
 	}
 	else
 	{
@@ -112,7 +112,7 @@ void EnemySpider::Move()
 
 		}
 		else
-			position.x += 1;
+			position.x += 1.2;
 	}
 
 }
