@@ -16,11 +16,10 @@ Enemy_RedBird::Enemy_RedBird(int x, int y) : Enemy(x, y)
 	fly.PushBack({ 108, 226, 26, 29 });
 	
 	fly.speed = 0.1f;
-
 	animation = &fly;
 
 	collider = App->collision->AddCollider({ 0, 0, 24, 24 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
-
+	score = 150;
 	original_y = y;
 }
 
