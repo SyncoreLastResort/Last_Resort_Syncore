@@ -255,6 +255,8 @@ bool ModuleLevel4::CleanUp()
 // Update: draw background
 update_status ModuleLevel4::Update()
 {
+	App->boss4->Enable();
+
 	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_DOWN)
 	{
 		App->render->camera.x += 100;

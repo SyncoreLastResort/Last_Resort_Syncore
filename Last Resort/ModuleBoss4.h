@@ -23,11 +23,18 @@ public:
 	void Shot1();
 	void Shot2();
 	void Shot3();
+	void Move();
 
 
 public:
+	bool boss4_dead;
+	bool move_right;
+	bool move_left;
 
 private:
+	int move_timer;
+	int open_timer;
+
 	int rightcore_hp;
 	int leftcore_hp;
 	//Bools
