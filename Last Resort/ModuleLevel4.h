@@ -43,15 +43,27 @@ public:
 	SDL_Rect wallrect;
 	SDL_Texture* wall = nullptr;
 	Collider* colliderwallmovdown = nullptr;
+	Collider* colliderwallmovdown2 = nullptr;
+	Collider* colliderwallmovdown3 = nullptr;
+	Collider* colliderwallmovdown4 = nullptr;
 	bool maxreached = false;
 	iPoint wallmovdownposition;
+	iPoint wallmovdownposition2;
+	iPoint wallmovdownposition3;
+	iPoint wallmovdownposition4;
 
 	//Pinchy Wall
 	SDL_Texture* pinchywall = nullptr;
 	Animation pinchywalanim;
 	Collider* colliderpinchywall = nullptr;
+	Collider* colliderpinchywall2 = nullptr;
+	Collider* colliderpinchywall3 = nullptr;
+	Collider* colliderpinchywall4 = nullptr;
 	bool maxreachedpinchy = false;
 	iPoint pinchywallposition;
+	iPoint pinchywallposition2;
+	iPoint pinchywallposition3;
+	iPoint pinchywallposition4;
 
 	//Background and foreground
 	SDL_Rect backgroundtilemaprect;
@@ -96,6 +108,9 @@ public:
 	Collider* foregroundcoll13 = nullptr;
 	Collider* foregroundcoll14 = nullptr;
 	Collider* foregroundcoll15 = nullptr;
+
+
+	bool bosstime = false;
 };
 
 #endif // __MODULELEVEL4_H__

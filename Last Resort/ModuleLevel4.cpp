@@ -114,12 +114,30 @@ ModuleLevel4::ModuleLevel4()
 	wallrect.w = 32;
 	wallrect.h = 157;
 	
-	wallmovdownposition.x = 400;
-	wallmovdownposition.y = -157;
+	wallmovdownposition.x = 600;
+	wallmovdownposition.y = -200;
+
+	wallmovdownposition2.x = 600;
+	wallmovdownposition2.y = -200;
+
+	wallmovdownposition3.x = 600;
+	wallmovdownposition3.y = -200;
+
+	wallmovdownposition4.x = 600;
+	wallmovdownposition4.y = -200;
 
 	//Pinchy Wall
 	pinchywallposition.x = 600;
 	pinchywallposition.y = SCREEN_HEIGHT;
+
+	pinchywallposition2.x = 600;
+	pinchywallposition2.y = SCREEN_HEIGHT;
+
+	pinchywallposition3.x = 600;
+	pinchywallposition3.y = SCREEN_HEIGHT;
+
+	pinchywallposition4.x = 600;
+	pinchywallposition4.y = SCREEN_HEIGHT;
 
 	pinchywalanim.PushBack({ 0, 0, 32, 177 });
 	pinchywalanim.PushBack({ 32, 0, 32, 177 });
@@ -187,10 +205,31 @@ bool ModuleLevel4::Start()
 		foregroundcoll12 = App->collision->AddCollider({ 5045, SCREEN_HEIGHT - 98, 65, 32 }, COLLIDER_TYPE::COLLIDER_WALL);
 		foregroundcoll13 = App->collision->AddCollider({ 5045, 60, 65, 32 }, COLLIDER_TYPE::COLLIDER_WALL);
 		foregroundcoll14 = App->collision->AddCollider({ 5330, 0, 55, SCREEN_HEIGHT }, COLLIDER_TYPE::COLLIDER_WALL);
-		foregroundcoll15 = App->collision->AddCollider({ foregroundtilemaprect1.w-685, 90, 230, 40 }, COLLIDER_TYPE::COLLIDER_WALL);
+		foregroundcoll15 = App->collision->AddCollider({ foregroundtilemaprect1.w-685, 90, 240, 40 }, COLLIDER_TYPE::COLLIDER_WALL);
+
+		colliderwallmovdown = App->collision->AddCollider({ wallmovdownposition.x+1500, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderpinchywall = App->collision->AddCollider({ pinchywallposition.x+1500, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
+
+		colliderwallmovdown2 = App->collision->AddCollider({ wallmovdownposition.x + 1600, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderpinchywall2 = App->collision->AddCollider({ pinchywallposition.x + 1600, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
+
+		colliderwallmovdown3 = App->collision->AddCollider({ wallmovdownposition.x + 1700, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderpinchywall3 = App->collision->AddCollider({ pinchywallposition.x + 1700, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
+
+		colliderwallmovdown4 = App->collision->AddCollider({ wallmovdownposition.x + 1800, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderpinchywall4 = App->collision->AddCollider({ pinchywallposition.x + 1800, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
+
+
+
+	/*	colliderwallmovdown = App->collision->AddCollider({ wallmovdownposition.x, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderpinchywall = App->collision->AddCollider({ pinchywallposition.x, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
 
 		colliderwallmovdown = App->collision->AddCollider({ wallmovdownposition.x, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
 		colliderpinchywall = App->collision->AddCollider({ pinchywallposition.x, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);
+
+		colliderwallmovdown = App->collision->AddCollider({ wallmovdownposition.x, wallmovdownposition.y, 32, 157 }, COLLIDER_TYPE::COLLIDER_WALL);
+		colliderpinchywall = App->collision->AddCollider({ pinchywallposition.x, pinchywallposition.y, 32, 177 }, COLLIDER_TYPE::COLLIDER_WALL);*/
+
 		createcollidersonce = true;
 	}
 		
@@ -276,23 +315,35 @@ update_status ModuleLevel4::Update()
 	}
 
 	// Move camera forward -----------------------------
-	App->render->camera.x += 1 * SCREEN_SIZE;
 
-	App->player->position.x += 1;
+	if (App->render->camera.x < 5050)
+	{
+		App->render->camera.x += 1 * SCREEN_SIZE;
 
-	if (App->player2->IsEnabled() == true)
-		App->player2->position.x += 1;
+		App->player->position.x += 1;
 
-	if (!boss_fight)
+		if (App->player2->IsEnabled() == true)
+			App->player2->position.x += 1;
+
+	}
+
+	if (!boss_fight && bosstime==false)
 		App->audio->PlayMusic(main_track_lvl4,ONCE);
 	
-	if (boss_fight)
-		App->audio->PlayMusic(boss_track_lvl4,ONCE);
-	
-	if (SDL_GetTicks() - start_time >= 202000 && !boss_fight) //After 202 seconds, the music changes from the maintrack to the boss track
+	//if (boss_fight)
+	//	App->audio->PlayMusic(boss_track_lvl4,ONCE);
+	//
+	//if (SDL_GetTicks() - start_time >= 202000 && !boss_fight) //After 202 seconds, the music changes from the maintrack to the boss track
+	//{
+	//	App->audio->StopAudio();
+	//	boss_fight = true;
+	//}
+
+	if (App->render->camera.x >= 5050 && bosstime == false)
 	{
 		App->audio->StopAudio();
-		boss_fight = true;
+		App->audio->PlayMusic(boss_track_lvl4, ONCE);
+		bosstime = true;
 	}
 	
 	
@@ -322,34 +373,100 @@ update_status ModuleLevel4::Update()
 
 	
 	//Wall movement
-	if (maxreached == false && wallmovdownposition.y <= 0)
+	if (maxreached == false && wallmovdownposition.y <= -60)
 	{
 		wallmovdownposition.y += 1;
 		
 	
 
-		if (wallmovdownposition.y == 0)
+		if (wallmovdownposition.y == -60)
 			maxreached = true;
 	}
-	if (maxreached == true && wallmovdownposition.y >= -157)
+	if (maxreached == true && wallmovdownposition.y <= -60)
 	{
 		wallmovdownposition.y -= 1;
 		
 
-		if (wallmovdownposition.y == -157)
+		if (wallmovdownposition.y == -150)
 			maxreached = false;
 	}
-	colliderwallmovdown->SetPos(wallmovdownposition.x, wallmovdownposition.y);
+
+	///////////////////////////////////////////////////
+
+	if (maxreached == false && wallmovdownposition2.y <= -60)
+	{
+		wallmovdownposition2.y += 1;
+
+
+
+		if (wallmovdownposition2.y == -60)
+			maxreached = true;
+	}
+	if (maxreached == true && wallmovdownposition2.y <= -60)
+	{
+		wallmovdownposition2.y -= 1;
+
+
+		if (wallmovdownposition2.y == -150)
+			maxreached = false;
+	}
+
+	////////////////////////////////////////////////////
+
+	if (maxreached == false && wallmovdownposition3.y <= -60)
+	{
+		wallmovdownposition3.y += 1;
+
+
+
+		if (wallmovdownposition3.y == -60)
+			maxreached = true;
+	}
+	if (maxreached == true && wallmovdownposition3.y <= -60)
+	{
+		wallmovdownposition3.y -= 1;
+
+
+		if (wallmovdownposition3.y == -150)
+			maxreached = false;
+	}
+
+
+	//////////////////////////////////////////////////////////
+
+	if (maxreached == false && wallmovdownposition4.y <= -60)
+	{
+		wallmovdownposition4.y += 1;
+
+
+
+		if (wallmovdownposition4.y == -60)
+			maxreached = true;
+	}
+	if (maxreached == true && wallmovdownposition4.y <= -60)
+	{
+		wallmovdownposition4.y -= 1;
+
+
+		if (wallmovdownposition4.y == -150)
+			maxreached = false;
+	}
+
+	/////////////////////////////////////////////////////////////
+	colliderwallmovdown->SetPos(wallmovdownposition.x+1500, wallmovdownposition.y);
+	colliderwallmovdown2->SetPos(wallmovdownposition.x + 1600, wallmovdownposition.y);
+	colliderwallmovdown3->SetPos(wallmovdownposition.x + 1700, wallmovdownposition.y);
+	colliderwallmovdown4->SetPos(wallmovdownposition.x + 1300, wallmovdownposition.y);
 	//End of Wall movement
 
 	//Pinchy Walll movement
 
-	if (maxreachedpinchy == false && pinchywallposition.y+177 >= SCREEN_HEIGHT)
+	if (maxreachedpinchy == false && pinchywallposition.y+100 >= SCREEN_HEIGHT)
 	{
 		pinchywallposition.y -= 1;
 
 
-		if (pinchywallposition.y+177 == SCREEN_HEIGHT)
+		if (pinchywallposition.y+100 == SCREEN_HEIGHT)
 			maxreachedpinchy = true;
 	}
 	if (maxreachedpinchy == true && pinchywallposition.y <= SCREEN_HEIGHT)
@@ -361,14 +478,89 @@ update_status ModuleLevel4::Update()
 			maxreachedpinchy = false;
 	}
 
-	colliderpinchywall->SetPos(pinchywallposition.x, pinchywallposition.y);
+	/////////////////////////////////////////
+
+	if (maxreachedpinchy == false && pinchywallposition2.y + 100 >= SCREEN_HEIGHT)
+	{
+		pinchywallposition2.y -= 1;
+
+
+		if (pinchywallposition2.y + 100 == SCREEN_HEIGHT)
+			maxreachedpinchy = true;
+	}
+	if (maxreachedpinchy == true && pinchywallposition2.y <= SCREEN_HEIGHT)
+	{
+		pinchywallposition2.y += 1;
+
+
+		if (pinchywallposition2.y == SCREEN_HEIGHT)
+			maxreachedpinchy = false;
+	}
+
+
+	/////////////////////////////////////////
+
+	if (maxreachedpinchy == false && pinchywallposition3.y + 100 >= SCREEN_HEIGHT)
+	{
+		pinchywallposition3.y -= 1;
+
+
+		if (pinchywallposition3.y + 100 == SCREEN_HEIGHT)
+			maxreachedpinchy = true;
+	}
+	if (maxreachedpinchy == true && pinchywallposition3.y <= SCREEN_HEIGHT)
+	{
+		pinchywallposition3.y += 1;
+
+
+		if (pinchywallposition3.y == SCREEN_HEIGHT)
+			maxreachedpinchy = false;
+	}
+
+	/////////////////////////////////////////
+
+	if (maxreachedpinchy == false && pinchywallposition4.y + 100 >= SCREEN_HEIGHT)
+	{
+		pinchywallposition4.y -= 1;
+
+
+		if (pinchywallposition4.y + 100 == SCREEN_HEIGHT)
+			maxreachedpinchy = true;
+	}
+	if (maxreachedpinchy == true && pinchywallposition4.y <= SCREEN_HEIGHT)
+	{
+		pinchywallposition4.y += 1;
+
+
+		if (pinchywallposition4.y == SCREEN_HEIGHT)
+			maxreachedpinchy = false;
+	}
+
+	//////////////////////////////////////
+
+	colliderpinchywall->SetPos(pinchywallposition.x+1500, pinchywallposition.y);
+	colliderpinchywall2->SetPos(pinchywallposition.x + 1600, pinchywallposition.y);
+	colliderpinchywall3->SetPos(pinchywallposition.x + 1700, pinchywallposition.y);
+	colliderpinchywall4->SetPos(pinchywallposition.x + 1300, pinchywallposition.y);
 	//End of Pinchy Wall movement
 	
 	// Draw everything --------------------------------------
 	App->render->Blit(backgroundtilemap, 0, 0, &backgroundtilemaprect, 0.5); // back background
 	App->render->Blit(BackLavaAnim, 0, 0, &Back_Lava.GetCurrentFrame(), 0.5); // back lava animation
-	App->render->Blit(wall, wallmovdownposition.x, wallmovdownposition.y, &wallrect, 1);
-	App->render->Blit(pinchywall, pinchywallposition.x, pinchywallposition.y, &pinchywalanim.GetCurrentFrame());
+
+	//WALLS
+	App->render->Blit(wall, wallmovdownposition.x+1500, wallmovdownposition.y, &wallrect, 1);
+	App->render->Blit(pinchywall, pinchywallposition.x+1500, pinchywallposition.y, &pinchywalanim.GetCurrentFrame());
+
+	App->render->Blit(wall, wallmovdownposition2.x + 1600, wallmovdownposition2.y, &wallrect, 1);
+	App->render->Blit(pinchywall, pinchywallposition2.x + 1600, pinchywallposition2.y, &pinchywalanim.GetCurrentFrame());
+
+	App->render->Blit(wall, wallmovdownposition3.x + 1700, wallmovdownposition3.y, &wallrect, 1);
+	App->render->Blit(pinchywall, pinchywallposition3.x + 1700, pinchywallposition3.y, &pinchywalanim.GetCurrentFrame());
+
+	App->render->Blit(wall, wallmovdownposition4.x + 1300, wallmovdownposition4.y, &wallrect, 1);
+	App->render->Blit(pinchywall, pinchywallposition4.x + 1300, pinchywallposition4.y, &pinchywalanim.GetCurrentFrame());
+
 	App->render->Blit(foregroundtilemap1, 0, 0, &foregroundtilemaprect1, 1); //foregorund
 	App->render->Blit(foregroundtilemap2, 4100, 0, &foregroundtilemaprect2, 1); //foregorund
 	App->render->Blit(Enemies_1, 400, 100, &op_cannon.GetCurrentFrame(), 1);
@@ -376,7 +568,7 @@ update_status ModuleLevel4::Update()
 //----------------------platforms--------------------------
 
 
-	App->render->Blit(foreground_platform, 2760, -120, &foreground_platforms, 1);
+	/*App->render->Blit(foreground_platform, 2760, -120, &foreground_platforms, 1);
 App->render->Blit(foreground_platform, 2760, -80, &foreground_platforms, 1);
 App->render->Blit(foreground_platform, 2760, -40, &foreground_platforms, 1);
 App->render->Blit(foreground_platform, 2760, 20, &foreground_platforms, 1);
@@ -385,22 +577,22 @@ App->render->Blit(foreground_platform, 2760, 140, &foreground_platforms, 1);
 App->render->Blit(foreground_platform, 2760, 180, &foreground_platforms, 1);
 App->render->Blit(foreground_platform, 2760, 100, &foreground_platforms, 1);
 App->render->Blit(foreground_platform, 2760, 220, &foreground_platforms, 1);
-App->render->Blit(foreground_platform, 2760, 260, &foreground_platforms, 1);
+App->render->Blit(foreground_platform, 2760, 260, &foreground_platforms, 1);*/
 
 	
 
 //	App->render->Blit(foreground_platform, 2760, 100, &platform_up.GetCurrentFrame(), 1);
 	
-	App->render->Blit(foreground_platform, 2860, -90, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, -50, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, -10, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, 30, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, 70, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, 110, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, 150, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, 190, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, 230, &foreground_platforms, 1);
-	App->render->Blit(foreground_platform, 2860, 270, &foreground_platforms, 1);
+	//App->render->Blit(foreground_platform, 2860, -90, &foreground_platforms, 1);
+	//App->render->Blit(foreground_platform, 2860, -50, &foreground_platforms, 1);
+	//App->render->Blit(foreground_platform, 2860, -10, &foreground_platforms, 1);
+	//App->render->Blit(foreground_platform, 2860, 30, &foreground_platforms, 1);
+	//App->render->Blit(foreground_platform, 2860, 70, &foreground_platforms, 1);
+	//App->render->Blit(foreground_platform, 2860, 110, &foreground_platforms, 1);
+	//App->render->Blit(foreground_platform, 2860, 150, &foreground_platforms, 1);
+	//App->render->Blit(foreground_platform, 2860, 190, &foreground_platforms, 1);
+	//App->render->Blit(foreground_platform, 2860, 230, &foreground_platforms, 1);
+	//App->render->Blit(foreground_platform, 2860, 270, &foreground_platforms, 1);
 
 
 //	App->render->Blit(foreground_platform, 2860, 110, &platform_down.GetCurrentFrame(), 1);
@@ -414,11 +606,7 @@ App->render->Blit(foreground_platform, 2760, 260, &foreground_platforms, 1);
 			App->player2->Enable();
 			App->player2->life -= 1;
 		}
-		/*if (App->UI->coins > 0)
-		{
-			App->player2->Enable();
-			App->UI->coins -= 1;
-		}*/
+		
 	}
 
 
