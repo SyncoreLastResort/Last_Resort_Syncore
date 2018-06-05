@@ -328,18 +328,14 @@ update_status ModuleLevel4::Update()
 			App->player2->Enable();
 			App->player2->life -= 1;
 		}
-		if (App->UI->coins > 0)
+		/*if (App->UI->coins > 0)
 		{
 			App->player2->Enable();
 			App->UI->coins -= 1;
-		}
+		}*/
 	}
 
-	/*if (coinisminus == true)
-	{
-		App->UI->coins -= 1;
-		coinisminus = false;
-	}*/
+
 
 	return UPDATE_CONTINUE;
 }
