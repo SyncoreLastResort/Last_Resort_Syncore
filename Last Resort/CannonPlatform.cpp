@@ -44,26 +44,35 @@ CannonPlatform::CannonPlatform(int x, int y) : Enemy(x, y)
 	life = 10;
 	texturename = App->enemies->cannonplatform;
 	
-	collider = App->collision->AddCollider({ 0, 10, 80, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 80, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 
 }
 
 void CannonPlatform::Move()
 {
+	PlayerPosition = App->player->position;
+
 	if (counter >= 150) {
 		counter = 0;
-		shot = true;
 		shooting.Reset();
+		animation = &shooting;
+		if (PlayerPosition.x > position.x) {
+			App->particles->Cannon_laser.speed.x = 2;
+			App->particles->Cannon_laser.speed.x++;
+			App->particles->AddParticle(App->particles->Cannon_shot, position.x + 80, position.y + 20, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT, 500);
+			App->particles->AddParticle(App->particles->Cannon_laser, position.x + 80, position.y + 20, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT,500);
+
+		}
+		else if (PlayerPosition.x < position.x) {
+			App->particles->Cannon_laser.speed.x = -2;
+			App->particles->Cannon_laser.speed.x--;
+			App->particles->AddParticle(App->particles->Cannon_shot, position.x, position.y + 20, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT,500);
+			App->particles->AddParticle(App->particles->Cannon_laser, position.x, position.y + 20, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT,500);
+		}
 	}
 	else {
 		counter++;
 	}
 
-	if (shot == true) {
-		animation = &shooting;
-		App->particles->Cannon_shot.speed.x = 2;
-		App->particles->Cannon_shot.speed.x++;
-		App->particles->AddParticle(App->particles->Cannon_shot, position.x + 20, position.y, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT);
-	}
 }

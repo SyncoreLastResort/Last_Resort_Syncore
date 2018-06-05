@@ -112,7 +112,7 @@ void EnemySpider::Move()
 
 		}
 		else
-			position.x += 1.2;
+			position.x += 1.4;
 	}
 
 }
