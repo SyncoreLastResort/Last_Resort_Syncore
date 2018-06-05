@@ -129,10 +129,6 @@ bool ModuleLevel4::Start()
 {
 	LOG("Loading level1 scene");
 
-	/*backgroundtilemap = App->textures->Load("assets/sprites/Stage4_tilemap.png");*/
-	/*background = App->textures->Load("assets/sprites/Background.png");
-	foreground = App->textures->Load("assets/sprites/Foreground.png");*/
-
 	backgroundtilemap = App->textures->Load("assets/sprites/Background.png");
 	foregroundtilemap1 = App->textures->Load("assets/sprites/foreground_1.png");
 	foregroundtilemap2 = App->textures->Load("assets/sprites/foreground_2.png");
