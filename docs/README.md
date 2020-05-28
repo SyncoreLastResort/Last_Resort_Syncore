@@ -7,17 +7,11 @@
 
    The player is in charge of one of this spaceships and also (when achieved in-game) an indestructible drone that is a shield and a          weapon at the same time. Making good use of it is key in order to succeed.
    
-   ***
+***
 
 ##       Gameplay Video
-<html>
-<body>
 
-<iframe width="600" height="420" src="https://www.youtube.com/watch?v=l3SsKg_DVoI&feature=youtu.be" frameborder="0" allowfullscreen>
-</iframe>
-
-</body>
-</html>
+<video src="Overview.mp4" width="600" height="500" controls preload></video>
 
 ***
 
